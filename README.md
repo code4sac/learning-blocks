@@ -9,6 +9,8 @@ Grant programs have a need to report to the government on their students.  They 
 Requires a data agreement followed by generating an API key in order to get access to their system.
 
 Aeries has a "sandbox" mode that allows development without accessing to sensitive data.
+ 
+ How to build an request: https://support.aeries.com/support/solutions/articles/14000113681-aeries-api-building-a-request
 
 ## PowerSchool
 
