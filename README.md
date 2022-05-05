@@ -13,7 +13,7 @@ Aeries has a "sandbox" mode that allows development without accessing to sensiti
  How to build a request: https://support.aeries.com/support/solutions/articles/14000113681-aeries-api-building-a-request
  Aeries API Documentation: https://support.aeries.com/support/solutions/14000072323
 ## PowerSchool
-
+ No sandbox but working on getting documentation from a PowerSchool Affiliated firm
 ## Alma
  Alma has a sandbox that you can mess around with, documentation can be found at: https://developers.exlibrisgroup.com/alma/apis/
 ## Sensitivities
