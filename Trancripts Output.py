@@ -3,6 +3,9 @@ import json
 API_HOST = "https://delnorte.asp.aeries.net/admin/api/v3/schools/520/students/grade/11"
 requestHeaders = {"formatType":"application/json", \
 					 "AERIES-CERT":"insert cert key here"}
+
+#DEMO API: 477abe9e7d27439681d62f4e0de1f5e1
+#DOCUMENTATION: https://support.aeries.com/support/solutions/articles/14000077926-aeries-api-full-documentation#aeries-api-h5
 def reqpull():
     request = requests.get(API_HOST, headers = requestHeaders)
     r1= request.json()
