@@ -11,7 +11,7 @@ Requires a data agreement followed by generating an API key in order to get acce
 Aeries has a "sandbox" mode that allows development without accessing to sensitive data.
  
  How to build an request: https://support.aeries.com/support/solutions/articles/14000113681-aeries-api-building-a-request
-
+ Aeries API Documentation: https://support.aeries.com/support/solutions/14000072323
 ## PowerSchool
 
 
