@@ -6,7 +6,7 @@ import json
 import pandas as pd
 import csv
 
-ID = [980047317, 980046527, 980047317]
+ID = ["Insert list of ID Number"]
 IDlen = len(ID)
 x = 0
 y = 0
