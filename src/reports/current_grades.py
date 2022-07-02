@@ -15,18 +15,18 @@ def get_current_grades(
     school_code: str,
     student_ids: List[str]
 ) -> str:
-  api_base = "%s/Admin/api/v5/schools/%s/ReportCard" % aeries_base_url, school_code
+  api_base = f"{aeries_base_url}/api/v5/schools/{school_code}/ReportCard"
   request_headers = {"formatType":"text/json", "AERIES-CERT": aeries_api_token}
   # random letters
-  ran_string = ''.join(random.choice(string.ascii_letters) for i in range(10))
-  file_path = 'current_grades_%s.csv' % ran_string
+  rand_string = ''.join(random.choice(string.ascii_letters) for i in range(10))
+  file_path = f'current_grades_{rand_string}.csv'
 
   with open(file_path, 'w', newline='') as current_grades_csv_file:
     csv_writer = csv.writer(current_grades_csv_file)
     csv_writer.writerow(columns_to_include) # header row in the csv
     
     for student_id in student_ids:
-      api_url = "%s/%s" % api_base, student_id
+      api_url = f"{api_base}/{student_id}"
       request_json = requests.get(api_url, headers = request_headers).json()
       
       for data in request_json:
