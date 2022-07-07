@@ -5,7 +5,7 @@ import pandas as pd
 import csv
 
 # Begin: request information
-API_HOST = "https://aeries.gcccharters.org/Admin/api/v5/schools/815/students/grade/11"
+API_HOST = "https://aeries.gcccharters.org/Admin/api/v5/schools/{insertscholid}/students/grade/{grade}"
 
 requestHeaders = {"formatType":"text/json", \
 					 "AERIES-CERT":"[INSERT API KEY]"}
