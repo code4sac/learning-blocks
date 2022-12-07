@@ -1,2 +1,5 @@
+.idea
+.aws-sam
+./venv
 **/*.pyc
 **/*.csv
