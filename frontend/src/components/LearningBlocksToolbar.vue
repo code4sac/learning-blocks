@@ -12,9 +12,10 @@
     <v-col class="text-center mt-4" cols="12">
       {{ new Date().getFullYear() }} — <strong>Learning Blocks</strong>
     </v-col>
-    <select>
-     <option>fgf</option>
-    </select>
+    <v-select
+    label="Select"
+    :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+    ></v-select>
   </v-app-bar>
 
   
