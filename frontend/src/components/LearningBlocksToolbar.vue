@@ -11,8 +11,8 @@
     <v-btn>Aries</v-btn>
 
     <v-select
-    label="Select"
-    :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+    label="Student Information System"
+    :items="['Aeries', 'ALMA (TBD)']"
     ></v-select>
   </v-app-bar>
 
