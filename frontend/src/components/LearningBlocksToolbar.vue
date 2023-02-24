@@ -15,14 +15,15 @@
     </v-app-bar-title>
     <v-spacer></v-spacer>
     <v-btn>Aries</v-btn>
-  </v-app-bar>
-  const app = createApp({
-  template: '#app-template',
-  data: () => ({
+    const app = createApp({
+    template: '#app-template',
+    data: () => ({
     selection: [],
     items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-  }),
-  }).use(vuetify).mount('#app')
+    }),
+    }).use(vuetify).mount('#app')
+  </v-app-bar>
+
   
 </template>
 
