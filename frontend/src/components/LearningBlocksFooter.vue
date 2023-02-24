@@ -14,6 +14,9 @@
       <v-col class="text-center mt-4" cols="12">
         {{ new Date().getFullYear() }} — <strong>Learning Blocks</strong>
       </v-col>
+      <v-col class="text-center mt-4" cols="12">
+        {{ new Date().getFullYear() }} — <strong>Learning Blocks</strong>
+      </v-col>
     </v-row>
   </v-footer>
 
