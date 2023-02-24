@@ -9,9 +9,7 @@
     </v-app-bar-title>
     <v-spacer></v-spacer>
     <v-btn>Aries</v-btn>
-    <v-col class="text-center mt-4" cols="12">
-      {{ new Date().getFullYear() }} — <strong>Learning Blocks</strong>
-    </v-col>
+
     <v-select
     label="Select"
     :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
