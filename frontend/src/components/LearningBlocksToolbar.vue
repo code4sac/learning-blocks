@@ -12,6 +12,9 @@
     <v-col class="text-center mt-4" cols="12">
       {{ new Date().getFullYear() }} — <strong>Learning Blocks</strong>
     </v-col>
+    <select>
+     <option>fgf</option>
+    </select>
   </v-app-bar>
 
   
