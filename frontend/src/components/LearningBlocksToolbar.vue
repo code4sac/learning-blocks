@@ -16,7 +16,7 @@
    
     variant="underlined"
     >
-    <option v=for = 'toggle_test in toggle_tests'></option>
+    <option v=for = 'toggle_test in toggle_test'>{{toggle_test}}</option>
     </v-select>
   </v-app-bar>
 
