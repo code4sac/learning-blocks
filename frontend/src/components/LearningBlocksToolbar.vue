@@ -8,16 +8,11 @@
       Learning Blocks
     </v-app-bar-title>
     <v-spacer></v-spacer>
-    
-
-    <select v-model= "toggle_test"
+    <v-select
     label="Student Information System"
-   
-   
+    :items="['Aeries', 'Alma (TBD)']"
     variant="underlined"
-    >
-    <option v=for = 'toggle_test in toggle_tests'>{{toggle_test}}</option>
-    <select>
+    ></v-select>
   </v-app-bar>
 
   
