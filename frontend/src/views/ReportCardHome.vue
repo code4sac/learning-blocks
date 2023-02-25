@@ -31,15 +31,7 @@
       <br>
       <v-btn type="submit" color="blue" @click.stop.prevent="submit">Generate query</v-btn>
     </v-container>
-    import axios from 'axios'
 
-axios.get('/calculate')
-  .then(response => {
-    console.log(response.data.result)
-  })
-  .catch(error => {
-    console.log(error)
-  })
   </v-form>
 </template>
 
