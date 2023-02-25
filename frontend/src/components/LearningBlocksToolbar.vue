@@ -15,7 +15,9 @@
    
    
     variant="underlined"
-    ></v-select>
+    >
+    <option v=for = 'toggle_test in toggle_tests'></option>
+    </v-select>
   </v-app-bar>
 
   
