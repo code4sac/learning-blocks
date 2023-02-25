@@ -10,14 +10,14 @@
     <v-spacer></v-spacer>
     
 
-    <v-select v-model= "toggle_test"
+    <select v-model= "toggle_test"
     label="Student Information System"
    
    
     variant="underlined"
     >
     <option v=for = 'toggle_test in toggle_tests'>{{toggle_test}}</option>
-    </v-select>
+    <select>
   </v-app-bar>
 
   
