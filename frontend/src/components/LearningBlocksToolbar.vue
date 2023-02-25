@@ -8,9 +8,9 @@
       Learning Blocks
     </v-app-bar-title>
     <v-spacer></v-spacer>
-    <v-btn>Aries</v-btn>
+    
 
-    <v-select
+    <v-select v-model= "v"
     label="Student Information System"
     :items="['Aeries', 'ALMA (TBD)']"
     ></v-select>
@@ -23,6 +23,11 @@
 export default {
   name: "LearningBlocksToolbar",
   data: () => ({
+    
+    c: "",
+    
+    
+    
     links: [
       'Home',
       'About Us',
@@ -31,6 +36,10 @@ export default {
       'Blog',
       'Contact Us',
     ],
+    
+    
+    
+    
   }),
 }
 </script>
