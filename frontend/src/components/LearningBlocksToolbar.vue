@@ -10,7 +10,7 @@
     <v-spacer></v-spacer>
     
 
-    <v-select v-model= "v"
+    <v-select v-model= "toggle_test"
     label="Student Information System"
     :items="['Aeries', 'ALMA (TBD)']"
     ></v-select>
@@ -24,7 +24,7 @@ export default {
   name: "LearningBlocksToolbar",
   data: () => ({
     
-    c: "",
+    toggle_test: "",
     
     
     
