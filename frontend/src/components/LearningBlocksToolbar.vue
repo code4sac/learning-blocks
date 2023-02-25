@@ -13,6 +13,7 @@
     <v-select v-model= "toggle_test"
     label="Student Information System"
     :items="['Aeries', 'ALMA (TBD)']"
+    variant="underlined"
     ></v-select>
   </v-app-bar>
 
