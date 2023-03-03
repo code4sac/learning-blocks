@@ -1,8 +1,10 @@
 
 export function exportDataFromJSON(data, fileName = "test.csv"){
     const csvString = transformToCSV(data)
-    const link  =  document.createElement('a')
-    link.setAttribute('href', 'data:text/csv;charset=utf-8' + encodeURI(csvString))
+    const blob = new Blob([csvString], {type: 'text/csv'})
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.setAttribute('href',url)
     link.setAttribute('download',fileName)
     document.body.appendChild(link)
     link.click()
