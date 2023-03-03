@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "d3": "^7.8.0",
+    "export-from-json": "^1.7.2",
     "loglevel": "^1.8.1",
     "vue": "^3.2.13",
     "vue-router": "^4.1.6",
@@ -17,11 +19,14 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@vitejs/plugin-vue": "^3.2.0",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint-plugin-vue": "^8.0.3",
+    "vite": "^3.2.5",
+    "vitest": "^0.25.5"
   },
   "eslintConfig": {
     "root": true,

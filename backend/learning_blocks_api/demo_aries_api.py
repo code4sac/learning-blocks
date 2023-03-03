@@ -5,10 +5,11 @@ import requests
 class demo_aries_api:
     DEMO_BASE_API_HOST = "https://demo.aeries.net/aeries"
 
-    def __init__(self, school_id: str, student_id: str, api_key: str):
+    def __init__(self, school_id: str, api_key: str, student_id: str = "", grade: str = ""):
         """Initialize the API class."""
         self.school_id = school_id
-        self.item_id = student_id
+        self.student_id = student_id
+        self.grade = grade
         self.api_key = api_key
         if not self.api_key:
             raise ValueError("AERIES_API_KEY environment variable not set.")
@@ -18,9 +19,20 @@ class demo_aries_api:
         }
 
     def get_current_grades(self):
-        url = f"{self.DEMO_BASE_API_HOST}/api/v5/schools/{self.school_id}/ReportCard/{self.item_id}"
+        url = f"{self.DEMO_BASE_API_HOST}/api/v5/schools/{self.school_id}/ReportCard/{self.student_id}"
         response = requests.get(url, headers=self.request_headers)
         return response.json()
+
+    def get_all_students(self):
+        url = f"{self.DEMO_BASE_API_HOST}/api/v5/schools/{self.school_id}/students/grade/{self.grade}"
+        response = requests.get(url, headers=self.request_headers)
+        return response.json()
+
+    def get_autofill_students(self):
+        url = f"{self.DEMO_BASE_API_HOST}/api/v5/schools/{self.school_id}/students/grade/{self.grade}"
+        response = requests.get(url, headers=self.request_headers)
+        df = pd.DataFrame(response.json())
+        return df.head().to_json()
 
     def get_current_grades_csv(self):
         result = ""

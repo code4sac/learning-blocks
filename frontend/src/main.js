@@ -9,6 +9,8 @@ import * as directives from 'vuetify/directives'
 const vuetify = createVuetify({
     components, directives,
 })
+
+
 const app = createApp(App)
 app.use(router)
 app.use(vuetify)
