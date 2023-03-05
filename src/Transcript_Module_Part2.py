@@ -10,8 +10,6 @@ import string
 def get_transcripts_2(
     aeries_base_url: str,
     aeries_api_token: str,
-    school_code: str,
-    student_ids: str,
 ) -> str:
     courses=[
 '000',
@@ -65,4 +63,4 @@ def get_transcripts_2(
 
         
 
-get_transcripts_2('https://aeries.gcccharters.org','cf919ece752842fd83d7edfdf3ac7bb9','815','980046708')
+get_transcripts_2('https://aeries.gcccharters.org','cf919ece752842fd83d7edfdf3ac7bb9')
