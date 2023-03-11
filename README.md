@@ -1,10 +1,25 @@
-# school-grant-data
+### SCHOOL_GRANT_DATA
 
 ## Problem Statement
 
 Grant programs have a need to report to the government on their students.  They have a need to gather data from school districts in order to form the reports.  There are a few systems in schools that are used to gather this inforation like PowerSchool and Aeries.  We need to use their apis to programmatically gather this information into csv format so that it can be used to generate reports in Cobro Compass.
 
-### CURRENT PROGRESS Last update:3/11/23
+# CURRENT PROGRESS Last update: 3/11/23. 
+
+This project has moved into a web based service, with the intent of using a Vue.js version 3 front-end and a python back end.  For documentation on Vue.js sign up to:
+
+FRONT-END DOCUMENTATION:
+-"Introduction to Vue 3"  at https://frontendmasters.com/courses/vue-3/ 
+
+-"Vue js + Python" at https://www.youtube.com/watch?v=uSawG4dxx2k
+
+
+# CURRENT PROGRESS Last update: 3/11/23.
+
+BACK-END DOCUMENTATION:
+- How to build a request: https://support.aeries.com/support/solutions/articles/14000113681-aeries-api-building-a-request
+- Aeries API Documentation: https://support.aeries.com/support/solutions/14000072323
+
 
 ## Aeries
 
@@ -24,4 +39,4 @@ The apis provide access to data that has PII.  We need to be very sensitive of t
 
 
 
-## If you have any question feel free to email shwndea@gmail.com
+## If you have any question feel free to email shwndea@gmail.com || NATE  || DAVID
