@@ -8,13 +8,19 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: () => import('@/views/ReportCardHome.vue'),
+            component: () => import('@/views/AriesApiContainer.vue'),
         },
         {
-            path: '/report',
+            path: '/report/:localStorageKey',
             name: 'report',
             component: () => import('@/views/ReportCardDetail.vue'),
+        },
+        {
+            path: '/students/:localStorageKey',
+            name: 'students',
+            component: () => import('@/views/StudentsDetail.vue'),
         }]
+
 })
 
 // router.onError((error) => {

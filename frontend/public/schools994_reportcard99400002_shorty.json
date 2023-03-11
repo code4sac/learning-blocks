@@ -1,0 +1,35 @@
+[
+  {
+    "StudentID": 99400002,
+    "StudentReportCardCourses": [
+      {
+        "SchoolCode": 994,
+        "CourseTitle": "Spanish I",
+        "MarkingPeriodGrades": [
+          {
+            "Mark": "A",
+            "TotalDaysOfSuspension": 0
+          },
+          {
+            "Mark": "B",
+            "TotalDaysOfSuspension": 0
+          }
+        ]
+      },
+      {
+        "SchoolCode": 994,
+        "CourseTitle": "Leadership",
+        "MarkingPeriodGrades": [
+          {
+            "Mark": "A",
+            "TotalDaysOfSuspension": 0
+          },
+          {
+            "Mark": "C",
+            "TotalDaysOfSuspension": 0
+          }
+        ]
+      }
+    ]
+  }
+]
