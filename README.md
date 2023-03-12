@@ -1,4 +1,4 @@
-                                                                     ### SCHOOL_GRANT_DATA##
+                                                                  ### SCHOOL_GRANT_DATA##
 
 ## Problem Statement
 
