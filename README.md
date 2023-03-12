@@ -18,12 +18,13 @@ FRONT-END DOCUMENTATION:
 
 Hold demo data in the front end title it "json" so that we can query it. How do you save it to local storage or check if it is already in cache. Maybe create a method to but random lettering at teh end of the name of the file so that you wouldnt have to keep checking cache. This would mean the user would have to delete their cache more often.
 
-
-# CURRENT PROGRESS Last update: 3/11/23.
-
 BACK-END DOCUMENTATION:
 - How to build a request: https://support.aeries.com/support/solutions/articles/14000113681-aeries-api-building-a-request
 - Aeries API Documentation: https://support.aeries.com/support/solutions/14000072323
+
+# CURRENT PROGRESS Last update: 3/11/23.
+
+
 
 
 ## Aeries
