@@ -13,6 +13,11 @@ FRONT-END DOCUMENTATION:
 
 -"Vue js + Python" at https://www.youtube.com/watch?v=uSawG4dxx2k
 
+-"Host your Python Static site for FREE with Netlify" at https://www.youtube.com/watch?v=UcMnJOsMYuM
+
+
+Hold demo data in the front end title it "json" so that we can query it. How do you save it to local storage or check if it is already in cache. Maybe create a method to but random lettering at teh end of the name of the file so that you wouldnt have to keep checking cache. This would mean the user would have to delete their cache more often.
+
 
 # CURRENT PROGRESS Last update: 3/11/23.
 
