@@ -28,13 +28,12 @@ BACK-END DOCUMENTATION:
 
 
 ## Aeries
+ This is program was primarily designed to gain access to Aeries databases; However, in order to access anything other than demo data from Aeries it requires a data agreement with school district so that they can generate an API key in order to get access to their system.
 
-Requires a data agreement followed by generating an API key in order to get access to their system.
-
-Aeries has a "sandbox" mode that allows development without accessing to sensitive data.
- 
- How to build a request: https://support.aeries.com/support/solutions/articles/14000113681-aeries-api-building-a-request
- Aeries API Documentation: https://support.aeries.com/support/solutions/14000072323
+Aeries has a "sandbox" mode that allows development without accessing to sensitive data:
+- AERIES-CERT: 477abe9e7d27439681d62f4e0de1f5e1
+- How to build a request: https://support.aeries.com/support/solutions/articles/14000113681-aeries-api-building-a-request
+- Aeries API Documentation: https://support.aeries.com/support/solutions/14000072323
 ## PowerSchool
  No sandbox but working on getting documentation from a PowerSchool Affiliated firm
 ## Alma
