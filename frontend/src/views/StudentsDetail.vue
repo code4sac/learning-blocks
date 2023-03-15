@@ -93,7 +93,9 @@ export default {
     }]
   }),
   computed: {
+    
     studentsColumnHeaders() {
+      console.log(this.tableData)
       return Object.keys(this.tableData[0])
     },
     studentsRows() {

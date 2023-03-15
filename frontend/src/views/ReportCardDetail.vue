@@ -13,7 +13,7 @@
 <script>
 import AriesDataTable from '@/components/AriesDataTable.vue'
 import {filterTableData} from "@/composables/filterTableData.js"
-import {exportDataFromJSON } from '@/components/CvsParser.js'
+import {exportDataFromJSON,transformData } from '@/components/CvsParser.js'
 import {onMounted} from "vue"
 
 
@@ -61,7 +61,6 @@ export default {
   }),
   setup() {
     onMounted(() => {
-      console.log('3')
       const {ftd} = filterTableData()
       return ftd
     })
@@ -96,49 +95,27 @@ export default {
             }
         })
         return keys
-        // if (Array.isArray(object)) {
-        //   getKeys(object[0], keepObjectKeys, skipArrays, keys, scope)
-        // } else if (isObject(object)) {
-        //   Object.keys(object).forEach(key => {
-        //     if ((!Array.isArray(object[key]) && !isObject(object[key])) || keepObjectKeys) {
-        //       if (!keys.includes(key)) keys.push(key)
-        //     }
-        //     getKeys(object[key], keepObjectKeys, skipArrays, keys, scope.concat(key))
-        //   })
-        // }
-       
-        // return keys
       }
       return getKeys(this.tableData)
     },
     // populates the rows
     reportCardRows() {
-      const isObject = (object) => object != null && object.constructor.name === "Object"
-
-      function getValues(object, values = [], rows = [[]], currentRow = 0) {
-        console.log(object)
-        if (Array.isArray(object)) {
-          
-          let newRows = Array(object.length * rows.length).fill(...rows)
-          console.log('newRows:', newRows)
-          object.forEach((value, index, array) => {
-            console.log(rows, index, array)
-            getValues(value, values, rows, index)
-          })
-        } else if (isObject(object)) {
-          
-          Object.keys(object).forEach(key => {
-            if (!Array.isArray(object[key]) && !isObject(object[key])) {
-              console.log('key',key)
-              values.push(object[key])
-              if (!rows[currentRow]) {
-                console.log('cur row', currentRow)
-                rows.push(rows[currentRow - 1].slice(0, rows[currentRow - 1].length - object.length))
-              }
-              rows[currentRow].push(object[key])
+      function getValues(object,values = [] ,rows = []) {
+        const headersLength = 7
+        const data = transformData(object)
+        // data.splice(7,0,{StudentID: 99400004})
+        const StudentID = Object.values(data[0]).join(',')
+        
+        for(let i = 0; i < data.length; i++){
+          values.push(Object.values(data[i]).join(','))
+          if(values.length % headersLength == 0 && i > 0 ){
+            rows.splice(rows.length,0,[...values])
+            values.splice(0,values.length)
+            if(i != data.length - 1 && Object.keys(data[i+1]).join(',') != Object.keys(data[0]).join(',')){
+              values.splice(0,0,StudentID)
             }
-            getValues(object[key], values, rows, currentRow)
-          })
+          }
+          
         }
         return rows
       }
