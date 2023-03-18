@@ -46,24 +46,7 @@ def get_transcripts2(
 
         
 
-get_transcripts2('https://aeries.gcccharters.org','cf919ece752842fd83d7edfdf3ac7bb9','815','980046708',    courses=[
-'000',
-'000001',
-'00000K',
-'0001',
-'1',
-'1-2',
-'10',
-'10152',
-'11',
-'110005',
-'110006',
-'110007',
-'110050',
-'112005',
-'115045',
-'115050',
-'12',
-'120006',
+get_transcripts2('https://demo.aeries.net/aeries','477abe9e7d27439681d62f4e0de1f5e1','994','99400001',    courses=[
+'list of courses'
 
 ])
