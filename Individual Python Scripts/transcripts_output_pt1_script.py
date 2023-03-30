@@ -1,6 +1,6 @@
 import requests
 import json
-API_HOST = "https://delnorte.asp.aeries.net/admin/api/v3/schools/520/students/grade/11"
+API_HOST = "https://demo.aeries.net/aeries/admin/api/v3/schools/520/students/grade/11"
 requestHeaders = {"formatType":"application/json", \
 					 "AERIES-CERT":"insert cert key here"}
 
@@ -29,10 +29,3 @@ def reqpull():
         print(r2)
         
        
-
-
-
-
-
-#dont delete below this
-reqpull()

@@ -3,7 +3,7 @@ import json
 import requests
 
 # Begin: request information
-API_HOST = "https://aeries.gcccharters.org/Admin/api/v5/schools/815/gpas/980047317"
+API_HOST = "https://demo.aeries.net/aeries/Admin/api/v5/schools/{insert_school_id}/gpas/{insert_student_id_number}"
 
 requestHeaders = {"formatType": "text/json", "AERIES-CERT": "INSERT API KEY"}
 

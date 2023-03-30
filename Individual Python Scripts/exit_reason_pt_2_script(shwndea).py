@@ -1,5 +1,3 @@
-
-
 import numpy as np
 import requests
 import json
@@ -16,7 +14,7 @@ df = pd.DataFrame(data=d)
 
 while x < IDlen:
     stdID = str(ID[x])
-    API_HOST = "https://aeries.gcccharters.org/Admin/api/v5/schools/815/enrollment/" + stdID
+    API_HOST = "https://demo.aeries.net/api/v5/schools/815/enrollment/" + stdID
     requestHeaders = {"formatType":"text/json", \
 					 "AERIES-CERT":"insert Key here"}
     request = requests.get(API_HOST, headers = requestHeaders)
