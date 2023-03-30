@@ -8,7 +8,7 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 10
     Tracing: Active
   Api:
     TracingEnabled: True
@@ -24,11 +24,11 @@ Resources:
         AllowOrigin: "'*'"
         AllowCredentials: false
 
-  DemoAriesReportCardFunction:
+  AriesReportCardFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: learning_blocks_api/
-      Handler: app.lambda_handler
+      Handler: app.aries_report_card
       Runtime: python3.9
       Architectures:
         - x86_64
@@ -36,7 +36,23 @@ Resources:
         demoAriesReportCard:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /LearningBlocksAPI/demoAriesReportCard
+            Path: /LearningBlocksAPI/AriesReportCard
+            Method: get
+            RestApiId: !Ref LearningBlocksAPI
+
+  AriesStudentsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: learning_blocks_api/
+      Handler: app.aries_students
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        demoAriesReportCard:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /LearningBlocksAPI/AriesStudents
             Method: get
             RestApiId: !Ref LearningBlocksAPI
 
@@ -47,9 +63,15 @@ Outputs:
   LearningBlocksApi:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
     Value: !Sub "https://${LearningBlocksAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod/LearningBlocksAPI/"
-  DemoAriesReportCardFunction:
-    Description: "Demo Aries Report Card Lambda Function ARN"
-    Value: !GetAtt DemoAriesReportCardFunction.Arn
-  DemoAriesReportCardFunctionIamRole:
+  AriesReportCardFunction:
+    Description: "Aries Report Card Lambda Function ARN"
+    Value: !GetAtt AriesReportCardFunction.Arn
+  AriesReportCardFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt DemoAriesReportCardFunctionRole.Arn
+    Value: !GetAtt AriesReportCardFunctionRole.Arn
+  AriesStudentsFunction:
+    Description: "Aries Report Card Lambda Function ARN"
+    Value: !GetAtt AriesStudentsFunction.Arn
+  AriesReportStudentsFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt AriesStudentsFunctionRole.Arn
