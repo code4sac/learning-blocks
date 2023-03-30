@@ -51,14 +51,14 @@
                 let right = data.length -1
                 while(left < right){
                     const mid  = Math.floor((left + right) /2)
-                    if(data[mid]['LastName'] < target){
+                    if(String( data[mid]['LastName']).toLowerCase() < target.toLowerCase()){
                         left = mid + 1
                     }
                     else{
                         right = mid
                     }
                 }
-                if(data[left]['LastName'] === target){
+                if(String(data[left]['LastName']).toLowerCase() === target.toLowerCase()){
                     this.leftMostIndex = left
                 }
                 else{
@@ -70,14 +70,14 @@
                 let right = data.length
                 while(left < right){
                     const mid = Math.floor((left + right)/2)
-                    if(data[mid]['LastName'] > target){
+                    if(String( data[mid]['LastName']).toLowerCase() > target.toLowerCase()){
                         right = mid
                     }
                     else{
                         left = mid + 1
                     }
                 }
-                if(data[right-1]['LastName'] === target){
+                if(String(data[right-1]['LastName']).toLowerCase() === target.toLowerCase()){
                     this.rightMostIndex = right - 1
                 }
                 else{
@@ -85,6 +85,10 @@
                 }
             },
             populateSearchArray(data){
+                if(this.leftMostIndex < 0 && this.rightMostIndex < 0){
+                    console.log("NO RESULTS WHERE FOUND")
+                    return
+                }
                 for(let i = this.leftMostIndex; i <= this.rightMostIndex; i++){
                     this.SearchResultsArray.push(data[i])
                 }
