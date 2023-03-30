@@ -2,17 +2,17 @@ export function createCSVDownload(data,fileName = '',viewPathCall= ''){
     switch (viewPathCall) {
         case 'ReportCard':{
             const headerLength = 7
-            exportDataFromJSON(data,headerLength,fileName)
+            getDownload(data,headerLength,fileName)
             break;
         }
         case 'Enrollment':{
             const headerLength = Object.keys(data[0]).length
-            exportDataFromJSON(data,headerLength,fileName)
+            getDownload(data,headerLength,fileName)
             break;
         }
         case 'StudentsDetail':{
             const headerLength = Object.keys(data[0]).length
-            exportDataFromJSON(data,headerLength,fileName)
+            getDownload(data,headerLength,fileName)
             break;
         }
         default:{
@@ -22,7 +22,7 @@ export function createCSVDownload(data,fileName = '',viewPathCall= ''){
     }
 }
 
-function exportDataFromJSON(data,headerLength ,fileName = "test.csv"){
+function getDownload(data,headerLength ,fileName = "test.csv"){
     const csvString = transformToCSV(data,headerLength)
     const blob = new Blob([csvString], {type: 'text/csv'})
     const url = window.URL.createObjectURL(blob)
