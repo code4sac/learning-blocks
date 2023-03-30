@@ -8,12 +8,13 @@
     Download
   </v-btn>
   <aries-data-table :data-column-headers="reportCardColumnHeaders" :data-rows="reportCardRows"></aries-data-table>
+  
 </template>
 
 <script>
 import AriesDataTable from '@/components/AriesDataTable.vue'
 import {filterTableData} from "@/composables/filterTableData.js"
-import {exportDataFromJSON,transformData } from '@/components/CvsParser.js'
+import {createCSVDownload,transformData } from '@/components/CvsParser.js'
 import {onMounted} from "vue"
 
 
@@ -62,18 +63,13 @@ export default {
   setup() {
     onMounted(() => {
       const {ftd} = filterTableData()
+      
       return ftd
     })
   },
   methods:{
     downLoadData(){
-
-      function createCSV(data){
-        exportDataFromJSON(data)
-        return ''
-      }
-      createCSV(this.tableData)
-     
+      createCSVDownload(this.tableData,'','ReportCard')     
     }
   },
   computed: {
@@ -101,16 +97,19 @@ export default {
     // populates the rows
     reportCardRows() {
       function getValues(object,values = [] ,rows = []) {
+        
         const headersLength = 7
         const data = transformData(object)
-        // data.splice(7,0,{StudentID: 99400004})
         const StudentID = Object.values(data[0]).join(',')
         
         for(let i = 0; i < data.length; i++){
+
           values.push(Object.values(data[i]).join(','))
           if(values.length % headersLength == 0 && i > 0 ){
+
             rows.splice(rows.length,0,[...values])
             values.splice(0,values.length)
+
             if(i != data.length - 1 && Object.keys(data[i+1]).join(',') != Object.keys(data[0]).join(',')){
               values.splice(0,0,StudentID)
             }
@@ -122,13 +121,13 @@ export default {
 
       let rows = getValues(this.tableData)
       return rows
-      // return []
     },
     schoolId() {
       // return this.tableData[0].schoolId
       return 'Todo'
     },
     studentId() {
+    
       return this.tableData[0].studentId
     }
   },

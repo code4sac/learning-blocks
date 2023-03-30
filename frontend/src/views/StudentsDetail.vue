@@ -1,11 +1,15 @@
 <template>
   <h4>Result</h4>
+  <v-btn @click="buttonDownload">
+      Download
+  </v-btn>
   <aries-data-table :data-column-headers="studentsColumnHeaders" :data-rows="studentsRows">
   </aries-data-table>
 </template>
 
 <script>
 import AriesDataTable from "@/components/AriesDataTable.vue";
+import { createCSVDownload } from "@/components/CvsParser"
 
 export default {
   name: "StudentsInSchoolByGradeDetail",
@@ -92,10 +96,14 @@ export default {
       "RecordsReleaseCode": ""
     }]
   }),
+  methods:{
+    buttonDownload(){
+      createCSVDownload(this.tableData,'','StudentsDetail')            
+    }
+  },
   computed: {
     
     studentsColumnHeaders() {
-      console.log(this.tableData)
       return Object.keys(this.tableData[0])
     },
     studentsRows() {
@@ -110,6 +118,7 @@ export default {
   },
   created() {
     this.tableData = JSON.parse(localStorage.getItem(this.$route.params.localStorageKey))
+    console.log(this.tableData)
   }
 }
 </script>

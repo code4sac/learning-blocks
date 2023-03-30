@@ -12,7 +12,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col v-for="field in queryFields" :key="field.model" cols="12" md="4">
+        <v-col v-for="field in queryFields" :key="field.model" cols="12" md="4" >
           <v-text-field
               v-model="field.model"
               :label="field.label"
@@ -33,7 +33,9 @@ export default {
     queryTypes: [
       'Report card',
       'Students',
+      'Enrollment'
     ],
+    returnQuery:[],
     selectedQuery: '',
     productionApi: false,
     schoolId: '994',
@@ -70,8 +72,33 @@ export default {
             'required': true
           })
           break
+        case 'Enrollment':
+          fields.push({
+            'label': 'SchoolID',
+            'model': 'schoolId',
+            'required': true
+            },
+            {
+              'label': 'StudentID',
+              'model': 'studentId',
+              'required': true
+            },
+            {
+              'label': 'LastName',
+              'model': 'lastname',
+              'required': true
+            },
+            {
+            'label': 'APIKey',
+            'model': 'apiKey',
+            'required': true
+          })
+          break
       }
+      console.log('fields',fields)
+      
       return fields
+
     }
   },
   methods: {
@@ -101,10 +128,28 @@ export default {
           }).catch(error => console.log(error))
         }).catch(error => console.log(error))
       }
+        else if (this.selectedQuery === 'Enrollment') {
+        const uniqueIdentifier = 'enrollment'
+        fetch(`${uniqueIdentifier}.json`).then(response => {
+          response.text().then(response => {
+            localStorage.setItem(uniqueIdentifier, response)
+            this.$router.push({
+              name: `enrollment`,
+              params: {localStorageKey: uniqueIdentifier}
+            }).catch(error => console.log(error))
+          }).catch(error => console.log(error))
+        }).catch(error => console.log(error))
+      }
+
     },
+    getQueryField(){
+      this.returnQuery = this.queryFields()
+      console.log('here',this.returnQuery)
+    }
   },
   created() {
     this.selectedQuery = this.queryTypes[0]
+    
   },
   mounted() {
     // fetch(`http://127.0.0.1:3000/LearningBlocksAPI/demoAriesReportCard?api_type=demo&school_id=994&student_id=99400002&api_key=477abe9e7d27439681d62f4e0de1f5e1`).then((response)=>{

@@ -1,5 +1,29 @@
-export function exportDataFromJSON(data, fileName = "test.csv"){
-    const csvString = transformToCSV(data)
+export function createCSVDownload(data,fileName = '',viewPathCall= ''){
+    switch (viewPathCall) {
+        case 'ReportCard':{
+            const headerLength = 7
+            exportDataFromJSON(data,headerLength,fileName)
+            break;
+        }
+        case 'Enrollment':{
+            const headerLength = Object.keys(data[0]).length
+            exportDataFromJSON(data,headerLength,fileName)
+            break;
+        }
+        case 'StudentsDetail':{
+            const headerLength = Object.keys(data[0]).length
+            exportDataFromJSON(data,headerLength,fileName)
+            break;
+        }
+        default:{
+            console.log('Error ViewPathCall was not declared')
+            break;
+        }
+    }
+}
+
+function exportDataFromJSON(data,headerLength ,fileName = "test.csv"){
+    const csvString = transformToCSV(data,headerLength)
     const blob = new Blob([csvString], {type: 'text/csv'})
     const url = window.URL.createObjectURL(blob)
     const link = document.createElement('a')
@@ -9,14 +33,13 @@ export function exportDataFromJSON(data, fileName = "test.csv"){
     link.click()
     document.body.removeChild(link)
 }
-function transformToCSV(data){   
-    const objects = transformData(data)
 
+function transformToCSV(data,headerLength){   
+    const objects = transformData(data)
     const headers = []
-    for(let i = 0; i < 7; i++){
+    for(let i = 0; i < headerLength; i++){
         headers.push(Object.keys(objects[i]).join(','))
     }
-  
     const rows = []
     for(let j = 0; j < objects.length; j++){
         if(j % headers.length == 0){
@@ -26,17 +49,15 @@ function transformToCSV(data){
         }
         rows.push(Object.values(objects[j]).join(','))
     }
-
     let csvString = headers.join(',') 
-    for(let k = 0; k < rows.length; k++){
-        if(k % headers.length == 0){
+    for(let r = 0; r < rows.length; r++){
+        if(r % headers.length == 0){
             csvString += '\n'
         }
-        const tmp = rows[k] + ','
+        const tmp = rows[r] + ','
         csvString += tmp
     }
     console.log(csvString)
-    
     return csvString
 }
 
