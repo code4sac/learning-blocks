@@ -1,14 +1,36 @@
 <template>
-    <h4>Result</h4>
-    <v-btn @click="buttonDownload">
-      Download
-    </v-btn>
-    <aries-data-table :data-column-headers="enrollmentCardColumnHeaders" :data-rows="enrollmentCardRows"></aries-data-table>
-    
+    <div>
+        <h4>Result</h4>
+        <div class="search-container">
+        <input type= "text" v-model = "searchText" class="search-input" placeholder="Search..." >
+        <v-btn class="search-padding-left" @click="enrollmentSearch">Search</v-btn>
+        </div>
+        <div>
+            <v-btn @click="buttonDownload">
+                Download
+            </v-btn>
+        </div>
+        <aries-data-table :data-column-headers="enrollmentCardColumnHeaders" :data-rows="enrollmentCardRows">
+        </aries-data-table>
+    </div>
 </template>
+<style>
+    .search-input::placeholder{
+        color: #232222;
+    }
+    .search-container{
+        padding-bottom: 10px;
+    }
+    .search-padding-left{
+        left:10px;
+        padding-left: 15px;
+    }
+</style>
 
 <script>
     import AriesDataTable from '@/components/AriesDataTable.vue'
+    // import { ref } from '@/views/AriesApiContainer.vue'
+    
     import { createCSVDownload } from '@/components/CvsParser'
     export default {
         name: 'enrollmentDetails',
@@ -19,7 +41,7 @@
             leftMostIndex: null,
             rightMostIndex: null,
             SearchResultsArray: [],
-            returnQuery:[],
+            searchText: '',
             apiKey: '',
             tableData:{
                 type: Array,
@@ -43,6 +65,14 @@
         }),
   
         methods:{
+            enrollmentSearch(){
+                if(this.SearchResultsArray.length > 0){
+                    this.SearchResultsArray.splice(0,this.SearchResultsArray.length)
+                }
+                this.leftmostBinarySearch(this.tableData,this.searchText)
+                this.rightmostBinarySearch(this.tableData,this.searchText)
+                this.populateSearchArray(this.tableData)
+            },
             buttonDownload(){
                 createCSVDownload(this.SearchResultsArray,'','Enrollment')
             },
@@ -109,6 +139,7 @@
             this.leftmostBinarySearch(this.tableData,'Garcia')
             this.rightmostBinarySearch(this.tableData,'Garcia')
             this.populateSearchArray(this.tableData)
+
         }
 
         
