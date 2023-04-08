@@ -19,7 +19,13 @@ const router = createRouter({
             path: '/students/:localStorageKey',
             name: 'students',
             component: () => import('@/views/StudentsDetail.vue'),
-        }]
+        },
+        {
+            path: '/enrollment/:localStorageKey',
+            name: 'enrollment',
+            component: () => import('@/views/EnrollmentDetail.vue'),
+        }
+    ]
 
 })
 
