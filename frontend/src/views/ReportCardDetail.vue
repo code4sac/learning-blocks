@@ -14,7 +14,7 @@
 <script>
 import AriesDataTable from '@/components/AriesDataTable.vue'
 import {filterTableData} from "@/composables/filterTableData.js"
-import {createCSVDownload,transformData } from '@/components/CvsParser.js'
+import {createCSVDownload,transformData } from '@/lib/CsvParser.js'
 import {onMounted} from "vue"
 
 

@@ -9,7 +9,7 @@
 
 <script>
 import AriesDataTable from "@/components/AriesDataTable.vue";
-import { createCSVDownload } from "@/components/CvsParser"
+import { createCSVDownload } from "@/lib/CsvParser"
 
 export default {
   name: "StudentsInSchoolByGradeDetail",

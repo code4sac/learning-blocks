@@ -2,8 +2,8 @@
     <div>
         <h4>Result</h4>
         <div class="search-container">
-        <input type= "text" v-model = "searchText" class="search-input" placeholder="Search..." >
-        <v-btn class="search-padding-left" @click="enrollmentSearch">Search</v-btn>
+            <input type= "text" v-model = "searchText" class="search-input" placeholder="Search..." >
+            <v-btn class="search-padding-left" @click="enrollmentSearch">Search</v-btn>
         </div>
         <div>
             <v-btn @click="buttonDownload">
@@ -28,10 +28,9 @@
 </style>
 
 <script>
-    import AriesDataTable from '@/components/AriesDataTable.vue'
-    // import { ref } from '@/views/AriesApiContainer.vue'
-    
-    import { createCSVDownload } from '@/components/CvsParser'
+    import AriesDataTable from '@/components/AriesDataTable.vue'    
+
+    import { createCSVDownload } from '@/lib/CsvParser'
     export default {
         name: 'enrollmentDetails',
         components: {AriesDataTable},
@@ -42,6 +41,7 @@
             rightMostIndex: null,
             SearchResultsArray: [],
             searchText: '',
+            queryFields:'',
             apiKey: '',
             tableData:{
                 type: Array,
@@ -136,6 +136,9 @@
         },
         created() {
             this.tableData = JSON.parse(localStorage.getItem(this.$route.params.localStorageKey))
+            console.log(this.tableData)
+            
+           
             this.leftmostBinarySearch(this.tableData,'Garcia')
             this.rightmostBinarySearch(this.tableData,'Garcia')
             this.populateSearchArray(this.tableData)
@@ -144,7 +147,5 @@
 
         
     }
-
-
 
 </script>
