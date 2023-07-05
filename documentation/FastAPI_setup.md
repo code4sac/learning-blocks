@@ -33,5 +33,7 @@ In aries_api.py class:
 Add 'import io'
 
 get_current_grades_csv_io function was created to store the csv inside memory using the the io module.
-## more documentation soon
+## More documentation soon!!!
+### Ideas
+- https://youtube.com/shorts/MCzA3vFG6ag?feature=share
 <img align="right" alt="GIF" src="https://i.pinimg.com/originals/e4/26/70/e426702edf874b181aced1e2fa5c6cde.gif" />
