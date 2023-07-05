@@ -14,3 +14,8 @@
 - If you adversed in python I suggest you start here
 - If you know Fast API I suggest you starte here
 - If you know Vue.JS  I suggest you start here
+
+
+
+## more documentation soon
+<img align="right" alt="GIF" src="https://i.pinimg.com/originals/e4/26/70/e426702edf874b181aced1e2fa5c6cde.gif" />
