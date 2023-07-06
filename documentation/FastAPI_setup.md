@@ -4,6 +4,7 @@
 4. Create a script: main.js
 5. Setup
 6. Install requests => `pipenv install requests`
+7. Start the server by running `uvicorn app:app --reload` 
 
 In main.py file:
 
