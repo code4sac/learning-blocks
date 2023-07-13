@@ -6,6 +6,6 @@
 - Click on the + symbol to open a new tab.
 - Enter the API Endpoint where it says, “Enter request URL” and select the method (action type GET, POST, etc.) for that request as shown below.
 - Click on the Send button.
-  - For example,    [test](https://drive.google.com/file/d/1XJUZ6tLVVbbD9WRg_PNsYJJ6VuXLFEzv/view?usp=sharing)
+  - For example, in order to pull a record of student data from Aeries: ![image](https://drive.google.com/uc?export=view&id=1XJUZ6tLVVbbD9WRg_PNsYJJ6VuXLFEzv)
 
 
