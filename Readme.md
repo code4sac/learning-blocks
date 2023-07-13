@@ -12,8 +12,8 @@
 
 ### if you are a developer we have a couple of ways for you to help/contribute/learn
 - If you adversed in python I suggest you start [here](https://github.com/code4sac/learning-blocks/blob/main/documentation/Individual_scripts.md)
-- If you know Fast API I suggest you starte here
-- If you know Vue.JS  I suggest you start here
+- If you know Fast API I suggest you starte [here](https://github.com/code4sac/learning-blocks/blob/main/documentation/FastAPI_setup.md)
+- If you know Vue.JS  I suggest you start [here](https://github.com/code4sac/learning-blocks/blob/main/documentation/Vuejs_setup.MD)
 
 
 
