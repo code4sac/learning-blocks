@@ -6,7 +6,7 @@
 - website documentation
 
 ### <p align="center">  If you know how to run a python script!  </p>
-- [go to python tutorial](https://github.com/code4sac/learning-blocks/blob/main/documentation/Individual_scripts.md)
+- [Python Tutorial](https://github.com/code4sac/learning-blocks/blob/main/documentation/Individual_scripts.md)
 - comment specifically for SSS user
 
 ###  <p align="center"> If you know how to use Python and Vue.JS!  </p>
