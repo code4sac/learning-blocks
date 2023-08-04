@@ -5,7 +5,7 @@ import requests
 
 
 class Api:
-    BASE_API_HOST = "https://aeries.gcccharters.org/Admin/api/v5"
+    BASE_API_HOST = "https://demo.aeries.net/api/v5"
     # "InsertSTUIDNum" "
 
     def __init__(self, school_id: str, item_id: str):
