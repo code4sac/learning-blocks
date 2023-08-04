@@ -25,7 +25,7 @@ def get_transcripts2(
         csv_writer.writerow(header)
         for x in range(Courseslen):
             Course = str(f"{courses[x]}")
-            API_HOST = "https://aeries.gcccharters.org/Admin/api/v5/courses/" + Course
+            API_HOST = "https://demo.aeries.net/api/v5/courses/" + Course
             requestHeaders = {"formatType":"text/json", \
                               "AERIES-CERT":"cf919ece752842fd83d7edfdf3ac7bb9"}
             request = requests.get(API_HOST, headers = requestHeaders)
