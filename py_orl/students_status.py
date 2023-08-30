@@ -1,9 +1,7 @@
 
 import csv
 import json
-# import io
-# import os
-
+import pandas as pd
 import requests
 
 
@@ -27,7 +25,7 @@ class students_status:
 
     def get_students_by_status(self):
 
-        url = f"{self.BASE_API_HOST}/schools/{self.school_id}/students?cert={self.api_key}&EndingRecord=5&StartingRecord=0"
+        url = f"{self.BASE_API_HOST}/schools/{self.school_id}/students?cert={self.api_key}&EndingRecord=50&StartingRecord=0"
         try:
             response = requests.get(url, headers=self.request_headers, timeout=10)
             extracted_data = []
@@ -54,8 +52,25 @@ class students_status:
             w.writeheader()
             w.writerows(values)
 
+    def generate_table_number_students(self):
+        df = pd.DataFrame(self.get_students_by_status())
+
+        result = df.groupby(['Grade', 'AttendanceProgramCodePrimary', 'InactiveStatusCode']).size().reset_index(name='Count')
+
+        pivot_table = result.pivot_table(index=['Grade', 'AttendanceProgramCodePrimary'], columns='InactiveStatusCode', values='Count', fill_value=0)
+
+        pd.set_option('display.max_rows', None)
+        pd.set_option('display.max_columns', None)
+        pd.set_option('display.width', 1000)
+
+        print(pivot_table)
+
     def export_students_by_status_json(self):
         values = json.dumps(self.get_students_by_status(), indent=4)
 
         with open("students_by_status.json", "w") as json_file:
             json_file.write(values)
+
+# TO TEST BEHAVIOR
+# smth = students_status()
+# smth.export_students_by_status_json()
