@@ -1,5 +1,6 @@
 
 import csv
+import json
 # import io
 # import os
 
@@ -45,10 +46,16 @@ class students_status:
             return []
 
     def export_students_by_status_csv(self):
-        val = self.get_students_by_status()
-        col_names = val[0].keys()
+        values = self.get_students_by_status()
+        col_names = values[0].keys()
 
         with open("students_by_status.csv", "w", newline="") as f:
             w = csv.DictWriter(f, fieldnames=col_names)
             w.writeheader()
-            w.writerows(val)
+            w.writerows(values)
+
+    def export_students_by_status_json(self):
+        values = json.dumps(self.get_students_by_status())
+
+        with open("students_by_status.json", "w") as json_file:
+            json_file.write(values)
