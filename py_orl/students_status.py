@@ -55,7 +55,7 @@ class students_status:
             w.writerows(values)
 
     def export_students_by_status_json(self):
-        values = json.dumps(self.get_students_by_status())
+        values = json.dumps(self.get_students_by_status(), indent=4)
 
         with open("students_by_status.json", "w") as json_file:
             json_file.write(values)
