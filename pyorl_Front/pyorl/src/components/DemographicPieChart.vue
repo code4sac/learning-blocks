@@ -314,7 +314,7 @@ export default class DemographicPieChart extends Vue {
 
         const jsonInfo = {};
         jsonData.forEach((student) => {
-            const name = student.Gender;
+            const name = student.Grade;
 
             if (jsonInfo[name]) {
                 jsonInfo[name].value++;
