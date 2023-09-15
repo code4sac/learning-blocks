@@ -52,7 +52,9 @@
             return {
                 dataList:[
                     {jsonData:studentsByGender, containerId:"GenderPieChart"}, 
-                    {jsonData:studentsByGrade, containerId:"GradePieChart"}
+                    {jsonData:studentsByGrade, containerId:"GradePieChart"}, 
+                    {jsonData:studentsByGrade, containerId:"GradePieChart1"}, 
+                    {jsonData:studentsByGrade, containerId:"GradePieChart2"}
                 ]
             };
         }

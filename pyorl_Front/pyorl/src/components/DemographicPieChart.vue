@@ -39,8 +39,8 @@ export default {
     };
   },
   mounted() {
-    const width = 250,
-      height = 250;
+    const width = 450,
+      height = 300;
 
     const data = this.jsonData;
 
@@ -64,6 +64,8 @@ export default {
 
     const arcs = pie(data);
 
+    const radius = Math.min(width, height) / 2;
+
     const svg = d3.select(`#${this.containerId}`).append("svg")
       .attr("width", width)
       .attr("height", height)
@@ -71,37 +73,51 @@ export default {
       .attr("style", "max-width: 100%; height: auto; font: 18px sans-serif;");
 
     svg.append("g")
-      .attr("stroke", "white")
       .selectAll()
       .data(arcs)
       .join("path")
       .attr("fill", d => color(d.data.name))
       .attr("d", arc)
-      .append("title")
-      .text(d => `${d.data.name}: ${d.data.value.toLocaleString("en-US")}`);
+
+    svg
+      .selectAll('allPolylines')
+      .data(arcs)
+      .enter()
+      .append('polyline')
+      .attr('stroke', 'black')
+      .style('fill', 'none')
+      .attr('stroke-width', 1)
+      .attr('points', (d) => {
+        const posA = arc.centroid(d)
+        const posB = arcLabel.centroid(d) // line break
+        const posC = arcLabel.centroid(d); // Label position
+        const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // angle of X pos extreme right or extreme left
+        posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // 1 or -1 = right or left
+        return [posA, posB, posC]
+      })
 
     svg.append("g")
-      .attr("text-anchor", "middle")
       .selectAll()
       .data(arcs)
-      .join("text")
-      .attr("transform", d => `translate(${arcLabel.centroid(d)})`)
-      .call(text => text.append("tspan")
-        .attr("y", "-0.4em")
-        .attr("font-weight", "bold")
-        .text(d => d.data.name))
-      // Define the lower limit of when the frequency should be displayed at
-      .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.27).append("tspan")
-        .attr("x", 0)
-        .attr("y", "0.7em")
-        .attr("fill-opacity", 0.7)
-        .text(d => d.data.value.toLocaleString("en-US")));
+      .enter()
+      .append('text')
+      .text(  (d) => { return `${d.data.name} (${d.data.value})` } )
+      .attr('transform', (d) => {
+        const pos = arcLabel.centroid(d);
+        const midAngle = d.startAngle + (d.endAngle - d.startAngle) / 2
+        pos[0] = radius * 0.99 * (midAngle < Math.PI ? 1 : -1);
+        return `translate(${  pos  })`;
+      })
+      .style('text-anchor', (d) => {
+        const midAngle = d.startAngle + (d.endAngle - d.startAngle) / 2
+        return (midAngle < Math.PI ? 'start' : 'end')
+      })
   }
 }
 </script>
   
 <style>
   .pieContainer{
-    width: fit-content;
+    width: 400px;
   }
 </style>
