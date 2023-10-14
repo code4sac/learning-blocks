@@ -9,6 +9,7 @@
 - API KEY
 - Aeries School Code
 - Target student's Aeries STU.ID field
+- Test
 
 ### if you are a developer we have a couple of ways for you to help/contribute/learn
 - If you well-versed in python I suggest you start [here](https://github.com/code4sac/learning-blocks/blob/main/documentation/Individual_scripts.md)
