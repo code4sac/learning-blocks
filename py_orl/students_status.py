@@ -38,7 +38,7 @@ class students_status:
                     filtered_obj = {key: obj[key] for key in keys_needed}
                     extracted_data.append(filtered_obj)
 
-            return extracted_data
+            return extracted_data, keys_needed
         except requests.exceptions.RequestException as err:
             print("API request failed:" + str(err))
             return []

@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from starlette.responses import StreamingResponse
-
+from routers import students
 from current_grades import current_grades
 
 app = FastAPI()
@@ -23,7 +23,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+app.include_router(students.router)
 class TeamOut(BaseModel):
     name: str
     city: str
