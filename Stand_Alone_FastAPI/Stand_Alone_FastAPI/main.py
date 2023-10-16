@@ -28,6 +28,34 @@ academicSessions = sqlalchemy.Table(
     Column("parentSourcedId", String(256), primary_key=True, unique=True, nullable=False),
 )
 
+classes = sqlalchemy.Table(
+    "classes",
+    metadata,
+    Column("sourcedId", String(256), primary_key=True, unique=True, nullable=False),
+    Column("status", Enum('active', 'tobedeleted', 'inactive', name='enum1'), nullable=False),
+    Column("dateLastModified", DateTime),
+    Column("title", String, nullable=False),
+    Column("grades", String),
+    Column("courseSourcedId", String, nullable=False),
+    Column("classCode", String),
+    Column("classType", Enum('enumeration_values_for_classType', name='enum_classType'), nullable=False),
+    Column("location", String),
+    Column("schoolSourcedId", String, nullable=False),
+    Column("termSourcedIds", String, nullable=False),
+    Column("subjects", String),
+    Column("subjectCodes", String),
+    Column("periods", String),
+)
+classResources = sqlalchemy.Table(
+    "classResources",
+    metadata,
+    Column("sourcedId", String(256), primary_key=True, unique=True, nullable=False),
+    Column("status", Enum('active', 'tobedeleted', 'inactive', name='enum1'), nullable=False),
+    Column("dateLastModified", DateTime, nullable=False),
+    Column("title", String),
+    Column("classSourcedId", String, nullable=False),
+    Column("resourceSourcedId", String, nullable=False),
+)
 
 engine = sqlalchemy.create_engine(DATABASE_URL)
 metadata.create_all(engine)
