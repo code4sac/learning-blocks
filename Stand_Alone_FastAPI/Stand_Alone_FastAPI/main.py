@@ -5,7 +5,7 @@ from sqlalchemy import Column, Integer, String, Enum, Date, DateTime, Boolean, F
 from sqlalchemy.orm import declarative_base
 from typing import List
 
-DATABASE_URL = 'postgresql://postgres:Jennzilla1%3F@localhost:5432/lb'
+DATABASE_URL = [insert postgres db]
 database = databases.Database(DATABASE_URL)
 
 metadata = sqlalchemy.MetaData()
