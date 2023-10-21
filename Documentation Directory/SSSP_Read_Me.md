@@ -2,11 +2,11 @@
 ## <p align="left"> So this documentation is here to help student support service providers with little computing experience dive into Student Informational Systems that allow for API access, such as Aeries and Alma.  </p>
 
 ### <p align="left"> If you have no coding skils whatsoever! </p>
-- [POSTMAN documentation](https://github.com/code4sac/learning-blocks/blob/main/documentation/Postman_Documentation.md)
+- [POSTMAN documentation](https://github.com/code4sac/learning-blocks/blob/main/Documentation%20Directory/Postman_Documentation.md)
 - website documentation
 
 ### <p align="left">  If you know how to run a python script!  </p>
-- [Python Tutorial](https://github.com/code4sac/learning-blocks/blob/main/documentation/Individual_scripts.md)
+- [Python Tutorial](https://github.com/code4sac/learning-blocks/blob/main/Documentation%20Directory/Individual_scripts.md)
 - comment specifically for SSS user
 
 ###  <p align="left"> If you know how to use Python and Vue.JS!  </p>
