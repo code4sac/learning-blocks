@@ -2,10 +2,10 @@ import requests
 import json
 
 # Define the URL separately
-url = "http://canvas.instructure.com/api/v1/courses/7983596/users"
+url = "http://canvas.instructure.com/api/v1/courses/[insert couse ID]/users"
 
 # Set the access token in the headers
-headers = {'Authorization': 'Bearer 7~skPyx76YuDnhaacL9yYF4Kt5n9UrWptdSNWg4WNk01PIQt18RGna3lzFlOmruUum'}
+headers = {'Authorization': 'Bearer [insert api token]'}
 
 try:
     # Use the 'requests' library to make a GET request
