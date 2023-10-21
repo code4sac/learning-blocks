@@ -10,10 +10,10 @@
 - Aeries School Code
 - Target student's Aeries STU.ID field
 
-### if you are a developer we have a couple of ways for you to help/contribute/learn
-- If you well-versed in Python I suggest you start [here](https://github.com/code4sac/learning-blocks/blob/main/Documentation%20Directory/Individual_scripts.md)
+### If you are a developer we have a couple of ways for you to help/contribute/learn
+- If you want to start off this project just learning the Python side of things I suggest you start [here](https://github.com/code4sac/learning-blocks/blob/main/Documentation%20Directory/Individual_scripts.md)
 - If you want to understand how Fast API works in this project I suggest you start [here](https://github.com/code4sac/learning-blocks/blob/main/Documentation%20Directory/FastAPI_setup.md)
-- If you want to boot up a dockerless version of this project, I suggest you start [here](https://github.com/code4sac/learning-blocks/tree/main/Learning-Blocks-No-Docker-Version) Warning this format has FERPA related implications and should be used on local servers onl.
+- If you want to boot up a dockerless FASTAPI/VUE.JS version of this project, I suggest you start [here](https://github.com/code4sac/learning-blocks/tree/main/Learning-Blocks-No-Docker-Version) <strong>Warning this format has FERPA related implications and should be used on local servers only</strong>.
 - If you want to begin building a website that will pass the muster of FERPA and other Student Privacy laws, I suggest you start [here](https://github.com/code4sac/learning-blocks/tree/main/Learning-Blocks-Docker-Version)
 
 
