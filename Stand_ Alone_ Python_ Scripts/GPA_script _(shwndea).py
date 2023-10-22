@@ -7,7 +7,6 @@ API_HOST = "https://demo.aeries.net/aeries/Admin/api/v5/schools/{insert_school_i
 
 requestHeaders = {"formatType": "text/json", "AERIES-CERT": "INSERT API KEY"}
 
-
 request = requests.get(API_HOST, headers=requestHeaders)
 requesttool = request.json()  # turns request to json request
 

@@ -4,14 +4,15 @@ API_HOST = "https://demo.aeries.net/aeries/admin/api/v3/schools/520/students/gra
 requestHeaders = {"formatType":"application/json", \
 					 "AERIES-CERT":"insert cert key here"}
 
-#DEMO API: 477abe9e7d27439681d62f4e0de1f5e1
-#DOCUMENTATION: https://support.aeries.com/support/solutions/articles/14000077926-aeries-api-full-documentation#aeries-api-h5
 def reqpull():
+    """
+    DEMO API: 477abe9e7d27439681d62f4e0de1f5e1
+    DOCUMENTATION: https://support.aeries.com/support/solutions/articles/14000077926-aeries-api-full-documentation#aeries-api-h5
+    :return:
+    """
     request = requests.get(API_HOST, headers = requestHeaders)
     r1= request.json()
 
-    
- 
     q=[]
     a=[]
     for q in r1:

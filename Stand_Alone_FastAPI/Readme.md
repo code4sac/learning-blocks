@@ -1,6 +1,6 @@
-# Learning Blocks without Docker
+# Stand-Alone FastAPI Server
 
-This project runs Learning Blocks without needed Docker.
+FastAPI server that runs database queries.
 
 ## more documentation soon
 

@@ -180,20 +180,37 @@ app = FastAPI()
 
 @app.on_event("startup")
 async def startup():
+    """
+    Database startup event.
+    :return: Database session
+    """
     await database.connect()
 
 @app.on_event("shutdown")
 async def shutdown():
+    """
+    Database shutdown event.
+    :return: Database session
+    """
     await database.disconnect()
 
 @app.get("/academicSessions/")
 async def read_academic_sessions():
+    """
+    Get all academic sessions.
+    :return: Academic sessions
+    """
     query = AcademicSession.select()
     academic_sessions = await database.fetch_all(query)
     return academic_sessions
 
 @app.post("/academicSessions/")
 async def create_academic_session(request: Request):
+    """
+    Create a new academic session.
+    :param request: Last record ID
+    :return:
+    """
     data = await request.json()
     query = AcademicSession.insert().values(**data.dict())
     last_record_id = await database.execute(query)

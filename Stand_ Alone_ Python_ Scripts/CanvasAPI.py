@@ -1,5 +1,5 @@
-import requests
 import json
+import requests
 
 # Define the URL separately
 url = "http://canvas.instructure.com/api/v1/courses/[insert couse ID]/users"

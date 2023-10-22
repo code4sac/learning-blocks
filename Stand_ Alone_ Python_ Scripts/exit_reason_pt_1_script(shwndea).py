@@ -1,19 +1,27 @@
 import csv
 import random
-import string
-
 import requests
+import string
 
 columns_to_include = ["StudentID", "LeaveDate", "ExitReasonCode"]
 
 
 def get_current_grades(
-    aeries_base_url: str,
-    aeries_api_token: str,
-    school_code: str,
-    student_ids: list[str],
-    academic_year: int,
+        aeries_base_url: str,
+        aeries_api_token: str,
+        school_code: str,
+        student_ids: list[str],
+        academic_year: int,
 ) -> str:
+    """
+    Get current grades for student.
+    :param aeries_base_url:
+    :param aeries_api_token:
+    :param school_code:
+    :param student_ids:
+    :param academic_year:
+    :return:
+    """
     api_base = f"{aeries_base_url}/Admin/api/v5/schools/{school_code}/enrollment"
     # api_base = f'/Admin/api/v5/schools/{schoolcode}/enrollment/{StudentID}/year/{AcademicYear}'
     request_headers = {"formatType": "text/json", "AERIES-CERT": aeries_api_token}
@@ -37,4 +45,4 @@ def get_current_grades(
 
     return file_path
 
-#get_current_grades(.....)
+# get_current_grades(.....)
