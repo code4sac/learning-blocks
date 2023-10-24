@@ -5,7 +5,7 @@ from api.api_v1.api import api_router
 from core.config import settings
 
 app = FastAPI(
-    title=settings.PROJECT_NAME,
+    title=settings.project_name,
     openapi_url=f"{settings.api_v1_str}/openapi.json"
 )
 
