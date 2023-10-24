@@ -1,1 +1,1 @@
-from orgs import Org, OrgCreate, OrgInDB, OrgUpdate # noqa
+from schemas.org import Org, OrgCreate, OrgInDB, OrgUpdate
