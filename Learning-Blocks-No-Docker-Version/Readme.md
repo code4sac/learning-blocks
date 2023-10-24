@@ -1,6 +1,6 @@
 # Learning Blocks without Docker
 
-This project runs Learning Blocks without needed Docker.
+This project runs Learning Blocks on a local server without Docker.
 
 ## more documentation soon
 
