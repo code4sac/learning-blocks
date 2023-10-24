@@ -11,10 +11,11 @@ class Settings(BaseSettings):
     secret_key: str = secrets.token_urlsafe(32)
     # 60 minutes * 24 hours * 8 days = 8 days
     access_token_expire_minutes: int = 60 * 24 * 8
+    example_school: int = 178598175
     server_name: str = ""
-    server_host: AnyHttpUrl = "http://localhost:5432"
-    backend_cors_origins: List[AnyHttpUrl] = ["http://localhost", "http://localhost:4200", "http://localhost:3000", \
-                                              "http://localhost:8080", "http://local.dockertoolbox.tiangolo.com"]
+    server_host: AnyHttpUrl = "http://localhost"
+    backend_cors_origins: List[AnyHttpUrl] = ["http://localhost:8000", "http://localhost", "http://localhost:4200",
+                                              "http://localhost:3000", "http://localhost:8080"]
     postgres_server: str = ""
     postgres_user: str = ""
     postgres_password: str = ""
@@ -59,24 +60,24 @@ class Settings(BaseSettings):
             return v
         return PostgresDsn.build(
             scheme="postgresql",
-            username=values.data.get("POSTGRES_USER"),
-            password=values.data.get("POSTGRES_PASSWORD"),
-            host=values.data.get("POSTGRES_SERVER") or "localhost",
-            path=f"/{values.data.get('POSTGRES_DB') or ''}",
+            username=values.data.get("postgres_user"),
+            password=values.data.get("postgres_password"),
+            host=values.data.get("postgres_server") or "localhost",
+            path=values.data.get('postgres_db')
         )
 
     @field_validator("emails_from_name")
     def get_project_name(cls, v: Optional[str], values: Dict[str, Any]) -> str:
         if not v:
-            return values.data.get("PROJECT_NAME")
+            return values.data.get("project_name")
         return v
 
     @field_validator("emails_enabled")
     def get_emails_enabled(cls, v: bool, values: Dict[str, Any]) -> bool:
         return bool(
-            values.data.get("SMTP_HOST")
-            and values.data.get("SMTP_PORT")
-            and values.data.get("EMAILS_FROM_EMAIL")
+            values.data.get("smtp_host")
+            and values.data.get("smtp_port")
+            and values.data.get("emails_from_email")
         )
 
     class Config:

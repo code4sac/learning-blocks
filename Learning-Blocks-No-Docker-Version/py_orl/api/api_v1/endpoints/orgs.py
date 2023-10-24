@@ -39,7 +39,7 @@ def create_org(
     return org
 
 
-@router.put("/{sourceId}", response_model=schemas.Org)
+@router.put("/{source_id}", response_model=schemas.Org)
 def update_org(
         *,
         db: Session = Depends(deps.get_db),
@@ -49,14 +49,14 @@ def update_org(
     """
     Update an org.
     """
-    org = crud.org.get(db=db, sourceId=source_id)
+    org = crud.org.get(db=db, source_id=source_id)
     if not org:
         raise HTTPException(status_code=404, detail="Org not found")
     org = crud.org.update(db=db, db_obj=org, obj_in=org_in)
     return org
 
 
-@router.get("/{sourceId}", response_model=schemas.Org)
+@router.get("/{source_id}", response_model=schemas.Org)
 def read_org(
         *,
         db: Session = Depends(deps.get_db),
@@ -65,13 +65,13 @@ def read_org(
     """
     Get org by ID.
     """
-    org = crud.org.get(db=db, sourceId=source_id)
+    org = crud.org.get(db=db, source_id=source_id)
     if not org:
         raise HTTPException(status_code=404, detail="Org not found")
     return org
 
 
-@router.delete("/{sourceId}", response_model=schemas.Org)
+@router.delete("/{source_id}", response_model=schemas.Org)
 def delete_org(
         *,
         db: Session = Depends(deps.get_db),
@@ -80,8 +80,8 @@ def delete_org(
     """
     Delete an org.
     """
-    org = crud.org.get(db=db, sourceId=source_id)
+    org = crud.org.get(db=db, source_id=source_id)
     if not org:
         raise HTTPException(status_code=404, detail="Org not found")
-    org = crud.org.remove(db=db, sourceId=source_id)
+    org = crud.org.remove(db=db, source_id=source_id)
     return org

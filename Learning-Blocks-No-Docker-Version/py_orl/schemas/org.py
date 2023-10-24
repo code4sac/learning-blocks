@@ -14,7 +14,7 @@ class OrgUpdate(OrgBase):
 
 
 class OrgInDBBase(OrgBase):
-    sourceId: str
+    source_id: str
     name: str
 
     class Config:
