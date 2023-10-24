@@ -4,7 +4,7 @@
 
 ### Install PostgreSQL
 
-Install PostgreSQL database from your operating systems prefered method.
+Install PostgreSQL database with your operating system's preferred method.
 
 #### Linux (Linux Mint)
 
@@ -32,7 +32,8 @@ psql
 
 ### Create an application admin database user
 
-Connect to the database as the postgres user. Enter the following commands in `psql` create a database and user with admin access.
+Connect to the database as the postgres user. Enter the following commands in `psql` create a database and user with
+admin access.
 
 ```postgresql
 create user admin;
@@ -82,11 +83,8 @@ graphical dialog.
 
 ### Initialize data in the database
 
-Start by running
-
-```shell
-python initial_data.py
-```
+When you first run the application, run `alembic upgrade head` and then populate the database
+with [initial_data.py](initial_data.py). These steps can be found in [prestart.sh](prestart.sh).
 
 ### Alembic migrations
 
@@ -105,6 +103,8 @@ Create an initial migration that adds the first table to the database.
 ```shell
 alembic revision -m "Create item table"
 ```
+
+**migrations/versions/7676b7dc4cb0_create_org_table.py**
 
 ```python
 from typing import Sequence, Union
@@ -131,16 +131,28 @@ def downgrade():
     op.drop_table('org')
 ```
 
+### Populate database data
+
+Run the [initial_data.py](initial_data.py) Python script.
+
+> Make sure to run an Alembic migration first to create the table and columns.
+
+```shell
+python initial_data.py
+```
+
 ### Create a model
 
 To create a model, create a Python file in the models folder.
 
 **models/item.py**
+
 ```python
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from db.base_class import Base
+
 
 class Item(Base):
     id: int = Column(Integer, primary_key=True, index=True)
@@ -155,6 +167,7 @@ class Item(Base):
 To create a schema, create a Python file in the schemas folder.
 
 **schemas/item.py**
+
 ```python
 from pydantic import BaseModel
 
@@ -197,9 +210,11 @@ class ItemInDB(ItemInDBBase):
 
 ### Create a CRUD (Create, Readm Update, and Delete) operation
 
-CRUD objects are used to access the database from the application code. To create a CRUD operation, add a file to the crud folder.
+CRUD objects are used to access the database from the application code. To create a CRUD operation, add a file to the
+crud folder.
 
 **crud/crud_item.py**
+
 ```python
 from typing import List
 
@@ -213,7 +228,7 @@ from schemas.item import ItemCreate, ItemUpdate
 
 class CRUDItem(CRUDBase[Item, ItemCreate, ItemUpdate]):
     def create_with_owner(
-        self, db: Session, *, obj_in: ItemCreate, owner_id: int
+            self, db: Session, *, obj_in: ItemCreate, owner_id: int
     ) -> Item:
         obj_in_data = jsonable_encoder(obj_in)
         db_obj = self.model(**obj_in_data, owner_id=owner_id)
@@ -223,7 +238,7 @@ class CRUDItem(CRUDBase[Item, ItemCreate, ItemUpdate]):
         return db_obj
 
     def get_multi_by_owner(
-        self, db: Session, *, owner_id: int, skip: int = 0, limit: int = 100
+            self, db: Session, *, owner_id: int, skip: int = 0, limit: int = 100
     ) -> List[Item]:
         return (
             db.query(self.model)
@@ -242,6 +257,7 @@ item = CRUDItem(Item)
 Add a file in the endpoints folder.
 
 **api/api_v1/enpoints/items.py**
+
 ```python
 from typing import Any, List
 
@@ -256,10 +272,10 @@ router = APIRouter()
 
 @router.get("/", response_model=List[schemas.Item])
 def read_items(
-    db: Session = Depends(deps.get_db),
-    skip: int = 0,
-    limit: int = 100,
-    current_user: models.User = Depends(deps.get_current_active_user),
+        db: Session = Depends(deps.get_db),
+        skip: int = 0,
+        limit: int = 100,
+        current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
     """
     Retrieve items.
@@ -275,10 +291,10 @@ def read_items(
 
 @router.post("/", response_model=schemas.Item)
 def create_item(
-    *,
-    db: Session = Depends(deps.get_db),
-    item_in: schemas.ItemCreate,
-    current_user: models.User = Depends(deps.get_current_active_user),
+        *,
+        db: Session = Depends(deps.get_db),
+        item_in: schemas.ItemCreate,
+        current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
     """
     Create new item.
@@ -289,11 +305,11 @@ def create_item(
 
 @router.put("/{id}", response_model=schemas.Item)
 def update_item(
-    *,
-    db: Session = Depends(deps.get_db),
-    id: int,
-    item_in: schemas.ItemUpdate,
-    current_user: models.User = Depends(deps.get_current_active_user),
+        *,
+        db: Session = Depends(deps.get_db),
+        id: int,
+        item_in: schemas.ItemUpdate,
+        current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
     """
     Update an item.
@@ -309,10 +325,10 @@ def update_item(
 
 @router.get("/{id}", response_model=schemas.Item)
 def read_item(
-    *,
-    db: Session = Depends(deps.get_db),
-    id: int,
-    current_user: models.User = Depends(deps.get_current_active_user),
+        *,
+        db: Session = Depends(deps.get_db),
+        id: int,
+        current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
     """
     Get item by ID.
@@ -327,10 +343,10 @@ def read_item(
 
 @router.delete("/{id}", response_model=schemas.Item)
 def delete_item(
-    *,
-    db: Session = Depends(deps.get_db),
-    id: int,
-    current_user: models.User = Depends(deps.get_current_active_user),
+        *,
+        db: Session = Depends(deps.get_db),
+        id: int,
+        current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
     """
     Delete an item.
@@ -347,6 +363,7 @@ def delete_item(
 Add an entry to the router file.
 
 **api/api_v1/api.py**
+
 ```python
 from fastapi import APIRouter
 
