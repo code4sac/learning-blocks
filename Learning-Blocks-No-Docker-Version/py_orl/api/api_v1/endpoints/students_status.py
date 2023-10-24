@@ -1,6 +1,6 @@
-
 import csv
 import json
+
 import pandas as pd
 import requests
 
@@ -33,7 +33,7 @@ class students_status:
             if response.status_code == 200:
                 data = response.json()
                 keys_needed = ['StudentID', 'Grade',
-                            'AttendanceProgramCodePrimary', 'InactiveStatusCode']
+                               'AttendanceProgramCodePrimary', 'InactiveStatusCode']
                 for obj in data[:len(data)]:
                     filtered_obj = {key: obj[key] for key in keys_needed}
                     extracted_data.append(filtered_obj)
@@ -55,9 +55,11 @@ class students_status:
     def generate_table_number_students(self):
         df = pd.DataFrame(self.get_students_by_status())
 
-        result = df.groupby(['Grade', 'AttendanceProgramCodePrimary', 'InactiveStatusCode']).size().reset_index(name='Count')
+        result = df.groupby(['Grade', 'AttendanceProgramCodePrimary', 'InactiveStatusCode']).size().reset_index(
+            name='Count')
 
-        pivot_table = result.pivot_table(index=['Grade', 'AttendanceProgramCodePrimary'], columns='InactiveStatusCode', values='Count', fill_value=0)
+        pivot_table = result.pivot_table(index=['Grade', 'AttendanceProgramCodePrimary'], columns='InactiveStatusCode',
+                                         values='Count', fill_value=0)
 
         pd.set_option('display.max_rows', None)
         pd.set_option('display.max_columns', None)

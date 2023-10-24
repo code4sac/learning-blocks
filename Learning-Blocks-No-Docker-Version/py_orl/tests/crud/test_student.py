@@ -1,12 +1,15 @@
 from sqlalchemy.orm import Session
 
-from app import crud
-from app.schemas.item import ItemCreate, ItemUpdate
-from app.tests.utils.user import create_random_user
-from app.tests.utils.utils import random_lower_string
+import crud
+from schemas.org import ItemCreate, ItemUpdate
+from tests.utils.user import create_random_user
+from tests.utils.utils import random_lower_string
 
 
 def test_create_item(db: Session) -> None:
+    """
+    Test create item in database.
+    """
     title = random_lower_string()
     description = random_lower_string()
     item_in = ItemCreate(title=title, description=description)
@@ -18,6 +21,9 @@ def test_create_item(db: Session) -> None:
 
 
 def test_get_item(db: Session) -> None:
+    """
+    Test get item in database.
+    """
     title = random_lower_string()
     description = random_lower_string()
     item_in = ItemCreate(title=title, description=description)
@@ -32,6 +38,9 @@ def test_get_item(db: Session) -> None:
 
 
 def test_update_item(db: Session) -> None:
+    """
+    Test update item in database.
+    """
     title = random_lower_string()
     description = random_lower_string()
     item_in = ItemCreate(title=title, description=description)
@@ -47,6 +56,9 @@ def test_update_item(db: Session) -> None:
 
 
 def test_delete_item(db: Session) -> None:
+    """
+    Test delete item in database.
+    """
     title = random_lower_string()
     description = random_lower_string()
     item_in = ItemCreate(title=title, description=description)

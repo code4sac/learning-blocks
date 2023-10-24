@@ -2,9 +2,11 @@
 async def root():
     return {"message": "Hello World"}
 
+
 @app.get("/teams", response_model=list[TeamOut])
 async def getTeams():
     return teams
+
 
 @app.post("/team/{name}", response_model=TeamOut)
 async def scoreTeam(name: str, win: bool = True):
@@ -15,6 +17,7 @@ async def scoreTeam(name: str, win: bool = True):
             else:
                 team.losses += 1
             return team
+
 
 # create the url name for the page
 @app.get("/student-data")
