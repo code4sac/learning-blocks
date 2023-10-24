@@ -5,7 +5,11 @@ import requests
 
 
 class Api:
+    """
+    Aries API.
+    """
     BASE_API_HOST = "https://demo.aeries.net/api/v5"
+
     # "InsertSTUIDNum" "
 
     def __init__(self, school_id: str, item_id: str):
@@ -21,12 +25,20 @@ class Api:
         }
 
     def get_current_grades(self):
+        """
+        Get current grades.
+        :return:
+        """
         url = f"{self.BASE_API_HOST}/schools/{self.school_id}/{self.item_id}"
         response = requests.get(url, headers=self.request_headers)
         print(response.text)
         return response.json()
 
     def get_current_grades_csv(self):
+        """
+        Get current grades and return it as a csv.
+        :return:
+        """
         val = self.get_current_grades()
         with open("current_grades.csv", "w") as f:
             w = csv.writer(f)
