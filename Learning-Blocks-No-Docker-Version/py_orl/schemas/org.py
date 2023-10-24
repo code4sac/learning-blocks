@@ -14,11 +14,11 @@ class OrgUpdate(OrgBase):
 
 
 class OrgInDBBase(OrgBase):
-    sourceId: str
+    source_id: str
     name: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class Org(OrgInDBBase):
