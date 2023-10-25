@@ -9,3 +9,5 @@ uvicorn
 pydantic-settings
 pydantic[email]
 tenacity
+pytest
+httpx

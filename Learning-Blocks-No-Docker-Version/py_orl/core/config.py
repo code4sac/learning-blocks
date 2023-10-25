@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     emails_from_email: Optional[EmailStr] = None
     emails_from_name: Optional[str] = None
     email_reset_token_expire_hours: int = 48
-    email_templates_dir: str = "/app/app/email-templates/build"
+    email_templates_dir: str = "email-templates/build"
     emails_enabled: bool = False
     email_test_user: EmailStr = "test@example.com"
     first_superuser: EmailStr = "test@example.com"
