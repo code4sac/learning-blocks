@@ -43,7 +43,7 @@ psql
 
 ### Create an application admin database user
 
-**Optional** You can skip this step and user your main postgres username and password.
+**Optional** You can skip this step if you use your main postgres username and password for the application.
 
 Connect to the database as the postgres user. Enter the following commands in `psql` to create a database and user with
 admin access.
@@ -61,7 +61,7 @@ createuser admin
 
 ### Create an application database
 
-Create a database and give the user all priveleges. 
+Create a database and give all priveleges to the user you created. 
 
 ```postgresql
 create database app;
