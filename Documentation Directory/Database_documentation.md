@@ -379,7 +379,7 @@ api_router.include_router(items.router, prefix="/items", tags=["items"])
 Install pgAdmin4 with Pip.
 
 ```shell
-pip install pgAdmin4
+pip install pgadmin4
 ```
 
 Navigate to the virtual environment folder and add the file `pgadmin4/config_local.py` with the following

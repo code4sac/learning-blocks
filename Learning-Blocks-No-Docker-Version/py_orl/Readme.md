@@ -35,7 +35,7 @@ Run the FastAPI server.
 uvicorn app:app --reload
 ``` 
 
-## Running with Make
+## Run with Make
 
 > More commands can be found in
 > [scripts/Readme.md](scripts/Readme.md), [scripts/Makefile](scripts/Makefile), and [tests/Makefile](tests/Makefile).
