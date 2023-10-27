@@ -63,16 +63,16 @@ Add the following exports to your `.bashrc` or `.zshrc` file.
 
 > Make sure to reload your terminal after saving for the changes to take effect.
 
-```shell
-export domain=localhost
-export project_name="Learning Blocks"
-export postgres_server=localhost
-export postgres_user=admin
-export postgres_password=change-me-password-8943ryhiu
-export postgres_db=app
-export pgadmin_listen_port=5050
-export pgadmin_default_email=my-email@gmail.com
-export pgadmin_default_password=change-me-password-8943ryhiu
+```env
+domain=localhost
+project_name="Learning Blocks"
+postgres_server=localhost
+postgres_user=admin
+postgres_password=change-me-password-8943ryhiu
+postgres_db=app
+pgadmin_listen_port=5050
+pgadmin_default_email=my-email@gmail.com
+pgadmin_default_password=change-me-password-8943ryhiu
 ```
 
 #### Windows
