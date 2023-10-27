@@ -4,11 +4,11 @@ This project runs Learning Blocks on a local server without Docker.
 
 ## Frontend
 
-See the [pyorl_Front folder](/Learning-Blocks-No-Docker-Version/pyorl_Front/).
+See the [pyorl_Front folder](/Learning-Blocks-No-Docker-Version/pyorl_Front).
 
 ## Backend
 
-See the [py_orl folder](/Learning-Blocks-No-Docker-Version/py_orl/).
+See the [py_orl folder](/Learning-Blocks-No-Docker-Version/py_orl).
 
 ## more documentation soon
 

@@ -11,27 +11,27 @@ Backend: http://localhost/api/v1/
 
 Automatic Interactive Docs (Swagger UI): https://localhost/docs
 
-PGAdmin: http://localhost:5050
+pgAdmin: http://localhost:5050
 
 ## Project setup
 
-The project requires Python and PostgreSQL to be installed.
+The project requires Python and PostgresSQL to be installed.
 
 ### Python
 
 **See:
-** [Stand_alone_FastAPI_setup.md#python-virtual-environment](/Documentation Directory/Stand_alone_FastAPI_setup.md)
+** [Stand_alone_FastAPI_setup.md#python-virtual-environment](/Documentation%20Directory/Stand_alone_FastAPI_setup.md)
 
 1. Set up a Python virtual environment
 2. Install the project dependencies listed
    in [requirements.txt](/Learning-Blocks-No-Docker-Version/py_orl/requirements.txt).
 
-> Make sure the `venv` folder is in the root of the [py_orl](/Learning-Blocks-No-Docker-Version/py_orl/) folder. This
-> ensures that app Python files (crude, api, etc.) are imported correctly.
+> Make sure the `venv` folder is in the root of the [py_orl](/Learning-Blocks-No-Docker-Version/py_orl) folder.
+> This ensures that app Python files (crude, api, etc.) are imported correctly.
 
 ### PostgreSQL database
 
-**See:** [Database_documentation.md](/Documentation Directory/Database_documentation.md)
+**See:** [Database_documentation.md](/Documentation%20Directory/Database_documentation.md)
 
 1. Install PostgreSQL
 2. Create an admin user and table for the application.
@@ -41,12 +41,20 @@ The project requires Python and PostgreSQL to be installed.
 
 ## Local server
 
-**See:**  [Stand_alone_FastAPI_setup.md#fastapi-examples](/Documentation Directory/Stand_alone_FastAPI_setup.md)
+**See:**  [Stand_alone_FastAPI_setup.md#fastapi-examples](/Documentation%20Directory/Stand_alone_FastAPI_setup.md)
+
+You can initialize the database with the following commands:
+
+```shell
+alembic upgrade head
+python initial_data.py
+```
 
 Run the FastAPI server.
 
 ```shell
-uvicorn app:app --reload
+export project_name="Learning Blocks"
+python -m uvicorn app:app --reload
 ``` 
 
 ## Run with Make
@@ -57,14 +65,6 @@ uvicorn app:app --reload
 
 Run the local server.
 
-### make migrate
-
-Execute the latest database migrations.
-
-### make init
-
-Initialize database with example data.
-
 ### make test
 
 Run all tests.
@@ -72,32 +72,6 @@ Run all tests.
 ### make coverage
 
 Run test coverage.
-
-# Backend API Scripts for Learning Blocks
-
-These files help run different steps of the project. They can be copied and pasted in your terminal or run with Make.
-
-## Copy & Paste
-
-You can initialize the database with the following commands:
-
-```shell
-alembic upgrade head
-python initial_data.py
-```
-
-Then, run the local webserver.
-
-```shell
-export project_name="Learning Blocks"
-python -m uvicorn app:app --reload
-```
-
-## Running with Make
-
-### make local
-
-Run the local server
 
 ### make migrate
 

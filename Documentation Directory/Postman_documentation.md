@@ -2,10 +2,10 @@
 
 ## <p align="center">With very little knowledge of APIs the best option is to use POSTMAN to access a SIS database</p>
 
-#### <p align="center">The following documentation comes from ["Basics of API Testing Using Postman"](https://www.geeksforgeeks.org/basics-of-api-testing-using-postman/)</p>
+#### <p align="center">The following documentation comes from ["Basics of API Testing Using Postman"](https://www.geeksforgeeks.org/basics-of-api-testing-using-postman)</p>
 
 - If you need help downloading POSTMAN look at the
-  following [document](https://geeksforgeeks.org/how-to-download-and-install-postman-on-windows/)
+  following [document](https://geeksforgeeks.org/how-to-download-and-install-postman-on-windows)
 - Go to your workspace in Postman.
 - Click on the + symbol to open a new tab.
 - Enter the API Endpoint where it says, “Enter request URL” and select the method (action type GET, POST, etc.) for that

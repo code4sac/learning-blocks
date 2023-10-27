@@ -2,9 +2,9 @@
 
 ## Backend Requirements
 
-* [Docker](https://www.docker.com/).
-* [Docker Compose](https://docs.docker.com/compose/install/).
-* [Poetry](https://python-poetry.org/) for Python package and environment management.
+* [Docker](https://www.docker.com).
+* [Docker Compose](https://docs.docker.com/compose/install).
+* [Poetry](https://python-poetry.org) for Python package and environment management.
 
 ## Frontend Requirements
 
@@ -54,7 +54,7 @@ If your Docker is not running in `localhost` (the URLs above wouldn't work) chec
 
 ### General workflow
 
-By default, the dependencies are managed with [Poetry](https://python-poetry.org/), go there and install it.
+By default, the dependencies are managed with [Poetry](https://python-poetry.org), go there and install it.
 
 From `./backend/app/` you can install all the dependencies with:
 
@@ -192,7 +192,7 @@ docker-compose exec backend bash /app/tests-start.sh --cov-report=html
 
 ### Live development with Python Jupyter Notebooks
 
-If you know about Python [Jupyter Notebooks](http://jupyter.org/), you can take advantage of them during local development.
+If you know about Python [Jupyter Notebooks](http://jupyter.org), you can take advantage of them during local development.
 
 The `docker-compose.override.yml` file sends a variable `env` with a value `dev` to the build process of the Docker image (during local development) and the `Dockerfile` has steps to then install and configure Jupyter inside your Docker container.
 

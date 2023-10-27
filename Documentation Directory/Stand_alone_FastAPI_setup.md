@@ -30,7 +30,8 @@ uvicorn app:app --reload
 
 ## FastAPI examples
 
-FastAPI is configured in the [app.py](app.py) file. Routes are configured in the [api](api/) folder. 
+FastAPI is configured in the [app.py](/Learning-Blocks-No-Docker/py_orl/app.py) file.
+Routes are configured in the [api](/Learning-Blocks-No-Docker/py_orl/api) folder. 
 
 Routes can also be defined in the app.py file.
 

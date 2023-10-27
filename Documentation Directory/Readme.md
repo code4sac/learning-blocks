@@ -1,6 +1,6 @@
 # Learning Blocks Documentation
 
-The documentation directory contains help on how to get started with Learning Blocks. It also contains examples on how
+The Documentation%20Directory contains help on how to get started with Learning Blocks. It also contains examples on how
 to use backend and frontend libraries.
 
 Some of the topics covered are:

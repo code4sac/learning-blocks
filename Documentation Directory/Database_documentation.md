@@ -13,7 +13,7 @@ Install PostgreSQL database with your operating system's preferred method.
 
 #### Windows
 
-Install PostgreSQL from the postgresql.org [download page](https://www.postgresql.org/download/windows/).
+Install PostgreSQL from the postgresql.org [download page](https://www.postgresql.org/download/windows).
 
 #### Linux (Linux Mint)
 
@@ -94,7 +94,7 @@ graphical dialog.
 
 ### Initialize data in the database
 
-1. Upgrade Alembic migration 
+1. Upgrade Alembic migration
 2. Populate the database with [initial_data.py](/Learning-Blocks-No-Docker-Version/py_orl/initial_data.py).
 
 ### Alembic migrations
@@ -154,7 +154,7 @@ def downgrade():
 
 ### Populate database data
 
-Run the [initial_data.py](initial_data.py) Python script.
+Run the [initial_data.py](/Learning-Blocks-No-Docker-Version/py_orl/initial_data.py) Python script.
 
 > Make sure to run an Alembic migration first to create the table and columns.
 
@@ -399,7 +399,9 @@ api_router.include_router(items.router, prefix="/items", tags=["items"])
 
 #### Install pgAdmin 4 on Windows
 
-Install for Windows on the [pgAdmin website](https://www.pgadmin.org/download/pgadmin-4-windows/). On first run, you will be prompted to create a master password. See [Generate a password with openssl](/Documentation Directory/utils.md).
+Install for Windows on the [pgAdmin website](https://www.pgadmin.org/download/pgadmin-4-windows).
+On the first run, you will be prompted to create a master password.
+See [Generate a password with openssl](/Documentation%20Directory/Utils.md).
 
 #### Install pgAdmin 4 on Linux (Linux Mint)
 
@@ -433,8 +435,8 @@ You can start pgAdmin after you have installed it in an active virtual environme
 pgadmin4
 ```
 
-On first run, it will ask you to configure a username and password to be used to log into pgAdmin. You can use anything
-you want, such as my-email@gmail.com and `randompassword`.
+On the first run, it will ask you to configure a username and password to be used to log into pgAdmin.
+You can use anything you want, such as my-email@gmail.com and `randompassword`.
 
 > Make sure to save your username and password somewhere; it won't be visible again. To recover a lost password, see the
 > section below.
@@ -443,4 +445,4 @@ Visit [localhost:5050](localhost:5050) in your browser and login.
 
 ### Recover lost pgAdmin username and password
 
-To recover a lost pgAdmin username and password, enter the following command.
+This section needs to be written.
