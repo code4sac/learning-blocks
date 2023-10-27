@@ -6,8 +6,11 @@ from app.tests.utils.item import create_random_item
 
 
 def test_create_item(
-    client: TestClient, superuser_token_headers: dict, db: Session
+        client: TestClient, superuser_token_headers: dict, db: Session
 ) -> None:
+    """
+    This test has yet to be converted to the org data type.
+    """
     data = {"title": "Foo", "description": "Fighters"}
     response = client.post(
         f"{settings.api_v1_str}/items/",
@@ -23,7 +26,7 @@ def test_create_item(
 
 
 def test_read_item(
-    client: TestClient, superuser_token_headers: dict, db: Session
+        client: TestClient, superuser_token_headers: dict, db: Session
 ) -> None:
     item = create_random_item(db)
     response = client.get(

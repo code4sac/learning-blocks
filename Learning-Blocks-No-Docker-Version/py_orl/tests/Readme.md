@@ -2,21 +2,11 @@
 
 The tests folder contains everything related to testing the Learning Blocks backend API.
 
-## Copy & Paste
-
 Run all tests by executing the following command from the test folder.
 
+> Make sure to set the environment variables first.
+
 ```shell
-pytest --cov=app --cov-report=term-missing tests
+python -m pytest --cov-report=term-missing tests
 ```
-
-## Running with Make
-
-### make all
-
-Run all tests.
-
-### make coverage
-
-Run test coverage.
 

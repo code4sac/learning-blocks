@@ -1,34 +1,20 @@
-# Run the local server.
+# Run the web server locally.
 local:
-	make -C scripts dev
-
-# Execute the latest database migrations.
-migrate:
-	make -C scripts migrate
-
-# Initialize database with example data.
-init:
-	make -C scripts init
+	python -m uvicorn app:app --reload
 
 # Run all tests.
 test:
-	make -C tests all
+	python -m pytest --cov-report=term-missing tests
 
 # Run test coverage.
 coverage:
-	make -C tests coverage
+	python -m pytest --cov-report=html
 
-
-# Run the web server locally.
-dev:
-	python -m uvicorn app:app --reload
-
-# Let the DB start and run migrations.
+# Run Alembic database migration upgrade.
 migrate:
-	python backend_pre_start.py
 	alembic upgrade head
 
-# Create initial data in DB. Requires a migration first.
+# Initialize database with example data. Requires a migration first.
 init:migrate
 	python initial_data.py
 

@@ -1,10 +1,19 @@
 # Database Documentation for Learning Blocks
 
+This documentation helps getting started with the database.
+
+- Setting up the database
+- Adding models in Python that interact with the database.
+
 ## Database setup
 
 ### Install PostgreSQL
 
 Install PostgreSQL database with your operating system's preferred method.
+
+#### Windows
+
+Install PostgreSQL from the postgresql.org [download page](https://www.postgresql.org/download/windows/).
 
 #### Linux (Linux Mint)
 
@@ -16,13 +25,15 @@ sudo apt install postgresql postgresql-contrib
 
 Check if the database is running.
 
+#### Linux (Linux Mint)
+
 ```shell
 sudo systemctl status postgresql 
 sudo pg_isready
 ```
 
 Use [psql](https://www.postgresql.org/docs/current/app-psql.html) to enter SQL queries in Postgres. The following
-command shows how to login as the postgres user and enter/exit the `psql` command.
+commands show how to login as the postgres user and enter/exit the `psql` command.
 
 ```shell
 sudo -i -u postgres
@@ -32,7 +43,7 @@ psql
 
 ### Create an application admin database user
 
-Connect to the database as the postgres user. Enter the following commands in `psql` create a database and user with
+Connect to the database as the postgres user. Enter the following commands in `psql` to create a database and user with
 admin access.
 
 ```postgresql
@@ -57,13 +68,7 @@ While we develop a way to read credentials from an `.env` file, we need a way to
 by [pydantic-settings](https://github.com/pydantic/pydantic-settings). This can be achieved for now by adding
 environment variables to your system path.
 
-#### Linux (Linux Mint)
-
-Add the following exports to your `.bashrc` or `.zshrc` file.
-
-> Make sure to reload your terminal after saving for the changes to take effect.
-
-```env
+```dotenv
 domain=localhost
 project_name="Learning Blocks"
 postgres_server=localhost
@@ -75,6 +80,12 @@ pgadmin_default_email=my-email@gmail.com
 pgadmin_default_password=change-me-password-8943ryhiu
 ```
 
+#### Linux (Linux Mint)
+
+Export environment variables in `.bashrc` or `.zshrc` file.
+
+> Make sure to reload your terminal after saving for the changes to take effect.
+
 #### Windows
 
 Add an environment variable on Windows with
@@ -83,8 +94,8 @@ graphical dialog.
 
 ### Initialize data in the database
 
-When you first run the application, run `alembic upgrade head` and then populate the database
-with [initial_data.py](initial_data.py). These steps can be found in [prestart.sh](prestart.sh).
+1. Upgrade Alembic migration 
+2. Populate the database with [initial_data.py](/Learning-Blocks-No-Docker-Version/py_orl/initial_data.py).
 
 ### Alembic migrations
 
@@ -104,7 +115,7 @@ Create an initial migration that adds the first table to the database.
 alembic revision -m "Create item table"
 ```
 
-**migrations/versions/7676b7dc4cb0_create_org_table.py**
+**migrations/versions/7676b7dc4cb0_create_item_table.py**
 
 ```python
 from typing import Sequence, Union
@@ -121,14 +132,24 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade():
     op.create_table(
-        'org',
-        sa.Column('source_id', sa.Integer, primary_key=True),
-        sa.Column('name', sa.String(50), nullable=False),
+        "item",
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("title", sa.String(), nullable=True),
+        sa.Column("description", sa.String(), nullable=True),
+        sa.Column("owner_id", sa.Integer(), nullable=True),
+        sa.ForeignKeyConstraint(["owner_id"], ["user.id"],),
+        sa.PrimaryKeyConstraint("id"),
     )
+    op.create_index(op.f("ix_item_description"), "item", ["description"], unique=False)
+    op.create_index(op.f("ix_item_id"), "item", ["id"], unique=False)
+    op.create_index(op.f("ix_item_title"), "item", ["title"], unique=False)
 
 
 def downgrade():
-    op.drop_table('org')
+    op.drop_index(op.f("ix_item_title"), table_name="item")
+    op.drop_index(op.f("ix_item_id"), table_name="item")
+    op.drop_index(op.f("ix_item_description"), table_name="item")
+    op.drop_table("item")
 ```
 
 ### Populate database data
@@ -208,7 +229,7 @@ class ItemInDB(ItemInDBBase):
     pass
 ```
 
-### Create a CRUD (Create, Readm Update, and Delete) operation
+### Create a CRUD (Create, Readme Update, and Delete) operation
 
 CRUD objects are used to access the database from the application code. To create a CRUD operation, add a file to the
 crud folder.
