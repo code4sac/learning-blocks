@@ -14,6 +14,13 @@ def random_lower_string() -> str:
     return "".join(random.choices(string.ascii_lowercase, k=32))
 
 
+def random_source_id() -> int:
+    """
+    Generate a random source ID.
+    """
+    return random.randint(a=1, b=9999)
+
+
 def random_email() -> str:
     """
     Generate a random email.

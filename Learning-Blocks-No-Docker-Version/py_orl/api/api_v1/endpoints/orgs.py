@@ -34,7 +34,7 @@ def create_org(
     """
     Create new org.
     """
-    org = crud.org.create_with_sourceId(db=db, obj_in=org_in)
+    org = crud.org.create(db=db, obj_in=org_in)
     return org
 
 
