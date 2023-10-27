@@ -4,7 +4,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 import crud
-import models
 import schemas
 from api import deps
 
@@ -20,7 +19,7 @@ def read_orgs(
     """
     Retrieve orgs.
     """
-    orgs = crud.org.get_multi_by_owner(
+    orgs = crud.org.get_multi(
         db=db, skip=skip, limit=limit
     )
     return orgs
@@ -35,53 +34,53 @@ def create_org(
     """
     Create new org.
     """
-    org = crud.org.create_with_owner(db=db, obj_in=org_in)
+    org = crud.org.create_with_sourceId(db=db, obj_in=org_in)
     return org
 
 
-@router.put("/{source_id}", response_model=schemas.Org)
+@router.put("/{sourceId}", response_model=schemas.Org)
 def update_org(
         *,
         db: Session = Depends(deps.get_db),
-        source_id: int,
+        sourceId: int,
         org_in: schemas.OrgUpdate
 ) -> Any:
     """
     Update an org.
     """
-    org = crud.org.get(db=db, source_id=source_id)
+    org = crud.org.get(db=db, sourceId=sourceId)
     if not org:
         raise HTTPException(status_code=404, detail="Org not found")
     org = crud.org.update(db=db, db_obj=org, obj_in=org_in)
     return org
 
 
-@router.get("/{source_id}", response_model=schemas.Org)
+@router.get("/{sourceId}", response_model=schemas.Org)
 def read_org(
         *,
         db: Session = Depends(deps.get_db),
-        source_id: int
+        sourceId: int
 ) -> Any:
     """
     Get org by ID.
     """
-    org = crud.org.get(db=db, source_id=source_id)
+    org = crud.org.get_by_sourceId(db=db, sourceId=sourceId)
     if not org:
         raise HTTPException(status_code=404, detail="Org not found")
     return org
 
 
-@router.delete("/{source_id}", response_model=schemas.Org)
+@router.delete("/{sourceId}", response_model=schemas.Org)
 def delete_org(
         *,
         db: Session = Depends(deps.get_db),
-        source_id: int
+        sourceId: int
 ) -> Any:
     """
     Delete an org.
     """
-    org = crud.org.get(db=db, source_id=source_id)
+    org = crud.org.get_by_sourceId(db=db, sourceId=sourceId)
     if not org:
         raise HTTPException(status_code=404, detail="Org not found")
-    org = crud.org.remove(db=db, source_id=source_id)
+    org = crud.org.remove(db=db, id=sourceId)
     return org
