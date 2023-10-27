@@ -33,7 +33,8 @@ The project requires Python and PostgreSQL to be installed.
 
 1. Install PostgreSQL
 2. Create an admin user and table for the application.
-3. (Optional) Install pgAdmin to view and modify the database.
+3. Add environment varialbes for database credentials other [configuration settings](https://github.com/code4sac/learning-blocks/blob/main/Learning-Blocks-No-Docker-Version/py_orl/core/config.py).
+4. (Optional) Install pgAdmin to view and modify the database.
 
 ## Local server
 
