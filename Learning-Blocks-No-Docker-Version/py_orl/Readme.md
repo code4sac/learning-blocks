@@ -21,8 +21,8 @@ and [Documentation Directory/Database_documentation.md](/Documentation%20Directo
 
 ### Python
 
-**See:
-** [Stand_alone_FastAPI_setup.md#python-virtual-environment](/Documentation%20Directory/Stand_alone_FastAPI_setup.md)
+**See:**
+[Stand_alone_FastAPI_setup.md#python-virtual-environment](/Documentation%20Directory/Stand_alone_FastAPI_setup.md)
 
 1. Set up a Python virtual environment
 2. Install the project dependencies listed
@@ -41,21 +41,32 @@ and [Documentation Directory/Database_documentation.md](/Documentation%20Directo
    other [configuration settings](/Learning-Blocks-No-Docker-Version/py_orl/core/config.py).
 4. (Optional) Install pgAdmin to view and modify the database.
 
+## Environment variables
+
+The environment variables are required for all commands. Environment variables can be set in different ways; it's up to
+you.
+
+> Note: Follow the pattern of lower case and using underscores (_) for spaces.
+
 ## Local server
 
 **See:**  [Stand_alone_FastAPI_setup.md#fastapi-examples](/Documentation%20Directory/Stand_alone_FastAPI_setup.md)
 
-You can initialize the database with the following commands:
+You can initialize the database first running an Alembic upgrade migration and then creating an example record.
 
 ```shell
+export project_name="Learning Blocks" # On Unix
+$env:project_name="Learning Blocks" # On Windows
+# Add more environment variables, like postgres_password and postgres_user.
 alembic upgrade head
 python initial_data.py
 ```
 
 Run the FastAPI server.
 
+> Make sure to add environment variables if they aren't already loaded.
+
 ```shell
-export project_name="Learning Blocks"
 python -m uvicorn app:app --reload
 ``` 
 
