@@ -39,7 +39,7 @@ admin access.
 create user admin;
 create database app;
 alter user admin with encrypted password 'change-me-password-8943ryhiu';
-grant all privileges on database app to admin; 
+grant all privileges on database app to admin;
 ```
 
 You can alternatively run the following commands on the command line.
@@ -376,7 +376,13 @@ api_router.include_router(items.router, prefix="/items", tags=["items"])
 
 ### Install pgAdmin 4
 
-Install pgAdmin4 with Pip.
+#### Install pgAdmin 4 on Windows
+
+Install for Windows on the [pgAdmin website](https://www.pgadmin.org/download/pgadmin-4-windows/). On first run, you will be prompted to create a master password. See [Generate a password with openssl](/Documentation Directory/utils.md).
+
+#### Install pgAdmin 4 on Linux (Linux Mint)
+
+Install pgAdmin4 with Pip on Linux Mint.
 
 ```shell
 pip install pgadmin4
