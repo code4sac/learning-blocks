@@ -1,12 +1,12 @@
 # Learning Blocks Documentation
 
-The Documentation%20Directory contains help on how to get started with Learning Blocks. It also contains examples on how
+The Documentation Directory contains help on how to get started with Learning Blocks. It also contains examples on how
 to use backend and frontend libraries.
 
 Some of the topics covered are:
 
-- [Installing the project]()
-- [Create models and run migrations]()
+- [Installing the project](Documentation Directory/Stand_alone_FastAPI_setup.md)
+- [Create models and run migrations](Documentation Directory/Database_documentation.md)
 
 ## more documentation soon
 

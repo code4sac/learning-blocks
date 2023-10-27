@@ -15,7 +15,9 @@ pgAdmin: http://localhost:5050
 
 ## Project setup
 
-The project requires Python and PostgresSQL to be installed.
+The project requires Python and PostgresSQL to be installed. For help, see For project setup,
+see [Documentation Directory/Stand_alone_FastAPI_setup.md](/Documentation%20Directory/Stand_alone_FastAPI_setup.md)
+and [Documentation Directory/Database_documentation.md](/Documentation%20Directory/Database_documentation.md).
 
 ### Python
 

@@ -20,6 +20,7 @@ python -m venv venv
 source ./venv/bin/activate # venv\Scripts\Activate.ps1 on Windows
 pip install -r requirements.txt
 ```
+
 ### Run the FastAPI server
 
 While in the py_orl folder, start the FastAPI server with the following command.
@@ -31,7 +32,7 @@ uvicorn app:app --reload
 ## FastAPI examples
 
 FastAPI is configured in the [app.py](/Learning-Blocks-No-Docker/py_orl/app.py) file.
-Routes are configured in the [api](/Learning-Blocks-No-Docker/py_orl/api) folder. 
+Routes are configured in the [api](/Learning-Blocks-No-Docker/py_orl/api) folder.
 
 Routes can also be defined in the app.py file.
 
