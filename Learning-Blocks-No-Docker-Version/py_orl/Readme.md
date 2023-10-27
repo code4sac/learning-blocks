@@ -72,6 +72,8 @@ python -m uvicorn app:app --reload
 
 ## Run with Make
 
+Make support is under development and might not work. The Makefile is still a good place to look for commands if you forget them.
+
 > More commands can be found in [Makefile](/Learning-Blocks-No-Docker-Version/py_orl/Makefile).
 
 ### make local
