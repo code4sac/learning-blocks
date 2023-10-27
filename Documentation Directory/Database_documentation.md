@@ -43,21 +43,35 @@ psql
 
 ### Create an application admin database user
 
+**Optional** You can skip this step and user your main postgres username and password.
+
 Connect to the database as the postgres user. Enter the following commands in `psql` to create a database and user with
 admin access.
 
 ```postgresql
 create user admin;
-create database app;
 alter user admin with encrypted password 'change-me-password-8943ryhiu';
+```
+
+You can alternatively run the following command on the command line, or pgAdmin, to create a user.
+
+```shell
+createuser admin
+```
+
+### Create an application database
+
+Create a database and give the user all priveleges. 
+
+```postgresql
+create database app;
 grant all privileges on database app to admin;
 ```
 
-You can alternatively run the following commands on the command line.
+You can alternatively run the following command on the command line, or pgAdmin, to create a database.
 
 ```shell
-createuser admin 
-createdb app 
+createdb app
 ```
 
 ## Database development
@@ -72,7 +86,7 @@ environment variables to your system path.
 domain=localhost
 project_name="Learning Blocks"
 postgres_server=localhost
-postgres_user=admin
+postgres_user=admin-or-postgres
 postgres_password=change-me-password-8943ryhiu
 postgres_db=app
 pgadmin_listen_port=5050
