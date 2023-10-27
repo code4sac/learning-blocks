@@ -13,9 +13,10 @@ def init_db(db: Session) -> None:
        name="First Example School"
     ```
     """
-    org = crud.org.get_by_source_id(db, source_id=settings.example_school)
+    org = crud.org.get_by_sourceId(db, sourceId=settings.example_school)
     if not org:
         org_in = schemas.OrgCreate(
-            name="First Example School"
+            name="First Example School",
+            sourceId=settings.example_school
         )
         org = crud.org.create(db, obj_in=org_in)

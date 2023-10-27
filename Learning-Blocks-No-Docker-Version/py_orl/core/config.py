@@ -7,11 +7,15 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
+    """
+    Settings for the backend API. They are automatically read from environment variables. If not found, they use a
+    default value. There are also validators to check the format of fields.
+    """
     api_v1_str: str = "/api/v1"
     secret_key: str = secrets.token_urlsafe(32)
     # 60 minutes * 24 hours * 8 days = 8 days
     access_token_expire_minutes: int = 60 * 24 * 8
-    example_school: int = 178598175
+    example_school: int = 994
     server_name: str = ""
     server_host: AnyHttpUrl = "http://localhost"
     backend_cors_origins: List[AnyHttpUrl] = ["http://localhost:8000", "http://localhost", "http://localhost:4200",

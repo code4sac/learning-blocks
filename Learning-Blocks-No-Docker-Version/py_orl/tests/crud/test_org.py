@@ -22,9 +22,9 @@ def test_get_org(db: Session) -> None:
     name = random_lower_string()
     org_in = OrgCreate(name=name)
     org = crud.org.create_with_org(db=db, obj_in=org_in)
-    stored_org = crud.org.get(db=db, source_id=org.source_id)
+    stored_org = crud.org.get(db=db, sourceId=org.sourceId)
     assert stored_org
-    assert org.source_id == stored_org.source_id
+    assert org.sourceId == stored_org.sourceId
     assert org.name == stored_org.name
 
 
@@ -52,4 +52,4 @@ def test_delete_org(db: Session) -> None:
     org2 = crud.org.remove(db=db, id=org.id)
     org3 = crud.org.get(db=db, id=org.id)
     assert org3 is None
-    assert org2.source_id == org.source_id
+    assert org2.sourceId == org.sourceId

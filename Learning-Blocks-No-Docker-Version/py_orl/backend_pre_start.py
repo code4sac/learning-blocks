@@ -19,9 +19,11 @@ wait_seconds = 1
     after=after_log(logger, logging.WARN),
 )
 def init() -> None:
+    """
+    Try to create a session to check if DB is awake.
+    """
     try:
         db = SessionLocal()
-        # Try to create session to check if DB is awake
         db.execute(text("SELECT 1"))
     except Exception as e:
         logger.error(e)
@@ -29,6 +31,9 @@ def init() -> None:
 
 
 def main() -> None:
+    """
+    Start the service and log a message to the console.
+    """
     logger.info("Initializing service")
     init()
     logger.info("Service finished initializing")

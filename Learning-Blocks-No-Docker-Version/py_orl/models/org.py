@@ -4,5 +4,6 @@ from db.base_class import Base
 
 
 class Org(Base):
-    source_id: int = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
+    id: int = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    sourceId = Column(String)
