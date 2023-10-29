@@ -13,7 +13,7 @@ def test_create_org(db: Session) -> None:
     source_id = random_source_id()
     org_in = OrgsCreate(name=name, sourcedId=source_id)
     org = crud.orgs.create(db=db, obj_in=org_in)
-    assert org.title == name
+    assert org.name == name
     assert org.sourcedId == source_id
 
 
@@ -27,7 +27,7 @@ def test_get_org(db: Session) -> None:
     stored_org = crud.orgs.get_by_sourcedId(db=db, sourcedId=org.sourcedId)
     assert stored_org
     assert org.sourcedId == stored_org.sourcedId
-    assert org.title == stored_org.title
+    assert org.name == stored_org.name
 
 
 def test_update_org(db: Session) -> None:
@@ -42,7 +42,7 @@ def test_update_org(db: Session) -> None:
     org_in2 = OrgsCreate(name=name2, sourcedId=2)
     org2 = crud.orgs.create(db=db, obj_in=org_in2)
     assert org.sourcedId != org2.sourcedId
-    assert org.title != org2.title
+    assert org.name != org2.name
 
 
 def test_delete_org(db: Session) -> None:
