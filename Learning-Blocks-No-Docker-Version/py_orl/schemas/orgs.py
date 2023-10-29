@@ -3,12 +3,12 @@ from pydantic import BaseModel
 
 class OrgBase(BaseModel):
     sourceId: int
-    name: str
+    title: str
 
 
 class OrgCreate(OrgBase):
     sourceId: int
-    name: str
+    title: str
 
 
 class OrgUpdate(OrgBase):
@@ -16,9 +16,8 @@ class OrgUpdate(OrgBase):
 
 
 class OrgInDBBase(OrgBase):
-    id: int
     sourceId: int
-    name: str
+    title: str
 
     class Config:
         from_attributes = True

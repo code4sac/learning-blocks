@@ -2,14 +2,14 @@ from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
 from crud.base import CRUDBase
-from models.org import Org
-from schemas.org import OrgCreate, OrgUpdate
+from models.orgs import Orgs
+from schemas.orgs import OrgCreate, OrgUpdate
 
 
-class CRUDOrg(CRUDBase[Org, OrgCreate, OrgUpdate]):
+class CRUDOrg(CRUDBase[Orgs, OrgCreate, OrgUpdate]):
     def create_with_sourceId(
             self, db: Session, *, obj_in: OrgCreate, sourceId: int
-    ) -> Org:
+    ) -> Orgs:
         """
         Unused, but keeping for documentation.
         """
@@ -22,7 +22,7 @@ class CRUDOrg(CRUDBase[Org, OrgCreate, OrgUpdate]):
 
     def get_by_sourceId(
             self, db: Session, *, sourceId: int
-    ) -> Org:
+    ) -> Orgs:
         """
         Get org by sourceId.
         """
@@ -33,4 +33,4 @@ class CRUDOrg(CRUDBase[Org, OrgCreate, OrgUpdate]):
         )
 
 
-org = CRUDOrg(Org)
+orgs = CRUDOrg(Orgs)
