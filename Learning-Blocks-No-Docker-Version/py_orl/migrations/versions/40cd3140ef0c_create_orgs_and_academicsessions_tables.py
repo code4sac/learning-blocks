@@ -1,17 +1,17 @@
-"""Create org table
+"""create orgs and academicsessions tables
 
-Revision ID: 7676b7dc4cb0
+Revision ID: 40cd3140ef0c
 Revises: 
-Create Date: 2023-10-24 14:02:47.276128
+Create Date: 2023-10-29 07:02:00.833479
 
 """
 from typing import Sequence, Union
 
-import sqlalchemy as sa
 from alembic import op
+import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
-revision: str = '7676b7dc4cb0'
+revision: str = '40cd3140ef0c'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -35,15 +35,20 @@ def upgrade():
         sa.Column('district', sa.Boolean, default=False),
         sa.Column('school', sa.Boolean, default=False),
     )
-    # op.create_table(
-    #     'academicsession',
-    #     sa.Column('id', sa.Integer, primary_key=True),
-    #     sa.Column('sourcedId', sa.String, nullable=False),
-    #     sa.Column('name', sa.String(50), nullable=False),
-    # )
+    op.create_table(
+        'academicsessions',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('sourcedId', sa.String, nullable=False),
+        sa.Column('status', sa.Enum('active', 'tobedeleted', 'inactive', name='enum1'), nullable=False),
+        sa.Column('dateLastModified', sa.DateTime),
+        sa.Column('title', sa.String(50)),
+        sa.Column('type', sa.Enum('gradingPeriod', 'semester', 'schoolYear', 'term', name='enum2'),
+                  nullable=False),
+        sa.Column('startDate', sa.DateTime),
+        sa.Column('endDate', sa.DateTime),
+        sa.Column('parentSourcedId', sa.String(256), primary_key=True, unique=True, nullable=False),
+    )
 
-
-def downgrade():
-    op.drop_table('orgs')
-    # op.drop_table('academicsession')
-    op.drop_index(op.f("enum1"), table_name="orgs")
+    def downgrade():
+        op.drop_table('orgs')
+        op.drop_table('academicsessions')

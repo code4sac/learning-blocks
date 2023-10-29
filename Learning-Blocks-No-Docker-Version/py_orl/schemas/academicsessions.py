@@ -1,14 +1,29 @@
+from datetime import datetime
+from typing import Optional
+
 from pydantic import BaseModel
 
 
 class AcademicsessionsBase(BaseModel):
     sourcedId: int
-    name: str
+    status: str
+    dateLastModified: Optional[datetime] = None
+    title: str
+    type: str
+    startDate: Optional[datetime] = None
+    endDate: Optional[datetime] = None
+    parentSourcedId: str
 
 
 class AcademicsessionsCreate(AcademicsessionsBase):
     sourcedId: int
-    name: str
+    status: str
+    dateLastModified: Optional[datetime] = None
+    title: str
+    type: str
+    startDate: Optional[datetime] = None
+    endDate: Optional[datetime] = None
+    parentSourcedId: str
 
 
 class AcademicsessionsUpdate(AcademicsessionsBase):
@@ -17,15 +32,21 @@ class AcademicsessionsUpdate(AcademicsessionsBase):
 
 class AcademicsessionsInDBBase(AcademicsessionsBase):
     sourcedId: int
-    name: str
+    status: str
+    dateLastModified: Optional[datetime] = None
+    title: str
+    type: str
+    startDate: Optional[datetime] = None
+    endDate: Optional[datetime] = None
+    parentSourcedId: str
 
     class Config:
         from_attributes = True
 
 
-class Org(AcademicsessionsInDBBase):
+class Academicsessions(AcademicsessionsInDBBase):
     pass
 
 
-class OrgInDB(AcademicsessionsInDBBase):
+class AcademicsessionsInDB(AcademicsessionsInDBBase):
     pass

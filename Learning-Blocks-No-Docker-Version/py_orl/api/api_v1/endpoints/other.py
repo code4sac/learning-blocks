@@ -11,7 +11,7 @@ async def getTeams():
 @app.post('/team/{name}', response_model=TeamOut)
 async def scoreTeam(name: str, win: bool = True):
     for team in teams:
-        if team.name == name:
+        if team.title == name:
             if win:
                 team.wins += 1
             else:
