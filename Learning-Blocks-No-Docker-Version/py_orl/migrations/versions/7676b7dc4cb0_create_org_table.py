@@ -19,12 +19,31 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade():
     op.create_table(
-        'org',
-        sa.Column('id', sa.Integer, primary_key=True),
-        sa.Column('name', sa.String(50), nullable=False),
-        sa.Column('sourceId', sa.Integer, nullable=False),
+        'orgs',
+        sa.Column('id', sa.Integer, primary_key=True, index=True),
+        sa.Column('sourcedId', sa.String(36), unique=True, nullable=False),
+        sa.Column('status', sa.Enum('active', 'tobedeleted', 'inactive', name='enum1'), nullable=False),
+        sa.Column('dateLastModified', sa.DateTime, nullable=False),
+        sa.Column('name', sa.String(36), nullable=False),
+        sa.Column('type', sa.Enum('department', 'school', 'district', 'local', 'state', 'national', name='enum_type'),
+                  nullable=False),
+        sa.Column('identifier', sa.String, nullable=True),
+        sa.Column('parentSourcedId', sa.String(36), nullable=False),
+        sa.Column('national', sa.Boolean, default=False),
+        sa.Column('state', sa.Boolean, default=False),
+        sa.Column('local', sa.Boolean, default=False),
+        sa.Column('district', sa.Boolean, default=False),
+        sa.Column('school', sa.Boolean, default=False),
     )
+    # op.create_table(
+    #     'academicsession',
+    #     sa.Column('id', sa.Integer, primary_key=True),
+    #     sa.Column('sourcedId', sa.String, nullable=False),
+    #     sa.Column('name', sa.String(50), nullable=False),
+    # )
 
 
 def downgrade():
-    op.drop_table('org')
+    op.drop_table('orgs')
+    # op.drop_table('academicsession')
+    op.drop_index(op.f("enum1"), table_name="orgs")

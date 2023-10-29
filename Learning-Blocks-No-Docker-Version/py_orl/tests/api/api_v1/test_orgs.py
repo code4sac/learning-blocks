@@ -11,7 +11,7 @@ def test_create_org(
     """
     Test creating an org.
     """
-    data = {"name": "Test School", "sourceId": "99999999"}
+    data = {"name": "Test School", "sourcedId": "99999999"}
     response = client.post(
         f"{settings.api_v1_str}/orgs/",
         headers=superuser_token_headers,
@@ -20,7 +20,7 @@ def test_create_org(
     assert response.status_code == 200
     content = response.json()
     assert content["name"] == data["name"]
-    assert content["sourceId"] == data["sourceId"]
+    assert content["sourcedId"] == data["sourcedId"]
     assert "id" in content
 
 
@@ -38,5 +38,5 @@ def test_read_org(
     assert response.status_code == 200
     content = response.json()
     assert content["name"] == org.name
-    assert content["sourceId"] == org.sourceId
+    assert content["sourcedId"] == org.sourcedId
     assert content["id"] == org.id

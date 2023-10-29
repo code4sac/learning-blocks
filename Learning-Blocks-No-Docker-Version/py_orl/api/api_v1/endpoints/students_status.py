@@ -6,7 +6,7 @@ import requests
 
 
 class students_status:
-    BASE_API_HOST = "https://demo.aeries.net/aeries/api/v5"
+    BASE_API_HOST = 'https://demo.aeries.net/aeries/api/v5'
 
     # args school id
 

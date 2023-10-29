@@ -7,7 +7,7 @@ import requests
 
 
 class current_grades:
-    BASE_API_HOST = "https://demo.aeries.net/aeries/api/v5"
+    BASE_API_HOST = 'https://demo.aeries.net/aeries/api/v5'
 
     # "InsertSTUIDNum" "
 
@@ -15,18 +15,18 @@ class current_grades:
         """Initialize the API class."""
         self.school_id = school_id
         self.item_id = 99400001
-        # self.api_key = os.environ.get("AERIES_API_KEY")
+        # self.api_key = os.environ.get('AERIES_API_KEY')
         self.api_key = '477abe9e7d27439681d62f4e0de1f5e1'
         if not self.api_key:
-            raise ValueError("AERIES_API_KEY environment variable not set.")
+            raise ValueError('AERIES_API_KEY environment variable not set.')
         self.request_headers = {
-            "formatType": "text/json",
-            "AERIES-CERT": self.api_key,
+            'formatType': 'text/json',
+            'AERIES-CERT': self.api_key,
         }
 
     def get_current_grades(self):
 
-        url = f"{self.BASE_API_HOST}/schools/{self.school_id}/gpas/{self.item_id}?cert={self.api_key}"
+        url = f'{self.BASE_API_HOST}/schools/{self.school_id}/gpas/{self.item_id}?cert={self.api_key}'
         print(url)
         response = requests.get(url, headers=self.request_headers)
         # print(response.text)
@@ -34,7 +34,7 @@ class current_grades:
 
     def get_current_grades_csv(self, filename):
         val = self.get_current_grades()
-        with open(filename, "w") as f:
+        with open(filename, 'w') as f:
             w = csv.writer(f)
             w.writerow(val.keys())
             w.writerow(val.values())
@@ -51,7 +51,7 @@ class current_grades:
         w = csv.writer(f)
         w.writerow(columns_to_include)
         for row in val:
-            w.writerow([row.get(h, "") for h in columns_to_include])
+            w.writerow([row.get(h, '') for h in columns_to_include])
         # for data in val:
         #    filteredData = dict((k, data[k]) for k in columns_to_include if k in val)
         #    w.writerow(filteredData.values())

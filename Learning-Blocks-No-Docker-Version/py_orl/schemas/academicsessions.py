@@ -1,31 +1,31 @@
 from pydantic import BaseModel
 
 
-class academicsessionsBase(BaseModel):
-    sourceId: int
+class AcademicsessionsBase(BaseModel):
+    sourcedId: int
     name: str
 
 
-class academicsessionsCreate(academicsessionsBase):
-    sourceId: int
+class AcademicsessionsCreate(AcademicsessionsBase):
+    sourcedId: int
     name: str
 
 
-class academicsessionsUpdate(academicsessionsBase):
+class AcademicsessionsUpdate(AcademicsessionsBase):
     pass
 
 
-class academicsessionsInDBBase(academicsessionsBase):
-    sourceId: int
+class AcademicsessionsInDBBase(AcademicsessionsBase):
+    sourcedId: int
     name: str
 
     class Config:
         from_attributes = True
 
 
-class Org(academicsessionsInDBBase):
+class Org(AcademicsessionsInDBBase):
     pass
 
 
-class OrgInDB(academicsessionsInDBBase):
+class OrgInDB(AcademicsessionsInDBBase):
     pass
