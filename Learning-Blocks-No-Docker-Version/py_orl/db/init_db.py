@@ -29,12 +29,12 @@ def init_db(db: Session) -> None:
         )
         org = crud.orgs.create(db, obj_in=org_in)
 
-    if not academicsessions:
-        academicsession_in = schemas.AcademicsessionsCreate(
-            sourcedId=settings.example_school,
-            status='active',
-            title='Sample Academic Session',
-            type='semester',
-            parentSourcedId='0',
-        )
-        academicsessions = crud.academicsessions.create(db, obj_in=academicsession_in)
+    # if not academicsessions:
+    #     academicsession_in = schemas.AcademicsessionsCreate(
+    #         sourcedId=settings.example_school,
+    #         status='active',
+    #         title='Sample Academic Session',
+    #         type='semester',
+    #         parentSourcedId='0',
+    #     )
+    #     academicsessions = crud.academicsessions.create(db, obj_in=academicsession_in)

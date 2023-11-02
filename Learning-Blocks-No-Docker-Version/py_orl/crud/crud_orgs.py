@@ -8,7 +8,7 @@ from schemas.orgs import OrgsCreate, OrgsUpdate
 
 class CRUDOrgs(CRUDBase[Orgs, OrgsCreate, OrgsUpdate]):
     def create_with_sourcedId(
-            self, db: Session, *, obj_in: OrgsCreate, sourcedId: int
+            self, db: Session, *, obj_in: OrgsCreate, sourcedId: str
     ) -> Orgs:
         """
         Unused, but keeping for documentation.
@@ -21,7 +21,7 @@ class CRUDOrgs(CRUDBase[Orgs, OrgsCreate, OrgsUpdate]):
         return db_obj
 
     def get_by_sourcedId(
-            self, db: Session, *, sourcedId: int
+            self, db: Session, *, sourcedId: str
     ) -> Orgs:
         """
         Get org by sourcedId.

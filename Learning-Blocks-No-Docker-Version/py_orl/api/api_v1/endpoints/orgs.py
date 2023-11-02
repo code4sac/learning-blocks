@@ -42,7 +42,7 @@ def create_org(
 def update_org(
         *,
         db: Session = Depends(deps.get_db),
-        sourcedId: int,
+        sourcedId: str,
         org_in: schemas.OrgsUpdate
 ) -> Any:
     """
@@ -59,7 +59,7 @@ def update_org(
 def read_org(
         *,
         db: Session = Depends(deps.get_db),
-        sourcedId: int
+        sourcedId: str
 ) -> Any:
     """
     Get org by ID.
@@ -74,7 +74,7 @@ def read_org(
 def delete_org(
         *,
         db: Session = Depends(deps.get_db),
-        sourcedId: int
+        sourcedId: str
 ) -> Any:
     """
     Delete an orgs.
