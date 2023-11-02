@@ -1,31 +1,48 @@
+from datetime import date, datetime
+from typing import Optional
+
 from pydantic import BaseModel
 
 
-class OrgBase(BaseModel):
-    sourceId: int
-    title: str
+class OrgsBase(BaseModel):
+    sourcedId: str
+    status: str
+    dateLastModified: datetime
+    name: str
+    type: str
+    identifier: Optional[str] = None
+    parentSourcedId: str
 
 
-class OrgCreate(OrgBase):
-    sourceId: int
-    title: str
+class OrgsCreate(OrgsBase):
+    sourcedId: str
+    status: str
+    dateLastModified: date
+    name: str
+    type: str
+    identifier: Optional[str] = None
+    parentSourcedId: str
 
 
-class OrgUpdate(OrgBase):
+class OrgsUpdate(OrgsBase):
     pass
 
 
-class OrgInDBBase(OrgBase):
-    sourceId: int
-    title: str
+class OrgsInDBBase(OrgsBase):
+    sourcedId: str
+    status: str
+    dateLastModified: date
+    name: str
+    type: str
+    identifier: Optional[str] = None
 
     class Config:
         from_attributes = True
 
 
-class Org(OrgInDBBase):
+class Orgs(OrgsInDBBase):
     pass
 
 
-class OrgInDB(OrgInDBBase):
+class OrgsInDB(OrgsInDBBase):
     pass

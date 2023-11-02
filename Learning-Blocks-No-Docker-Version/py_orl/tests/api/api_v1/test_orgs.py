@@ -9,9 +9,9 @@ def test_create_org(
         client: TestClient, superuser_token_headers: dict, db: Session
 ) -> None:
     """
-    Test creating an org.
+    Test creating an orgs.
     """
-    data = {"name": "Test School", "sourceId": "99999999"}
+    data = {"name": "Test School", "sourcedId": "99999999"}
     response = client.post(
         f"{settings.api_v1_str}/orgs/",
         headers=superuser_token_headers,
@@ -20,7 +20,7 @@ def test_create_org(
     assert response.status_code == 200
     content = response.json()
     assert content["name"] == data["name"]
-    assert content["sourceId"] == data["sourceId"]
+    assert content["sourcedId"] == data["sourcedId"]
     assert "id" in content
 
 
@@ -28,15 +28,15 @@ def test_read_org(
         client: TestClient, superuser_token_headers: dict, db: Session
 ) -> None:
     """
-    Test reading an org.
+    Test reading an orgs.
     """
     org = create_random_org(db)
     response = client.get(
-        f"{settings.api_v1_str}/orgs/{org.id}",
+        f"{settings.api_v1_str}/orgs/{orgs.id}",
         headers=superuser_token_headers,
     )
     assert response.status_code == 200
     content = response.json()
-    assert content["name"] == org.name
-    assert content["sourceId"] == org.sourceId
-    assert content["id"] == org.id
+    assert content["name"] == orgs.name
+    assert content["sourcedId"] == orgs.sourcedId
+    assert content["id"] == orgs.id

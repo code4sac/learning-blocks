@@ -3,34 +3,34 @@ from sqlalchemy.orm import Session
 
 from crud.base import CRUDBase
 from models.orgs import Orgs
-from schemas.orgs import OrgCreate, OrgUpdate
+from schemas.orgs import OrgsCreate, OrgsUpdate
 
 
-class CRUDOrg(CRUDBase[Orgs, OrgCreate, OrgUpdate]):
-    def create_with_sourceId(
-            self, db: Session, *, obj_in: OrgCreate, sourceId: int
+class CRUDOrgs(CRUDBase[Orgs, OrgsCreate, OrgsUpdate]):
+    def create_with_sourcedId(
+            self, db: Session, *, obj_in: OrgsCreate, sourcedId: int
     ) -> Orgs:
         """
         Unused, but keeping for documentation.
         """
         obj_in_data = jsonable_encoder(obj_in)
-        db_obj = self.model(**obj_in_data, sourceId=sourceId)
+        db_obj = self.model(**obj_in_data, sourcedId=sourcedId)
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)
         return db_obj
 
-    def get_by_sourceId(
-            self, db: Session, *, sourceId: int
+    def get_by_sourcedId(
+            self, db: Session, *, sourcedId: int
     ) -> Orgs:
         """
-        Get org by sourceId.
+        Get org by sourcedId.
         """
         return (
             db.query(self.model)
-            .filter(self.model.sourceId == sourceId)
+            .filter(self.model.sourcedId == sourcedId)
             .first()
         )
 
 
-orgs = CRUDOrg(Orgs)
+orgs = CRUDOrgs(Orgs)

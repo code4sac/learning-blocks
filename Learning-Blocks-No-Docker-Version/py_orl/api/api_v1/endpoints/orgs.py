@@ -10,7 +10,7 @@ from api import deps
 router = APIRouter()
 
 
-@router.get("/", response_model=List[schemas.Org])
+@router.get('/', response_model=List[schemas.Orgs])
 def read_orgs(
         db: Session = Depends(deps.get_db),
         skip: int = 0,
@@ -19,68 +19,68 @@ def read_orgs(
     """
     Retrieve orgs.
     """
-    orgs = crud.org.get_multi(
+    orgs = crud.orgs.get_multi(
         db=db, skip=skip, limit=limit
     )
     return orgs
 
 
-@router.post("/", response_model=schemas.Org)
+@router.post('/', response_model=schemas.Orgs)
 def create_org(
         *,
         db: Session = Depends(deps.get_db),
-        org_in: schemas.OrgCreate
+        org_in: schemas.OrgsCreate
 ) -> Any:
     """
-    Create new org.
+    Create new orgs.
     """
-    org = crud.org.create(db=db, obj_in=org_in)
+    org = crud.orgs.create(db=db, obj_in=org_in)
     return org
 
 
-@router.put("/{sourceId}", response_model=schemas.Org)
+@router.put('/{sourcedId}', response_model=schemas.Orgs)
 def update_org(
         *,
         db: Session = Depends(deps.get_db),
-        sourceId: int,
-        org_in: schemas.OrgUpdate
+        sourcedId: int,
+        org_in: schemas.OrgsUpdate
 ) -> Any:
     """
-    Update an org.
+    Update an orgs.
     """
-    org = crud.org.get(db=db, sourceId=sourceId)
+    org = crud.orgs.get(db=db, sourcedId=sourcedId)
     if not org:
-        raise HTTPException(status_code=404, detail="Org not found")
-    org = crud.org.update(db=db, db_obj=org, obj_in=org_in)
+        raise HTTPException(status_code=404, detail='Org not found')
+    org = crud.orgs.update(db=db, db_obj=org, obj_in=org_in)
     return org
 
 
-@router.get("/{sourceId}", response_model=schemas.Org)
+@router.get('/{sourcedId}', response_model=schemas.Orgs)
 def read_org(
         *,
         db: Session = Depends(deps.get_db),
-        sourceId: int
+        sourcedId: int
 ) -> Any:
     """
     Get org by ID.
     """
-    org = crud.org.get_by_sourceId(db=db, sourceId=sourceId)
+    org = crud.orgs.get_by_sourcedId(db=db, sourcedId=sourcedId)
     if not org:
-        raise HTTPException(status_code=404, detail="Org not found")
+        raise HTTPException(status_code=404, detail='Org not found')
     return org
 
 
-@router.delete("/{sourceId}", response_model=schemas.Org)
+@router.delete('/{sourcedId}', response_model=schemas.Orgs)
 def delete_org(
         *,
         db: Session = Depends(deps.get_db),
-        sourceId: int
+        sourcedId: int
 ) -> Any:
     """
-    Delete an org.
+    Delete an orgs.
     """
-    org = crud.org.get_by_sourceId(db=db, sourceId=sourceId)
+    org = crud.orgs.get_by_sourcedId(db=db, sourcedId=sourcedId)
     if not org:
-        raise HTTPException(status_code=404, detail="Org not found")
-    org = crud.org.remove(db=db, id=sourceId)
+        raise HTTPException(status_code=404, detail='Org not found')
+    org = crud.orgs.remove(db=db, id=sourcedId)
     return org
