@@ -1,1 +1,2 @@
-from crud.crud_org import org
+from crud.crud_orgs import orgs
+from crud.crud_academicsessions import academicsessions

@@ -1,14 +1,17 @@
-@app.get("/")
+from app import app
+
+
+@app.get('/')
 async def root():
-    return {"message": "Hello World"}
+    return {'message': 'Hello World'}
 
 
-@app.get("/teams", response_model=list[TeamOut])
+@app.get('/teams', response_model=list[TeamOut])
 async def getTeams():
     return teams
 
 
-@app.post("/team/{name}", response_model=TeamOut)
+@app.post('/team/{name}', response_model=TeamOut)
 async def scoreTeam(name: str, win: bool = True):
     for team in teams:
         if team.name == name:
@@ -20,7 +23,7 @@ async def scoreTeam(name: str, win: bool = True):
 
 
 # create the url name for the page
-@app.get("/student-data")
+@app.get('/student-data')
 # create a method that will return value you want to the browser to see
 def read_student_info():
     url = 'https://demo.aeries.net/aeries/api/v5/enrollment/99400001/year/2020?cert=477abe9e7d27439681d62f4e0de1f5e1'
@@ -36,7 +39,7 @@ def read_student_info():
 
 
 # create the url name for the page
-@app.get("/download-data")
+@app.get('/download-data')
 # create a method that will return value you want to the browser to see
 def download_student_info():
     url = 'https://demo.aeries.net/aeries/api/v5/enrollment/99400001/year/2020?cert=477abe9e7d27439681d62f4e0de1f5e1'
@@ -48,7 +51,7 @@ def download_student_info():
 
         # Do extra stuff here
 
-        headers = {"Content-Disposition": "attachment; filename=student-data.json"}
+        headers = {'Content-Disposition': 'attachment; filename=student-data.json'}
         return JSONResponse(content=data, headers=headers)
 
     else:
@@ -56,11 +59,11 @@ def download_student_info():
 
 
 # create the url name for the page
-@app.get("/download-csv")
+@app.get('/download-csv')
 # create a method that will return value you want to the browser to see
 def download_csv():
     try:
-        aries = current_grades("994", "2020")
+        aries = current_grades('994', '2020')
         csv_data = aries.get_current_grades_csv_io()
 
         def iterate(data):
