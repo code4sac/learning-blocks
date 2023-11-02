@@ -1,4 +1,4 @@
-"""create orgs and academicsessions tables
+"""Create orgs and academicsessions tables
 
 Revision ID: 40cd3140ef0c
 Revises: 

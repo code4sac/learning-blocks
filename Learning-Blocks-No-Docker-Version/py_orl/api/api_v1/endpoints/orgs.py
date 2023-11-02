@@ -32,7 +32,7 @@ def create_org(
         org_in: schemas.OrgsCreate
 ) -> Any:
     """
-    Create new org.
+    Create new orgs.
     """
     org = crud.orgs.create(db=db, obj_in=org_in)
     return org
@@ -46,7 +46,7 @@ def update_org(
         org_in: schemas.OrgsUpdate
 ) -> Any:
     """
-    Update an org.
+    Update an orgs.
     """
     org = crud.orgs.get(db=db, sourcedId=sourcedId)
     if not org:
@@ -77,7 +77,7 @@ def delete_org(
         sourcedId: int
 ) -> Any:
     """
-    Delete an org.
+    Delete an orgs.
     """
     org = crud.orgs.get_by_sourcedId(db=db, sourcedId=sourcedId)
     if not org:
