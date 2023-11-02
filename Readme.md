@@ -22,6 +22,7 @@
   this format has FERPA related implications and should be used on local servers only</strong>.
 - If you want to begin building a website that will pass the muster of FERPA and other Student Privacy laws, I suggest
   you start [here](https://github.com/code4sac/learning-blocks/tree/main/Learning-Blocks-Docker-Version)
+- If you wannt to dive into a demo version of aeries go [here] (https://demo.aeries.net/aeries/)
 
 ## More documentation soon
 
