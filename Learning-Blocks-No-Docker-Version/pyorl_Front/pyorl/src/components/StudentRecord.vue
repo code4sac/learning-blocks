@@ -1,12 +1,14 @@
-<script lang="ts" setup>
-import { onMounted } from 'vue'
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import axios from 'axios';
 
+let studentRecord = ref({});
+
 onMounted(() => {
-  const URL = 'http://127.0.0.1:8000/student-data';
+  const URL = 'http://127.0.0.1:8000/api/v1/other/student-data';
   axios.get(URL)
     .then(response => {
-      this.studentRecord = response.data[0];
+      studentRecord.value = response.data[0];
     })
     .catch(error => {
       console.error('Error fetching student records:', error);
@@ -23,8 +25,8 @@ onMounted(() => {
       <p>Grade: {{ studentRecord.Grade }}</p>
       <h3>Download Student Information:</h3>
       <p>
-        <a href="http://127.0.0.1:8000/download-data" target="_blank"> Download Json</a> ||
-        <a href="http://127.0.0.1:8000/download-csv" target="_blank"> Download CSV</a>
+        <a href="http://127.0.0.1:8000/api/v1/other/download-data" target="_blank"> Download Json</a> ||
+        <a href="http://127.0.0.1:8000/api/v1/other/download-csv" target="_blank"> Download CSV</a>
       </p>
     </template>
 

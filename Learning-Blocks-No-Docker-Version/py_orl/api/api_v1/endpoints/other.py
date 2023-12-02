@@ -1,29 +1,35 @@
-from app import app
+from fastapi import APIRouter, Depends, HTTPException
+import requests
+from starlette.responses import JSONResponse, StreamingResponse
+
+from api.api_v1.endpoints.current_grades import current_grades
+
+router = APIRouter()
 
 
-@app.get('/')
+@router.get('/')
 async def root():
     return {'message': 'Hello World'}
 
 
-@app.get('/teams', response_model=list[TeamOut])
-async def getTeams():
-    return teams
-
-
-@app.post('/team/{name}', response_model=TeamOut)
-async def scoreTeam(name: str, win: bool = True):
-    for team in teams:
-        if team.name == name:
-            if win:
-                team.wins += 1
-            else:
-                team.losses += 1
-            return team
+# @app.get('/teams', response_model=list[TeamOut])
+# async def getTeams():
+#     return teams
+#
+#
+# @app.post('/team/{name}', response_model=TeamOut)
+# async def scoreTeam(name: str, win: bool = True):
+#     for team in teams:
+#         if team.name == name:
+#             if win:
+#                 team.wins += 1
+#             else:
+#                 team.losses += 1
+#             return team
 
 
 # create the url name for the page
-@app.get('/student-data')
+@router.get('/student-data')
 # create a method that will return value you want to the browser to see
 def read_student_info():
     url = 'https://demo.aeries.net/aeries/api/v5/enrollment/99400001/year/2020?cert=477abe9e7d27439681d62f4e0de1f5e1'
@@ -39,7 +45,7 @@ def read_student_info():
 
 
 # create the url name for the page
-@app.get('/download-data')
+@router.get('/download-data')
 # create a method that will return value you want to the browser to see
 def download_student_info():
     url = 'https://demo.aeries.net/aeries/api/v5/enrollment/99400001/year/2020?cert=477abe9e7d27439681d62f4e0de1f5e1'
@@ -59,7 +65,7 @@ def download_student_info():
 
 
 # create the url name for the page
-@app.get('/download-csv')
+@router.get('/download-csv')
 # create a method that will return value you want to the browser to see
 def download_csv():
     try:

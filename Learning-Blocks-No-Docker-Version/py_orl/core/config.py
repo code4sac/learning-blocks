@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     server_name: str = ''
     server_host: AnyHttpUrl = 'http://localhost'
     backend_cors_origins: List[AnyHttpUrl] = ['http://localhost:8000', 'http://localhost', 'http://localhost:4200',
-                                              'http://localhost:3000', 'http://localhost:8080']
+                                              'http://localhost:3000', 'http://localhost:8080', 'http://localhost:5173']
     postgres_server: str = ""
     postgres_user: str = ""
     postgres_password: str = ""
