@@ -10,11 +10,11 @@
 </template>
   
 <script>
-    import DemographicPieChart from '@/components/DemographicPieChart.vue'
-    import jsonData from '../../demo.json';
-    import { ref } from 'vue';
+import DemographicPieChart from '../components/DemographicPieChart.vue'
+import jsonData from '../../demo.json';
+import {ref} from 'vue';
 
-    // These two variables are to emulate fetching data from the backend
+// These two variables are to emulate fetching data from the backend
     const studentsByGender = ref(
         Object.values(jsonData.reduce((accumulator, student) => {
             const name = student.Gender;

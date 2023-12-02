@@ -1,13 +1,6 @@
-<template>
-    <div>
-        <div :id="containerId" class="pieContainer"></div>
-        <p>{{ chartLabel }}</p>
-    </div>
-</template>
-  
 <script>
 import * as d3 from 'd3'
-import { computed } from 'vue';
+import {computed} from 'vue';
 
 export default {
   props: {
@@ -116,6 +109,13 @@ export default {
 }
 </script>
   
+<template>
+    <div>
+        <div :id="containerId" class="pieContainer"></div>
+        <p>{{ chartLabel }}</p>
+    </div>
+</template>
+
 <style>
   .pieContainer{
     width: 400px;
