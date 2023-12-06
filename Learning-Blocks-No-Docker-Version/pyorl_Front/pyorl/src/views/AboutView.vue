@@ -1,6 +1,17 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Demo of styles:</h1>
+    <StyleDemoTable>
+      <template #headers>
+        <el-text size="small">Demo of text el-text</el-text>
+        <el-text>Demo of text el-text</el-text>
+        <el-text size="large">Demo of text el-text</el-text>
+        <p>Demo of text p</p>
+      </template>
+    </StyleDemoTable>
   </div>
 </template>
 
