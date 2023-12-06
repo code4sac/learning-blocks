@@ -8,7 +8,7 @@ local server.
 
 Install PostgreSQL and the Python dependencies. For help, see [No_docker_getting_started.md](Documentation%20Directory/No_docker_getting_started.md).
 
-### Add environment variables.
+### Add environment variables
 
 Add the following environment variables to your path. You can also try to create a .env file, but I haven't tested that this works.
 
@@ -30,6 +30,15 @@ postgres_db=app
 pgadmin_listen_port=5050
 pgadmin_default_email=user
 pgadmin_default_password=change_me_password01
+```
+
+### Initialize the database
+
+Run the Alembic migration to initialize the database tables. Then, populate the database with the initial_data.py script.
+
+```shell
+alembic upgrade head
+python initial_data.py
 ```
 
 ### Run the server
