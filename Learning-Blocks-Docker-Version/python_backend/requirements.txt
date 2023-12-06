@@ -1,0 +1,11 @@
+alembic
+fastapi
+pandas
+pydantic[email]
+pydantic_settings
+pytest
+Requests
+SQLAlchemy
+starlette
+uvicorn
+psycopg2
