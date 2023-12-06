@@ -8,7 +8,7 @@ Create a .env file with your database credentials. The docker-compose.yml uses t
 
 #### .env
 ```dotenv
-# The application is configured to use only lowercase environment variables. These are case-sensative.
+# The application is configured to use only lowercase environment variable names. Example: lower_case=AnythiNGelseUPPER023~#=. The names are case-sensative.
 domain=localhost
 
 # Backend
