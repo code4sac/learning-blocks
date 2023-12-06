@@ -19,7 +19,7 @@ jobs:
       - name: Build Next.js static site
         run: |
           npm install --prefix Learning-Blocks-No-Docker-Version/pyorl_Front/pyorl
-          npm run build-only Learning-Blocks-No-Docker-Version/pyorl_Front/pyorl
+          npm run build-only --prefix Learning-Blocks-No-Docker-Version/pyorl_Front/pyorl
       - name: Ignore Jekyll
         run: |
           touch Learning-Blocks-No-Docker-Version/pyorl_Front/pyorl/dist/.nojekyll
