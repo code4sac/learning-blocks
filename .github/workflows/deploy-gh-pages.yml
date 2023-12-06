@@ -1,0 +1,32 @@
+name: Deploy Next.js static site to GitHub pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 21.x ]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Build Next.js static site
+        run: |
+          npm install --prefix Learning-Blocks-No-Docker-Version/pyorl_Front/pyorl
+          npm run build-only Learning-Blocks-No-Docker-Version/pyorl_Front/pyorl
+      - name: Ignore Jekyll
+        run: |
+          touch Learning-Blocks-No-Docker-Version/pyorl_Front/pyorl/dist/.nojekyll
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: Learning-Blocks-No-Docker-Version/pyorl_Front/pyorl/dist
+          git-config-name: Automated
+          git-config-email: hello@opensac.org
+          branch: gh-pages
