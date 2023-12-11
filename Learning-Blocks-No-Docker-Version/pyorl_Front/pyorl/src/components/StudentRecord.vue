@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { onMounted, ref } from 'vue'
+<script lang="ts" setup>
+import {onMounted, ref} from 'vue'
 import axios from 'axios';
 
 let studentRecord = ref({});

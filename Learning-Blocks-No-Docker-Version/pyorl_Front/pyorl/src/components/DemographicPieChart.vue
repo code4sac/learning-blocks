@@ -8,12 +8,12 @@ export default {
       type: Object,
       required: true
     },
-    containerId:{
-        type: String,
-        required: true
+    containerId: {
+      type: String,
+      required: true
     }
   },
-  setup(props){
+  setup(props) {
     const propsId = computed(() => {
       if (props.containerId) {
         const words = props.containerId.split(/(?=[A-Z])/);
@@ -28,7 +28,7 @@ export default {
     });
 
     return {
-        chartLabel
+      chartLabel
     };
   },
   mounted() {
@@ -94,12 +94,14 @@ export default {
       .data(arcs)
       .enter()
       .append('text')
-      .text(  (d) => { return `${d.data.name} (${d.data.value})` } )
+      .text((d) => {
+        return `${d.data.name} (${d.data.value})`
+      })
       .attr('transform', (d) => {
         const pos = arcLabel.centroid(d);
         const midAngle = d.startAngle + (d.endAngle - d.startAngle) / 2
         pos[0] = radius * 0.99 * (midAngle < Math.PI ? 1 : -1);
-        return `translate(${  pos  })`;
+        return `translate(${pos})`;
       })
       .style('text-anchor', (d) => {
         const midAngle = d.startAngle + (d.endAngle - d.startAngle) / 2
@@ -108,16 +110,16 @@ export default {
   }
 }
 </script>
-  
+
 <template>
-    <div>
-        <div :id="containerId" class="pieContainer"></div>
-        <p>{{ chartLabel }}</p>
-    </div>
+  <div>
+    <div :id="containerId" class="pieContainer"></div>
+    <p>{{ chartLabel }}</p>
+  </div>
 </template>
 
 <style>
-  .pieContainer{
-    width: 400px;
-  }
+.pieContainer {
+  width: 400px;
+}
 </style>

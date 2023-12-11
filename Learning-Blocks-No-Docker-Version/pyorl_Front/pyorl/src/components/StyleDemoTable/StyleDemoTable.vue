@@ -2,7 +2,7 @@
 import { ElTableV2 } from "element-plus"
 import { useSlots } from 'vue'
 const slots = useSlots()
-console.log(slots['headers'].length)
+console.log(slots['headers']?.length)
 const generateColumns = (length = 10, prefix = 'column-', props?: any) =>
     Array.from({length}).map((_, columnIndex) => ({
       ...props,

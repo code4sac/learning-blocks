@@ -1,7 +1,7 @@
-import {DemographicData} from "@/data/DemographicData";
+import {DemographicData} from "./DemographicData";
 
 export default async function getStudentData():  Promise<Array<DemographicData>>{
-  const { default: mockData } = await import("@/api/studentMockData01.json", { assert: { type: "json" } });
+  const { default: mockData } = await import("./studentMockData01.json", { assert: { type: "json" } });
   return mockData.map(it => {
     return new DemographicData(
       it["Student ID"],

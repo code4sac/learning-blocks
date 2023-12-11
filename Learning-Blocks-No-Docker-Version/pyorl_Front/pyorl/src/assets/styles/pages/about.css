@@ -1,0 +1,469 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+/*
+About page layout.
+ */
+
+.about-section-landing {
+  color: $neutral-900;
+  background-color: $secondary-50;
+  padding: 96px 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  @media (max-width: $screen-md) {
+    padding: 48px 40px;
+    flex-direction: column;
+  }
+}
+
+.about-section-light-container {
+  width: 50%;
+  position: relative;
+
+  @media (max-width: $screen-md) {
+    width: 100%;
+  }
+}
+
+.about-heading-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  width: 43px;
+  border-bottom: 4px solid $neutral-900;
+}
+
+.about-underline-alt::after {
+  border-bottom: 4px solid $neutral-50;
+}
+
+.about-heading-section {
+  color: $neutral-300;
+  @include h1-section;
+  margin: 0;
+}
+
+.about-heading-section-alt {
+  color: $secondary-500;
+}
+
+.about-heading-section-sub {
+  margin: 10px 0;
+  @include h2-semi-bold;
+
+  @media (max-width: $screen-sm) {
+    @include h3-semi-bold;
+  }
+}
+
+.about-section-paragraph {
+  @include subheading-regular;
+  margin: 0;
+
+  @media (max-width: $screen-sm) {
+    @include p3-regular;
+  }
+}
+
+.about-section-paragraph-bold {
+  @include subheading-bold;
+}
+
+.about-light-section {
+  padding: 7%;
+  background-color: $secondary-50;
+
+  @media (max-width: $screen-md) {
+    padding: 16px;
+  }
+}
+
+.about-grid-container {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: fit-content;
+  margin: auto;
+}
+
+.full-width-item {
+  grid-row: 1;
+  grid-column: 1 / span 2;
+  width: 100%;
+}
+
+.grid-item {
+  width: 100%;
+}
+
+.about-team-section {
+  padding: 0 0 64px 0;
+  background-color: $secondary-50;
+  color: $neutral-900;
+}
+
+.team-paragraph-container {
+  padding: 64px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  @media (max-width: $screen-md) {
+    padding: 64px 40px;
+    gap: 12px;
+  }
+}
+
+.about-heading-container {
+  position: relative;
+
+  @media (max-width: $screen-md) {
+    width: 100%;
+  }
+}
+
+.about-section-dark {
+  background-color: $neutral-900;
+  color: $neutral-50;
+}
+
+.about-dark-heading-container {
+  position: relative;
+}
+
+.about-section-mission {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 192px 0 192px 80px;
+  background-image: url("/img/open_data_day_curved.png");
+  background-repeat: no-repeat;
+  background-size: 45vw 40vw;
+  background-position: right center;
+
+  @media (min-width: 1700px) {
+    background-size: 40% 80%;
+  }
+
+  @media (max-width: $screen-lg) {
+    background-image: none;
+    padding: 0;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+.mission-container {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+
+  @media (max-width: $screen-lg) {
+    width: auto;
+    padding: 48px 40px 0 40px;
+    margin: auto;
+  }
+}
+
+.about-action-image {
+  display: none;
+  margin-top: 40px;
+
+  @media (max-width: $screen-lg) {
+    display: block;
+    height: 50vw;
+    margin-bottom: 80px;
+  }
+
+  @media (max-width: $screen-md) {
+    display: block;
+    height: 70vw;
+    margin-bottom: 80px;
+  }
+}
+
+.team-paragraph {
+  width: 65%;
+
+  @media (max-width: $screen-md) {
+    width: 100%;
+  }
+}
+
+.team-members-container {
+  padding: 0 80px;
+
+  @media (max-width: $screen-sm) {
+    padding: 0 24px;
+  }
+
+  @media (max-width: $screen-xs) {
+    padding: 0;
+  }
+}
+
+.team-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 10px;
+
+  @media (max-width: $screen-xxl) {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+.team-cards-grid div {
+  color: black;
+  text-align: center;
+}
+
+.team-grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0 0 15px 0;
+  border: solid 1px #EAECF0;
+}
+
+.member-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 15px;
+}
+
+.member-name-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.member-name {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1.1em;
+  line-height: 29px;
+  color: #282828;
+  margin: 0;
+}
+
+.member-title {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 21px;
+  color: #3E3E59;
+  margin: 0;
+}
+
+.member-quote {
+  color: #5F6980;
+  margin-right: auto;
+}
+
+.about-sub-heading {
+  @include h1-semi-bold;
+  margin: 10px 0;
+
+  @media (max-width: $screen-sm) {
+    @include h1-small-semi-bold;
+  }
+}
+
+.about-join-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 64px 80px;
+  gap: 24px;
+
+  @media (max-width: $screen-md) {
+    padding: 48px 40px;
+    gap: 40px;
+  }
+
+  @media (max-width: $screen-xs) {
+    padding: 48px 20px;
+  }
+}
+
+.opportunities-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+
+  @media (max-width: $screen-lg) {
+    display: block;
+  }
+}
+
+.opportunities-intro-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  margin-right: 15%;
+
+  @media (max-width: $screen-lg) {
+    margin-right: 0;
+  }
+}
+
+.opportunities-intro-paragraph {
+  @include p3-regular;
+  margin: 0;
+
+  @media (max-width: $screen-sm) {
+    @include p2-regular;
+  }
+}
+
+.opportunities-intro-paragraph span {
+  font-weight: 700;
+
+  @media (max-width: $screen-sm) {
+    @include p2-regular;
+    font-weight: 700;
+  }
+}
+
+.opportunities-anchor {
+  @include h3-bold;
+  color: black;
+  width: 85%;
+  position: absolute;
+  top: 40%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+
+  @media (min-width: $screen-xxl) {
+    width: 12em;
+  }
+}
+
+.opportunities-anchor a {
+  color: $primary-500;
+}
+
+.opportunities-get-started {
+  position: relative;
+  background-image: url("/img/about/rectangle.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  @media (max-width: $screen-lg) {
+    display: none;
+  }
+}
+
+.opportunities-get-started img {
+  opacity: 0;
+}
+
+.positions-heading {
+  display: block;
+  @include h3-bold;
+  color: $secondary-500;
+  padding-top: 20px;
+
+  @media (max-width: $screen-md) {
+    display: none;
+  }
+}
+
+.positions-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+
+  @media (max-width: $screen-lg) {
+    gap: 47px;
+  }
+}
+
+.positions-container {
+  width: 48%;
+  min-width: 400px;
+
+  @media (max-width: $screen-lg) {
+    width: 100%;
+  }
+
+  @media (max-width: $screen-sm) {
+    min-width: 0;
+  }
+}
+
+.positions-header {
+  @include h5-semi-bold;
+  color: $secondary-50;
+}
+
+.positions-list {
+  border-top: 1px $neutral-400 solid;
+}
+
+.position {
+  @include subheading-bold;
+  font-weight: 600;
+  color: $neutral-200;
+}
+
+.get-started-bottom {
+  position: relative;
+  background-image: url("/img/about/rectangle.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin: auto;
+
+  @media (min-width: $screen-lg) {
+    display: none;
+  }
+
+  @media (max-width: $screen-sm) {
+    width: 100%;
+  }
+}
+
+.get-started-bottom img {
+  opacity: 0;
+}
+
+.opportunities-anchor-bottom {
+  @include h3-bold;
+  color: black;
+  width: 80%;
+  position: absolute;
+  top: 40%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+
+  @media (max-width: $screen-sm) {
+    font-size: 1.7em;
+    line-height: 1.2em;
+  }
+
+  @media (max-width: $screen-xs) {
+    font-size: 1.2em;
+  }
+}
+
+.opportunities-anchor-bottom a {
+  color: $primary-500;
+}

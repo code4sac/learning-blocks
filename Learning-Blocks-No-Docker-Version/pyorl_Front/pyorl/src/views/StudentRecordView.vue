@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import StudentRecord from '../components/StudentRecord.vue'
 </script>
 
