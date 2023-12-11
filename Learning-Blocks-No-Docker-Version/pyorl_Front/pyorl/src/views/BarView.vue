@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import DemographicBarChart from "@/components/DemographicBarChart.vue";
 </script>
 <template>
-  <DemographicBarChart />
+  <DemographicBarChart/>
 </template>
   

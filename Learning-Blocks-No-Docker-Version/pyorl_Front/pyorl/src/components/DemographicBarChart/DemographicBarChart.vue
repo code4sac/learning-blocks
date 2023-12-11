@@ -1,8 +1,8 @@
 <script lang="ts">
 import * as d3 from 'd3';
 import {Vue} from "vue-class-component";
-import {DemographicData} from "@/data/DemographicData";
-import getStudentData from "@/api/studentData";
+import {DemographicData} from "./DemographicData";
+import getStudentData from "./studentData";
 
 type DemographicBarChartData = {
   gradeLevel: number

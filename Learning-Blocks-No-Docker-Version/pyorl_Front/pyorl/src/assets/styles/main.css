@@ -1,0 +1,33 @@
+@import "./abstracts/variables.css";
+@import './base/base.css';
+
+/*
+Base layout styles for all pages. Includes the app theme. This file should be imported in the base layout file.
+ */
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/*html,*/
+/*body {*/
+/*  max-width: 100vw;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  background: $navbar-color;*/
+/*}*/
+
+/*.full-width {*/
+/*  width: 100%;*/
+/*  overflow: clip;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*}*/
+
+/*.hidden {*/
+/*  display: none;*/
+/*}*/

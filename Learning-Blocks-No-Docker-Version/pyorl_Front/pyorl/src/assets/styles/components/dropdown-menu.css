@@ -1,0 +1,64 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins";
+
+/*
+Navigation bar drop down menu.
+*/
+
+.dropdown-menu {
+  background-color: $secondary-50;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: #ebeae5;
+  display: flex;
+  gap: 80px;
+  padding: 40px 80px;
+  width: 100%;
+
+  a {
+    color: $neutral-900 !important;
+  }
+}
+
+.dropdown-button {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  background-color: $secondary-300 !important;
+  border: 1px solid !important;
+  border-color: $secondary-500 !important;
+  border-radius: 6px;
+  padding: 8px 12px !important;
+  flex: 0 0 auto !important;
+  cursor: pointer;
+}
+
+.dropdown-menu .text-wrapper-2 {
+  @include h4-semi-bold;
+  color: $neutral-900;
+  position: relative;
+  white-space: nowrap;
+  width: 220px;
+}
+
+.text-wrapper-3 {
+  cursor: pointer;
+  text-decoration: none;
+  color: $primary-900;
+  @include p-footer-bold;
+  border-bottom: 1px solid $primary-900;
+}
+
+.dropdown-menu .section-content {
+  @include p1-regular;
+  color: $neutral-900;
+  padding: 20px 0;
+}
+
+.dropdown-menu .section-content-2 {
+  @include p-footer;
+  color: $neutral-900;
+  padding: 20px 0;
+}
+
+
