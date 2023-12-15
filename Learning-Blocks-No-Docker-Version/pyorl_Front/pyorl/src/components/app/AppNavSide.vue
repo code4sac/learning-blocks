@@ -1,30 +1,33 @@
 <script lang="ts" setup>
-import {Document, Location, Menu as IconMenu, Setting,} from '@element-plus/icons-vue'
-
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
+import { DataAnalysis, Document, Files, House, } from '@element-plus/icons-vue'
 </script>
 
 <template>
-  <el-menu
-    active-text-color="#ffd04b"
-    background-color="#545c64"
-    class="el-menu-vertical-demo"
-    default-active="2"
-    text-color="#fff"
-    @close="handleClose"
-    @open="handleOpen"
-  >
-    <el-sub-menu index="1">
+  <el-menu default-active="1" >
+    <el-menu-item index="1">
+      <el-icon>
+        <House/>
+      </el-icon>
+      <span>Table only view</span>
+    </el-menu-item>
+    <el-menu-item index="2">
+      <el-icon>
+        <DataAnalysis/>
+      </el-icon>
+      <span>Overview</span>
+    </el-menu-item>
+    <el-menu-item index="3">
+      <el-icon>
+        <Document/>
+      </el-icon>
+      <span>CSV Central</span>
+    </el-menu-item>
+    <el-sub-menu index="4">
       <template #title>
         <el-icon>
-          <location/>
+          <Files/>
         </el-icon>
-        <span>Navigator One</span>
+        <span>Other</span>
       </template>
       <el-menu-item-group title="Group One">
         <el-menu-item index="1-1">item one</el-menu-item>
@@ -38,23 +41,13 @@ const handleClose = (key: string, keyPath: string[]) => {
         <el-menu-item index="1-4-1">item one</el-menu-item>
       </el-sub-menu>
     </el-sub-menu>
-    <el-menu-item index="2">
-      <el-icon>
-        <icon-menu/>
-      </el-icon>
-      <span>Navigator Two</span>
-    </el-menu-item>
-    <el-menu-item disabled index="3">
-      <el-icon>
-        <document/>
-      </el-icon>
-      <span>Navigator Three</span>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <el-icon>
-        <setting/>
-      </el-icon>
-      <span>Navigator Four</span>
-    </el-menu-item>
   </el-menu>
 </template>
+
+<style scoped>
+/*
+.el-menu .el-menu-item:hover, .el-menu-demo .el-sub-menu__title:hover {
+  background-color: #ECF0E9;
+}
+ */
+</style>

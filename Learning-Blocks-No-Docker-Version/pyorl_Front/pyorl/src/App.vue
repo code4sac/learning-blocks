@@ -9,4 +9,4 @@ import AppNavBar from '@/components/app/AppNavToolbar.vue'
 </template>
 
 <style scoped>
-</style>
+</style>2023

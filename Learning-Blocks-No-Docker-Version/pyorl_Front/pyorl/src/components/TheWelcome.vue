@@ -1,88 +1,58 @@
 <script lang="ts" setup>
 import WelcomeItem from './WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
 </script>
 
 <template>
   <WelcomeItem>
     <template #icon>
-      <DocumentationIcon/>
+      <el-image src="/welcome_block_02.png"/>
     </template>
-    <template #heading>Documentation</template>
+    <template #heading>Feature 1</template>
 
     Vue’s
     <a href="https://vuejs.org/" rel="noopener" target="_blank">official documentation</a>
     provides you with all information you need to get started.
   </WelcomeItem>
 
-  <WelcomeItem>
+  <WelcomeItem style="padding-top: 1rem">
     <template #icon>
-      <ToolingIcon/>
+      <el-image src="/welcome_block_03.png"/>
     </template>
-    <template #heading>Tooling</template>
-
-    This project is served and bundled with
-    <a href="https://vitejs.dev/guide/features.html" rel="noopener" target="_blank">Vite</a>. The
-    recommended IDE setup is
-    <a href="https://code.visualstudio.com/" rel="noopener" target="_blank">VSCode</a> +
-    <a href="https://github.com/johnsoncodehk/volar" rel="noopener" target="_blank">Volar</a>. If
-    you need to test your components and web pages, check out
-    <a href="https://www.cypress.io/" rel="noopener" target="_blank">Cypress</a> and
-    <a href="https://on.cypress.io/component" rel="noopener" target="_blank"
-    >Cypress Component Testing</a
-    >.
-
-    <br/>
-
-    More instructions are available in <code>README.md</code>.
+    <template #heading>Compare student data with State of California standards</template>
+    <el-link>Dashboard ➜ CA Data</el-link>
+    Visualize student data relative to defined State of California educational benchmarks for actionable insights.
   </WelcomeItem>
 
-  <WelcomeItem>
+  <WelcomeItem style="padding-top: 1rem">
     <template #icon>
-      <EcosystemIcon/>
+      <el-image src="/welcome_block_04.png"/>
     </template>
-    <template #heading>Ecosystem</template>
-
-    Get official tools and libraries for your project:
-    <a href="https://pinia.vuejs.org/" rel="noopener" target="_blank">Pinia</a>,
-    <a href="https://router.vuejs.org/" rel="noopener" target="_blank">Vue Router</a>,
-    <a href="https://test-utils.vuejs.org/" rel="noopener" target="_blank">Vue Test Utils</a>, and
-    <a href="https://github.com/vuejs/devtools" rel="noopener" target="_blank">Vue Dev Tools</a>. If
-    you need more resources, we suggest paying
-    <a href="https://github.com/vuejs/awesome-vue" rel="noopener" target="_blank">Awesome Vue</a>
-    a visit.
+    <template #heading>Download a CSV file based on filter of students</template>
+    <el-link>Interventions ➜ Downloads</el-link>
+    Use precise student filters to refine and generate focused data in CSV format.
   </WelcomeItem>
 
-  <WelcomeItem>
+  <WelcomeItem style="padding-top: 1.2rem">
     <template #icon>
-      <CommunityIcon/>
+      <el-image src="/welcome_block_05.png"/>
     </template>
-    <template #heading>Community</template>
+    <template #heading>Feature 4</template>
 
-    Got stuck? Ask your question on
-    <a href="https://chat.vuejs.org" rel="noopener" target="_blank">Vue Land</a>, our official
-    Discord server, or
-    <a href="https://stackoverflow.com/questions/tagged/vue.js" rel="noopener" target="_blank"
-    >StackOverflow</a
-    >. You should also subscribe to
-    <a href="https://news.vuejs.org" rel="noopener" target="_blank">our mailing list</a> and follow
-    the official
-    <a href="https://twitter.com/vuejs" rel="noopener" target="_blank">@vuejs</a>
-    twitter account for latest news in the Vue world.
+    Vue’s
+    <a href="https://vuejs.org/" rel="noopener" target="_blank">official documentation</a>
+    provides you with all information you need to get started.
   </WelcomeItem>
 
-  <WelcomeItem>
+  <WelcomeItem style="padding-top: 1rem">
     <template #icon>
-      <SupportIcon/>
+      <el-image src="/welcome_block_06.png"/>
     </template>
-    <template #heading>Support Vue</template>
+    <template #heading>View Learning Blocks on GitHub</template>
 
-    As an independent project, Vue relies on community backing for its sustainability. You can help
-    us by
-    <a href="https://vuejs.org/sponsor/" rel="noopener" target="_blank">becoming a sponsor</a>.
+    <el-link href="https://github.com/code4sac/learning-blocks">Code repository on GitHub.com</el-link>
+    This project is open-source, and made by volunteers at Open Sacramento.
   </WelcomeItem>
 </template>
+
+<style scoped>
+</style>

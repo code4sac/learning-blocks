@@ -1,75 +1,78 @@
-# Learning Blocks Frontend
+# Learning Blocks &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/code4sac/learning-blocks/blob/main/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/code4sac/learning-blocks/blob/main/.github/CONTRIBUTING.md)
 
-This template should help get you started developing with Vue 3 in Vite.
+Learning Blocks is a student information system designed for ease-of-use and increased productivity.
 
-## Recommended IDE Setup
+## Documentation
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and
-disable
-Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[Documentation Website](https://code4sac.github.io/projects/learningblocks)
 
-## Type Support for `.vue` Imports in TS
+Documentation for individual components can be found in their respective README
+files.
+Get started with an overview in the [`Component_Doucmention.md [not live yet]`](https://github.com/cod4sac/learning-blocks/).
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for
-type checking. In editors, we
-need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
-to make the TypeScript language service aware of `.vue` types.
+## Development
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented
-a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more
-performant. You can enable it by the following steps:
+This is the development repo for the Learning Blocks website.
 
-1. Disable the built-in TypeScript Extension
-   1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+### Structure
 
-## Customize configuration
+- `.github`
+  - Contains workflows used by GitHub Actions.
+  - Contains issue templates and contribution guidelines.
+- `src`
+  - Contains the source code for the website. Built with [Vue.js](https://vuejs.org).
+- `public`
+  - Contains the individual packages managed in the monorepo.
+- `cypress`
+  - Not yet implemented.
+- `.vscode`
+  - Contains the suggested packages for Visual Studio Code.
+  - Volar
+  - Vue.vscode-typescript-vue-plugin
+  - dbaeumer.vscode-eslint
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### Tasks
 
-## Project Setup
+First, `npm install` the npm workspace.
 
-```sh
-npm install
-```
+- `dev`
+  - Use `npm run dev` to start a local web server for development.
+- `test`
+  - Use `npm run test` to run tests for every package.
+  - Use `npm run test -w <package-name>` to run the test script for a specific
+    package. More details can be found in the contributing guide below.
+- `build`
+  - Use `npm run build` to run the build script in every package.
+  - Use `npm run build -w <package-name>` to run the build script for a specific
+    package.
 
-### Compile and Hot-Reload for Development
+## Contributing
 
-```sh
-npm run dev
-```
+Development happens in the open on GitHub and we are grateful for contributions
+including bug fixes, improvements, and ideas.
 
-### Type-Check, Compile and Minify for Production
+### Code of Conduct
 
-```sh
-npm run build
-```
+This project expects all participants to adhere to Meta's OSS
+[Code of Conduct](https://opensource.fb.com/code-of-conduct/). Please read
+the full text so that you can understand what actions will and will not be
+tolerated.
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### Contributing Guide
 
-```sh
-npm run test:unit
-```
+Read the
+[contributing guide](https://github.com/facebook/stylex/blob/main/.github/CONTRIBUTING.md)
+to learn about our development process, how to propose bug fixes and
+improvements, and how to build and test your changes.
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+### License
 
-```sh
-npm run test:e2e:dev
-```
+Learning Blocks is [MIT licensed](./LICENSE.txt).
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+#### Things to add
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+Add tests to GitHub Actions. Then add the following snippet in the Readme.md.
 
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+```markdown
+[![Build Status](https://github.com/code4sac/learning-blocks/workflows/tests/badge.svg)](https://github.com/code4sac/learning-blocks/actions)
 ```
