@@ -35,11 +35,7 @@ const doClick2 = () => {
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>Action 1</el-dropdown-item>
-              <el-dropdown-item>Action 2</el-dropdown-item>
-              <el-dropdown-item>Action 3</el-dropdown-item>
-              <el-dropdown-item disabled>Action 4</el-dropdown-item>
-              <el-dropdown-item divided>Action 5</el-dropdown-item>
+              <el-dropdown-item>Show Demographic Charts</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -102,6 +98,16 @@ const doClick2 = () => {
           </el-card>
         </el-col>
       </el-row>
+      <el-row>
+        <div v-show="showDemographicGraphs" class="graphContainer">
+          <!--        <DemographicPieChart-->
+          <!--            v-for="(data, index) in dataList"-->
+          <!--            :key="index"-->
+          <!--            :containerId="data.containerId"-->
+          <!--            :jsonData="data.jsonData"-->
+          <!--        />-->
+        </div>
+      </el-row>
     </div>
   </div>
 </template>
@@ -118,11 +124,12 @@ const doClick2 = () => {
 
 .statistic-outer-container {
   display: flex;
+  width: 100%;
   justify-content: center;
 }
 
 .statistic-inner-container {
-  max-width: 1200px;
+  max-width: 1000px;
   flex-grow: 1;
 }
 

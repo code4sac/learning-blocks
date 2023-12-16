@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import IconNotice from "@/components/icons/IconNotice.vue";
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { ElCheckbox, ElFormItem, ElInput } from "element-plus";
 import TheWelcome from "@/components/TheWelcome.vue";
-import { QuestionFilled } from "@element-plus/icons-vue"
+import { QuestionFilled, CloseBold } from "@element-plus/icons-vue"
 import AppFooter from "@/components/app/AppFooter.vue";
 
 const formInline = reactive({
@@ -12,8 +12,10 @@ const formInline = reactive({
   region: '',
   date: '',
 })
+
+const syncSubmitted = ref(true)
 const onSubmit = () => {
-  console.log('submit!')
+  syncSubmitted.value = true
 }
 </script>
 
@@ -79,6 +81,12 @@ const onSubmit = () => {
                       <el-form-item style="margin-left: 1em">
                         <el-button type="primary" @click="onSubmit">Sync</el-button>
                       </el-form-item>
+                      <el-text type="danger" v-show="syncSubmitted" style="display: block">
+                        <el-icon :size="24">
+                        <CloseBold />
+                      </el-icon>
+                        Syncing to local storage is under development. The dashboard uses static data for now.
+                      </el-text>
                     </el-form>
                   </div>
                 </el-card>

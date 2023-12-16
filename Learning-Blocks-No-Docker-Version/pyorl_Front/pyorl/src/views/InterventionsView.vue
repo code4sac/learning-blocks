@@ -1,15 +1,10 @@
-<script lang="ts">
+<script lang="ts" setup>
 import AppStatistic from "@/components/app/AppStatistic.vue";
 import StyleDemoTable from "@/components/StyleDemoTable";
 import AppNavSide from "@/components/app/AppNavSide.vue";
-import DemographicPieChart from "@/components/DemographicPieChart.vue";
+// import DemographicPieChart from "@/components/DemographicBarChart";
 import { ref } from 'vue';
 import jsonData from '../../demo.json';
-import LearningBlocksToolbar from "@/components/app/AppPageHeader.vue";
-import AppFooter from "@/components/app/AppFooter.vue";
-import AriesDataTable from "@/components/AriesDataTable/AriesDataTable.vue";
-import EnrollmentDetails from "@/components/AriesDataTable/EnrollmentDetail.vue";
-import ReportDetail from "@/components/AriesDataTable/ReportCardDetail.vue";
 
 // These two variables are to emulate fetching data from the backend
 const studentsByGender = ref(
@@ -38,45 +33,24 @@ const studentsByGrade = ref(
 
       return accumulator;
     }, {}))
-);
+)
 
-export default {
-  name: 'DashboardView',
-  components: {
-    StyleDemoTable,
-    AppNavSide,
-    AppStatistic,
-    ReportDetail,
-    EnrollmentDetails,
-    AriesDataTable,
-    AppFooter,
-    LearningBlocksToolbar,
-    DemographicPieChart
-  },
-  data() {
-    return {
-      dataList: [
+const dataList = [
         {jsonData: studentsByGender, containerId: "GenderPieChart"},
         {jsonData: studentsByGrade, containerId: "GradePieChart"},
         {jsonData: studentsByGrade, containerId: "GradePieChart1"}
       ]
-    };
-  }
+const showDemographicGraphs = ref(false);
+
+const onClickShowDemographicGraphs = () => {
+
 }
 </script>
 
 <template>
   <el-container direction="vertical">
     <div class="statistic-container">
-      <AppStatistic></AppStatistic>
-      <div class="graphContainer">
-        <DemographicPieChart
-            v-for="(data, index) in dataList"
-            :key="index"
-            :containerId="data.containerId"
-            :jsonData="data.jsonData"
-        />
-      </div>
+      <AppStatistic/>
     </div>
     <div class="dashboard-main-section">
       <el-aside class="sidebar">
@@ -113,6 +87,7 @@ Home page styles.
 
 .statistic-container {
   padding: 8px 0;
+  max-width: 1700px;
 }
 
 .dashboard-table {
