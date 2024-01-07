@@ -1,10 +1,10 @@
 # Learning Blocks without Docker
 
-This project runs Learning Blocks on a local server without Docker.
 
 ## Frontend
 
-See the [pyorl_Front folder](/https://github.com/code4sac/learning-blocks/tree/main/LB_Community_Edition_Non_Enterprise/Current_Iteration_Files/pyorl_Front/pyorl)
+See the [pyorl_Front folder](https://github.com/code4sac/learning-blocks/tree/main/LB_Community_Edition_Non_Enterprise/Current_Iteration_Files/pyorl_Front/pyorl)
+
 
 ## Backend Scripts for Learning Blocks
 
