@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "KevinRose.vsc-python-indent",
+        "njpwerner.autodocstring",
+        "donjayamanne.python-environment-manager"
+    ]
+}
