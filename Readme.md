@@ -14,17 +14,17 @@
 ### If you are a developer, we have a couple of ways for you to help/contribute/learn
 
 - If you want to start off this project just learning the Python side of things, I suggest you
-  start [here](https://github.com/code4sac/learning-blocks/blob/main/Documentation%20Directory/Individual_scripts.md)
+  start [here](https://github.com/code4sac/learning-blocks/edit/main/Documentation%20Directory/Individual_scripts.md)
 - If you want to understand how Fast API works in this project, I suggest you
-  start [here](https://github.com/code4sac/learning-blocks/blob/main/Documentation%20Directory/FastAPI_setup.md)
+  start [here](https://github.com/code4sac/learning-blocks/edit/main/LB_Community_Edition_Non_Enterprise/Past_iterations/Stand_Alone_FastAPI/Readme.md)
 - If you want to boot up a docker-less FastAPI/VUE.JS version of this project, I suggest you
-  start [here](https://github.com/code4sac/learning-blocks/tree/main/Learning-Blocks-No-Docker-Version) <strong>Warning
+  start <a href="https://github.com/code4sac/learning-blocks/tree/main/LB_Community_Edition_Non_Enterprise/Current_Iteration_Files">here</a>
   this format has FERPA related implications and should be used on local servers only</strong>.
 - If you want to begin building a website that will pass the muster of FERPA and other Student Privacy laws, I suggest
-  you start [here](https://github.com/code4sac/learning-blocks/tree/main/Learning-Blocks-Docker-Version)
-- If you want to dive into a demo version of aeries go [here] (https://demo.aeries.net/aeries/)
+  you start [here](https://github.com/code4sac/learning-blocks/tree/main/LB_Community_Edition_Enterprise)
+- If you want to dive into a demo version of aeries go [here](https://demo.aeries.net/aeries/)
 - If you want to know about database standards used in this documentation go [here](https://www.imsglobal.org/oneroster-v11-final-csv-tables#_Toc480293254 )
 
 ## More documentation soon
 
-<img align="right" alt="GIF" src="https://i.pinimg.com/originals/e4/26/70/e426702edf874b181aced1e2fa5c6cde.gif" />
+<img align="center" alt="GIF" src="https://i.pinimg.com/originals/e4/26/70/e426702edf874b181aced1e2fa5c6cde.gif" />
