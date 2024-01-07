@@ -1,7 +1,6 @@
 # Welcome to Learning Blocks: Community Edition (Non Enterprise)
 
 There have been many iterations of this project
-<div style="text-align: center;">
 <table>
   <thead>
     <tr>
@@ -10,25 +9,28 @@ There have been many iterations of this project
     </tr>
   </thead>
   <tbody>
+        <tr>
+      <td style="text-align: center;">Active</td>
+      <td style="text-align: center;">
+         <a href="https://github.com/code4sac/learning-blocks/tree/main/LB_Community_Edition_Non_Enterprise/Current_Iteration_Files)">Current_Iteration_Files</a>
+      </td>
+    </tr>
     <tr>
       <td style="text-align: center;">Archived</td>
       <td style="text-align: center;">
         <a href="https://github.com/code4sac/learning-blocks/tree/main/LB_Community_Edition_Non_Enterprise/Past_iterations/Stand_Alone_FastAPI">Stand_Alone_FastAPI</a>
       </td>
     </tr>
+    <tr>
+      <td style="text-align: center;">Archived</td>
+      <td style="text-align: center;">
+        <a href="https://github.com/code4sac/learning-blocks/tree/main/LB_Community_Edition_Non_Enterprise/Past_iterations/learning-blocks_V_Dan_Nate"> Learning-Blocks_V_Dan_Nate</a>
+      </td>
+    </tr>
   </tbody>
 </table>
-</div>
-
-## Frontend
-
-See the [pyorl_Front folder](/Learning-Blocks-No-Docker-Version/pyorl_Front).
-
-## Backend Scripts for Learning Blocks
-
-For project setup, see [Documentation Directory/Stand_alone_FastAPI_setup.md](/Documentation%20Directory/Stand_alone_FastAPI_setup.md) and [Documentation Directory/Database_documentation.md](/Documentation%20Directory/Database_documentation.md).
 
 
-## more documentation soon
+## More Documentation Soon
 
-<img align="right" alt="GIF" src="https://i.pinimg.com/originals/e4/26/70/e426702edf874b181aced1e2fa5c6cde.gif" />
+<img align="center" alt="GIF" src="https://i.pinimg.com/originals/e4/26/70/e426702edf874b181aced1e2fa5c6cde.gif" />
