@@ -1,0 +1,204 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+/*
+conduct page layout
+ */
+ .conduct-light-theme {
+    color: $neutral-900;
+    background-color: $secondary-50;
+ }
+
+ .conduct-dark-theme {
+    color: $neutral-50;
+    background-color: $neutral-900;
+ }
+
+ .conduct-gray-theme {
+    color: $neutral-50;
+    background-color: $neutral-500;
+ }
+
+.conduct-section-landing {
+    padding: 96px 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+
+    @media (max-width: $screen-md) {
+      padding: 96px 60px;
+    }
+
+    @media (max-width: $screen-md) {
+      padding: 48px 40px;
+      flex-direction: column;
+    }
+}
+
+.conduct-section-heading-container {
+    position: relative;
+    width: 100%;
+}
+
+.conduct-list-container{
+    padding: 40px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+    @media (max-width: $screen-md) {
+        padding: 0px 25px 48px 25px;
+        gap: 24px;
+    }
+}
+
+.conduct-heading-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    width: 43px;
+    border-bottom: 4px solid $neutral-900;
+}
+
+.underline-alt::after {
+    border-bottom: 4px solid $neutral-50;
+}
+
+.conduct-heading-section {
+    color: $neutral-300;
+    @include h1-section;
+    margin: 0;
+}
+
+.conduct-heading-section-alt {
+    color: $secondary-500;
+}
+
+.conduct-heading-section-sub {
+    margin: 10px 0;
+    @include h2-semi-bold;
+  
+    @media (max-width: $screen-sm) {
+      @include h1-small-semi-bold;
+    }
+}
+
+.conduct-sub-h1-heading {
+    @include h1-small-semi-bold;
+    margin: 12px 0px;
+
+    @media (max-width: $screen-sm) {
+        @include h3-semi-bold;
+    }
+}
+
+.conduct-sub-heading {
+    @include subheading-bold;
+    margin: 10px 0;
+    width: 100%;
+    text-align: left;
+
+    @media (max-width: $screen-sm) {
+        @include p2-bold;
+    }
+}
+
+.conduct-section-paragraph {
+    @include p3-regular;
+    margin: 0;
+
+    @media (max-width: $screen-sm) {
+      @include p2-regular;
+    }
+}
+
+.conduct-numbered-item {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+    width: 100%;
+
+    @media (max-width: $screen-md) {
+        gap: 16px;
+        padding: 0;
+        align-items: flex-start;
+    }
+}
+
+.conduct-item-image {
+    width: 10vw;
+    height: 10vw;
+    max-width: 80px;
+    max-height: 80px;
+}
+
+.conduct-item-paragraph {
+    @include subheading-regular;
+    margin: 0;
+    width: 100%;
+
+    @media (max-width: $screen-sm) {
+      @include p2-regular;
+    }
+}
+
+.conduct-paragraph-anchor {
+    color: $neutral-50;
+}
+
+// Policies
+
+.conduct-policy-landing-container {
+    padding: 96px 80px 40px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+
+    @media (max-width: $screen-md) {
+        padding: 48px 40px 0px 40px;
+    }
+}
+
+.conduct-policy-body-container {
+    padding: 40px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+    @media (max-width: $screen-md) {
+        padding: 48px 40px;
+        gap: 40px;
+    }
+}
+
+// Email template
+.conduct-email-header-container {
+    padding: 48px 80px 24px 80px;
+
+    @media (max-width: $screen-md) {
+        padding: 48px 25px 0px 25px;
+    }
+}
+
+.conduct-email-template-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 80px 40px 80px;
+
+    @media (max-width: $screen-md) {
+        padding: 32px 25px 48px 25px;
+    }
+}
