@@ -6,9 +6,10 @@ This project runs Learning Blocks on a local server without Docker.
 
 See the [pyorl_Front folder](/Learning-Blocks-No-Docker-Version/pyorl_Front).
 
-## Backend
+## Backend Scripts for Learning Blocks
 
-See the [py_orl folder](/Learning-Blocks-No-Docker-Version/py_orl).
+For project setup, see [Documentation Directory/Stand_alone_FastAPI_setup.md](/Documentation%20Directory/Stand_alone_FastAPI_setup.md) and [Documentation Directory/Database_documentation.md](/Documentation%20Directory/Database_documentation.md).
+
 
 ## more documentation soon
 
