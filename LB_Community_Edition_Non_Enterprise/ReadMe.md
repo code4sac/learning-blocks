@@ -12,7 +12,7 @@ There have been many iterations of this project
         <tr>
       <td style="text-align: center;">Active</td>
       <td style="text-align: center;">
-         <a href="https://github.com/code4sac/learning-blocks/tree/main/LB_Community_Edition_Non_Enterprise/Current_Iteration_Files)">Current_Iteration_Files</a>
+         <a href="https://github.com/code4sac/learning-blocks/tree/main/LB_Community_Edition_Non_Enterprise/Current_Iteration_Files">Current_Iteration_Files</a>
       </td>
     </tr>
     <tr>
