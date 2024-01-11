@@ -1,5 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException
 import requests
+from fastapi import APIRouter
 from starlette.responses import JSONResponse, StreamingResponse
 
 from api.api_v1.endpoints.current_grades import current_grades

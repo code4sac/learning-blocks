@@ -2,14 +2,14 @@ from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
 from crud.base import CRUDBase
-from models.academicsessions import Academicsessions
-from schemas.academicsessions import AcademicsessionsCreate, AcademicsessionsUpdate
+from models.academic_session import AcademicSession
+from schemas.academicsession import AcademicsessionCreate, AcademicsessionUpdate
 
 
-class CRUDAcademicsessions(CRUDBase[Academicsessions, AcademicsessionsCreate, AcademicsessionsUpdate]):
+class CRUDAcademicsession(CRUDBase[AcademicSession, AcademicsessionCreate, AcademicsessionUpdate]):
     def create_with_sourcedId(
-            self, db: Session, *, obj_in: AcademicsessionsCreate, sourcedId: int
-    ) -> Academicsessions:
+            self, db: Session, *, obj_in: AcademicsessionCreate, sourcedId: int
+    ) -> AcademicSession:
         """
         Unused, but keeping for documentation.
         """
@@ -22,7 +22,7 @@ class CRUDAcademicsessions(CRUDBase[Academicsessions, AcademicsessionsCreate, Ac
 
     def get_by_sourcedId(
             self, db: Session, *, sourcedId: int
-    ) -> Academicsessions:
+    ) -> AcademicSession:
         """
         Get academic session by sourcedId.
         """
@@ -34,7 +34,7 @@ class CRUDAcademicsessions(CRUDBase[Academicsessions, AcademicsessionsCreate, Ac
 
     def get_by_parentSourcedId(
             self, db: Session, *, parentSourcedId: int
-    ) -> Academicsessions:
+    ) -> AcademicSession:
         """
         Get academic session by parentSourcedId.
         """
@@ -45,4 +45,4 @@ class CRUDAcademicsessions(CRUDBase[Academicsessions, AcademicsessionsCreate, Ac
         )
 
 
-academicsessions = CRUDAcademicsessions(Academicsessions)
+academicsession = CRUDAcademicsession(AcademicSession)

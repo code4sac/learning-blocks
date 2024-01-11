@@ -1,3 +1,4 @@
-from models.academicsessions import Academicsessions # noqa
-from models.orgs import Orgs # noqa
-from base_class import Base # noqa
+from models.academicsession import Academicsession  # noqa
+from models.org import Org  # noqa
+
+from base_class import Base  # noqa

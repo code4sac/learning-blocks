@@ -21,7 +21,7 @@ init:migrate
 # Check and optimize code formatting.
 lint:
 	autoflake --remove-all-unused-imports --recursive --remove-unused-variables --in-place app --exclude=__init__.py
-	mypy app
-	black app --check
-	isort --force-single-line-imports app
+	mypy .
+	black . --check
+	isort --force-single-line-imports .
 	flake8

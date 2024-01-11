@@ -1,4 +1,4 @@
-# Learning Blocks Backend
+# Learning Blocks Enterprise FastAPI
 
 This is an overview of how to run Learning Blocks without Docker. It describes setting up the project and running the
 local server.
@@ -18,26 +18,26 @@ this works.
 
 ```dotenv
 # The application is configured to use only lowercase environment variable names. Example: lower_case=AnythiNGelseUPPER023~#=. The names are case-sensative.
-domain=localhost
+DOMAIN=localhost
 
 # Backend
-project_name="Learning Blocks"
+PROJECT_NAME="Learning Blocks"
 
 # Postgres
-postgres_server=localhost
-postgres_user=postgres
-postgres_password=change_me_password01
-postgres_db=app
+POSTGRES_SERVER=localhost
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=change_me_password01
+POSTGRES_DB=app
 
 # PgAdmin
-pgadmin_listen_port=5050
-pgadmin_default_email=user
-pgadmin_default_password=change_me_password01
+PGADMIN_LISTEN_PORT=5050
+PGADMIN_DEFAULT_EMAIL=user
+PGADMIN_DEFAULT_PASSWORD=change_me_password01
 ```
 
 ### Initialize the database
 
-Create a database with the same name as the postgres_db environment variable. Then, run the Alembic migration to
+Create a database with the same name as the POSTGRES_DB environment variable. Then, run the Alembic migration to
 initialize the database tables. To populate the database with data, run the initial_data.py script.
 
 ```shell

@@ -1,37 +1,49 @@
 from datetime import datetime
 
 from sqlalchemy.orm import Session
+from sqlmodel import select
 
 import crud
-import schemas
 from core.config import settings
+from neworgsmodel import Org, OrgCreate
 
 
-def init_db(db: Session) -> None:
+def init_db(session: Session) -> None:
     """
     Initialize the database.
     Default options can include:
     ```python
        name='First Example School'
     ```
+    Tables should be created with Alembic migrations
+    But if you don't want to use migrations, create
+    the tables use the following line: `Base.metadata.create_all(bind=engine)`
     """
-    org = crud.orgs.get_by_sourcedId(db, sourcedId=settings.example_school)
-    academicsessions = crud.academicsessions.get_by_sourcedId(db, sourcedId=settings.example_school)
+    
+    org = session.exec(
+        select(Org).where(Org.sourcedId == settings.EXAMPLE_SCHOOL)
+    ).first()
 
     if not org:
-        org_in = schemas.OrgsCreate(
-            sourcedId=settings.example_school,
-            status='active',
-            dateLastModified=datetime.utcnow().date(),
+        org_in = OrgCreate(
+            sourcedId=settings.EXAMPLE_SCHOOL,
+            status='Active',
+            dateLastModified=f"{datetime.utcnow().timestamp()}",
             name='First Example School',
-            type='school',
-            parentSourcedId='0',
+            type='School',
+            identifier='0',         
         )
-        org = crud.orgs.create(db, obj_in=org_in)
+        db_obj = Org.from_orm(org_in)
+        session.add(db_obj)
+        session.commit()
+        session.refresh(db_obj)
+        return db_obj
 
+    
+    # academicsessions = crud.academicsessions.get_by_sourcedId(session, sourcedId=settings.EXAMPLE_SCHOOL)
     # if not academicsessions:
     #     academicsession_in = schemas.AcademicsessionsCreate(
-    #         sourcedId=settings.example_school,
+    #         sourcedId=settings.EXAMPLE_SCHOOL,
     #         status='active',
     #         title='Sample Academic Session',
     #         type='semester',

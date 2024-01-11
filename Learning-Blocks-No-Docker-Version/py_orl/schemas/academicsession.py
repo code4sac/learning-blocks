@@ -4,7 +4,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class AcademicsessionsBase(BaseModel):
+class AcademicsessionBase(BaseModel):
     sourcedId: int
     status: str
     dateLastModified: Optional[datetime] = None
@@ -15,7 +15,7 @@ class AcademicsessionsBase(BaseModel):
     parentSourcedId: str
 
 
-class AcademicsessionsCreate(AcademicsessionsBase):
+class AcademicsessionCreate(AcademicsessionBase):
     sourcedId: int
     status: str
     dateLastModified: Optional[datetime] = None
@@ -26,11 +26,11 @@ class AcademicsessionsCreate(AcademicsessionsBase):
     parentSourcedId: str
 
 
-class AcademicsessionsUpdate(AcademicsessionsBase):
+class AcademicsessionUpdate(AcademicsessionBase):
     pass
 
 
-class AcademicsessionsInDBBase(AcademicsessionsBase):
+class AcademicsessionInDBBase(AcademicsessionBase):
     sourcedId: int
     status: str
     dateLastModified: Optional[datetime] = None
@@ -44,9 +44,9 @@ class AcademicsessionsInDBBase(AcademicsessionsBase):
         from_attributes = True
 
 
-class Academicsessions(AcademicsessionsInDBBase):
+class Academicsession(AcademicsessionInDBBase):
     pass
 
 
-class AcademicsessionsInDB(AcademicsessionsInDBBase):
+class AcademicsessionInDB(AcademicsessionInDBBase):
     pass

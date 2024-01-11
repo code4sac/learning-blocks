@@ -1,86 +1,88 @@
-from typing import Any, List
+from sqlite3 import dbapi2
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from sqlmodel import select
 
-import crud
-import schemas
-from api import deps
+from neworgsmodel import Org, OrgCreate, OrgOut, OrgUpdate
+from api.deps import SessionDep
 
 router = APIRouter()
 
 
-@router.get('/', response_model=List[schemas.Orgs])
+@router.get('/', response_model=list[OrgOut])
 def read_orgs(
-        db: Session = Depends(deps.get_db),
+        session: SessionDep,
         skip: int = 0,
         limit: int = 100
 ) -> Any:
     """
     Retrieve orgs.
     """
-    orgs = crud.orgs.get_multi(
-        db=db, skip=skip, limit=limit
-    )
-    return orgs
+    statement = select(Org).offset(skip).limit(limit)
+    return session.exec(statement).all()
 
 
-@router.post('/', response_model=schemas.Orgs)
+@router.post('/', response_model=Org)
 def create_org(
         *,
-        db: Session = Depends(deps.get_db),
-        org_in: schemas.OrgsCreate
+        session: SessionDep,
+        org_in: OrgCreate
 ) -> Any:
     """
-    Create new orgs.
+    Create new org.
     """
-    org = crud.orgs.create(db=db, obj_in=org_in)
+    org = Org.from_orm(org_in)
+    session.add(org)
+    session.commit()
+    session.refresh(org)
     return org
 
 
-@router.put('/{sourcedId}', response_model=schemas.Orgs)
+@router.put('/{sourcedId}', response_model=Org)
 def update_org(
         *,
-        db: Session = Depends(deps.get_db),
+        session: SessionDep,
         sourcedId: str,
-        org_in: schemas.OrgsUpdate
+        org_in: OrgUpdate
 ) -> Any:
     """
-    Update an orgs.
+    Update an org.
     """
-    org = crud.orgs.get(db=db, sourcedId=sourcedId)
+    org = org.get(db=session, sourcedId=sourcedId)
     if not org:
         raise HTTPException(status_code=404, detail='Org not found')
-    org = crud.orgs.update(db=db, db_obj=org, obj_in=org_in)
+    org = org.update(db=session, db_obj=org, obj_in=org_in)
     return org
 
 
-@router.get('/{sourcedId}', response_model=schemas.Orgs)
+@router.get('/{sourcedId}', response_model=OrgOut)
 def read_org(
         *,
-        db: Session = Depends(deps.get_db),
+        session: SessionDep,
         sourcedId: str
 ) -> Any:
     """
     Get org by ID.
     """
-    org = crud.orgs.get_by_sourcedId(db=db, sourcedId=sourcedId)
+    org = session.get(Org, id)
     if not org:
         raise HTTPException(status_code=404, detail='Org not found')
     return org
 
 
-@router.delete('/{sourcedId}', response_model=schemas.Orgs)
+@router.delete('/{sourcedId}', response_model=Org)
 def delete_org(
         *,
-        db: Session = Depends(deps.get_db),
+        session: SessionDep,
         sourcedId: str
 ) -> Any:
     """
-    Delete an orgs.
+    Delete an org.
     """
-    org = crud.orgs.get_by_sourcedId(db=db, sourcedId=sourcedId)
+    org = org.get_by_sourcedId(db=session, sourcedId=sourcedId)
     if not org:
         raise HTTPException(status_code=404, detail='Org not found')
-    org = crud.orgs.remove(db=db, id=sourcedId)
+    org = org.remove(db=session, id=sourcedId)
     return org

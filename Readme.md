@@ -23,7 +23,7 @@
 - If you want to begin building a website that will pass the muster of FERPA and other Student Privacy laws, I suggest
   you start [here](https://github.com/code4sac/learning-blocks/tree/main/Learning-Blocks-Docker-Version)
 - If you want to dive into a demo version of aeries go [here] (https://demo.aeries.net/aeries/)
-- If you want to know about database standards used in this documentation go [here](https://www.imsglobal.org/oneroster-v11-final-csv-tables#_Toc480293254 )
+- If you want to know about database standards used in this documentation, go [here](https://www.imsglobal.org/oneroster-v11-final-csv-tables#_Toc480293254 )
 
 ## More documentation soon
 
