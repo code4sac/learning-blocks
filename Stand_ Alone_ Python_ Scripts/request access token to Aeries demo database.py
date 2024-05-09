@@ -1,6 +1,10 @@
 import requests
 from base64 import b64encode
 
+#demo database information:
+#Client ID: 1279e5c6b747b6d62b7c76db3a205d40eb7458e678a90493d537d5af6b953550
+#Client Secret: 68019dbf8d8ba82980dd148eecc3977ac0d7f1f040d444225874c88eb80b9c1a
+
 # Replace these values with your actual client ID and client secret
 client_id = "your_client_id"
 client_secret = "your_client_secret"
