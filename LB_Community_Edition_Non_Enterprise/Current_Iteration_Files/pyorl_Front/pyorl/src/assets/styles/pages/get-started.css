@@ -1,0 +1,260 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+/*
+Get Started page layout
+ */
+ .section-landing {
+    color: $neutral-900;
+    background-color: $secondary-50;
+    padding: 96px 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+
+    @media (max-width: $screen-md) {
+      padding: 48px 40px;
+      flex-direction: column;
+    }
+}
+
+.section-light-container {
+    width: 50%;
+    position: relative;
+
+    @media (max-width: $screen-md) {
+      width: 100%;
+    }
+}
+
+.heading-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    width: 43px;
+    border-bottom: 4px solid $neutral-900;
+}
+
+.underline-alt::after {
+    border-bottom: 4px solid $neutral-50;
+}
+
+.heading-section {
+    color: $neutral-300;
+    @include h1-section;
+    margin: 0;
+}
+
+.heading-section-alt {
+  color: $secondary-500;
+}
+
+.heading-section-sub {
+  margin: 10px 0;
+  @include h2-semi-bold;
+
+  @media (max-width: $screen-sm) {
+    @include h3-semi-bold;
+  }
+}
+
+.section-paragraph {
+    @include subheading-regular;
+    margin: 0;
+
+    @media (max-width: $screen-sm) {
+      @include p3-regular;
+    }
+}
+
+.section-paragraph span {
+    @include subheading-bold;
+}
+
+.sub-heading {
+    @include h1-semi-bold;
+    margin: 10px 0;
+
+    @media (max-width: $screen-sm) {
+        @include h1-small-semi-bold;
+    }
+}
+
+.heading-paragraph {
+    @include subheading-regular;
+    margin: 0;
+    color: $neutral-50;
+
+    @media (max-width: $screen-sm) {
+      @include p2-regular;
+    }
+}
+
+// Instructions section
+
+.section-dark {
+    background-color: $primary-900;
+    color: white;
+    padding: 64px 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+
+    @media (max-width: $screen-lg) {
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      gap: 40px;
+      padding: 8vw 4vw;
+    }
+}
+
+.instructions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.instructions-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.dark-heading-container {
+    position: relative;
+}
+
+.dark-heading-container::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    width: 43px;
+    border-bottom: 4px solid $neutral-50;
+}
+
+.instructions-steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.instructions-step-container {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+
+    @media (max-width: $screen-xl) {
+        gap: 16px;
+    }
+}
+
+.step-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.step-image {
+    width: 10vw;
+    height: 10vw;
+    max-width: 72px;
+    max-height: 72px;
+}
+
+.step-header {
+    @include h3-bold;
+    margin: 0;
+    color: $neutral-50;
+
+    @media (max-width: $screen-sm) {
+        @include h5-semi-bold;
+        font-weight: 700;
+    }
+}
+
+.step-paragraph {
+    @include p3-regular;
+    margin: 0;
+    color: $neutral-50;
+
+    @media (max-width: $screen-sm) {
+        @include p2-regular;
+    }
+}
+
+.step-anchor {
+    color: $secondary-500;
+    font-weight: 700;
+}
+
+.sidebar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @media (max-width: $screen-xs) {
+        gap: 0px;
+    }
+}
+
+.get-started {
+    position: relative;
+    background-image: url("/img/about/rectangle.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: auto;
+
+    @media (max-width: $screen-sm) {
+        width: 90vw;
+    }
+}
+
+.get-started img {
+    opacity: 0;
+}
+
+.get-started-anchor {
+    @include h3-bold;
+    color: black;
+    width: 80%;
+    position: absolute;
+    top: 40%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+
+    @media (max-width: $screen-sm) {
+        font-size: 1.7em;
+        line-height: 1.2em;
+    }
+
+    @media (max-width: $screen-xs) {
+        font-size: 1.5em;
+    }
+}
+
+.get-started-anchor a {
+    color: $primary-500;
+}
+
+.anchors-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.anchor {
+    color: $secondary-500;
+    @include subheading-bold;
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px $neutral-50 solid;
+}

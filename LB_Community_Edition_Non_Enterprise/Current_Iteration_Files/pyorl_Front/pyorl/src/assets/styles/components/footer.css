@@ -1,0 +1,160 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+/*
+Footer layout.
+ */
+
+footer {
+  height: fit-content;
+  background-color: $secondary-50;
+}
+
+.footerContainerTop {
+  padding: 40px 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  @media (max-width: $screen-md) {
+    padding: 40px;
+    gap: 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+}
+
+.footerMessage {
+  padding: 0 10px;
+  width: 23%;
+  gap: 16px;
+
+  @media (max-width: $screen-xl) {
+    padding: 0;
+  }
+
+  @media (max-width: $screen-md) {
+    width: 100%;
+  }
+}
+
+.footerMessageHeader {
+  @include h2-semi-bold;
+  margin: 0;
+  padding: 10px 0;
+
+  @media (max-width: $screen-md) {
+    @include h3-semi-bold;
+  }
+}
+
+.footerMessageParagraph {
+  @include p-footer;
+  margin: 0;
+  padding: 10px 0;
+
+  @media (max-width: $screen-md) {
+    width: 90%;
+    padding: 0;
+  }
+}
+
+.footerActionLinks {
+  width: 23%;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 30px;
+
+  @media (max-width: $screen-md) {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.footerActionLinksItem {
+  @include p-footer;
+  margin: 0;
+}
+
+.footerActionLinksAnchor {
+  cursor: pointer;
+  text-decoration: none;
+  color: $primary-900;
+  @include p-footer-bold;
+  border-bottom: 1px solid $primary-900;
+}
+
+.footerSocialMedia {
+  width: 23%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px 0;
+  gap: 30px;
+
+  @media (max-width: $screen-md) {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0;
+  }
+}
+
+.footerSocialMediaLink {
+  text-decoration: none;
+  color: $neutral-900;
+}
+
+.footerSocialMediaIcon {
+  width: 46px;
+  height: 46px;
+}
+
+.footerBottomContainer {
+  border-top: solid #ebeae5 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 80px;
+
+  @media (max-width: $screen-md) {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 40px;
+  }
+}
+
+.footerBottomTitle {
+  @include caption-footer;
+  margin: auto 0;
+  order: 1;
+  color: $neutral-900;
+
+  @media (max-width: $screen-md) {
+    order: 2;
+  }
+}
+
+.footerBottomLinksContainer {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  order: 2;
+
+  @media (max-width: $screen-md) {
+    order: 1;
+  }
+}
+
+.footerBottomLink {
+  @include caption-regular-uppercase;
+  text-decoration: none;
+  color: black;
+}

@@ -1,0 +1,44 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+.not-found-container {
+  min-height: 100dvh;
+  display: grid;
+  background-color: $secondary-50;
+}
+
+.not-found-content {
+  margin: 8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: $screen-md) {
+  .not-found-content {
+    margin: 0 2rem;
+    align-self: center;
+  }
+}
+
+.not-found-content h1 {
+  @include h1-bold;
+  color: $primary-900;
+  margin: 0;
+}
+
+.not-found-content h4 {
+  @include subheading-medium-bold;
+  color: $primary-900;
+  margin: 0;
+}
+
+.not-found-content p {
+  @include p3-regular;
+  color: $neutral-300;
+  margin: 0;
+}
+
+.not-found-link {
+  color: $neutral-900;
+}
