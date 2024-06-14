@@ -1,8 +1,8 @@
-"""Initial tables
+"""empty message
 
-Revision ID: fde56185afbd
+Revision ID: d8cc3fe93ea8
 Revises: 
-Create Date: 2023-12-28 18:07:14.735270
+Create Date: 2024-06-13 10:50:21.070748
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'fde56185afbd'
+revision: str = 'd8cc3fe93ea8'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -25,6 +25,27 @@ def upgrade() -> None:
     sa.Column('status', sa.Enum('Active', 'ToBeDeleted', 'Inactive', name='status'), nullable=True),
     sa.Column('dateLastModified', sa.DateTime(), nullable=True),
     sa.Column('title', sa.String(length=255), nullable=False),
+    sa.PrimaryKeyConstraint('sourcedId'),
+    sa.UniqueConstraint('sourcedId')
+    )
+    op.create_table('demographic',
+    sa.Column('sourcedId', sa.String(length=255), nullable=False),
+    sa.Column('status', sa.Enum('Active', 'ToBeDeleted', 'Inactive', name='status'), nullable=True),
+    sa.Column('dateLastModified', sa.DateTime(), nullable=True),
+    sa.Column('birthDate', sa.DateTime(), nullable=True),
+    sa.Column('sex', sa.Enum('Male', 'Female', 'NoneBinary', name='gender'), nullable=True),
+    sa.Column('americanIndianOrAlaskaNative', sa.Enum('TRUE', 'FALSE', name='truefalse'), nullable=True),
+    sa.Column('asian', sa.Enum('TRUE', 'FALSE', name='truefalse'), nullable=True),
+    sa.Column('blackOrAfricanAmerican', sa.Enum('TRUE', 'FALSE', name='truefalse'), nullable=True),
+    sa.Column('nativeHawaiianOrOtherPacificIslander', sa.Enum('TRUE', 'FALSE', name='truefalse'), nullable=True),
+    sa.Column('white', sa.Enum('TRUE', 'FALSE', name='truefalse'), nullable=True),
+    sa.Column('demographicRaceTwoOrMoreRaces', sa.Enum('TRUE', 'FALSE', name='truefalse'), nullable=True),
+    sa.Column('hispanicOrLatinoEthnicity', sa.Enum('TRUE', 'FALSE', name='truefalse'), nullable=True),
+    sa.Column('countryOfBirthCode', sa.String(length=255), nullable=True),
+    sa.Column('stateOfBirthAbbreviation', sa.String(length=255), nullable=True),
+    sa.Column('cityOfBirth', sa.String(length=255), nullable=True),
+    sa.Column('publicSchoolResidenceStatus', sa.String(length=255), nullable=True),
+    sa.Column('metadata', sa.JSON(), nullable=True),
     sa.PrimaryKeyConstraint('sourcedId'),
     sa.UniqueConstraint('sourcedId')
     )
@@ -50,6 +71,7 @@ def upgrade() -> None:
     sa.Column('importance', sa.Enum('Primary', 'Secondary', name='importance'), nullable=True),
     sa.Column('vendorId', sa.String(length=255), nullable=True),
     sa.Column('applicationId', sa.String(length=255), nullable=True),
+    sa.Column('metadata', sa.JSON(), nullable=True),
     sa.PrimaryKeyConstraint('sourcedId'),
     sa.UniqueConstraint('sourcedId'),
     sa.UniqueConstraint('vendorResourceId')
@@ -71,6 +93,7 @@ def upgrade() -> None:
     sa.Column('phone', sa.String(length=255), nullable=True),
     sa.Column('grades', sa.String(length=255), nullable=True),
     sa.Column('password', sa.String(length=255), nullable=True),
+    sa.Column('metadata', sa.JSON(), nullable=True),
     sa.PrimaryKeyConstraint('sourcedId'),
     sa.UniqueConstraint('sourcedId')
     )
@@ -79,12 +102,13 @@ def upgrade() -> None:
     sa.Column('status', sa.Enum('Active', 'ToBeDeleted', 'Inactive', name='status'), nullable=True),
     sa.Column('dateLastModified', sa.DateTime(), nullable=True),
     sa.Column('title', sa.String(length=255), nullable=False),
-    sa.Column('type', sa.Enum('GradingPeriod', 'Semester', 'SchoolYear', 'Term', name='sessiontype'), nullable=False),
+    sa.Column('type', sa.String(length=255), nullable=False),
     sa.Column('startDate', sa.Date(), nullable=False),
     sa.Column('endDate', sa.Date(), nullable=False),
     sa.Column('parentSourcedId', sa.String(length=255), nullable=True),
     sa.Column('schoolYear', sa.Integer(), nullable=False),
     sa.Column('schoolSourcedId', sa.String(length=255), nullable=False),
+    sa.Column('href', sa.String(length=255), nullable=False),
     sa.ForeignKeyConstraint(['parentSourcedId'], ['academic_session.sourcedId'], ),
     sa.ForeignKeyConstraint(['schoolSourcedId'], ['org.sourcedId'], ),
     sa.PrimaryKeyConstraint('sourcedId'),
@@ -147,6 +171,7 @@ def upgrade() -> None:
     sa.Column('title', sa.String(length=255), nullable=True),
     sa.Column('courseSourcedId', sa.String(length=255), nullable=False),
     sa.Column('resourceSourcedId', sa.String(length=255), nullable=False),
+    sa.Column('metadata', sa.JSON(), nullable=True),
     sa.ForeignKeyConstraint(['courseSourcedId'], ['course.sourcedId'], ),
     sa.ForeignKeyConstraint(['resourceSourcedId'], ['resource.sourcedId'], ),
     sa.PrimaryKeyConstraint('sourcedId'),
@@ -182,6 +207,7 @@ def upgrade() -> None:
     sa.Column('primary', sa.Enum('TRUE', 'FALSE', name='truefalse'), nullable=True),
     sa.Column('beginDate', sa.Date(), nullable=True),
     sa.Column('endDate', sa.Date(), nullable=True),
+    sa.Column('metadata', sa.JSON(), nullable=True),
     sa.ForeignKeyConstraint(['classSourcedId'], ['class.sourcedId'], ),
     sa.ForeignKeyConstraint(['schoolSourcedId'], ['org.sourcedId'], ),
     sa.ForeignKeyConstraint(['userSourcedId'], ['user.sourcedId'], ),
@@ -201,6 +227,7 @@ def upgrade() -> None:
     sa.Column('gradingPeriodSourcedId', sa.String(length=255), nullable=False),
     sa.Column('resultValueMin', sa.Float(), nullable=False),
     sa.Column('resultValueMax', sa.Float(), nullable=False),
+    sa.Column('metadata', sa.JSON(), nullable=True),
     sa.ForeignKeyConstraint(['categorySourcedId'], ['category.sourcedId'], ),
     sa.ForeignKeyConstraint(['classSourcedId'], ['class.sourcedId'], ),
     sa.ForeignKeyConstraint(['gradingPeriodSourcedId'], ['academic_session.sourcedId'], ),
@@ -217,6 +244,7 @@ def upgrade() -> None:
     sa.Column('score', sa.Float(), nullable=False),
     sa.Column('scoreDate', sa.Date(), nullable=False),
     sa.Column('comment', sa.String(length=255), nullable=True),
+    sa.Column('metadata', sa.JSON(), nullable=True),
     sa.ForeignKeyConstraint(['lineItemSourcedId'], ['line_item.sourcedId'], ),
     sa.ForeignKeyConstraint(['studentSourcedId'], ['user.sourcedId'], ),
     sa.PrimaryKeyConstraint('sourcedId'),
@@ -241,5 +269,6 @@ def downgrade() -> None:
     op.drop_table('user')
     op.drop_table('resource')
     op.drop_table('org')
+    op.drop_table('demographic')
     op.drop_table('category')
     # ### end Alembic commands ###
