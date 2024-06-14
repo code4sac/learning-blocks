@@ -1,16 +1,14 @@
 from pydantic import BaseModel
-from models.status import Status  # Adjust this import based on your dependencies
 from typing import Optional
+from models.status import Status
 
 class CourseResourceBase(BaseModel):
     sourcedId: str
-    status: Status
-    dateLastModified: str
+    status: Optional[Status] = None
+    dateLastModified: Optional[str] = None
     title: str
     courseSourcedId: str
     resourceSourcedId: str
-    course: Optional[list] = None
-    resource: Optional[list] = None
 
 class CourseResourceCreate(CourseResourceBase):
     pass

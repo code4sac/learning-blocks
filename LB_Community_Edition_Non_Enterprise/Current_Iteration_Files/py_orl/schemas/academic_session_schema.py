@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-from models.status import Status
 from typing import List, Optional
+from models.status import Status
 
 class AcademicSessionBase(BaseModel):
     title: str
@@ -9,10 +9,12 @@ class AcademicSessionBase(BaseModel):
     type: str
     schoolYear: str
     sourcedId: str
-    status: Status
-    dateLastModified: str
-    metadata: Optional[dict]
-    parentSourcedId: Optional[str]  # Make parentSourcedId optional
+    status: Optional[Status] = None
+    dateLastModified: Optional[str] = None
+    parentSourcedId: Optional[str] = None # Make parentSourcedId optional
+    schoolSourcedId: str
+    href: str
+    metadata: Optional[dict] = {}
 
 class AcademicSessionCreate(AcademicSessionBase):
     pass

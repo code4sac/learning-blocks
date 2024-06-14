@@ -1,21 +1,21 @@
 from pydantic import BaseModel
 from models.status import Status  # Adjust this import based on your dependencies
+from models.role_type import RoleType
+from models.true_false import TrueFalse
+
 from typing import Optional
 
 class EnrollmentBase(BaseModel):
     sourcedId: str
-    status: Status
-    dateLastModified: str
+    status: Optional[Status] = None
+    dateLastModified: Optional[str] = None
     classSourcedId: str
     schoolSourcedId: str
     userSourcedId: str
-    role: Status
-    primary: Status
-    beginDate: str
-    endDate: str
-    class_: Optional[str]  # Make class_ field optional using Optional from typing
-    school: Optional[str]  # Make school field optional using Optional from typing
-    user: Optional[str]  # Make user field optional using Optional from typing
+    role: RoleType
+    primary: Optional[TrueFalse] = None
+    beginDate: Optional[str] = None
+    endDate: Optional[str] = None
 
 class EnrollmentCreate(EnrollmentBase):
     pass
