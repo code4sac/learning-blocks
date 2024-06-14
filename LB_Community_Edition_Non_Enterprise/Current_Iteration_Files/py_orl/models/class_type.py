@@ -1,6 +1,6 @@
 from enum import Enum
 
 
-class ClassType(Enum):
+class ClassType(str, Enum):
     Homeroom = 'homeroom'
     Scheduled = 'scheduled'
