@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class OrgType(Enum):
+class OrgType(str, Enum):
     Department = 'department'
     School = 'school'
     District = 'district'

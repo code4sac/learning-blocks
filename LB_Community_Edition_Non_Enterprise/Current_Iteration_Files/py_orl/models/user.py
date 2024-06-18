@@ -32,7 +32,13 @@ class User(Base):
     password = Column(String(255), nullable=True)
 
     orgs = relationship("Org", secondary=user_org, back_populates="users")
-    agents = relationship("User", secondary=user_agent, back_populates="users")
+    agents = relationship(
+            "User", 
+            secondary=user_agent, 
+            primaryjoin=sourcedId == user_agent.c.userSourcedId,
+            secondaryjoin=sourcedId == user_agent.c.agentSourcedId, 
+            back_populates="agents"
+            )
     enrollments = relationship("Enrollment", back_populates="user")
     results = relationship("Result", back_populates="student")
     # Metadata column

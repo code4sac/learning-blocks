@@ -1,27 +1,27 @@
 from pydantic import BaseModel
 from typing import Optional
 
+from models.status import Status
+from models.role_type import RoleType
+from models.true_false import TrueFalse
+
 class UserBase(BaseModel):
     sourcedId: str
-    status: bool
-    dateLastModified: str
-    enabledUser: bool
-    role: str
+    status: Optional[Status] = None
+    dateLastModified: Optional[str] = None
+    enabledUser: TrueFalse
+    role: RoleType
     username: str
     userIds: Optional[str] = None
     givenName: str
     familyName: str
     middleName: str = ""
-    identifier: str
-    email: str
+    identifier: Optional[str] = None
+    email: Optional[str] = None
     sms: Optional[str] = None
     phone: str = ""
     grades: Optional[str] = None
     password: Optional[str] = None
-    orgs: Optional[list] = None
-    agents: Optional[list] = None
-    enrollments: Optional[list] = None
-    results: Optional[list] = None
 
 class UserCreate(UserBase):
     pass

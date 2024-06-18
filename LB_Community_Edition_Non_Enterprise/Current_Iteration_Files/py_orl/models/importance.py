@@ -1,6 +1,6 @@
 from enum import Enum
 
 
-class Importance(Enum):
+class Importance(str, Enum):
     Primary = 'primary'
     Secondary = 'secondary'

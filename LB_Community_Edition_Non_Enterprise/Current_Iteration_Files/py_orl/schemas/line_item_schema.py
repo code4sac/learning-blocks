@@ -4,21 +4,18 @@ from typing import Optional
 
 class LineItemBase(BaseModel):
     sourcedId: str
-    status: Status
-    dateLastModified: str
+    status: Optional[Status] = None
+    dateLastModified: Optional[str] = None
     title: str
-    description: str
+    description: Optional[str] = None
     assignDate: str
     dueDate: str
     classSourcedId: str
     categorySourcedId: str
     gradingPeriodSourcedId: str
-    resultValueMin: str
-    resultValueMax: str
-    class_: Optional[list] = None
-    category: Optional[list] = None
-    gradingPeriod: Optional[list] = None
-    results: Optional[list] = None
+    resultValueMin: float
+    resultValueMax: float
+    metadata: Optional[dict] = {}
 
 class LineItemCreate(LineItemBase):
     pass

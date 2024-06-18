@@ -1,12 +1,11 @@
 from sqlalchemy import Column, String, Enum, DateTime, JSON
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
 
 from models.gender import Gender
 from models.status import Status
 from models.true_false import TrueFalse
 
-Base = declarative_base()
+from db.base_class import Base
 
 
 class Demographic(Base):

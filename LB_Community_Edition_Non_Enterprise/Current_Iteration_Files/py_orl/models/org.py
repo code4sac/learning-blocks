@@ -4,7 +4,6 @@ from db.base_class import Base
 from models.org_type import OrgType
 from models.status import Status
 
-
 class Org(Base):
     __tablename__ = "org"
 
@@ -21,3 +20,4 @@ class Org(Base):
     classes = relationship('Class', back_populates='school')
     courses = relationship("Course", back_populates="org")
     enrollments = relationship("Enrollment", back_populates="school")
+    users = relationship("User", secondary="user_org", back_populates="orgs")

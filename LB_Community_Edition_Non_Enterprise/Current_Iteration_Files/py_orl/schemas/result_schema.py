@@ -1,19 +1,19 @@
 from pydantic import BaseModel
 from models.status import Status  # Adjust this import based on your dependencies
+from models.score_status import ScoreStatus
+
 from typing import Optional
 
 class ResultBase(BaseModel):
     sourcedId: str
-    status: Status
-    dateLastModified: str
+    status: Optional[Status] = None
+    dateLastModified: Optional[str] = None
     lineItemSourcedId: str
     studentSourcedId: str
-    scoreStatus: Status
+    scoreStatus: ScoreStatus
     score: str
     scoreDate: str
-    comment: str
-    lineItem: Optional[list]
-    student: Optional[list]
+    comment: Optional[str] = None
 
 class ResultCreate(ResultBase):
     pass
