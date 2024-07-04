@@ -16,4 +16,8 @@ To get started with Learning Blocks Community Edition, follow these steps:
      ```bash
     cd LB_Community_Edition_Non_Enterprise/Pilot_Iteration_Files
      ```
+3. Enter into Terminal:
+     ```bash
+     uvicorn main:app --reload 
+     ```
 3. Choose which folder you want to contribute to and check Readmd.md files to find issues regarding this part of the code
