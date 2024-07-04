@@ -13,7 +13,7 @@ class current_grades:
 
     def __init__(self, school_id: str, item_id: str):
         """Initialize the API class."""
-        self.school_id = school_id
+        self.school_id = 994
         self.item_id = 99400001
         # self.api_key = os.environ.get('AERIES_API_KEY')
         self.api_key = '477abe9e7d27439681d62f4e0de1f5e1'
