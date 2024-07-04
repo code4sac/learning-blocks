@@ -1,8 +1,8 @@
 # Learning Blocks Community Edition
 
-Welcome to the Learning Blocks Community Edition repository! This project aims to provide a versatile learning platform for educational purposes.
+Welcome to the Learning Blocks Pilote Community Edition repository! This compartmentalized version is a reflection of the latest conversation the project had with school districts. This is the MVP we are currently pitching:
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/code4sac/learning-blocks?tab=MIT-1-ov-file#readme)
 
 ## Installation
 
