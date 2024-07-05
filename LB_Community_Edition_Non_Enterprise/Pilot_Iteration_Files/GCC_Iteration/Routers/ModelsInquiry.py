@@ -1,6 +1,8 @@
-
 from typing import List
+import os
+from pathlib import Path
 import inspect
+from sqlalchemy.orm.decl_api import DeclarativeMeta
 
 # Function to get all model names from models directory
 def get_model_names(models_package: str) -> List[dict]:
@@ -17,15 +19,14 @@ def get_model_names(models_package: str) -> List[dict]:
         module_name = f"{models_package}.{model_file}"
         try:
             module = __import__(module_name, fromlist=[""])
-        except ImportError as e:
-            continue
-        
-        # Collect class names
-        classes = []
-        for name, obj in inspect.getmembers(module):
-            if inspect.isclass(obj) and obj.__module__ == module_name:
+            classes = []
+            
+            for name, obj in inspect.getmembers(module, lambda x: inspect.isclass(x) and issubclass(x, DeclarativeMeta)):
                 classes.append(name)
+            
+            models.append({"module_name": module_name, "classes": classes})
         
-        models.append({"module_name": module_name, "classes": classes})
+        except Exception as e:
+            models.append({"module_name": module_name, "error": str(e)})
     
     return models
