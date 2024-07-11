@@ -15,7 +15,7 @@ def get_db():
     finally:
         db.close()
 
-@router.get('/people/', response_model=List[schemas.PeopleInDBSchema])
+@router.get('/', response_model=List[schemas.PeopleInDBSchema])
 async def read_people(
     skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
 ):
@@ -31,7 +31,7 @@ async def read_people(
     
     # Fetch data from database asynchronously if not in cache
     people = await asyncio.to_thread(
-        db.query(models.PeopleInDB).offset(skip).limit(limit).all
+        lambda: db.query(models.PeopleInDB).offset(skip).limit(limit).all()
     )
     
     # Store data in Redis cache asynchronously
@@ -39,7 +39,7 @@ async def read_people(
     
     return people
 
-@router.post('/people/', response_model=schemas.PeopleInDBSchema)
+@router.post('/', response_model=schemas.PeopleInDBSchema)
 async def create_person(
     person: schemas.PeopleInDBSchema, db: Session = Depends(get_db)
 ):
@@ -50,46 +50,79 @@ async def create_person(
     db.add(db_person)
     await asyncio.to_thread(db.commit)
     await asyncio.to_thread(db.refresh, db_person)
+    
+    # Invalidate cache
+    await asyncio.to_thread(redis_client.delete, 'people:*')
+    
     return db_person
 
-@router.put('/people/{person_id}', response_model=schemas.PeopleInDBSchema)
+@router.put('/{person_id}', response_model=schemas.PeopleInDBSchema)
 async def update_person(
     person_id: str, person: schemas.PeopleInDBSchema, db: Session = Depends(get_db)
 ):
     """
     Update a person asynchronously.
     """
-    db_person = db.query(models.PeopleInDB).filter(models.PeopleInDB.AnonymizedStudentID == person_id).first()
-    if db_person:
-        for key, value in person.dict(exclude_unset=True).items():
-            setattr(db_person, key, value)
-        await asyncio.to_thread(db.commit)
-        await asyncio.to_thread(db.refresh, db_person)
+    db_person = await asyncio.to_thread(
+        lambda: db.query(models.PeopleInDB).filter(models.PeopleInDB.AnonymizedStudentID == person_id).first()
+    )
+    if not db_person:
+        raise HTTPException(status_code=404, detail='Person not found')
+
+    for key, value in person.dict(exclude_unset=True).items():
+        setattr(db_person, key, value)
+        
+    await asyncio.to_thread(db.commit)
+    await asyncio.to_thread(db.refresh, db_person)
+    
+    # Invalidate cache
+    await asyncio.to_thread(redis_client.delete, 'people:*')
+    
     return db_person
 
-@router.get('/people/{person_id}', response_model=schemas.PeopleInDBSchema)
+@router.get('/{person_id}', response_model=schemas.PeopleInDBSchema)
 async def read_person(
     person_id: str, db: Session = Depends(get_db)
 ):
     """
     Get person by ID asynchronously.
     """
+    cache_key = f'person:{person_id}'
+    
+    # Check if data exists in Redis cache asynchronously
+    cached_data = await asyncio.to_thread(redis_client.get, cache_key)
+    if cached_data:
+        return schemas.PeopleInDBSchema.parse_raw(cached_data)
+    
     db_person = await asyncio.to_thread(
-        db.query(models.PeopleInDB).filter(models.PeopleInDB.AnonymizedStudentID == person_id).first
+        lambda: db.query(models.PeopleInDB).filter(models.PeopleInDB.AnonymizedStudentID == person_id).first()
     )
-    if db_person is None:
+    if not db_person:
         raise HTTPException(status_code=404, detail='Person not found')
+    
+    # Store data in Redis cache asynchronously
+    await asyncio.to_thread(redis_client.set, cache_key, schemas.PeopleInDBSchema.dumps(db_person))
+    
     return db_person
 
-@router.delete('/people/{person_id}', response_model=schemas.PeopleInDBSchema)
+@router.delete('/{person_id}', response_model=schemas.PeopleInDBSchema)
 async def delete_person(
     person_id: str, db: Session = Depends(get_db)
 ):
     """
     Delete a person asynchronously.
     """
-    db_person = db.query(models.PeopleInDB).filter(models.PeopleInDB.AnonymizedStudentID == person_id).first()
-    if db_person:
-        db.delete(db_person)
-        await asyncio.to_thread(db.commit)
+    db_person = await asyncio.to_thread(
+        lambda: db.query(models.PeopleInDB).filter(models.PeopleInDB.AnonymizedStudentID == person_id).first()
+    )
+    if not db_person:
+        raise HTTPException(status_code=404, detail='Person not found')
+    
+    await asyncio.to_thread(db.delete, db_person)
+    await asyncio.to_thread(db.commit)
+    
+    # Invalidate cache
+    await asyncio.to_thread(redis_client.delete, f'person:{person_id}')
+    await asyncio.to_thread(redis_client.delete, 'people:*')
+    
     return db_person
