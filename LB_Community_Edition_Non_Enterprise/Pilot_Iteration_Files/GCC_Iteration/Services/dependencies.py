@@ -12,6 +12,14 @@ from app.security import get_current_user
 from fastapi import HTTPException
 from app.models import UserRoles
 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+async def get_current_user(token: str = Security(oauth2_scheme)):
+    user = verify_token(token)  # Example function to verify token
+    if user is None:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    return user
+
 
 async def check_admin_user(user: UserRoles = Depends(get_current_user)):
     if user.role != "admin":
@@ -48,13 +56,6 @@ async def log_request(request: Request):
 
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-async def get_current_user(token: str = Security(oauth2_scheme)):
-    user = verify_token(token)  # Example function to verify token
-    if user is None:
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-    return user
 
 
 def get_db() -> Session:
