@@ -36,6 +36,10 @@ There have been many iterations of this project
   </tbody>
 </table>
 
+## Getting Started
+Copy the content in file .env.example to a .env file.
+
+`cp Pilot_Iteration_Files/GCC_Iteration/Services/.env.example Pilot_Iteration_Files/GCC_Iteration/Services/.env`
 
 
 ## More Documentation Soon
