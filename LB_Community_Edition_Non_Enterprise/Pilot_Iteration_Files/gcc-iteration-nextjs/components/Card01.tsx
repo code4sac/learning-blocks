@@ -1,3 +1,5 @@
+'use client'; // Ensures this component is rendered on the client side
+
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
