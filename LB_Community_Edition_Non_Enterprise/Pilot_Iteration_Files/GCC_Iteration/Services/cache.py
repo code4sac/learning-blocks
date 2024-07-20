@@ -1,4 +1,4 @@
-from Pilot_Iteration_Files.GCC_Iteration.Config.RedisConfig import redis_client
+from Config.RedisConfig import redis_client
 
 def cache_data(key: str, value: str):
     redis_client.set(key, value)

@@ -24,24 +24,23 @@ class PeopleInDB(Base):
     AnonymizedCounselorNumber: Mapped[Optional[str]] = mapped_column(String, index=True, default=None)
     AnonymizedHomeroomTeacherNumber: Mapped[Optional[str]] = mapped_column(String, index=True, default=None)
     GraduationCohort: Mapped[Optional[str]] = mapped_column(String, index=True, default=None)
-    SchoolCode: Mapped[Optional[str]] = mapped_column(String, ForeignKey('schools.school_code'), index=True, default=None)
+    SchoolCode: Mapped[Optional[List[str]]] = mapped_column(String, ForeignKey('schools.SchoolCodeFromRoster'), index=True, default=None)
     Birthdate: Mapped[Optional[str]] = mapped_column(String, default=None)
     EnabledUser: Mapped[Optional[str]] = mapped_column(String, default=None)
     Role: Column[RoleEnum] = Column(String(length=50))  # Use RoleEnum as the type for Role
     Identifier: Mapped[Optional[str]] = mapped_column(String, ForeignKey('different_users.Identifier'), default=None)
     Grades: Mapped[Optional[List[str]]] = mapped_column(ARRAY(String), default=None)
     userIds: Mapped[Optional[str]] = mapped_column(String, index=True, default=None)
-    FamilyKey: Mapped[Optional[List[str]]] = mapped_column(ARRAY(String), default=None)
-    SectionsIDs: Mapped[Optional[List[str]]] = mapped_column(ARRAY(String), default=None)
+    FamilyKey: Mapped[Optional[str]] = mapped_column(ARRAY(String), default=None)
+    SectionsIDs: Mapped[Optional[List[str]]] = mapped_column(String, index=True, default=None)
     GradebookIDs: Mapped[Optional[List[str]]] = mapped_column(ARRAY(String), default=None)
     DateLastModified: Mapped[Optional[str]] = mapped_column(String, default=None)
     
-    # Relationships
-    schools: Mapped['SchoolRoster'] = relationship("SchoolRoster", back_populates="people")
-    AssociatedAccounts: Mapped[List['UserAssociation']] = relationship("UserAssociation", back_populates="people")
+    
+    AssociatedAccounts: Mapped[List['UserAssociation']] = relationship("UserAssociation", back_populates="AssociatedAccounts")
     different_classes: Mapped[List['ClassRoster']] = relationship("ClassRoster", back_populates="people")
     different_gradebooks: Mapped[List['GradebookAssociation']] = relationship("GradebookAssociation", back_populates="people")
-
+"""
     # Relationship to Student table based on Role
     @property
     def student_info(self) -> Optional['Student']:
@@ -53,7 +52,7 @@ class PeopleInDB(Base):
     def student_info(self, student: 'Student') -> None:
         if self.Role == RoleEnum.student:
             self._student_info = student
-
+"""
 class Student(Base):
     __tablename__ = "student"
 
@@ -70,11 +69,11 @@ class SchoolRoster(Base):
     __tablename__ = "schools"
 
     SchoolRosterID: Mapped[Optional[str]] = mapped_column(String, index=True, default=None)
-    school_code: Mapped[str] = mapped_column(String, primary_key=True, index=True)
-    name: Mapped[Optional[str]] = mapped_column(String, index=True, default=None)
+    SchoolCodeFromRoster: Mapped[str] = mapped_column(String, primary_key=True, index=True)
+    NameOfSchool: Mapped[Optional[str]] = mapped_column(String, index=True, default=None)
 
     # Relationships
-    people: Mapped[List['PeopleInDB']] = relationship("PeopleInDB", back_populates="schools")
+    People: Mapped[List['PeopleInDB']] = relationship("PeopleInDB", back_populates="schools")
 
 class UserAssociation(Base):
     __tablename__ = "different_users"
