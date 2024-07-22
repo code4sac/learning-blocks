@@ -1,0 +1,9 @@
+.dashboard_header {
+  /* Heading/H1 - Small/Semi Bold */
+  font-size: 39px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 47px; /* 120.513% */
+  letter-spacing: -1.56px;
+  padding: 16px 0 24px 0;
+}

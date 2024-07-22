@@ -1,0 +1,34 @@
+.toolbarContainer {
+  display: flex;
+  padding: 8px 8px 0 8px;
+}
+
+.leftToolbarSection {
+  flex-grow: 1;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.rightToolbarSection {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dashboardContainer {
+  display: flex;
+}
+
+.leftDashboardSection {
+}
+
+.rightDashboardSection {
+  flex-grow: 1;
+}
+
+.toolbarLink {
+  margin: 0 12px;
+}
+
+.toolbarLinkSelected {
+  text-decoration: underline;
+}
