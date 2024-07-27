@@ -7,7 +7,7 @@ function AppNavBar() {
       <Container>
 
         <div>
-          <span style={{float: 'right'}}><Image src="icon_info.svg" alt="info"/> Learning Blocks Enterprise Demo v0.0.1-microsoft-azure.1</span>
+          <span style={{ float: 'right' }}><Image src="/icon_info.svg" alt="info" /> Learning Blocks Enterprise Demo v0.0.1-microsoft-azure.1</span>
         </div>
       </Container>
     </>

@@ -1,9 +1,10 @@
-import {Card} from 'react-bootstrap'
+"use client";
+import { Card } from 'react-bootstrap'
 import data from './data/ExampleDataAnalytics.json'
 import styles from './DashboardD84.module.css'
-import {xor} from 'lodash'
-import {useState} from 'react'
-import {Demographic} from "@/utils/models/demographic";
+import { xor } from 'lodash'
+import { useState } from 'react'
+import { Demographic } from "@/utils/models/demographic";
 import Image from "next/image";
 
 export interface D84Props {
@@ -70,8 +71,8 @@ function DashboardD84() {
     <div className={styles.container}>
       {data.map((it, index) => {
         return <Card key={it.key} className={styles.card} onClick={() => handleClick(index)}
-                     data-bs-theme={getCardTheme(index)}>
-          {/*<DropdownButton id="dropdown-basic-button" title={<Image src="menu_dots.png" height="20" width="20" /> }*/}
+          data-bs-theme={getCardTheme(index)}>
+          {/*<DropdownButton id="dropdown-basic-button" title={<Image src="/menu_dots.png" height="20" width="20" /> }*/}
           {/*  style={{ position: 'relative', float: 'right', margin: '4px 8px' }}*/}
           {/*  variant='outline-light'*/}
           {/*>*/}
@@ -88,11 +89,11 @@ function DashboardD84() {
             <div className={styles.cardBodyImageContainer}>
               {it.analytics_title === "College and Career" ?
                 <Image src={`/${getAnalyticsChart("chart", it.analytics_level_amount)}`} width="120"
-                       alt={`Chart displaying ${it.analytics_level_text} level for ${it.analytics_title}.`}/>
+                  alt={`Chart displaying ${it.analytics_level_text} level for ${it.analytics_title}.`} />
                 : it.analytics_title === "Unduplicated Count" ?
-                  <div style={{fontSize: '64px'}}>{it.analytics_level_amount}</div>
+                  <div style={{ fontSize: '64px' }}>{it.analytics_level_amount}</div>
                   : <Image src={`/${getAnalyticsChart("", it.analytics_level_amount)}`} width="100"
-                           alt={`Chart displaying ${it.analytics_level_text} level for ${it.analytics_title}.`}/>
+                    alt={`Chart displaying ${it.analytics_level_text} level for ${it.analytics_title}.`} />
               }
             </div>
             <Card.Text className="text-center">

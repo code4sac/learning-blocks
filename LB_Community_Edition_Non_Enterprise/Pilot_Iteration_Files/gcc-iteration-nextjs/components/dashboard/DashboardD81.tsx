@@ -1,9 +1,10 @@
-import {Container} from 'react-bootstrap'
+"use client";
+import { Container } from 'react-bootstrap'
 import styles from './DashboardD81.module.css'
-import {useState} from 'react'
-import {Analytic} from "@/utils/models/analytics";
-import {Demographic} from "@/utils/models/demographic";
-import {TableStudent} from "@/utils/models/table";
+import { useState } from 'react'
+import { Analytic } from "@/utils/models/analytics";
+import { Demographic } from "@/utils/models/demographic";
+import { TableStudent } from "@/utils/models/table";
 import CardGroupBentoBox from "@/components/card/CardGroupBentoBox";
 import CardGroupAnalytics from "@/components/card/CardGroupAnalytics";
 import Table01 from "@/components/table/Table01";
@@ -42,7 +43,7 @@ const defaultData: TableStudent[] = [
  * @param subMenu {string} The selected toolbar menu.
  * @returns Dashboard component.
  */
-function DashboardD81({data, setPageQueryKey}: D81Props) {
+function DashboardD81({ data, setPageQueryKey }: D81Props) {
   const [selectedCategories, setSelectedCategories] = useState(Array<string>)
 
   function selectCategory(key: string, index: number) {
@@ -62,8 +63,8 @@ function DashboardD81({data, setPageQueryKey}: D81Props) {
     <Container className={styles.container}>
       <CardGroupBentoBox data={data?.demographics}></CardGroupBentoBox>
       <CardGroupAnalytics data={data?.analytics!} selectedCategories={selectedCategories}
-                          selectCategory={selectCategory}
-                          getCardTheme={getCardTheme}></CardGroupAnalytics>
+        selectCategory={selectCategory}
+        getCardTheme={getCardTheme}></CardGroupAnalytics>
       <Table01 data={defaultData}></Table01>
     </Container>
   )

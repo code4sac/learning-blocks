@@ -1,12 +1,19 @@
 import styles from './page.module.css'; // Ensure this path is correct
-import Card01 from '@/components2/Card01'; // Import the Card01 component
+import DashboardPage from '@/components/pages/DashboardPage';
+
+let context = {
+  auth: undefined!,
+  navigationKey: 'example 01',
+  queryKey: '1efa02',
+}
 
 export default function Home() {
   return (
     <main className={styles.main}>
 
+      {/* <DashboardPage navigationKey={context.navigationKey} queryKey={context.queryKey}></DashboardPage> */}
 
-      <Card01/>
+      <DashboardPage navigationKey={context.navigationKey} queryKey={context.queryKey} />
 
     </main>
   );

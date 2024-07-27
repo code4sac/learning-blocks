@@ -1,7 +1,8 @@
-import {Container} from 'react-bootstrap'
+"use client";
+import { Container } from 'react-bootstrap'
 import styles from './DashboardDb4.module.css'
-import {reject, xor} from 'lodash'
-import {useState} from 'react'
+import { reject, xor } from 'lodash'
+import { useState } from 'react'
 import CardC44 from "@/components/card/CardC44";
 import CardC89 from "@/components/card/CardC89";
 
@@ -15,7 +16,7 @@ export interface LanguageStudent {
   languageStudentAggregate: number
 }
 
-function DashboardDb4({languageStudents}: DashboardAggregatorProps) {
+function DashboardDb4({ languageStudents }: DashboardAggregatorProps) {
   const [selectedCards, setSelectedCards] = useState([0])
 
   function handleClick(id: number) {
@@ -44,22 +45,22 @@ function DashboardDb4({languageStudents}: DashboardAggregatorProps) {
       <div className={`${styles.languageStudentCard} ${styles.languageStudent1}`}>
         {languageStudents.filter(it => it.key == 'T1').map(it =>
           <CardC44 key={it.key} title={it.languageStudentTitle}
-                   stat={it.languageStudentAggregate.toString()}/>)}
+            stat={it.languageStudentAggregate.toString()} />)}
       </div>
       <div className={`${styles.languageStudentCard} ${styles.languageStudent2}`}>
         {languageStudents.filter(it => it.key == 'G1').map(it =>
           <CardC44 key={it.key} title={it.languageStudentTitle}
-                   stat={it.languageStudentAggregate.toString()}/>)}
+            stat={it.languageStudentAggregate.toString()} />)}
       </div>
       <div className={`${styles.languageStudentCard} ${styles.languageStudent3}`}>
         {languageStudents.filter(it => it.key == 'G2').map(it =>
           <CardC44 key={it.key} title={it.languageStudentTitle}
-                   stat={it.languageStudentAggregate.toString()}/>)}
+            stat={it.languageStudentAggregate.toString()} />)}
       </div>
       <div className={`${styles.languageStudentCard} ${styles.languageStudent4}`}>
         {languageStudents.filter(it => it.key == 'G3').map(it =>
           <CardC44 key={it.key} title={it.languageStudentTitle}
-                   stat={it.languageStudentAggregate.toString()}/>)}
+            stat={it.languageStudentAggregate.toString()} />)}
       </div>
       <div className={`${styles.languageStudentCard} ${styles.languageStudent5}`}>
         <CardC89 data={languageStudents}></CardC89>

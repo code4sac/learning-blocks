@@ -1,8 +1,9 @@
-import {useState} from 'react'
-import {Container, Dropdown, Form, InputGroup, Nav, Navbar} from 'react-bootstrap'
+"use client";
+import { useState } from 'react'
+import { Container, Dropdown, Form, InputGroup, Nav, Navbar } from 'react-bootstrap'
 import links from './data/links01.json'
 import styles from './AppNavigationBar01.module.css'
-import {SubMenu} from "@/utils/models/page";
+import { SubMenu } from "@/utils/models/page";
 import Image from 'next/image';
 import menuSearch from "../../public/menu_search.png"
 
@@ -17,7 +18,7 @@ interface NEAppNavigationBarProps {
  * @param subMenu {string} The selected toolbar menu.
  * @returns App container child element.
  */
-function AppNavigationBar01({onClickSubMenuLink, selectedMenu, selectedSubMenu}: NEAppNavigationBarProps) {
+function AppNavigationBar01({ onClickSubMenuLink, selectedMenu, selectedSubMenu }: NEAppNavigationBarProps) {
   const [querySaveDisabled, setQuerySaveDisabled] = useState(false)
 
   function capitalizeFirstLetter(text: string) {
@@ -31,21 +32,21 @@ function AppNavigationBar01({onClickSubMenuLink, selectedMenu, selectedSubMenu}:
           {links.map((link) => {
             return <div key={link.key}>
               <a href={link.key}
-                 className={`${styles.menuLink} ${link.key === selectedMenu ? styles.menuLinkSelected : ''}`}>
+                className={`${styles.menuLink} ${link.key === selectedMenu ? styles.menuLinkSelected : ''}`}>
                 <Image
                   src={link.key === selectedMenu ? `${link.menuIcon}_light.svg` : `${link.menuIcon}.svg`}
-                  width='24' height='24' alt="Expand navbar"/>
-                <span style={{paddingLeft: '4px', fontWeight: '600'}}>
-                                {capitalizeFirstLetter(link.key)}
-                            </span>
+                  width='24' height='24' alt="Expand navbar" />
+                <span style={{ paddingLeft: '4px', fontWeight: '600' }}>
+                  {capitalizeFirstLetter(link.key)}
+                </span>
               </a>
             </div>
           })}
         </Nav>
         <Nav>
-          <Dropdown style={{display: 'inline-block'}}>
+          <Dropdown style={{ display: 'inline-block' }}>
             <Dropdown.Toggle id="dropdown-basic" className="bg-transparent"
-                             style={{border: 0, color: 'black'}}>
+              style={{ border: 0, color: 'black' }}>
               New Query 1*
             </Dropdown.Toggle>
 
@@ -55,7 +56,7 @@ function AppNavigationBar01({onClickSubMenuLink, selectedMenu, selectedSubMenu}:
                 href=""
                 disabled={true}>New Query 1*</Dropdown.Item>
               <Dropdown.Item href="">View All (0)</Dropdown.Item>
-              <Dropdown.Divider/>
+              <Dropdown.Divider />
               <Dropdown.Item href="" onClick={() => null}>Save</Dropdown.Item>
               <Dropdown.Item href="" onClick={() => null}>Rename</Dropdown.Item>
               {selectedMenu !== 'dashboard' ?
@@ -67,7 +68,7 @@ function AppNavigationBar01({onClickSubMenuLink, selectedMenu, selectedSubMenu}:
         <Nav>
           <Form>
             <InputGroup>
-              <InputGroup.Text id='basic-addon1'><Image src={menuSearch} alt="Search"/></InputGroup.Text>
+              <InputGroup.Text id='basic-addon1'><Image src={menuSearch} alt="Search" /></InputGroup.Text>
               <Form.Control
                 placeholder='Search'
                 aria-label='Search'

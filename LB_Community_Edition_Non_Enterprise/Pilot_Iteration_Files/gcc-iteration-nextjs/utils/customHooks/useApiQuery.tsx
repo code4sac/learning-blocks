@@ -1,5 +1,5 @@
-import {useQuery} from "@tanstack/react-query";
+// import {useQuery} from "@tanstack/react-query";
 
-export function useCustomHook() {
-  return useQuery({queryKey: ['customHook'], queryFn: () => 'Hello'})
-}
+// export function useCustomHook() {
+//   return useQuery({queryKey: ['customHook'], queryFn: () => 'Hello'})
+// }

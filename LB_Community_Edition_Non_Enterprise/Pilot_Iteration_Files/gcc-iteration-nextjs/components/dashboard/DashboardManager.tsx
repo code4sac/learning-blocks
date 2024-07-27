@@ -1,6 +1,6 @@
-import {Container} from 'react-bootstrap'
-import {SubMenu} from "@/utils/models/page";
-import {ReactElement} from "react";
+import { Container } from 'react-bootstrap'
+import { SubMenu } from "@/utils/models/page";
+import { ReactElement } from "react";
 import DashboardD81 from "@/components/dashboard/DashboardD81";
 import DashboardD0f from "@/components/dashboard/DashboardD0F";
 
@@ -15,7 +15,7 @@ export interface DashboardProps {
  * @param subMenu {string} The selected toolbar menu.
  * @returns App container child element.
  */
-function DashboardManager({data, selectedSubMenu, setPageQueryKey}: DashboardProps) {
+function DashboardManager({ data, selectedSubMenu, setPageQueryKey }: DashboardProps) {
   function renderInnerContent(): ReactElement {
     switch (selectedSubMenu) {
       case SubMenu.Example01:

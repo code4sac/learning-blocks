@@ -1,25 +1,27 @@
-import {useState} from 'react'
-import {keepPreviousData, useQuery} from '@tanstack/react-query'
-import DashboardManager from '../dashboard/DashboardManager.tsx'
-import AppContainer01 from '../app/AppContainer01.tsx'
-import {Col, Container, Row} from 'react-bootstrap'
-import {PageProps, SubMenu} from "@/utils/models/page";
-import AppContainer02 from '../app/AppContainer02.tsx'
-import {fetchJson} from '@/utils/utils/api/fetchJson.ts'
+"use client"
+import { ReactElement, useState } from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
+import { PageProps, SubMenu } from "@/utils/models/page";
+import { fetchJson } from '@/utils/utils/api/fetchJson'
+import DashboardManager from '../dashboard/DashboardManager';
+import AppContainer01 from '../app/AppContainer01';
+import AppContainer02 from '../app/AppContainer02';
+
+let data = {}
 
 /**
  * Dashboard page.
  * @returns App page.
  */
-function DashboardPage({navigationKey, queryKey}: PageProps) {
+function DashboardPage({ navigationKey, queryKey }: PageProps) {
   const [currentSubMenu, setCurrentSubMenu] = useState(navigationKey ? navigationKey : SubMenu.Example01)
   const [pageQueryKey, setPageQueryKey] = useState(queryKey ? queryKey : '')
 
-  const {isPending, isError, error, data, isFetching, isPlaceholderData} = useQuery({
-    queryKey: [pageQueryKey],
-    queryFn: () => fetchData(),
-    placeholderData: keepPreviousData
-  })
+  // const { isPending, isError, error, data, isFetching, isPlaceholderData } = useQuery({
+  //   queryKey: [pageQueryKey],
+  //   queryFn: () => fetchData(),
+  //   placeholderData: keepPreviousData
+  // })
 
   /**
    * Handle app logic and render the inner app content.
@@ -30,7 +32,7 @@ function DashboardPage({navigationKey, queryKey}: PageProps) {
     switch (currentSubMenu) {
       case SubMenu.Example01:
         return <DashboardManager data={data} selectedSubMenu={currentSubMenu}
-                                 setPageQueryKey={setPageQueryKey}></DashboardManager>
+          setPageQueryKey={setPageQueryKey}></DashboardManager>
       case SubMenu.Example02:
         return <DashboardManager data={data} selectedSubMenu={currentSubMenu}></DashboardManager>
       default:
@@ -55,23 +57,27 @@ function DashboardPage({navigationKey, queryKey}: PageProps) {
   }
 
   return <div>
-    {isPending ? <AppContainer01 selectedMenu="dashboard" selectedSubMenu={currentSubMenu}
-                                 setCurrentSubMenu={setCurrentSubMenu}>
-        <DashboardManager data={data ? data : [{}]} selectedSubMenu={currentSubMenu}></DashboardManager>
-      </AppContainer01>
+    <AppContainer01 selectedMenu="dashboard" selectedSubMenu={currentSubMenu}
+      setCurrentSubMenu={setCurrentSubMenu}>
+      <DashboardManager data={data ? data : [{}]} selectedSubMenu={currentSubMenu}></DashboardManager>
+    </AppContainer01>
+    {/* {isPending ? <AppContainer01 selectedMenu="dashboard" selectedSubMenu={currentSubMenu}
+      setCurrentSubMenu={setCurrentSubMenu}>
+      <DashboardManager data={data ? data : [{}]} selectedSubMenu={currentSubMenu}></DashboardManager>
+    </AppContainer01>
       : isError ? <Container>
-          <Row className="justify-content-md-center">
-            <Col>An error has occurred: + {error.message}</Col>
-          </Row>
-        </Container>
+        <Row className="justify-content-md-center">
+          <Col>An error has occurred: + {error.message}</Col>
+        </Row>
+      </Container>
         : <div>
           <AppContainer02 selectedMenu="dashboard" selectedSubMenu={currentSubMenu}
-                          setCurrentSubMenu={setCurrentSubMenu}>
+            setCurrentSubMenu={setCurrentSubMenu}>
             {isFetching ? <span> Loading...</span> : null}{' '}
 
             {renderInnerContent()}
           </AppContainer02>
-        </div>}
+        </div>} */}
   </div>
 }
 
