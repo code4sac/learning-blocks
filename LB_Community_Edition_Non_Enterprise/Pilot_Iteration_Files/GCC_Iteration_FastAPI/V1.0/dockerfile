@@ -1,8 +1,28 @@
+# Use the official Python image from the Docker Hub
 FROM python:3.10
-ENV PYTHONUNBUFFERED = 1
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+
+# Create and set the working directory
 WORKDIR /app
-COPY requirements.txt requirements.txt
-RUN pip3 install --upgrade pip
-RUN pip3 install -r requirements.txt
-COPY . /app 
+
+# Copy the Poetry configuration files and requirements.txt file to the working directory
+COPY pyproject.toml poetry.lock* requirements.txt /app/
+
+# Upgrade pip and install Poetry
+RUN pip install --upgrade pip \
+    && pip install poetry \
+    # Install dependencies using Poetry, excluding the root package and development dependencies
+    && poetry install --no-root --no-dev \
+    # Install the dependencies listed in requirements.txt
+    && pip install -r requirements.txt
+
+# Copy the rest of the application code to the working directory
+COPY . /app
+
+# Expose port 8000 for the application
 EXPOSE 8000
+
+# Command to run the application using Poetry and uvicorn
+CMD ["poetry", "run", "uvicorn", "v1.main:app", "--host", "0.0.0.0", "--port", "8000"]

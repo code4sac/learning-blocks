@@ -63,20 +63,19 @@ class StudentInDBCreate(BaseModel):
     role: RoleEnum
 
 
-class PeopleInDBResponse(BaseModel):
+class PeopleInDBResponse(PeopleInDBCreate):
     id: int
-    name: str  # Add other fields as necessary
 
     class Config:
-        orm_mode = True
+        from_attributes = True  
+        
 
 class StudentInDBResponse(StudentInDBCreate):
     id: int
     people: PeopleInDBResponse
 
-class Config:
-            orm_mode = True
-# SQLAlchemy model
+    class Config:
+        from_attributes = True
 
 class StudentInDB(Base):
     __tablename__ = "students"
