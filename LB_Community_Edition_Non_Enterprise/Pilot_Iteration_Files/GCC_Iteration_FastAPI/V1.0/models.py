@@ -3,14 +3,14 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Enum, Column, Integer, String, JSON, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import sessionmaker, Mapped, mapped_column, relationship
+from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.exc import IntegrityError
 import os
-import enum
 from typing import Optional, List
 from dotenv import load_dotenv
-
+from typing import Generator
+from sqlalchemy.orm import Session
 
 load_dotenv()
 
@@ -71,3 +71,11 @@ class PeopleInDB(Base):
     
     # Relationship to StudentInDB
     student: Mapped["StudentInDB"] = relationship("StudentInDB", back_populates="people")
+
+
+def get_db() -> Generator[Session, None, None]:
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

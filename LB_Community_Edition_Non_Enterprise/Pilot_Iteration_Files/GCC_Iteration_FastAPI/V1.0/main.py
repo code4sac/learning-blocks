@@ -1,15 +1,16 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Enum, Column, Integer, String, JSON, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.orm import sessionmaker, Mapped, mapped_column, relationship
 from sqlalchemy.exc import IntegrityError
 import os
 import enum
 from typing import Optional, List
 from dotenv import load_dotenv
-from models import RoleEnum, StudentInDB, PeopleInDB
+from models import RoleEnum, StudentInDB, PeopleInDB, get_db
+from fastapi import FastAPI, HTTPException, Depends
 # Load environment variables from .env file
 load_dotenv()
 
@@ -76,8 +77,7 @@ class StudentInDBResponse(StudentInDBCreate):
 Base.metadata.create_all(bind=engine)
 
 @app.post("/people/", response_model=PeopleInDBResponse)
-def create_person(person: PeopleInDBCreate):
-    db = SessionLocal()
+def create_person(person: PeopleInDBCreate, db: Session = Depends(get_db)):
     try:
         db_person = PeopleInDB(
             name=person.name,
@@ -102,8 +102,6 @@ def create_person(person: PeopleInDBCreate):
         return db_person
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
-    finally:
-        db.close()
 
 @app.get("/people/{person_id}", response_model=PeopleInDBResponse)
 def read_person(person_id: int):
