@@ -1,21 +1,16 @@
 from fastapi import FastAPI, HTTPException, Depends
-from pydantic import BaseModel
-from sqlalchemy import create_engine, Enum, Column, Integer, String, JSON, ForeignKey
+from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
-from sqlalchemy.orm import sessionmaker, Mapped, mapped_column, relationship
+from sqlalchemy.orm import sessionmaker 
 from sqlalchemy.exc import IntegrityError
 import os
-import enum
-from typing import Optional, List
 from dotenv import load_dotenv
-from models import RoleEnum, StudentInDB, PeopleInDB, get_db
+from models import StudentInDB, PeopleInDB, get_db
 from fastapi import FastAPI, HTTPException, Depends
 from schemas import PeopleInDBCreate, PeopleInDBResponse, StudentInDBCreate, StudentInDBResponse
 from sqlalchemy.orm import Session
 
-
-from sqlalchemy.orm import Session
 
 # Load environment variables from .env file
 load_dotenv()
