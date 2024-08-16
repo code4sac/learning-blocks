@@ -11,6 +11,12 @@ from typing import Optional, List
 from dotenv import load_dotenv
 from models import RoleEnum, StudentInDB, PeopleInDB, get_db
 from fastapi import FastAPI, HTTPException, Depends
+from schemas import PeopleInDBCreate, PeopleInDBResponse, StudentInDBCreate, StudentInDBResponse
+from sqlalchemy.orm import Session
+
+
+from sqlalchemy.orm import Session
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -28,53 +34,9 @@ Base = declarative_base()
 app = FastAPI()
 
 
-
-class PeopleInDBCreate(BaseModel):
-    name: str
-    age: Optional[int] = None
-    role: RoleEnum
-    AnonymizedStudentID: str
-    AnonymizedStudentNumber: Optional[str] = None
-    AnonymizedCounselorNumber: Optional[str] = None
-    AnonymizedHomeroomTeacherNumber: Optional[str] = None
-    GraduationCohort: Optional[str] = None
-    Birthdate: Optional[str] = None
-    EnabledUser: Optional[str] = None
-    Grades: Optional[List[str]] = None
-    FamilyKey: Optional[List[str]] = None
-    SectionsIDs: Optional[str] = None
-    GradebookIDs: Optional[List[str]] = None
-    DateLastModified: Optional[str] = None
-
-class PeopleInDBResponse(PeopleInDBCreate):
-    id: int
-
-class StudentInDBCreate(BaseModel):
-    anonymizedStudentID: str
-    anonymizedStudentNumber: Optional[str] = None
-    role: RoleEnum
-
-
-class PeopleInDBResponse(PeopleInDBCreate):
-    id: int
-
-    class Config:
-        from_attributes = True  
-        
-
-class StudentInDBResponse(StudentInDBCreate):
-    id: int
-    people: PeopleInDBResponse
-
-    class Config:
-        from_attributes = True
-
-
-
-
-
 # Create the database tables
 Base.metadata.create_all(bind=engine)
+
 
 @app.post("/people/", response_model=PeopleInDBResponse)
 def create_person(person: PeopleInDBCreate, db: Session = Depends(get_db)):

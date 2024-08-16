@@ -13,14 +13,5 @@ RUN pip install --upgrade pip \
     && poetry install --no-root --no-dev \
     && pip install -r requirements.txt
 
-# Copy the migration script
-COPY migrate.sh /app/migrate.sh
-
-# Make the migration script executable
-RUN chmod +x /app/migrate.sh
-
-# Run the migration script
-ENTRYPOINT ["/app/migrate.sh"]
-
 # Optionally, you might want to set a default command or override it
 CMD ["uvicorn", "app:main", "--host", "0.0.0.0", "--port", "8000"]
