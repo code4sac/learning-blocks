@@ -1,104 +1,13 @@
-from fastapi import FastAPI, HTTPException, Depends
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, Session
-from sqlalchemy.orm import sessionmaker 
-from sqlalchemy.exc import IntegrityError
-import os
-from dotenv import load_dotenv
-from models import StudentInDB, PeopleInDB, get_db
-from fastapi import FastAPI, HTTPException, Depends
-from schemas import PeopleInDBCreate, PeopleInDBResponse, StudentInDBCreate, StudentInDBResponse
-from sqlalchemy.orm import Session
-
-
-# Load environment variables from .env file
-load_dotenv()
-
-# Define the database path
-DATABASE_URL = os.getenv("DATABASE_URL")
-if not DATABASE_URL:
-    raise ValueError("DATABASE_URL is not set in the environment variables")
-
-# Set up SQLAlchemy
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
-
-# Define FastAPI app
-app = FastAPI()
-
+from fastapi import FastAPI
+from routers import people, students
+from databases.databases import Base, engine
 
 # Create the database tables
 Base.metadata.create_all(bind=engine)
 
+# Define FastAPI app
+app = FastAPI()
 
-@app.post("/people/", response_model=PeopleInDBResponse)
-def create_person(person: PeopleInDBCreate, db: Session = Depends(get_db)):
-    try:
-        db_person = PeopleInDB(
-            name=person.name,
-            age=person.age,
-            role=person.role,
-            AnonymizedStudentID=person.AnonymizedStudentID,
-            AnonymizedStudentNumber=person.AnonymizedStudentNumber,
-            AnonymizedCounselorNumber=person.AnonymizedCounselorNumber,
-            AnonymizedHomeroomTeacherNumber=person.AnonymizedHomeroomTeacherNumber,
-            GraduationCohort=person.GraduationCohort,
-            Birthdate=person.Birthdate,
-            EnabledUser=person.EnabledUser,
-            Grades=person.Grades,
-            FamilyKey=person.FamilyKey,
-            SectionsIDs=person.SectionsIDs,
-            GradebookIDs=person.GradebookIDs,
-            DateLastModified=person.DateLastModified
-        )
-        db.add(db_person)
-        db.commit()
-        db.refresh(db_person)
-        return db_person
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
-
-@app.get("/people/{person_id}", response_model=PeopleInDBResponse)
-def read_person(person_id: int):
-    db = SessionLocal()
-    try:
-        db_person = db.query(PeopleInDB).filter(PeopleInDB.id == person_id).first()
-        if db_person is None:
-            raise HTTPException(status_code=404, detail="Person not found")
-        return db_person
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
-    finally:
-        db.close()
-
-@app.post("/students/", response_model=StudentInDBCreate)
-def create_student(student: StudentInDBCreate):
-    db = SessionLocal()
-    # Check if the associated PeopleInDB record exists using anonymizedStudentID
-    person = db.query(PeopleInDB).filter(PeopleInDB.AnonymizedStudentID == student.anonymizedStudentID).first()
-    if not person:
-        raise HTTPException(status_code=404, detail="Associated person not found")
-
-    # Create and add the new student record
-    new_student = StudentInDB(
-        anonymizedStudentID=student.anonymizedStudentID,
-        anonymizedStudentNumber=student.anonymizedStudentNumber,
-        role=student.role,
-        people=person
-    )
-    
-    try:
-        db.add(new_student)
-        db.commit()
-        db.refresh(new_student)
-        return new_student
-    except IntegrityError as e:
-        db.rollback()
-        raise HTTPException(status_code=400, detail="Integrity error occurred")
-    except Exception as e:
-        db.rollback()
-        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
-    finally:
-        db.close()
+# Include routers
+app.include_router(people.router)
+app.include_router(students.router)

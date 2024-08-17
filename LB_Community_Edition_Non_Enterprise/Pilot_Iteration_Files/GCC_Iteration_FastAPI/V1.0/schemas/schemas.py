@@ -1,7 +1,7 @@
 
 from typing import Optional, List
 from pydantic import BaseModel
-from models import RoleEnum 
+from models.models import RoleEnum 
         
 class PeopleInDBCreate(BaseModel):
     name: str
