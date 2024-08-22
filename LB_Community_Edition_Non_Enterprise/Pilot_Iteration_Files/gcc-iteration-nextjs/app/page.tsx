@@ -1,20 +1,12 @@
-import styles from './page.module.css'; // Ensure this path is correct
-import DashboardPage from '@/components/pages/DashboardPage';
+import SiteNavigationBar03 from '@/app/_components/layout/navigationBar/SiteNavigationBar03';
+import LandingPage02 from "@/app/_features/landingPage/LandingPage02";
 
-let context = {
-  auth: undefined!,
-  navigationKey: 'example 01',
-  queryKey: '1efa02',
-}
-
-export default function Home() {
-  return (
-    <main className={styles.main}>
-
-      {/* <DashboardPage navigationKey={context.navigationKey} queryKey={context.queryKey}></DashboardPage> */}
-
-      <DashboardPage navigationKey={context.navigationKey} queryKey={context.queryKey} />
-
-    </main>
-  );
+export default async function Page() {
+    return <div className='h-screen v-screen'>
+        <SiteNavigationBar03></SiteNavigationBar03>
+        b
+        <div className="">
+            <LandingPage02></LandingPage02>
+        </div>
+    </div>
 }

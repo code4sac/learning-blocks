@@ -1,0 +1,22 @@
+.mainToolbarContainer {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+}
+
+.innerToolbarContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainToolbarIconsContainer {
+    display: inline-flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0 8px;
+    opacity: 95%;
+}

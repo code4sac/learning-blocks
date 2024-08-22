@@ -1,0 +1,43 @@
+
+.loginFormContainer {
+    width: 460px;
+    padding: 64px;
+}
+
+.loginPageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginFormSectionDescription {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.loginFormSectionDemo {
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+}
+
+.loginFormSection {
+    margin-top: 20px;
+}
+
+.login-form-field-info {
+    color: #F24E1E;
+    position: absolute;
+    background-image: url("menu_alert_circle_filled.png");
+    background-repeat: no-repeat;
+    padding-left: 24px;
+    background-position: center left;
+    font-size: 12px;
+    font-style: normal !important;
+    margin-top: 2px;
+}

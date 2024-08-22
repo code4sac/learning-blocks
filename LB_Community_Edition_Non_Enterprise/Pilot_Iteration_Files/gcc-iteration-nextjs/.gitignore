@@ -36,3 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 .env
+
+.idea
+# VSCode is a supported editor for this project.
+# .vscode
