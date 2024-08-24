@@ -8,7 +8,8 @@ import LandingPage02 from '../../app/_features/landingPage/LandingPage02'
  */
 describe('Default landing page tests.', {}, () => {
     test('Landing page should container a Live Demo button.', async () => {
-        render(<LandingPage02/>)
+        render(<LandingPage02 />)
+
         expect(screen.getByText('Live Demo')).not.toBeNull()
     })
 })
