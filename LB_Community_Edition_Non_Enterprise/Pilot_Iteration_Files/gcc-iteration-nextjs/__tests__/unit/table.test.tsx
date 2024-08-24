@@ -1,4 +1,4 @@
-import { describe, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { render } from "@testing-library/react";
 import Table01 from "@/app/_components/ui/table/Table01";
 import mockData from '@/__tests__/mock/exampleTableData.json';
