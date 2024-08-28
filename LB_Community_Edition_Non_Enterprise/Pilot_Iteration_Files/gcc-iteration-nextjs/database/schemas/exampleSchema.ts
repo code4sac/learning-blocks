@@ -2,6 +2,13 @@ import { relations } from 'drizzle-orm'
 import { integer, sqliteTable, text, unique } from 'drizzle-orm/sqlite-core'
 import { boolean, createdAt, date, id } from '@/database/schemas/schemaFields'
 
+export const students = sqliteTable('students', {
+    id: id(),
+    createdAt: createdAt(),
+    email: text('email').unique().notNull(),
+    password: text('password').notNull(),
+})
+
 export const users = sqliteTable('users', {
     id: id(),
     createdAt: createdAt(),
@@ -9,7 +16,7 @@ export const users = sqliteTable('users', {
     password: text('password').notNull(),
 })
 
-export const usersRelations = relations(users, ({many}) => ({
+export const usersRelations = relations(users, ({ many }) => ({
     events: many(events),
 }))
 
@@ -40,7 +47,7 @@ export const events = sqliteTable(
     })
 )
 
-export const eventsRelations = relations(events, ({many, one}) => ({
+export const eventsRelations = relations(events, ({ many, one }) => ({
     rsvps: many(rsvps),
     createdBy: one(users, {
         references: [users.id],
@@ -55,7 +62,7 @@ export const attendees = sqliteTable('attendees', {
     name: text('name').notNull(),
 })
 
-export const attendeesRelations = relations(attendees, ({many}) => ({
+export const attendeesRelations = relations(attendees, ({ many }) => ({
     rsvps: many(rsvps),
 }))
 
@@ -77,7 +84,7 @@ export const rsvps = sqliteTable(
     })
 )
 
-export const rsvpsRelations = relations(rsvps, ({one}) => ({
+export const rsvpsRelations = relations(rsvps, ({ one }) => ({
     attendee: one(attendees, {
         fields: [rsvps.attendeeId],
         references: [attendees.id],

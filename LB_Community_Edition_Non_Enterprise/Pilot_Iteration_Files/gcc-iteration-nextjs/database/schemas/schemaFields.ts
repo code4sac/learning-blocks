@@ -14,4 +14,4 @@ export const createdAt = () =>
 
 export const date = (name: string) => text(name)
 
-export const boolean = (field: string) => integer(field, {mode: 'boolean'})
+export const boolean = (field: string) => integer(field, { mode: 'boolean' })

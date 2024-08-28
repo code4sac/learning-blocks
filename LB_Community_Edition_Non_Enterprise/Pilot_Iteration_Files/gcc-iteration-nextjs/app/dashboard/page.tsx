@@ -4,7 +4,7 @@ let context = {
     queryKey: '1efa02',
 }
 
-export default function DashboardPage() {
+export default function Page() {
     return (
         <div>
             Dashboard
