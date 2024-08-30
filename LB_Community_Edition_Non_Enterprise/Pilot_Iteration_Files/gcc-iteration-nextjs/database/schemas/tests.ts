@@ -1,10 +1,10 @@
-import { relations } from 'drizzle-orm'
-import { integer, sqliteTable, text, unique } from 'drizzle-orm/sqlite-core'
-import { boolean, createdAt, date, id } from '@/database/schemas/schemaFields'
+import { relations } from "drizzle-orm";
+import { integer, sqliteTable, text, unique } from "drizzle-orm/sqlite-core";
+import { boolean, createdAt, date, id } from "@/database/schemas/schemaFields";
 
-export const students = sqliteTable('students', {
-    id: id(),
-    createdAt: createdAt(),
-    email: text('email').unique().notNull(),
-    password: text('password').notNull(),
-})
+export const students = sqliteTable("students", {
+  id: id(),
+  createdAt: createdAt(),
+  email: text("email").unique().notNull(),
+  password: text("password").notNull(),
+});

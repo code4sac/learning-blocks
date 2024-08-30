@@ -1,6 +1,6 @@
 # Tests
 
-## __tests__ Folder
+## **tests** Folder
 
 The `__tests__` folder is a convention used in Next.js projects to organize test files. This folder typically contains
 unit tests, integration tests, and end-to-end (E2E) tests. By following this convention, you can keep your test files

@@ -1,8 +1,8 @@
-'use client'
-import { NextUIProvider } from '@nextui-org/react'
+"use client";
+import { NextUIProvider } from "@nextui-org/react";
 
-export function AppNextUIProvider({children}: { children: React.ReactNode }) {
-    return <NextUIProvider>{children}</NextUIProvider>
+export function AppNextUIProvider({ children }: { children: React.ReactNode }) {
+  return <NextUIProvider>{children}</NextUIProvider>;
 }
 
 //import * as React from 'react'
@@ -23,4 +23,3 @@ export function AppNextUIProvider({children}: { children: React.ReactNode }) {
 //    {children}
 //  </AuthContext.Provider>
 //}
-

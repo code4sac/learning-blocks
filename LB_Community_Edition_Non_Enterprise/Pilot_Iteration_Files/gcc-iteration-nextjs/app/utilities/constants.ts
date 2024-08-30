@@ -1,1 +1,1 @@
-export const COOKIE_NAME = 'pardy-token'
+export const COOKIE_NAME = "pardy-token";

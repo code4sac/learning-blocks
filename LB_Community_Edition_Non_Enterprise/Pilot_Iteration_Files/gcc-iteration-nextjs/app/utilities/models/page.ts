@@ -1,14 +1,14 @@
 export interface PageProps {
-    navigationKey?: string,
-    queryKey?: string
+  navigationKey?: string;
+  queryKey?: string;
 }
 
 export enum SubMenu {
-    Example01,
-    Example02
+  Example01,
+  Example02,
 }
 
 export enum AppMenu {
-    Dashboard,
-    Example02
+  Dashboard,
+  Example02,
 }

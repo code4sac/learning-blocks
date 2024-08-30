@@ -1,0 +1,33 @@
+# .prettierignore
+
+# Ignore artifacts:
+build
+coverage
+dist
+node_modules
+
+# Ignore Next.js specific folders:
+.next
+out
+
+# Ignore mock files:
+__tests__/mock
+
+# Ignore all files in a specific directory:
+public/
+
+# Ignore all minified files:
+*.min.js
+
+# Ignore all env files:
+.env
+.env.*
+
+# Ignore doc folder:
+doc/
+
+# Ignore database migrations Drizzle:
+migrations/
+
+# Ignore package-lock.json files:
+package-lock.json

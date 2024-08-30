@@ -1,10 +1,10 @@
 import AppNavigationBar02 from "@/app/_components/layout/navigationBar/AppNavigationBar02";
 
 interface NEAppContainerProps {
-    selectedMenu: string
-    selectedSubMenu: string
-    setCurrentSubMenu: any
-    children: any
+  selectedMenu: string;
+  selectedSubMenu: string;
+  setCurrentSubMenu: any;
+  children: any;
 }
 
 /**
@@ -15,14 +15,22 @@ interface NEAppContainerProps {
  * @param setCurrentSubMenu {any} The .
  * @returns App container child element.
  */
-function AppContainer02({children, selectedMenu, selectedSubMenu, setCurrentSubMenu}: NEAppContainerProps) {
-    return <div>
-        <AppNavigationBar02 selectedMenu={selectedMenu} selectedSubMenu={selectedSubMenu}
-                            onClickSubMenuLink={setCurrentSubMenu}></AppNavigationBar02>
-        <div>
-            {children}
-        </div>
+function AppContainer02({
+  children,
+  selectedMenu,
+  selectedSubMenu,
+  setCurrentSubMenu,
+}: NEAppContainerProps) {
+  return (
+    <div>
+      <AppNavigationBar02
+        selectedMenu={selectedMenu}
+        selectedSubMenu={selectedSubMenu}
+        onClickSubMenuLink={setCurrentSubMenu}
+      ></AppNavigationBar02>
+      <div>{children}</div>
     </div>
+  );
 }
 
-export default AppContainer02
+export default AppContainer02;

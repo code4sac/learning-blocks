@@ -1,9 +1,4 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:drizzle/all"
-  ],
-  "plugins": [
-    "drizzle"
-  ]
+  "extends": ["next/core-web-vitals", "plugin:drizzle/all"],
+  "plugins": ["drizzle"]
 }

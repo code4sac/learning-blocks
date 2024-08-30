@@ -1,116 +1,116 @@
 .container {
-    display: grid;
-    grid-template-columns:auto minmax(0, 1fr);
-    gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
-    width: 100%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  width: 100%;
 }
 
 .cardBodyImageContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .helpIcon {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 .categoriesContainer {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding-top: 12px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 12px;
 }
 
 .categoryCard {
-    min-width: 40px;
-    white-space: nowrap;
-    cursor: pointer;
+  min-width: 40px;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 .colorIndicator0 {
-    background-color: red;
-    width: 100%;
-    height: 8px;
+  background-color: red;
+  width: 100%;
+  height: 8px;
 }
 
 .colorIndicator1 {
-    background-color: orange;
-    width: 100%;
-    height: 8px;
+  background-color: orange;
+  width: 100%;
+  height: 8px;
 }
 
 .colorIndicator2 {
-    background-color: yellow;
-    width: 100%;
-    height: 8px;
+  background-color: yellow;
+  width: 100%;
+  height: 8px;
 }
 
 .colorIndicator3 {
-    background-color: green;
-    width: 100%;
-    height: 8px;
+  background-color: green;
+  width: 100%;
+  height: 8px;
 }
 
 .colorIndicator4 {
-    background-color: blue;
-    width: 100%;
-    height: 8px;
+  background-color: blue;
+  width: 100%;
+  height: 8px;
 }
 
 @media (min-width: 400px) {
-    .container {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 10px;
-        grid-auto-rows: minmax(100px, auto);
-    }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
 }
 
 @media (min-width: 576px) {
-    .container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        grid-auto-rows: minmax(100px, auto);
-    }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
 }
 
 @media (min-width: 768px) {
-    .container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        grid-auto-rows: minmax(100px, auto);
-    }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
 }
 
 @media (min-width: 992px) {
-    .container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        grid-auto-rows: minmax(100px, auto);
-    }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
 }
 
 @media (min-width: 1200px) {
-    .container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        grid-auto-rows: minmax(100px, auto);
-    }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
 }
 
 @media (min-width: 1400px) {
-    .container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        grid-auto-rows: minmax(100px, auto);
-    }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
 }
