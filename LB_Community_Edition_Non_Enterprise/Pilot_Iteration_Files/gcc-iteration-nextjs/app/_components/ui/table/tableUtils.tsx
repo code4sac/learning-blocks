@@ -1,5 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { TableStudent } from "@/app/utilities/models/table";
+import { TableStudent } from "@/app/_utilities/models/table";
 
 export function getDefaultColumns() {
   const columnHelper = createColumnHelper<TableStudent>();

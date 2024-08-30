@@ -1,7 +1,7 @@
 import styles from "./CardGroupAnalytics.module.css";
 import CardC79 from "./CardC79";
 import CardC93 from "./CardC93";
-import { AnalyticCardGroupProps } from "@/app/utilities/models/card";
+import { AnalyticCardGroupProps } from "@/app/_utilities/models/card";
 
 function CardGroupAnalytics({
   data,

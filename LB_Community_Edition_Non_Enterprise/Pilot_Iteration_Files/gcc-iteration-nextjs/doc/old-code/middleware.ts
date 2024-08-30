@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { COOKIE_NAME } from '@/app/utilities/constants'
+import { COOKIE_NAME } from '@/app/_utilities/constants'
 
 export function middleware(request: NextRequest) {
     if (request.nextUrl.pathname.startsWith('/dashboard')) {

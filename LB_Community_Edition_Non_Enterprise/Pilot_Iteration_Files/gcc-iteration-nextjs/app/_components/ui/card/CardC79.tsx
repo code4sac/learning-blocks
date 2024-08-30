@@ -1,8 +1,8 @@
 import { Card, OverlayTrigger, Tooltip } from "react-bootstrap";
 import styles from "./CardC79.module.css";
 import Image from "next/image";
-import { AnalyticCardProps } from "@/app/utilities/models/card";
-import { parseAnalyticArrowGraphImage } from "@/app/utilities/graph/graphUtils";
+import { AnalyticCardProps } from "@/app/_utilities/models/card";
+import { parseAnalyticArrowGraphImage } from "@/app/_utilities/graph/graphUtils";
 
 /**
  * Dashboard arrow graph card. Categories (Red, Orange, Yellow, Green, Blue). Monotone color theme.

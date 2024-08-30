@@ -1,6 +1,6 @@
 "use server";
 
-import { COOKIE_NAME } from "@/app/utilities/constants";
+import { COOKIE_NAME } from "@/app/_utilities/constants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

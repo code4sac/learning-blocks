@@ -4,7 +4,7 @@ import { createEvent } from "@/database/__tests__/utilities/createEvent";
 import { createUser } from "@/database/__tests__/utilities/createUser";
 
 const exampleUser = {
-  email: "user5@example.com",
+  email: "user6@example.com",
   password: "vNPFeBSQ+2rKtuZtTw==",
 };
 

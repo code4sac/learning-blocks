@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import links from "@/__tests__/mock/links01.json";
 import styles from "./AppNavigationBar01.module.css";
-import { SubMenu } from "@/app/utilities/models/page";
+import { SubMenu } from "@/app/_utilities/models/page";
 import Image from "next/image";
 
 interface NEAppNavigationBarProps {

@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { SubMenu } from "@/app/utilities/models/page";
+import { SubMenu } from "@/app/_utilities/models/page";
 import { ReactElement } from "react";
 import DashboardD81 from "@/app/_features/dashboard/DashboardD81";
 import DashboardD0f from "@/app/_features/dashboard/DashboardD0F";

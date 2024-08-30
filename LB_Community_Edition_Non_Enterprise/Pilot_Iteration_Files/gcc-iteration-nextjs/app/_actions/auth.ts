@@ -1,9 +1,9 @@
 "use server";
 import { cookies } from "next/headers";
-import { signin, signup } from "@/app/utilities/authTools";
+import { signin, signup } from "@/app/_utilities/authTools";
 import { z } from "zod";
 import { redirect } from "next/navigation";
-import { COOKIE_NAME } from "@/app/utilities/constants";
+import { COOKIE_NAME } from "@/app/_utilities/constants";
 
 const authSchema = z.object({
   email: z.string().email(),

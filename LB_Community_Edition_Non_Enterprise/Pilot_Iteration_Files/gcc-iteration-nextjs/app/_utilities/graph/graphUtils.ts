@@ -1,4 +1,4 @@
-import { Demographic } from "@/app/utilities/models/demographic";
+import { Demographic } from "@/app/_utilities/models/demographic";
 
 /**
  * Filter the demographics by race code. This excludes demographics like gender and total students.

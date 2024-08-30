@@ -5,7 +5,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { StudentTableProps } from "@/app/utilities/models/table";
+import { StudentTableProps } from "@/app/_utilities/models/table";
 import { getDefaultColumns } from "@/app/_components/ui/table/tableUtils";
 import { Button } from "@nextui-org/button";
 
@@ -31,7 +31,7 @@ function Table01({ data }: StudentTableProps) {
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </th>
                 ))}
@@ -58,7 +58,7 @@ function Table01({ data }: StudentTableProps) {
                       ? null
                       : flexRender(
                           header.column.columnDef.footer,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </th>
                 ))}

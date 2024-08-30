@@ -1,6 +1,6 @@
 ﻿import links from "@/__tests__/mock/links01.json";
 import styles from "./AppNavigationBar01.module.css";
-import { SubMenu } from "@/app/utilities/models/page";
+import { SubMenu } from "@/app/_utilities/models/page";
 import Image from "next/image";
 import { useState } from "react";
 import { Container, Form, InputGroup, Nav, Navbar } from "react-bootstrap";

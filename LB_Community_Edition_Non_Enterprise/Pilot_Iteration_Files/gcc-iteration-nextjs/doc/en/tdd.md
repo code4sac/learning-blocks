@@ -10,4 +10,4 @@ Test React components in the `/__tests__/unit` folder.
 
 Test database in the `/database/__tests__/unit` folder.
 
-Database tests are useful for adding or removing data from the database. Look at `database/__tests__/utilities` for examples.
+Database tests are useful for adding or removing data from the database. Look at `database/__tests__/_utilities` for examples.

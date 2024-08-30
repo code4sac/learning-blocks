@@ -1,8 +1,8 @@
 import { Card, OverlayTrigger, Tooltip } from "react-bootstrap";
 import styles from "./CardC93.module.css";
-import { parseAnalyticBarGraphImage } from "@/app/utilities/graph/graphUtils";
-import { AnalyticCategory } from "@/app/utilities/models/analytics";
-import { AnalyticCardProps } from "@/app/utilities/models/card";
+import { parseAnalyticBarGraphImage } from "@/app/_utilities/graph/graphUtils";
+import { AnalyticCategory } from "@/app/_utilities/models/analytics";
+import { AnalyticCardProps } from "@/app/_utilities/models/card";
 import Image from "next/image";
 
 /**
@@ -84,7 +84,7 @@ function CardC93({
                     </Card.Body>
                   </Card>
                 );
-              }
+              },
             )}
           </div>
         </Card.Body>

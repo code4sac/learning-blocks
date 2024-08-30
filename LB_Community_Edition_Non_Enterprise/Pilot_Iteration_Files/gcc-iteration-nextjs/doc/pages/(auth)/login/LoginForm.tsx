@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap'
 import { FieldApi, useForm } from "@tanstack/react-form"
-import { User } from '@/app/utilities/models/user'
+import { User } from '@/app/_utilities/models/user'
 import { getRedirectUrl } from '@/utils/utils/urlFunctions'
 
 function FieldInfo({field}: { field: FieldApi<any, any, any, any> }) {

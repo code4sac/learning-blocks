@@ -1,9 +1,9 @@
 "use client";
 import { ReactElement, useState } from "react";
-import { PageProps, SubMenu } from "@/app/utilities/models/page";
-import { fetchJson } from "@/app/utilities/api/fetchJson";
-import DashboardManager from "../_components/dashboard/DashboardManager";
-import AppContainer01 from "../_components/app/AppContainer01";
+import { PageProps, SubMenu } from "@/app/_utilities/models/page";
+import { fetchJson } from "@/app/_utilities/api/fetchJson";
+import DashboardManager from "@/app/_features/dashboard/DashboardManager";
+import AppContainer01 from "@/app/_components/layout/container/AppContainer01";
 
 let data = {};
 
@@ -13,7 +13,7 @@ let data = {};
  */
 function DashboardPage({ navigationKey, queryKey }: PageProps) {
   const [currentSubMenu, setCurrentSubMenu] = useState(
-    navigationKey ? navigationKey : SubMenu.Example01
+    navigationKey ? navigationKey : SubMenu.Example01,
   );
   const [pageQueryKey, setPageQueryKey] = useState(queryKey ? queryKey : "");
 
@@ -64,15 +64,15 @@ function DashboardPage({ navigationKey, queryKey }: PageProps) {
     switch (currentSubMenu) {
       case SubMenu.Example01:
         return await fetchJson(
-          `${window.location.origin}/api/v1/dashboard/D81/994?filter=${pageQueryKey}`
+          `${window.location.origin}/api/v1/dashboard/D81/994?filter=${pageQueryKey}`,
         );
       case SubMenu.Example02:
         return await fetchJson(
-          `${window.location.origin}/api/v1/dashboard/DemographicsDashboardPage/994`
+          `${window.location.origin}/api/v1/dashboard/DemographicsDashboardPage/994`,
         );
       default:
         return await fetchJson(
-          `${window.location.origin}/api/v1/dashboard/D81/994`
+          `${window.location.origin}/api/v1/dashboard/D81/994`,
         );
     }
   }

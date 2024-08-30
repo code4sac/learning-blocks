@@ -1,7 +1,7 @@
 "use client";
 import { Container } from "react-bootstrap";
 import styles from "./DashboardD0f.module.css";
-import { Demographic } from "@/app/utilities/models/demographic";
+import { Demographic } from "@/app/_utilities/models/demographic";
 import CardC44 from "@/app/_components/ui/card/CardC44";
 import CardC89 from "@/app/_components/ui/card/CardC89";
 

@@ -4,7 +4,7 @@ import data from "./data/ExampleDataAnalytics.json";
 import styles from "./DashboardD84.module.css";
 import { xor } from "lodash";
 import { useState } from "react";
-import { Demographic } from "@/app/utilities/models/demographic";
+import { Demographic } from "@/app/_utilities/models/demographic";
 import Image from "next/image";
 
 export interface D84Props {
@@ -96,7 +96,7 @@ function DashboardD84() {
                   <Image
                     src={`/${getAnalyticsChart(
                       "chart",
-                      it.analytics_level_amount
+                      it.analytics_level_amount,
                     )}`}
                     width="120"
                     alt={`Chart displaying ${it.analytics_level_text} level for ${it.analytics_title}.`}

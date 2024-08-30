@@ -2,8 +2,8 @@
 
 import { db } from "@/database/db";
 import { events } from "@/database/schema";
-import { delay } from "@/app/utilities/delay";
-import { getCurrentUser } from "@/app/utilities/users";
+import { delay } from "@/app/_utilities/delay";
+import { getCurrentUser } from "@/app/_utilities/users";
 import randomName from "@scaleway/random-name";
 import { revalidateTag } from "next/cache";
 

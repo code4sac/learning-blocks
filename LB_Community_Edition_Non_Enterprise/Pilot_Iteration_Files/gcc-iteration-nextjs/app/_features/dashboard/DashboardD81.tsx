@@ -2,9 +2,9 @@
 import { Container } from "react-bootstrap";
 import styles from "./DashboardD81.module.css";
 import { useState } from "react";
-import { Analytic } from "@/app/utilities/models/analytics";
-import { Demographic } from "@/app/utilities/models/demographic";
-import { TableStudent } from "@/app/utilities/models/table";
+import { Analytic } from "@/app/_utilities/models/analytics";
+import { Demographic } from "@/app/_utilities/models/demographic";
+import { TableStudent } from "@/app/_utilities/models/table";
 import CardGroupBentoBox from "@/app/_components/ui/card/CardGroupBentoBox";
 import CardGroupAnalytics from "@/app/_components/ui/card/CardGroupAnalytics";
 import Table01 from "@/app/_components/ui/table/Table01";
