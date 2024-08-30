@@ -1,9 +1,9 @@
-function AppContainer01({children}) {
-    return <div>
-        <div>
-            {children}
-        </div>
+function AppContainer01({ children }) {
+  return (
+    <div>
+      <div>{children}</div>
     </div>
+  );
 }
 
-export default AppContainer01
+export default AppContainer01;

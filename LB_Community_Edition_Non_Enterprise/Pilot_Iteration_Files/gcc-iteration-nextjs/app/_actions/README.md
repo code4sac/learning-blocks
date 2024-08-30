@@ -12,8 +12,8 @@ Example:
 ```tsx
 // pages/api/data.js
 export default function handler(req, res) {
-  if (req.method === 'GET') {
-    res.status(200).json({ data: 'Sample Data' });
+  if (req.method === "GET") {
+    res.status(200).json({ data: "Sample Data" });
   }
 }
 ```
@@ -27,7 +27,7 @@ Example:
 ```tsx
 // pages/index.js
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/data');
+  const res = await fetch("http://localhost:3000/api/data");
   const data = await res.json();
   return { props: { data } };
 }
@@ -40,12 +40,12 @@ Use useEffect or SWR (stale-while-revalidate) for client-side data fetching.
 Example:
 
 ```tsx
-import useSWR from 'swr';
+import useSWR from "swr";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function Component() {
-  const { data, error } = useSWR('/api/data', fetcher);
+  const { data, error } = useSWR("/api/data", fetcher);
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
@@ -62,17 +62,17 @@ Example:
 
 ```tsx
 // pages/index.js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Home({ data }) {
-  const [formData, setFormData] = useState('');
+  const [formData, setFormData] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('/api/data', {
-      method: 'POST',
+    const res = await fetch("/api/data", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ formData }),
     });
@@ -138,7 +138,7 @@ Use Next.js's built-in routing for navigation between pages.
 Example:
 
 ```tsx
-import Link from 'next/link';
+import Link from "next/link";
 
 function HomePage() {
   return (

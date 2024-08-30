@@ -7,36 +7,36 @@ Database code should not depend on other files outside of this folder. That will
 
 ## Quick Start
 
-### Set Up Environment Variables:  
+### Set Up Environment Variables:
 
-Create a .env file in the root of your project. Add the following environment variables:  
+Create a .env file in the root of your project. Add the following environment variables:
 
 ```dotenv
 TURSO_CONNECTION_URL=your_connection_url
 TURSO_AUTH_TOKEN=your_auth_token
 ```
 
-### Configure Database Connection:  
+### Configure Database Connection:
 
 Edit database/db.ts to set up the database connection using Drizzle.
 
-### Define Database Schema:  
+### Define Database Schema:
 
 Edit database/schema.ts to define your database schema.
 
-* Use utility functions from database/schemas/schemaFields.ts to define fields.
+- Use utility functions from database/schemas/schemaFields.ts to define fields.
 
-### Generate Database Migrations:  
+### Generate Database Migrations:
 
-Run the following command to generate database migrations:  
+Run the following command to generate database migrations:
 
 ```shell
 npm run db:generate
 ```
 
-### Apply Migrations:  
+### Apply Migrations:
 
-Apply the generated migrations to your database:  
+Apply the generated migrations to your database:
 
 ```shell
 npm run db:migrate
