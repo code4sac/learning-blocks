@@ -12,7 +12,6 @@
 - Target student's Aeries STU.ID field
 
 ### If you are a developer, we have a couple of ways for you to help/contribute/learn
-#### BACKEND
 
 - If you want to start off this project just learning the Python side of things, I suggest you
   start [here](https://github.com/code4sac/learning-blocks/edit/main/Documentation%20Directory/Individual_scripts.md)
@@ -25,15 +24,6 @@
   you start [here](https://github.com/code4sac/learning-blocks/tree/main/LB_Community_Edition_Enterprise)
 - If you want to dive into a demo version of aeries go [here](https://demo.aeries.net/aeries/)
 - If you want to know about database standards used in this documentation go [here](https://www.imsglobal.org/oneroster-v11-final-csv-tables#_Toc480293254 )
-
-#### FRONTEND
-To get started, after cloning the repo locally:
-```
-$ cd LB_Community_Edition_Non_Enterprise/Pilot_Iteration_Files/gcc-iteration-nextjs
-$ npm insatll
-$ npm run dev
-```
-Take a look in your browser at [http://localhost:3000/](http://localhost:3000/)
 
 ## More documentation soon
 
