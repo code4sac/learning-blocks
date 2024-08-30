@@ -27,6 +27,7 @@ async function createTestUser({
             id: users.id,
             email: users.email,
             createdAt: users.createdAt,
+            password: users.password,
         })
 
     const user = rows[0]
