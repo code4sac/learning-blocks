@@ -1,5 +1,7 @@
 # Database
 
+Database code should not depend on other files outside of this folder. That will make it easier to replace the database with something else in the future.
+
 > [!IMPORTANT]  
 > The database is currently using example data. Once we have a better understanding of the data we will update the database schema and drop the example tables.
 
