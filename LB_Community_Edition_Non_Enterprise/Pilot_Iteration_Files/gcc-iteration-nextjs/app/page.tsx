@@ -1,14 +1,13 @@
+import SiteNavigationBar03 from "@/app/_components/layout/navigationBar/SiteNavigationBar03";
+import LandingPage02 from "@/app/_features/landingPage/LandingPage02";
 
-import styles from './page.module.css'; // Ensure this path is correct
-import Card01 from '@/components/Card01'; // Import the Card01 component
-
-export default function Home() {
+export default async function Page() {
   return (
-    <main className={styles.main}>
-
-
-      <Card01 />
-
-    </main>
+    <div className="h-screen v-screen">
+      <SiteNavigationBar03></SiteNavigationBar03>b
+      <div className="">
+        <LandingPage02></LandingPage02>
+      </div>
+    </div>
   );
 }

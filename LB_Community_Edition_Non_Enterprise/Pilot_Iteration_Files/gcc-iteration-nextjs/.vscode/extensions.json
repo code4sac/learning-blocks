@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "firefox-devtools.vscode-firefox-debug",
+    "vitest.explorer",
+    "esbenp.prettier-vscode"
+  ]
+}

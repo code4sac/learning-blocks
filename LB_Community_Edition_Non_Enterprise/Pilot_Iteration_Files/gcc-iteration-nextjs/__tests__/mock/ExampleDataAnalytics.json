@@ -1,0 +1,50 @@
+[
+  {
+    "key": "A10b6",
+    "analytics_title": "Chronic Absenteeism",
+    "analytics_student_amount": 208,
+    "analytics_level_amount": 50,
+    "analytics_level_text": "Yellow",
+    "analytics_description": "Who is chronically absent (less than 10% attendance)"
+  },
+  {
+    "key": "A8af8",
+    "analytics_title": "Suspension Rate",
+    "analytics_student_amount": 208,
+    "analytics_level_amount": 50,
+    "analytics_level_text": "Yellow",
+    "analytics_description": "Cohort data"
+  },
+  {
+    "key": "A188e",
+    "analytics_title": "Graduation Rate",
+    "analytics_student_amount": 208,
+    "analytics_level_amount": 50,
+    "analytics_level_text": "Yellow",
+    "analytics_description": "Graduation rate"
+  },
+  {
+    "key": "A9e77",
+    "analytics_title": "LTEL",
+    "analytics_student_amount": 208,
+    "analytics_level_amount": 50,
+    "analytics_level_text": "Yellow",
+    "analytics_description": "LTEL List (students who arent on track to keeping up with their english as a secondary language)"
+  },
+  {
+    "key": "A1b84",
+    "analytics_title": "College and Career",
+    "analytics_student_amount": 208,
+    "analytics_level_amount": 50,
+    "analytics_level_text": "Medium",
+    "analytics_description": "College and career indicators"
+  },
+  {
+    "key": "A8314",
+    "analytics_title": "Unduplicated Count",
+    "analytics_student_amount": 208,
+    "analytics_level_amount": 50,
+    "analytics_level_text": "Medium",
+    "analytics_description": "Unduplicated Count"
+  }
+]

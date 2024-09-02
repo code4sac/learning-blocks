@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Learning Blocks Dashboard Website
+
+A comprehensive dashboard application for displaying user data.
+
+## Project Description
+
+This project is a frontend web application built using Next.js, a React framework that enables server-side rendering and
+static site generation. The application serves as a user data dashboard, providing users with an interactive and dynamic
+interface to view and analyze various metrics and statistics.
+
+### Key Features
+
+- **Data Visualization**: Integrates with charting libraries to display data in various graphical formats.
+- **Responsive Design**: Ensures the dashboard is accessible and usable on all devices.
 
 ## Getting Started
 
-First, run the development server:
+First, install the required packages and then run the development server:
 
 ```bash
+npm i
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Checklist
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Here are some commands to check before submitting code.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Load homepage and any other pages that need to be checked. `npm run dev`
+2. Check for warnings and errors in the code. `npm run lint`
+3. Database should return "Everything's fine 🐶🔥". `npm run db:check`
+4. (Optional) Make sure all tests pass. `npm run test`
 
-## Learn More
+## Help
 
-To learn more about Next.js, take a look at the following resources:
+Take a look at code in the `__test__` folder for examples. There are also `README.md` files that give specific help,
+such as [/database/README.md](/database/README.md).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### General Documentation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+English documentation files are stored in `doc/en`.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Database commands](/doc/en/drizzle.md)
+- [Test driven development](/doc/en/tdd.md)
+- [Running project in VSCode](/doc/en/vscode.md)

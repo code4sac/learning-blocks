@@ -1,0 +1,46 @@
+[
+  {
+    "demographic_title": "Total",
+    "demographic_aggregate": "12,874"
+  },
+  {
+    "demographic_title": "Female",
+    "demographic_aggregate": "6,232"
+  },
+  {
+    "demographic_title": "Male",
+    "demographic_aggregate": "6,642"
+  },
+  {
+    "demographic_title": "Asian",
+    "demographic_aggregate": "4,310"
+  },
+  {
+    "demographic_title": "Black/African American",
+    "demographic_aggregate": "309"
+  },
+  {
+    "demographic_title": "Hispanic",
+    "demographic_aggregate": "4,029"
+  },
+  {
+    "demographic_title": "Multiple",
+    "demographic_aggregate": "910"
+  },
+  {
+    "demographic_title": "Native American",
+    "demographic_aggregate": "33"
+  },
+  {
+    "demographic_title": "Pacific Islander",
+    "demographic_aggregate": "438"
+  },
+  {
+    "demographic_title": "Unknown",
+    "demographic_aggregate": "14"
+  },
+  {
+    "demographic_title": "White",
+    "demographic_aggregate": "2,831"
+  }
+]

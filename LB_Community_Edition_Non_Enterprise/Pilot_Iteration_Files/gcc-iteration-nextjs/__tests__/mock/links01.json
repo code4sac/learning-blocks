@@ -1,0 +1,26 @@
+[
+  {
+    "key": "dashboard",
+    "menuIcon": "menu_grid",
+    "subMenuLinks": [
+      {
+        "key": 0
+      },
+      {
+        "key": 1
+      }
+    ]
+  },
+  {
+    "key": "student",
+    "menuIcon": "menu_id",
+    "subMenuLinks": [
+      {
+        "key": 0
+      },
+      {
+        "key": 1
+      }
+    ]
+  }
+]

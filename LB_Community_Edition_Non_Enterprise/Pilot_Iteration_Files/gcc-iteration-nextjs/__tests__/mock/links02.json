@@ -1,0 +1,72 @@
+[
+  {
+    "title": "dashboard",
+    "menuIcon": "menu_grid",
+    "subMenuLinks": [
+      "example 01",
+      "example 02",
+      "overview",
+      "events"
+    ]
+  },
+  {
+    "title": "student",
+    "menuIcon": "menu_id",
+    "subMenuLinks": [
+      "Show All",
+      "Personal Info",
+      "Family Info",
+      "Contact List",
+      "Medical",
+      "Vaccines",
+      "Insurance",
+      "Financial"
+    ]
+  },
+  {
+    "title": "courses",
+    "menuIcon": "menu_clipboard_list",
+    "subMenuLinks": [
+      "overview",
+      "attendance",
+      "schedule",
+      "Course History",
+      "Class Catalog",
+      "Academic Plan"
+    ]
+  },
+  {
+    "title": "pathway",
+    "menuIcon": "menu_navigation_search",
+    "subMenuLinks": [
+      "graduation",
+      "transcripts",
+      "tests",
+      "universities",
+      "resources"
+    ]
+  },
+  {
+    "title": "intervention",
+    "menuIcon": "menu_arrow_fork",
+    "subMenuLinks": [
+      "overview",
+      "504 Plan",
+      "IEP",
+      "SST",
+      "Long Term English Learners",
+      "behavioral"
+    ]
+  },
+  {
+    "title": "messages",
+    "menuIcon": "menu_mail",
+    "subMenuLinks": [
+      "inbox",
+      "contact",
+      "directory",
+      "forms",
+      "status"
+    ]
+  }
+]
