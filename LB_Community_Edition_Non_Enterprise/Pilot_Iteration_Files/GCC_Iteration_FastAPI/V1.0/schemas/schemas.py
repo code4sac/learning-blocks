@@ -19,14 +19,18 @@ class PeopleInDBCreate(BaseModel):
     SectionsIDs: Optional[str] = None
     GradebookIDs: Optional[List[str]] = None
     DateLastModified: Optional[str] = None
+    school_code: Optional[str]  # Add the new field for SchoolCode
 
-class PeopleInDBResponse(PeopleInDBCreate):
-    id: int
+    class Config:
+        from_attributes = True
 
 class StudentInDBCreate(BaseModel):
-    anonymizedStudentID: str
-    anonymizedStudentNumber: Optional[str] = None
+    AnonymizedStudentID: str
+    AnonymizedStudentNumber: Optional[str] = None
     role: RoleEnum
+
+    class Config:
+        from_attributes = True
 
 
 class PeopleInDBResponse(PeopleInDBCreate):
@@ -42,3 +46,20 @@ class StudentInDBResponse(StudentInDBCreate):
 
     class Config:
         from_attributes = True
+
+class SchoolsInDBBase(BaseModel):
+    school_code: str
+    school_name: str
+    address: Optional[str]
+    city: Optional[str]
+    state: Optional[str]
+    zip_code: Optional[str]
+
+    class Config:
+        orm_mode = True
+
+class SchoolsInDBCreate(SchoolsInDBBase):
+    pass
+
+class SchoolsInDB(SchoolsInDBBase):
+    id: int
