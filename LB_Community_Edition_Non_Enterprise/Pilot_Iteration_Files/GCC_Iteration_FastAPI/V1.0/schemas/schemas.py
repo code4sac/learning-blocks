@@ -1,4 +1,4 @@
-from typing import Optional, List, Union, Dict, Optional
+from typing import Optional, List, Dict
 from models.models import RoleEnum
 from pydantic import BaseModel, Field
 
@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 class PeopleInDBCreate(BaseModel):
     Firstname: str
     Lastname: str
-    role: RoleEnum
+    role: RoleEnum = "RoleEnum"
     sourcedid: str  # Unique identifier for linking
     EnabledUser: str = "True"
     DateLastModified: Optional[str] = None
@@ -170,6 +170,7 @@ class StudentInDBResponse(StudentInDBCreate):
     birthdate: Optional[str] = None
     Sections: Optional[List[str]] = None
     SchlAssociated: Optional[str] = None
+    BDDemo: Optional[BDDemoModel] = None
     
 
     class Config:
@@ -229,3 +230,37 @@ class SchoolsInDBCreate(SchoolsInDBBase):
 class SchoolsInDB(SchoolsInDBBase):
     id: int
     people: List[PeopleInDBResponse]  # List of people associated with the school
+
+# Schema for updating PeopleInDB records
+class PeopleInDBUpdate(BaseModel):
+    Firstname: Optional[str] = None
+    Lastname: Optional[str] = None
+    role: RoleEnum = "RoleEnum"
+    sourcedid: Optional[str] = None
+    EnabledUser: Optional[str] = None
+    DateLastModified: Optional[str] = None
+    school_code: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class StudentInDB(BaseModel):
+    id: int
+    AnonymizedStudentID: str
+    AnonymizedStudentNumber: str
+    Sections: Optional[List[str]] = None
+    SchlAssociated: Optional[str] = None
+    Birthdate: Optional[str] = None
+
+    class Config:
+        orm_mode = True
+
+class StudentInDBCreate(BaseModel):
+    AnonymizedStudentID: str
+    AnonymizedStudentNumber: str
+    Sections: Optional[List[str]] = None
+    SchlAssociated: Optional[str] = None
+    Birthdate: Optional[str] = None
+
+class StudentInDBResponse(StudentInDB):
+    pass
