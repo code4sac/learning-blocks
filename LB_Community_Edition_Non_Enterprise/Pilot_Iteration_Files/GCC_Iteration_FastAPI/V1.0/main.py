@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import people, students, teachers
+from routers import people, students, teachers, schools
 from databases.databases import Base, engine
 
 # Create the database tables
@@ -12,3 +12,4 @@ app = FastAPI()
 app.include_router(people.router)
 app.include_router(students.router)
 app.include_router(teachers.router)
+app.include_router(schools.router, prefix="/api")

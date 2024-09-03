@@ -16,15 +16,6 @@ class PeopleInDBCreate(BaseModel):
 
         from_attributes = True
 
-# Base schema for StudentInDB creation
-class StudentInDBCreate(BaseModel):
-    AnonymizedStudentID: str
-    AnonymizedStudentNumber: Optional[str] = None
-    role: RoleEnum = "student"
-    sourcedid: str  # This will link to PeopleInDB's sourcedid
-
-    class Config:
-        from_attributes = True
 
 class BDDemoModel(BaseModel):
     BDcurrentAcademicIndicator: Dict[str, int] = Field(
@@ -159,6 +150,17 @@ class TeacherInDBCreate(BaseModel):
 
 # Response schema for PeopleInDB
 
+class StudentInDBCreate(BaseModel):
+    AnonymizedStudentID: str
+    AnonymizedStudentNumber: str
+    Sections: Optional[List[str]] = None
+    SchlAssociated: Optional[str] = None
+    Birthdate: Optional[str] = None
+    role: RoleEnum = "student"
+    sourcedid: str
+
+
+
 
 # Response schema for StudentInDB
 class StudentInDBResponse(StudentInDBCreate):
@@ -198,7 +200,7 @@ class PeopleInDBResponse(PeopleInDBCreate):
    id: int
    Firstname: str
    Lastname: str
-   role: RoleEnum = "RoleEnum"
+   role: RoleEnum 
    sourcedid: str
    EnabledUser: Optional[str] = None
    DateLastModified: Optional[str] = None
@@ -224,12 +226,16 @@ class SchoolsInDBBase(BaseModel):
 
 # Schema for SchoolsInDB creation
 class SchoolsInDBCreate(SchoolsInDBBase):
+    bddemo : Optional[BDDemoModel] = None
     pass
 
-# Response schema for SchoolsInDB
-class SchoolsInDB(SchoolsInDBBase):
+# Response schema for SchoolsInDB with list of associated people
+class SchoolsInDBResponse(SchoolsInDBBase):
     id: int
-    people: List[PeopleInDBResponse]  # List of people associated with the school
+    people: List[PeopleInDBResponse] = []  # List of people associated with the school
+
+    class Config:
+        orm_mode = True
 
 # Schema for updating PeopleInDB records
 class PeopleInDBUpdate(BaseModel):
@@ -255,12 +261,18 @@ class StudentInDB(BaseModel):
     class Config:
         orm_mode = True
 
-class StudentInDBCreate(BaseModel):
-    AnonymizedStudentID: str
-    AnonymizedStudentNumber: str
-    Sections: Optional[List[str]] = None
-    SchlAssociated: Optional[str] = None
-    Birthdate: Optional[str] = None
-
 class StudentInDBResponse(StudentInDB):
     pass
+class PeopleInDB(BaseModel):
+    id: int
+    Firstname: str
+    Lastname: str
+    role: RoleEnum
+    sourcedid: str
+    EnabledUser: Optional[str] = None
+    DateLastModified: Optional[str] = None
+    school_code: Optional[str] = None
+    student: Optional[StudentInDBResponse] = None
+    teacher: Optional[TeacherInDBResponse] = None
+    class Config:
+        orm_mode = True

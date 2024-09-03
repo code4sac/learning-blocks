@@ -1,10 +1,10 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import text
-from models.models import StudentInDB, RoleEnum
+from models.models import StudentInDB
 from schemas.schemas import (
     StudentInDBCreate, StudentInDBResponse, 
-    BDDemoModel, PeopleInDBCreate, PeopleInDBResponse
+    BDDemoModel
 )
 from databases.databases import get_db  # Use relative import
 
@@ -15,15 +15,20 @@ def create_student(student: StudentInDBCreate, db: Session = Depends(get_db)):
     try:
         # Insert the StudentInDB record using raw SQL and return the inserted record
         query = text("""
-            INSERT INTO students (AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid)
-            VALUES (:AnonymizedStudentID, :AnonymizedStudentNumber, :role, :sourcedid)
-            RETURNING id, AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid
+            INSERT INTO students (AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid, Sections, SchlAssociated, Birthdate, BDDemo)
+            VALUES (:AnonymizedStudentID, :AnonymizedStudentNumber, :role, :sourcedid, :Sections, :SchlAssociated, :Birthdate, :BDDemoModel)
+            RETURNING id, AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid, Sections, SchlAssociated, Birthdate, BDDemo
         """)
         result = db.execute(query, {
             "AnonymizedStudentID": student.AnonymizedStudentID,
             "AnonymizedStudentNumber": student.AnonymizedStudentNumber,
             "role": student.role.value,
-            "sourcedid": student.sourcedid
+            "sourcedid": student.sourcedid,
+            "Sections": student.Sections,
+            "SchlAssociated": student.SchlAssociated,
+            "Birthdate": student.Birthdate,
+            "BDDemoModel": student.BDDemoModel.model_dump_json()
+    
         })
         db_student = result.fetchone()
 
@@ -82,10 +87,10 @@ def update_bddemo(student_id: int, bddemo: BDDemoModel, db: Session = Depends(ge
             UPDATE students
             SET BDDemo = :bddemo
             WHERE id = :student_id
-            RETURNING id, AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid, BDDemo
+            RETURNING id, AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid, BDDemo, Sections, SchlAssociated, Birthdate
         """)
         result = db.execute(query, {
-            "bddemo": bddemo.json(),  # Convert BDDemoModel to JSON string
+            "bddemo": bddemo.model_dump_json(),  # Convert BDDemoModel to JSON string
             "student_id": student_id
         })
         updated_student = result.fetchone()

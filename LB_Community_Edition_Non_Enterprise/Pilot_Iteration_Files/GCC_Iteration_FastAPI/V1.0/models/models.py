@@ -44,12 +44,12 @@ class PricePerStudent(int, enum.Enum):
 class PeopleInDB(Base):
     __tablename__ = "people"
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
-    Firstname: Mapped[str] = mapped_column(String, index=True)
-    Lastname: Mapped[str] = mapped_column(String, index=True)
+    firstname: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
+    lastname: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
     role: Mapped[RoleEnum] = mapped_column(SQLAEnum(RoleEnum), nullable=False, index=True)
     sourcedid: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)  # sourcedid as the unique identifier
-    EnabledUser: Mapped[str] = mapped_column(String, index=True)
-    DateLastModified: Mapped[str] = mapped_column(String, index=True)
+    enableduser: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
+    datelastmodified: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
     school_code: Mapped[Optional[str]] = mapped_column(String, ForeignKey("schools.school_code"), nullable=True, index=True)
     
     # Relationships
@@ -65,16 +65,14 @@ class StudentInDB(PeopleInDB):
     __tablename__ = "students"
     __table_args__ = {'extend_existing': True}
     id: Mapped[int] = mapped_column(Integer, ForeignKey("people.id"), primary_key=True, index=True)
-    AnonymizedStudentID: Mapped[str] = mapped_column(String, unique=True, nullable=False)
-    AnonymizedStudentNumber: Mapped[Optional[str]] = mapped_column(String, nullable=True)
-    BDDemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)
+    anonymizedstudentid: Mapped[str] = mapped_column(String, unique=True, nullable=False)  # Changed to lowercase
+    anonymizedstudentnumber: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    bddemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)  # Changed to lowercase
     role: Mapped[RoleEnum] = mapped_column(SQLAEnum(RoleEnum), nullable=False, index=True)
     sourcedid: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)
-    Sections: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)
-    SchlAssociated: Mapped[Optional[str]] = mapped_column(String, nullable=True)
-    Birthdate: Mapped[Optional[str]] = mapped_column(String, nullable=True)
-
-
+    sections: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    schlassociated: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    birthdate: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
 
     __mapper_args__ = {
         'polymorphic_identity': 'student',  # Identity for Student
@@ -96,27 +94,27 @@ class TeacherInDB(PeopleInDB):
     __tablename__ = "teachers"
     __table_args__ = {'extend_existing': True}
     id: Mapped[int] = mapped_column(Integer, ForeignKey("people.id"), primary_key=True, index=True)
-    AnonymizedTeacherID: Mapped[str] = mapped_column(String, unique=True, nullable=False)
-    AnonymizedTeacherNumber: Mapped[Optional[str]] = mapped_column(String, nullable=True)
-    Sections: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)
-    StuAssociated: Mapped[Optional[Dict[str, Dict[str, Optional[str]]]]] = mapped_column(JSON, nullable=True)
-    SchlAssociated: Mapped[Optional[str]] = mapped_column(String, nullable=True)
-    Credentials: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)
-    Subjects: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)
-    SiteDuties: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)
-    GradeLevels: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)
-    BDDemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)
- 
+    anonymizedteacherid: Mapped[str] = mapped_column(String, unique=True, nullable=False)  # Changed to lowercase
+    anonymizedteachernumber: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    sections: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    stuassociated: Mapped[Optional[Dict[str, Dict[str, Optional[str]]]]] = mapped_column(JSON, nullable=True)  # Changed to lowercase
+    schlassociated: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    credentials: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    subjects: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    siteduties: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    gradelevels: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    bddemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)  # Changed to lowercase
+
     def set_stu_associated(self, data: Optional[Dict[str, Dict[str, Optional[str]]]]):
         """Serialize dictionary to JSON string after validation."""
         if data and validate_stu_associated(data):
-            self.StuAssociated = json.dumps(data)
+            self.stuassociated = json.dumps(data)
         else:
             raise ValueError("Invalid data structure for StuAssociated")
 
     def get_stu_associated(self) -> Optional[Dict[str, Dict[str, Optional[str]]]]:
         """Deserialize JSON string to dictionary."""
-        return json.loads(self.StuAssociated) if self.StuAssociated else None
+        return json.loads(self.stuassociated) if self.stuassociated else None
 
     __mapper_args__ = {
         'polymorphic_identity': 'teacher',  # Identity for Teacher
@@ -132,7 +130,7 @@ class SchoolsInDB(Base):
     city: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     state: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     zip_code: Mapped[Optional[str]] = mapped_column(String, nullable=True)
-    BDDemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)
+    bddemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)  # Changed to lowercase
 
     # Relationship to PeopleInDB
     people: Mapped[List["PeopleInDB"]] = relationship("PeopleInDB", back_populates="school")
