@@ -1,14 +1,15 @@
 import enum
+import json
+import os
+from typing import Optional, List, Dict, Generator
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from sqlalchemy import create_engine, Enum, Column, Integer, String, JSON, ForeignKey, Table
+from sqlalchemy import Column, Integer, String, JSON, ForeignKey, Enum as SQLAEnum
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship, with_polymorphic
-from sqlalchemy.exc import IntegrityError
-import os
-from typing import Optional, List, Generator, Dict
+from sqlalchemy.orm import sessionmaker, relationship, Mapped, mapped_column
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from dotenv import load_dotenv
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import create_engine
 
 load_dotenv()
 
@@ -45,12 +46,10 @@ class PeopleInDB(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     Firstname: Mapped[str] = mapped_column(String, index=True)
     Lastname: Mapped[str] = mapped_column(String, index=True)
-    role: Mapped[RoleEnum]= mapped_column(Enum(RoleEnum), nullable=False, index=True)
+    role: Mapped[RoleEnum] = mapped_column(SQLAEnum(RoleEnum), nullable=False, index=True)
     sourcedid: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)  # sourcedid as the unique identifier
     EnabledUser: Mapped[str] = mapped_column(String, index=True)
     DateLastModified: Mapped[str] = mapped_column(String, index=True)
-
-    # Foreign key to SchoolsInDB
     school_code: Mapped[Optional[str]] = mapped_column(String, ForeignKey("schools.school_code"), nullable=True, index=True)
     
     # Relationships
@@ -64,12 +63,17 @@ class PeopleInDB(Base):
 # Polymorphic model for students
 class StudentInDB(PeopleInDB):
     __tablename__ = "students"
-    __table_args__ = {'extend_existing': True}  # Add this line
+    __table_args__ = {'extend_existing': True}
     id: Mapped[int] = mapped_column(Integer, ForeignKey("people.id"), primary_key=True, index=True)
     AnonymizedStudentID: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     AnonymizedStudentNumber: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+    BDDemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)
+    role: Mapped[RoleEnum] = mapped_column(SQLAEnum(RoleEnum), nullable=False, index=True)
+    sourcedid: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)
+    Sections: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)
+    SchlAssociated: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     
-    # Additional student-specific fields can be added here
+
 
     __mapper_args__ = {
         'polymorphic_identity': 'student',  # Identity for Student
@@ -89,7 +93,7 @@ def validate_stu_associated(data: Dict[str, Dict[str, Optional[str]]]) -> bool:
 
 class TeacherInDB(PeopleInDB):
     __tablename__ = "teachers"
-    __table_args__ = {'extend_existing': True}  # Add this line
+    __table_args__ = {'extend_existing': True}
     id: Mapped[int] = mapped_column(Integer, ForeignKey("people.id"), primary_key=True, index=True)
     AnonymizedTeacherID: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     AnonymizedTeacherNumber: Mapped[Optional[str]] = mapped_column(String, nullable=True)
@@ -101,23 +105,17 @@ class TeacherInDB(PeopleInDB):
     SiteDuties: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)
     GradeLevels: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)
     BDDemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)
-    BDGender: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)
-    BDASTI: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)
-    BDCCI: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)
-
+ 
     def set_stu_associated(self, data: Optional[Dict[str, Dict[str, Optional[str]]]]):
         """Serialize dictionary to JSON string after validation."""
         if data and validate_stu_associated(data):
-            import json
             self.StuAssociated = json.dumps(data)
         else:
             raise ValueError("Invalid data structure for StuAssociated")
 
     def get_stu_associated(self) -> Optional[Dict[str, Dict[str, Optional[str]]]]:
         """Deserialize JSON string to dictionary."""
-        import json
         return json.loads(self.StuAssociated) if self.StuAssociated else None
-    # Additional teacher-specific fields can be added here
 
     __mapper_args__ = {
         'polymorphic_identity': 'teacher',  # Identity for Teacher
@@ -133,21 +131,10 @@ class SchoolsInDB(Base):
     city: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     state: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     zip_code: Mapped[Optional[str]] = mapped_column(String, nullable=True)
-    
+    BDDemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)
+
     # Relationship to PeopleInDB
     people: Mapped[List["PeopleInDB"]] = relationship("PeopleInDB", back_populates="school")
-# Utility functions
-def serialize_to_json(data: Optional[Dict[str, List[str]]]) -> Optional[str]:
-    if data is not None:
-        return json.dumps(data)
-    return None
-
-def deserialize_from_json(data: Optional[str]) -> Optional[Dict[str, List[str]]]:
-    if data is not None:
-        return json.loads(data)
-    return None
-
-Base.metadata.create_all(bind=engine)
 
 # Dependency to get DB session
 def get_db() -> Generator:
@@ -156,3 +143,5 @@ def get_db() -> Generator:
         yield db
     finally:
         db.close()
+
+Base.metadata.create_all(bind=engine)

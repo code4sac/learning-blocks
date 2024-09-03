@@ -27,7 +27,21 @@ class StudentInDBCreate(BaseModel):
         from_attributes = True
 
 class BDDemoModel(BaseModel):
- BDcurrentethnicity: Dict[str, int] = Field(
+    BDcurrentAcademicIndicator: Dict[str, int] = Field(
+        {
+            "Suspensions_Indicator": 0,
+            "EL_Prgrs_Indicator": 0,
+            "Grad_Rate_Indicator": 0,
+            "College_Career_Indicator": 0,
+            "ELA_Indicator": 0,
+            "Math_Indicator": 0,
+            "Total_Students_Grad_OnTrack": 0,
+            "Total_Students_Grad_OffTrack": 0,
+            "Total_At_Risk_Students": 0,
+        },
+        description="Breakdown of students by academic indicators."
+    )
+    BDcurrentethnicity: Dict[str, int] = Field(
         {
             "Total_Hispanic": 0,
             "Total_White_Hispanic": 0,
@@ -35,8 +49,7 @@ class BDDemoModel(BaseModel):
         },
         description="Breakdown of students by ethnicity with total counts."
     )
-
- BDcurrentrace: Dict[str, int] = Field(
+    BDcurrentrace: Dict[str, int] = Field(
         {
             "Total_American_Indian_Alaska_Native": 0,
             "Total_Native_Hawaiian_Other_Pacific_Islander": 0,
@@ -47,30 +60,87 @@ class BDDemoModel(BaseModel):
             "Total_Hispanic": 0,
             "Total_Pacific_Islander": 0,
             "Total_Two_or_more": 0,
-            # Add any other predefined keys you need here
         },
         description="Breakdown of students by race with total counts."
     )
- BDcurrentgender: Dict[str, int] = Field(
+    BDcurrentgender: Dict[str, int] = Field(
         {
             "Total_Students": 0,
             "Total_Male_Students": 0,
             "Total_Female_Students": 0,
+            "Total_Non-Binary_Students": 0,
         },
-
-        description="Breakdown of students by ethnicity with total counts."
+        description="Breakdown of students by gender with total counts."
     )
-class BDGenderModel(BaseModel):
-    key1: List[str] = Field(..., description="Description for key1")
-    key2: List[str] = Field(..., description="Description for key2")
+    BDcurrentSPED: Dict[str, int] = Field(
+        {
+            "Total_IEP_Students": 0,
+            "Total_504_Students": 0,
+            "Total_Students_with_Disabilities": 0,
+            "Total_Students_without_Disabilities": 0,
+            "Total_Students": 0,
+        }
+    )
+    BDcurrentLangAcq: Dict[str, int] = Field(
+        {
+            "Total_English_Learners": 0,
+            "Total_English_Proficient": 0,
+            "Total_Long_Term_English_Learners": 0,
+            "Total_Reclassified_Fluent_English_Proficient": 0,
+            "Total_Students": 0,
+        }
+    )
+    BDcurrentSpclPrg: Dict[str, int] = Field(
+        {
+            "Total_Free_Lunch": 0,
+            "Total_Reduced_Lunch": 0,
+            "Total_Pay_Lunch": 0,
+            "Total_Mckinney_Vento": 0,
+            "Total_Foster": 0,
+            "Total_Socio_Econ_Disad": 0,
+            "Total_Students": 0,
+            "Total_At_Risk": 0,
+        }
+    )
+    BDcurrentAtRiskIndicators: Dict[str, int] = Field(
+        {
+            "Total_Free_Lunch": 0,
+            "Total_Reduced_Lunch": 0,
+            "Total_Pay_Lunch": 0,
+            "Total_Mckinney_Vento": 0,
+            "Total_Foster": 0,
+            "Total_Socio_Econ_Disad": 0,
+            "Total_Students": 0,
+            "Total_At_Risk": 0,
+        }
+    )
+    BDcurrentAttendance: Dict[str, int] = Field(
+        {
+            "Total_Days_Absent": 0,
+            "Total_Days_Present": 0,
+            "Total_Days_InSchl_Suspended": 0,
+            "Total_Days_Home_Suspended": 0,
+            "Total_Students_Chronically_Absent": 0,
+            "Total_Students_Not_Chronically_Absent": 0,
+            "Total_Students_Mid_Year_Graduated": 0,
+            "Total_Students_Mid_Year_Enrolled": 0,
+            "Total_Students_Admin_Dropped": 0,
+            "Total_Students": 0,
+        }
+    )
+    BDcurrentRetention: Dict[str, int] = Field(
+        {
+            "Total_Students_Retained": 0,
+            "Total_Students": 0,
+        }
+    )
+    BDcurrentSuspensions: Dict[str, int] = Field(
+        {
+            "Total_Suspensions": 0,
+            "Total_Students": 0,
+        }
+    )
 
-class BDASTIModel(BaseModel):
-    key1: List[str] = Field(..., description="Description for key1")
-    key2: List[str] = Field(..., description="Description for key2")
-
-class BDCCIModel(BaseModel):
-    key1: List[str] = Field(..., description="Description for key1")
-    key2: List[str] = Field(..., description="Description for key2")
 
 class TeacherInDBCreate(BaseModel):
     AnonymizedTeacherID: str
@@ -83,9 +153,7 @@ class TeacherInDBCreate(BaseModel):
     SiteDuties: Optional[List[str]] = None
     GradeLevels: Optional[List[str]] = None
     BDDemo: Optional[BDDemoModel] = None
-    BDGender: Optional[BDGenderModel] = None
-    BDASTI: Optional[BDASTIModel] = None
-    BDCCI: Optional[BDCCIModel] = None
+
     class Config:
         from_attributes = True
 
@@ -109,8 +177,13 @@ class TeacherInDBResponse(TeacherInDBCreate):
     AnonymizedTeacherNumber: Optional[str] = None
     role: RoleEnum = "teacher"
     sourcedid: str
-    id: int
-    students: List[StudentInDBResponse] = []
+    StuAssociated: List[StudentInDBResponse] = []
+    SchlAssociated: Optional[str] = None
+    Credentials: Optional[List[str]] = None
+    Subjects: Optional[List[str]] = None
+    SiteDuties: Optional[List[str]] = None
+    GradeLevels: Optional[List[str]] = None
+
 
     class Config:
       from_attributes = True
