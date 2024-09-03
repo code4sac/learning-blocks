@@ -72,7 +72,8 @@ class StudentInDB(PeopleInDB):
     sourcedid: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)
     Sections: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)
     SchlAssociated: Mapped[Optional[str]] = mapped_column(String, nullable=True)
-    
+    Birthdate: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+
 
 
     __mapper_args__ = {

@@ -167,6 +167,10 @@ class StudentInDBResponse(StudentInDBCreate):
     role: RoleEnum = "student"
     sourcedid: str
     id: int
+    birthdate: Optional[str] = None
+    Sections: Optional[List[str]] = None
+    SchlAssociated: Optional[str] = None
+    
 
     class Config:
       from_attributes = True
