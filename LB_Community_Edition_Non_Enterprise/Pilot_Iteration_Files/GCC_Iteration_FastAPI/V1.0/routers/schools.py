@@ -50,6 +50,7 @@ def update_school(school_id: int, school: SchoolsInDBCreate, db: Session = Depen
         existing_school.city = school.city
         existing_school.state = school.state
         existing_school.zip_code = school.zip_code
+        existing_school.bddemo = school.bddemo.json()
 
         db.commit()
         db.refresh(existing_school)

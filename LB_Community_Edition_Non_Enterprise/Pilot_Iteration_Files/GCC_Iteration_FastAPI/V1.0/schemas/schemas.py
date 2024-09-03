@@ -158,11 +158,10 @@ class StudentInDBCreate(BaseModel):
     Birthdate: Optional[str] = None
     role: RoleEnum = "student"
     sourcedid: str
+    BDDemo: Optional[BDDemoModel] = None
 
 
-
-
-# Response schema for StudentInDB
+ #Response schema for StudentInDB
 class StudentInDBResponse(StudentInDBCreate):
     AnonymizedStudentID: str
     AnonymizedStudentNumber: Optional[str] = None
@@ -177,6 +176,10 @@ class StudentInDBResponse(StudentInDBCreate):
 
     class Config:
       from_attributes = True
+      
+
+
+
 
 # Response schema for TeacherInDB
 class TeacherInDBResponse(TeacherInDBCreate):
@@ -195,6 +198,20 @@ class TeacherInDBResponse(TeacherInDBCreate):
     class Config:
       from_attributes = True
 
+
+class PeopleInDB(BaseModel):
+    id: int
+    Firstname: str
+    Lastname: str
+    role: RoleEnum
+    sourcedid: str
+    EnabledUser: Optional[str] = None
+    DateLastModified: Optional[str] = None
+    school_code: Optional[str] = None
+    student: Optional[StudentInDBResponse] = None
+    teacher: Optional[TeacherInDBResponse] = None
+    class Config:
+        orm_mode = True
 
 class PeopleInDBResponse(PeopleInDBCreate):
    id: int
@@ -233,6 +250,7 @@ class SchoolsInDBCreate(SchoolsInDBBase):
 class SchoolsInDBResponse(SchoolsInDBBase):
     id: int
     people: List[PeopleInDBResponse] = []  # List of people associated with the school
+    bddemo: Optional[BDDemoModel] = None
 
     class Config:
         orm_mode = True
@@ -261,18 +279,3 @@ class StudentInDB(BaseModel):
     class Config:
         orm_mode = True
 
-class StudentInDBResponse(StudentInDB):
-    pass
-class PeopleInDB(BaseModel):
-    id: int
-    Firstname: str
-    Lastname: str
-    role: RoleEnum
-    sourcedid: str
-    EnabledUser: Optional[str] = None
-    DateLastModified: Optional[str] = None
-    school_code: Optional[str] = None
-    student: Optional[StudentInDBResponse] = None
-    teacher: Optional[TeacherInDBResponse] = None
-    class Config:
-        orm_mode = True

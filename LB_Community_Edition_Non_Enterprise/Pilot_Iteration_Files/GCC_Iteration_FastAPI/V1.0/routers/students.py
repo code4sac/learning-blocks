@@ -27,7 +27,7 @@ def create_student(student: StudentInDBCreate, db: Session = Depends(get_db)):
             "Sections": student.Sections,
             "SchlAssociated": student.SchlAssociated,
             "Birthdate": student.Birthdate,
-            "BDDemoModel": student.BDDemoModel.model_dump_json()
+            "BDdemo": student.BDDemo if student.BDDemo else None
     
         })
         db_student = result.fetchone()
@@ -44,14 +44,13 @@ def create_student(student: StudentInDBCreate, db: Session = Depends(get_db)):
             AnonymizedStudentID=db_student["AnonymizedStudentID"],
             AnonymizedStudentNumber=db_student["AnonymizedStudentNumber"],
             role=db_student["role"],
-            sourcedid=db_student["sourcedid"]
+            sourcedid=db_student["sourcedid"],
+            BDDemoModel=db_student["BDDemo"]
         )
 
         return response_student
     except Exception as e:
         db.rollback()
-        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
-
 
 @router.get("/students/{student_id}", response_model=StudentInDBResponse)
 def read_student(student_id: int, db: Session = Depends(get_db)):
@@ -59,15 +58,15 @@ def read_student(student_id: int, db: Session = Depends(get_db)):
         db_student = db.query(StudentInDB).filter(StudentInDB.id == student_id).first()
         if db_student is None:
             raise HTTPException(status_code=404, detail="Student not found")
-
         response_student = StudentInDBResponse(
             id=db_student.id,
             AnonymizedStudentID=db_student.AnonymizedStudentID,
             AnonymizedStudentNumber=db_student.AnonymizedStudentNumber,
             role=db_student.role,
-            sourcedid=db_student.sourcedid
+            sourcedid=db_student.sourcedid,
+            BDDemoModel=db_student.BDDemo
         )
-
+        
         return response_student
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
