@@ -1,77 +1,117 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
-from models.models import SchoolsInDB
-from schemas.schemas import SchoolsInDBCreate, SchoolsInDBResponse
-from databases.databases import get_db
+from sqlalchemy import text
+from models.models import StudentInDB
+from schemas.schemas import (
+    StudentInDBCreate, StudentInDBResponse, 
+    BDDemoModel
+)
+from databases.databases import get_db  # Use relative import
 
 router = APIRouter()
 
-@router.post("/schools", response_model=SchoolsInDBResponse)
-def create_school(school: SchoolsInDBCreate, db: Session = Depends(get_db)):
+@router.post("/students/", response_model=StudentInDBResponse)
+def create_student(student: StudentInDBCreate, db: Session = Depends(get_db)):
     try:
-        db_school = SchoolsInDB(
-            school_code=school.school_code,
-            school_name=school.school_name,
-            address=school.address,
-            city=school.city,
-            state=school.state,
-            zip_code=school.zip_code,
-            bddemo=school.bddemo.json()
+        # Insert the StudentInDB record using raw SQL and return the inserted record
+        query = text("""
+            INSERT INTO students (AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid, Sections, SchlAssociated, Birthdate, BDDemo)
+            VALUES (:AnonymizedStudentID, :AnonymizedStudentNumber, :role, :sourcedid, :Sections, :SchlAssociated, :Birthdate, :BDDemoModel)
+            RETURNING id, AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid, Sections, SchlAssociated, Birthdate, BDDemo
+        """)
+        result = db.execute(query, {
+            "AnonymizedStudentID": student.AnonymizedStudentID,
+            "AnonymizedStudentNumber": student.AnonymizedStudentNumber,
+            "role": student.role.value,
+            "sourcedid": student.sourcedid,
+            "Sections": student.Sections,
+            "SchlAssociated": student.SchlAssociated,
+            "Birthdate": student.Birthdate,
+            "BDDemoModel": student.BDDemoModel.model_dump_json()
+    
+        })
+        db_student = result.fetchone()
+
+        if not db_student:
+            raise HTTPException(status_code=500, detail="Failed to create student.")
+
+        # Commit the transaction
+        db.commit()
+
+        # Construct the response data
+        response_student = StudentInDBResponse(
+            id=db_student["id"],
+            AnonymizedStudentID=db_student["AnonymizedStudentID"],
+            AnonymizedStudentNumber=db_student["AnonymizedStudentNumber"],
+            role=db_student["role"],
+            sourcedid=db_student["sourcedid"]
         )
-        db.add(db_school)
-        db.commit()
-        db.refresh(db_school)
 
-        return db_school
+        return response_student
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
 
-@router.get("/schools/{school_id}", response_model=SchoolsInDBResponse)
-def read_school(school_id: int, db: Session = Depends(get_db)):
-    school = db.query(SchoolsInDB).filter(SchoolsInDB.id == school_id).first()
-    if not school:
-        raise HTTPException(status_code=404, detail="School not found")
-    return school
-
-
-# Update a school
-@router.put("/schools/{school_id}", response_model=SchoolsInDBResponse)
-def update_school(school_id: int, school: SchoolsInDBCreate, db: Session = Depends(get_db)):
-    existing_school = db.query(SchoolsInDB).filter(SchoolsInDB.id == school_id).first()
-    if not existing_school:
-        raise HTTPException(status_code=404, detail="School not found")
-    
+@router.get("/students/{student_id}", response_model=StudentInDBResponse)
+def read_student(student_id: int, db: Session = Depends(get_db)):
     try:
-        existing_school.school_code = school.school_code
-        existing_school.school_name = school.school_name
-        existing_school.address = school.address
-        existing_school.city = school.city
-        existing_school.state = school.state
-        existing_school.zip_code = school.zip_code
+        db_student = db.query(StudentInDB).filter(StudentInDB.id == student_id).first()
+        if db_student is None:
+            raise HTTPException(status_code=404, detail="Student not found")
 
-        db.commit()
-        db.refresh(existing_school)
+        response_student = StudentInDBResponse(
+            id=db_student.id,
+            AnonymizedStudentID=db_student.AnonymizedStudentID,
+            AnonymizedStudentNumber=db_student.AnonymizedStudentNumber,
+            role=db_student.role,
+            sourcedid=db_student.sourcedid
+        )
 
-        return existing_school
+        return response_student
     except Exception as e:
-        db.rollback()
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
 
-# Delete a school
-@router.delete("/schools/{school_id}", response_model=SchoolsInDBResponse)
-def delete_school(school_id: int, db: Session = Depends(get_db)):
-    school = db.query(SchoolsInDB).filter(SchoolsInDB.id == school_id).first()
-    if not school:
-        raise HTTPException(status_code=404, detail="School not found")
-    
+@router.put("/students/{student_id}/update_student_bddemo", response_model=StudentInDBResponse, summary="Update Student BDDemo")
+def update_bddemo(student_id: int, bddemo: BDDemoModel, db: Session = Depends(get_db)):
     try:
-        db.delete(school)
+        # Find the student by ID
+        db_student = db.query(StudentInDB).filter_by(id=student_id).first()
+
+        if db_student is None:
+            raise HTTPException(status_code=404, detail="Student not found")
+
+        # Update the BDDemo column with new data using raw SQL
+        query = text("""
+            UPDATE students
+            SET BDDemo = :bddemo
+            WHERE id = :student_id
+            RETURNING id, AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid, BDDemo, Sections, SchlAssociated, Birthdate
+        """)
+        result = db.execute(query, {
+            "bddemo": bddemo.model_dump_json(),  # Convert BDDemoModel to JSON string
+            "student_id": student_id
+        })
+        updated_student = result.fetchone()
+
+        if not updated_student:
+            raise HTTPException(status_code=500, detail="Failed to update BDDemo.")
+
+        # Commit the transaction
         db.commit()
-        return school
+
+        # Construct the response data
+        response_student = StudentInDBResponse(
+            id=updated_student["id"],
+            AnonymizedStudentID=updated_student["AnonymizedStudentID"],
+            AnonymizedStudentNumber=updated_student["AnonymizedStudentNumber"],
+            role=updated_student["role"],
+            sourcedid=updated_student["sourcedid"],
+            BDDemo=bddemo
+        )
+
+        return response_student
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
-
