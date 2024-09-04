@@ -48,8 +48,8 @@ class PeopleInDB(Base):
     lastname: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
     role: Mapped[RoleEnum] = mapped_column(SQLAEnum(RoleEnum), nullable=False, index=True)
     sourcedid: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)  # sourcedid as the unique identifier
-    enableduser: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
-    datelastmodified: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
+    EnabledUser: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
+    dateLastModified: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
     school_code: Mapped[Optional[str]] = mapped_column(String, ForeignKey("schools.school_code"), nullable=True, index=True)
     
     # Relationships
@@ -73,6 +73,7 @@ class StudentInDB(PeopleInDB):
     sections: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
     schlassociated: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
     birthdate: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    school_code: Mapped[Optional[str]] = mapped_column(String, ForeignKey("schools.school_code"), nullable=True, index=True)
 
     __mapper_args__ = {
         'polymorphic_identity': 'student',  # Identity for Student

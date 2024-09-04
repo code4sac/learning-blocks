@@ -1,57 +1,37 @@
+import json
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from models.models import StudentInDB
-from schemas.schemas import (
-    StudentInDBCreate, StudentInDBResponse, 
-    BDDemoModel
-)
-from databases.databases import get_db  # Use relative import
+from schemas.schemas import StudentInDBCreate, StudentInDBResponse, BDDemoModel
+from databases.databases import get_db  # Ensure relative import is correct
 
 router = APIRouter()
 
-@router.post("/students/", response_model=StudentInDBResponse)
-def create_student(student: StudentInDBCreate, db: Session = Depends(get_db)):
+@router.post("/student", response_model=StudentInDBResponse)
+def create_school(student: StudentInDBCreate, db: Session = Depends(get_db)):
     try:
-        # Insert the StudentInDB record using raw SQL and return the inserted record
-        query = text("""
-            INSERT INTO students (AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid, Sections, SchlAssociated, Birthdate, BDDemo)
-            VALUES (:AnonymizedStudentID, :AnonymizedStudentNumber, :role, :sourcedid, :Sections, :SchlAssociated, :Birthdate, :BDDemoModel)
-            RETURNING id, AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid, Sections, SchlAssociated, Birthdate, BDDemo
-        """)
-        result = db.execute(query, {
-            "AnonymizedStudentID": student.AnonymizedStudentID,
-            "AnonymizedStudentNumber": student.AnonymizedStudentNumber,
-            "role": student.role.value,
-            "sourcedid": student.sourcedid,
-            "Sections": student.Sections,
-            "SchlAssociated": student.SchlAssociated,
-            "Birthdate": student.Birthdate,
-            "BDdemo": student.BDDemo if student.BDDemo else None
-    
-        })
-        db_student = result.fetchone()
-
-        if not db_student:
-            raise HTTPException(status_code=500, detail="Failed to create student.")
-
-        # Commit the transaction
-        db.commit()
-
-        # Construct the response data
-        response_student = StudentInDBResponse(
-            id=db_student["id"],
-            AnonymizedStudentID=db_student["AnonymizedStudentID"],
-            AnonymizedStudentNumber=db_student["AnonymizedStudentNumber"],
-            role=db_student["role"],
-            sourcedid=db_student["sourcedid"],
-            BDDemoModel=db_student["BDDemo"]
+        db_student = StudentInDB(
+            school_code=student.school_code,
+            AnonymizedStudentID=student.AnonymizedStudentID,
+            AnonymizedStudentNumber=student.AnonymizedStudentNumber,
+            role=student.role,
+            sourcedid=student.sourcedid,
+            Sections=student.Sections,
+            schlassociated=student.SchlAssociated,
+            birthdate=student.Birthdate,
+            bddemo=student.bddemo.json()
         )
+        db.add(db_student)
+        db.commit()
+        db.refresh(db_student)
 
-        return response_student
+        return db_student
     except Exception as e:
         db.rollback()
+        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
+    
 @router.get("/students/{student_id}", response_model=StudentInDBResponse)
 def read_student(student_id: int, db: Session = Depends(get_db)):
     try:
@@ -64,6 +44,7 @@ def read_student(student_id: int, db: Session = Depends(get_db)):
             AnonymizedStudentNumber=db_student.AnonymizedStudentNumber,
             role=db_student.role,
             sourcedid=db_student.sourcedid,
+            school_code=db_student.school_code,
             BDDemoModel=db_student.BDDemo
         )
         
@@ -86,7 +67,7 @@ def update_bddemo(student_id: int, bddemo: BDDemoModel, db: Session = Depends(ge
             UPDATE students
             SET BDDemo = :bddemo
             WHERE id = :student_id
-            RETURNING id, AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid, BDDemo, Sections, SchlAssociated, Birthdate
+            RETURNING id, AnonymizedStudentID, AnonymizedStudentNumber, role, sourcedid, BDDemo, Sections, SchlAssociated, Birthdate, school_code
         """)
         result = db.execute(query, {
             "bddemo": bddemo.model_dump_json(),  # Convert BDDemoModel to JSON string
@@ -107,6 +88,7 @@ def update_bddemo(student_id: int, bddemo: BDDemoModel, db: Session = Depends(ge
             AnonymizedStudentNumber=updated_student["AnonymizedStudentNumber"],
             role=updated_student["role"],
             sourcedid=updated_student["sourcedid"],
+            school_code=updated_student["school_code"],
             BDDemo=bddemo
         )
 

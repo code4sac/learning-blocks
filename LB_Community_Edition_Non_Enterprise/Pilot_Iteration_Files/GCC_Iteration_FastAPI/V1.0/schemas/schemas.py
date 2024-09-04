@@ -1,21 +1,21 @@
 from typing import Optional, List, Dict
 from models.models import RoleEnum
 from pydantic import BaseModel, Field
+from datetime import datetime
 
 # Base schema for PeopleInDB creation
 class PeopleInDBCreate(BaseModel):
-    Firstname: str
+    firstname: str
     Lastname: str
-    role: RoleEnum = "RoleEnum"
-    sourcedid: str  # Unique identifier for linking
-    EnabledUser: str = "True"
+    role: str  # Assuming it's a string, but you might want to use an Enum
+    sourcedid: str
+    EnabledUser: bool
     DateLastModified: Optional[str] = None
-    school_code: Optional[str] = None  # Field for SchoolCode
+    school_code: Optional[str] = None
+    AnonymizedStudentID: str 
 
     class Config:
-
         from_attributes = True
-
 
 class BDDemoModel(BaseModel):
     BDcurrentAcademicIndicator: Dict[str, int] = Field(
@@ -143,7 +143,7 @@ class TeacherInDBCreate(BaseModel):
     Subjects: Optional[List[str]] = None
     SiteDuties: Optional[List[str]] = None
     GradeLevels: Optional[List[str]] = None
-    BDDemo: Optional[BDDemoModel] = None
+    bddemo: Optional[BDDemoModel] = None
 
     class Config:
         from_attributes = True
@@ -158,11 +158,14 @@ class StudentInDBCreate(BaseModel):
     Birthdate: Optional[str] = None
     role: RoleEnum = "student"
     sourcedid: str
-    BDDemo: Optional[BDDemoModel] = None
+    school_code: Optional[str] = None
+    bddemo: Optional[BDDemoModel] = None
+    school_name: Optional[str] = None
+
 
 
  #Response schema for StudentInDB
-class StudentInDBResponse(StudentInDBCreate):
+class StudentInDBResponse(BaseModel):
     AnonymizedStudentID: str
     AnonymizedStudentNumber: Optional[str] = None
     role: RoleEnum = "student"
@@ -171,7 +174,8 @@ class StudentInDBResponse(StudentInDBCreate):
     birthdate: Optional[str] = None
     Sections: Optional[List[str]] = None
     SchlAssociated: Optional[str] = None
-    BDDemo: Optional[BDDemoModel] = None
+    school_code: Optional[str] = None
+    bddemo: Optional[BDDemoModel] = None
     
 
     class Config:
@@ -182,7 +186,7 @@ class StudentInDBResponse(StudentInDBCreate):
 
 
 # Response schema for TeacherInDB
-class TeacherInDBResponse(TeacherInDBCreate):
+class TeacherInDBResponse(BaseModel):
     AnonymizedTeacherID: str
     AnonymizedTeacherNumber: Optional[str] = None
     role: RoleEnum = "teacher"
@@ -201,33 +205,32 @@ class TeacherInDBResponse(TeacherInDBCreate):
 
 class PeopleInDB(BaseModel):
     id: int
-    Firstname: str
+    firstname: str
     Lastname: str
     role: RoleEnum
     sourcedid: str
     EnabledUser: Optional[str] = None
-    DateLastModified: Optional[str] = None
+    dateLastModified: Optional[str] = None
     school_code: Optional[str] = None
     student: Optional[StudentInDBResponse] = None
     teacher: Optional[TeacherInDBResponse] = None
     class Config:
         orm_mode = True
 
-class PeopleInDBResponse(PeopleInDBCreate):
-   id: int
-   Firstname: str
-   Lastname: str
-   role: RoleEnum 
-   sourcedid: str
-   EnabledUser: Optional[str] = None
-   DateLastModified: Optional[str] = None
-   school_code: Optional[str] = None
-    
-   # Include related models based on the role
-   student: Optional[StudentInDBResponse] = None
-   teacher: Optional[TeacherInDBResponse] = None
-   class Config:
-       from_attributes = True
+class PeopleInDBResponse(BaseModel):
+    id: int
+    firstname: str
+    lastname: str
+    role: str
+    sourcedid: str
+    EnabledUser: bool
+    dateLastModified: Optional[str] = None
+    school_code: Optional[str]
+    student: Optional[StudentInDBResponse] = None
+    teacher: Optional[TeacherInDBResponse] = None
+
+    class Config:
+        orm_mode = True
 # Base schema for SchoolsInDB
 
 class SchoolsInDBBase(BaseModel):
@@ -250,6 +253,9 @@ class SchoolsInDBCreate(SchoolsInDBBase):
 class SchoolsInDBResponse(SchoolsInDBBase):
     id: int
     people: List[PeopleInDBResponse] = []  # List of people associated with the school
+    school_code: str
+    school_name: str
+
     bddemo: Optional[BDDemoModel] = None
 
     class Config:
@@ -257,12 +263,12 @@ class SchoolsInDBResponse(SchoolsInDBBase):
 
 # Schema for updating PeopleInDB records
 class PeopleInDBUpdate(BaseModel):
-    Firstname: Optional[str] = None
+    firstname: Optional[str] = None
     Lastname: Optional[str] = None
     role: RoleEnum = "RoleEnum"
     sourcedid: Optional[str] = None
     EnabledUser: Optional[str] = None
-    DateLastModified: Optional[str] = None
+    dateLastModified: Optional[str] = None
     school_code: Optional[str] = None
 
     class Config:
@@ -275,6 +281,7 @@ class StudentInDB(BaseModel):
     Sections: Optional[List[str]] = None
     SchlAssociated: Optional[str] = None
     Birthdate: Optional[str] = None
+    school_code: Optional[str] = None
 
     class Config:
         orm_mode = True
