@@ -1,23 +1,27 @@
-﻿"use client";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import Dropdown from "react-bootstrap/Dropdown";
-import Image from "next/image";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import { useState } from "react";
-import styles from "./SiteNavigationBar01.module.css";
+﻿'use client'
+import Container from 'react-bootstrap/Container'
+import Navbar from 'react-bootstrap/Navbar'
+import Dropdown from 'react-bootstrap/Dropdown'
+import Image from 'next/image'
+import Offcanvas from 'react-bootstrap/Offcanvas'
+import { useState } from 'react'
+import styles from './SiteNavigationBar01.module.css'
 
 function signOut() {
-  localStorage.clear();
-  window.location.href = "/login";
+  localStorage.clear()
+  window.location.href = '/login'
 }
 
+/**
+ * Old navigation bar using bootstrap.
+ * @param loggedIn
+ */
 function SiteNavigationBar01(loggedIn) {
-  const [showSidebar, setShowSidebar] = useState(false);
-  const handleClose = () => setShowSidebar(false);
-  const handleShow = () => setShowSidebar(true);
+  const [showSidebar, setShowSidebar] = useState(false)
+  const handleClose = () => setShowSidebar(false)
+  const handleShow = () => setShowSidebar(true)
   const [showAccessibilityOptions, setShowAccessibilityOptions] =
-    useState(false);
+    useState(false)
 
   return (
     <div>
@@ -45,23 +49,23 @@ function SiteNavigationBar01(loggedIn) {
       <div
         style={
           loggedIn.loggedIn
-            ? { background: "#850A0A" }
-            : { background: "#FFFFFF" }
+            ? { background: '#850A0A' }
+            : { background: '#FFFFFF' }
         }
         className={`${styles.mainToolbarContainer}`}
       >
         <Container>
           <div className={`${styles.innerToolbarContainer}`}>
-            <a href={"/"}>
+            <a href={'/'}>
               <Image
                 width={148}
                 height={60}
-                src={loggedIn.loggedIn ? "/logosvg" : "/logo.svg"}
+                src={loggedIn.loggedIn ? '/logosvg' : '/logo.svg'}
                 className=""
                 alt="Learning Blocks logo"
               />
             </a>
-            <div style={{ display: "flex", flexGrow: 1, color: "white" }}>
+            <div style={{ display: 'flex', flexGrow: 1, color: 'white' }}>
               <Image
                 style={{ marginLeft: 16, marginRight: 16 }}
                 src="/menu_point_filled_light.svg"
@@ -70,7 +74,7 @@ function SiteNavigationBar01(loggedIn) {
                 width={24}
               />
               <span
-                style={{ fontWeight: 600, size: "16px", lineHeight: "20px" }}
+                style={{ fontWeight: 600, size: '16px', lineHeight: '20px' }}
               >
                 Northstop Unified School District
               </span>
@@ -87,8 +91,8 @@ function SiteNavigationBar01(loggedIn) {
                     height={60}
                     src={
                       loggedIn.loggedIn
-                        ? "/menu_accessible.png"
-                        : "/menuAccessibleImage"
+                        ? '/menu_accessible.png'
+                        : '/menuAccessibleImage'
                     }
                     alt="Help / Support"
                   />
@@ -99,8 +103,8 @@ function SiteNavigationBar01(loggedIn) {
                     height={60}
                     src={
                       loggedIn.loggedIn
-                        ? "/menu_world.png"
-                        : "/menu_world_light.png"
+                        ? '/menu_world.png'
+                        : '/menu_world_light.png'
                     }
                     alt="Help / Support"
                   />
@@ -111,15 +115,15 @@ function SiteNavigationBar01(loggedIn) {
                     height={60}
                     src={
                       loggedIn.loggedIn
-                        ? "/menu_help_circle.png"
-                        : "/menu_help_circle_light.png"
+                        ? '/menu_help_circle.png'
+                        : '/menu_help_circle_light.png'
                     }
                     alt="Help / Support"
                   />
                 </a>
               </div>
               {loggedIn.loggedIn ? (
-                <Dropdown style={{ display: "inline-block" }}>
+                <Dropdown style={{ display: 'inline-block' }}>
                   <Dropdown.Toggle
                     id="dropdown-basic"
                     className="bg-transparent"
@@ -160,7 +164,7 @@ function SiteNavigationBar01(loggedIn) {
         </Container>
       </div>
     </div>
-  );
+  )
 }
 
-export default SiteNavigationBar;
+export default SiteNavigationBar

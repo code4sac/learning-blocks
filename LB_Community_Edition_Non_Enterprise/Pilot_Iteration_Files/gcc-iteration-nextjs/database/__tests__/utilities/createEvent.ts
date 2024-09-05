@@ -1,28 +1,26 @@
-import { events } from "@/database/schema";
-import { LibSQLDatabase } from "drizzle-orm/libsql";
-import { integer, sqliteTable, text, unique } from "drizzle-orm/sqlite-core";
+import { events } from '@/database/schema'
+import { LibSQLDatabase } from 'drizzle-orm/libsql'
 
 export async function createEvent(
-  db: LibSQLDatabase<typeof import("../../schema")>
+  db: LibSQLDatabase<typeof import('../../schema')>,
+  eventData,
 ) {
-  const createdEvent = await db.insert(events).values({
-    name: "Example Event",
-    startOn: new Date().toUTCString(),
-    createdById: text("createdById").notNull(),
-    description: text("description"),
-
-    streetNumber: integer("streetNumber"),
-    street: text("street"),
-    zip: integer("zip"),
-    bldg: text("bldg"),
-
-    isPrivate: boolean("isPrivate").default(false).notNull(),
-    status: text("status", {
-      enum: ["draft", "live", "started", "ended", "canceled"],
+  let rows = await db
+    .insert(events)
+    .values({
+      name: eventData.name,
+      startOn: eventData.startOn,
+      createdById: eventData.createdById,
+      status: 'draft',
     })
-      .default("draft")
-      .notNull(),
-  });
+    .returning({
+      id: events.id,
+      name: events.name,
+      startOn: events.startOn,
+      createdById: events.createdById,
+    })
 
-  return createdEvent;
+  let event = rows[0]
+
+  return { event }
 }

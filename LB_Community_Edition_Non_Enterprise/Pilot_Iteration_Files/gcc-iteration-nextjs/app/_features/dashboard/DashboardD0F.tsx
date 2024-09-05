@@ -1,12 +1,11 @@
-"use client";
-import { Container } from "react-bootstrap";
-import styles from "./DashboardD0f.module.css";
-import { Demographic } from "@/app/_utilities/models/demographic";
-import CardC44 from "@/app/_components/ui/card/CardC44";
-import CardC89 from "@/app/_components/ui/card/CardC89";
+'use client'
+import styles from './DashboardD0f.module.css'
+import { Demographic } from '@/app/_utilities/models/demographic'
+import CardC44 from '@/app/_components/ui/card/CardC44'
+import CardC89 from '@/app/_components/ui/card/CardC89'
 
 export interface D0fProps {
-  demographics: [Demographic];
+  demographics: [Demographic]
 }
 
 /**
@@ -16,11 +15,11 @@ export interface D0fProps {
  */
 function DashboardD0f({ demographics }: D0fProps) {
   return (
-    <Container>
+    <div>
       <div className={styles.demographicAggregateContainer}>
         <div className={`${styles.demographicCard} ${styles.demographic1}`}>
           {demographics
-            .filter((it) => it.key == "T1")
+            .filter((it) => it.key == 'T1')
             .map((it) => (
               <CardC44
                 key={it.key}
@@ -31,7 +30,7 @@ function DashboardD0f({ demographics }: D0fProps) {
         </div>
         <div className={`${styles.demographicCard} ${styles.demographic2}`}>
           {demographics
-            .filter((it) => it.key == "G1")
+            .filter((it) => it.key == 'G1')
             .map((it) => (
               <CardC44
                 key={it.key}
@@ -42,7 +41,7 @@ function DashboardD0f({ demographics }: D0fProps) {
         </div>
         <div className={`${styles.demographicCard} ${styles.demographic3}`}>
           {demographics
-            .filter((it) => it.key == "G2")
+            .filter((it) => it.key == 'G2')
             .map((it) => (
               <CardC44
                 key={it.key}
@@ -53,7 +52,7 @@ function DashboardD0f({ demographics }: D0fProps) {
         </div>
         <div className={`${styles.demographicCard} ${styles.demographic4}`}>
           {demographics
-            .filter((it) => it.key == "G3")
+            .filter((it) => it.key == 'G3')
             .map((it) => (
               <CardC44
                 key={it.key}
@@ -81,8 +80,8 @@ function DashboardD0f({ demographics }: D0fProps) {
           className={`${styles.demographicCard} ${styles.demographic10}`}
         ></div>
       </div>
-    </Container>
-  );
+    </div>
+  )
 }
 
-export default DashboardD0f;
+export default DashboardD0f
