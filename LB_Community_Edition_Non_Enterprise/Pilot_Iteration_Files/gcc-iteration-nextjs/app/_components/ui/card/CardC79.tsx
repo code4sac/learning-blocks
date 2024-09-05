@@ -1,8 +1,7 @@
-import { Card, OverlayTrigger, Tooltip } from "react-bootstrap";
-import styles from "./CardC79.module.css";
-import Image from "next/image";
-import { AnalyticCardProps } from "@/app/_utilities/models/card";
-import { parseAnalyticArrowGraphImage } from "@/app/_utilities/graph/graphUtils";
+import styles from './CardC79.module.css'
+import Image from 'next/image'
+import { AnalyticCardProps } from '@/app/_utilities/models/card'
+import { parseAnalyticArrowGraphImage } from '@/app/_utilities/graph/graphUtils'
 
 /**
  * Dashboard arrow graph card. Categories (Red, Orange, Yellow, Green, Blue). Monotone color theme.
@@ -18,33 +17,31 @@ function CardC79({
   function getColorIndicator(index: number) {
     switch (index) {
       case 0:
-        return styles.colorIndicator0;
+        return styles.colorIndicator0
       case 1:
-        return styles.colorIndicator1;
+        return styles.colorIndicator1
       case 2:
-        return styles.colorIndicator2;
+        return styles.colorIndicator2
       case 3:
-        return styles.colorIndicator3;
+        return styles.colorIndicator3
       case 4:
-        return styles.colorIndicator4;
+        return styles.colorIndicator4
     }
   }
 
   return (
     <div key={data.key}>
-      <Card>
-        <Card.Body>
-          <Card.Text
-            className={`h6 text-center ${styles.cardBodyImageContainer}`}
-          >
+      <div>
+        <div>
+          <div className={`h6 text-center ${styles.cardBodyImageContainer}`}>
             {data.analyticTitle}
-            <OverlayTrigger
+            <div
               placement="right"
               delay={{ show: 250, hide: 400 }}
               overlay={(props) => (
-                <Tooltip id="button-tooltip" {...props}>
+                <div id="button-tooltip" {...props}>
                   {data.analyticDescription}
-                </Tooltip>
+                </div>
               )}
             >
               <Image
@@ -54,8 +51,8 @@ function CardC79({
                 height={24}
                 width={24}
               />
-            </OverlayTrigger>
-          </Card.Text>
+            </div>
+          </div>
           <div className={styles.cardBodyImageContainer}>
             <Image
               src={parseAnalyticArrowGraphImage(data.analyticLevelAmount)}
@@ -66,24 +63,22 @@ function CardC79({
           <div className={styles.categoriesContainer}>
             {data.analyticCategories?.map((category, index) => {
               return (
-                <Card
+                <div
                   className={styles.categoryCard}
                   key={category.key}
                   onClick={() => selectCategory(data.key, index)}
                   data-bs-theme={getCardTheme(index)}
                 >
                   <div className={getColorIndicator(index)}></div>
-                  <Card.Body>
-                    {category.analyticCategoryStudentAmount}
-                  </Card.Body>
-                </Card>
-              );
+                  <div>{category.analyticCategoryStudentAmount}</div>
+                </div>
+              )
             })}
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
-  );
+  )
 }
 
-export default CardC79;
+export default CardC79

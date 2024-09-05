@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { AppNextUIProvider } from "@/app/_utilities/providers";
-import "./globals.css";
-import React from "react";
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import { AppNextUIProvider } from '@/app/_utilities/providers'
+import './globals.css'
+import React from 'react'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Learning Blocks",
-  description: "Learning Blocks dashboard.",
-};
+  title: 'Learning Blocks',
+  description: 'Learning Blocks dashboard.',
+}
 
 /**
  * Root layout component.
@@ -26,5 +26,5 @@ export default function RootLayout({
         <AppNextUIProvider>{children}</AppNextUIProvider>
       </body>
     </html>
-  );
+  )
 }

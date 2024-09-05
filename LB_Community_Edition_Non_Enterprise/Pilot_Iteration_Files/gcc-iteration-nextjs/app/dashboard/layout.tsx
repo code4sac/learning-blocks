@@ -1,12 +1,12 @@
-import SiteNavigationBar02 from "@/app/_components/layout/navigationBar/SiteNavigationBar02";
+import SiteNavigationBar from '@/app/_components/layout/navigationBar/SiteNavigationBar'
 
 export default function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div>
-      <SiteNavigationBar02></SiteNavigationBar02>
+      <SiteNavigationBar></SiteNavigationBar>
       <div>{children}</div>
     </div>
-  );
+  )
 }
