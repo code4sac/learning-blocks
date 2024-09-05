@@ -6,6 +6,7 @@ authors = ["Shawn_Dean <info@innovateforcalifornia.org>"]
 license = "MIT LicenseCopyright (c) 2022 Code for Sacramento & 2024 Innovate For California <https://github.com/code4sac/learning-blocks?tab=MIT-1-ov-file#readme>"
 readme = "README.md"
 packages = [{include = "v1"}]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
