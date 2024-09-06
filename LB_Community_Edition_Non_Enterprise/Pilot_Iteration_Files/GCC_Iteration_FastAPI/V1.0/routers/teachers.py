@@ -11,25 +11,32 @@ from databases.databases import get_db  # Use relative import
 router = APIRouter()
 
 @router.post("/teachers/", response_model=TeacherInDBResponse)
-def create_teacher(teacher: PeopleInDBCreate, db: Session = Depends(get_db)):
+def create_teacher(teacher: TeacherInDBResponse, db: Session = Depends(get_db)):
     if teacher.role != RoleEnum.teacher:
         raise HTTPException(status_code=400, detail="Role must be teacher.")
 
     try:
         # Insert the PeopleInDB record for teacher
         query = text("""
-            INSERT INTO people (Firstname, Lastname, role, sourcedid, EnabledUser, DateLastModified, school_code)
-            VALUES (:Firstname, :Lastname, :role, :sourcedid, :EnabledUser, :DateLastModified, :school_code)
-            RETURNING id, Firstname, Lastname, role, sourcedid, EnabledUser, DateLastModified, school_code
+            INSERT INTO people (Firstname, Lastname, role, sourcedid, EnabledUser, DateLastModified, school_code, grade_levels)
+            VALUES (:Firstname, :Lastname, :role, :sourcedid, :EnabledUser, :DateLastModified, :school_code, :grade_levels)
+            RETURNING id, Firstname, Lastname, role, sourcedid, EnabledUser, DateLastModified, school_code, grade_levels
         """)
         result = db.execute(query, {
-            "Firstname": teacher.Firstname,
-            "Lastname": teacher.Lastname,
+            "anonymizedteacherid": teacher.AnonymizedTeacherID,
+            "anonymizedteachernumber": teacher.AnonymizedTeacherNumber,
+            "sections": teacher.Sections,
+            "stu_associated": teacher.StuAssociated,
+            "schl_associated": teacher.SchlAssociated,
+            "credentials": teacher.Credentials,
+            "subjects": teacher.Subjects,
             "role": teacher.role.value,
             "sourcedid": teacher.sourcedid,
             "EnabledUser": teacher.EnabledUser,
             "DateLastModified": teacher.DateLastModified,
-            "school_code": teacher.school_code
+            "school_code": teacher.school_code,
+            "grade_levels": teacher.GradeLevels,
+            "bddemo": teacher.bddemo.json() if teacher.bddemo else None
         })
         db_person = result.fetchone()
 
@@ -52,7 +59,14 @@ def create_teacher(teacher: PeopleInDBCreate, db: Session = Depends(get_db)):
             "credentials": teacher.Credentials,
             "subjects": teacher.Subjects,
             "site_duties": teacher.SiteDuties,
-            "grade_levels": teacher.GradeLevels
+            "grade_levels": teacher.GradeLevels,
+            "role": teacher.role.value,
+            "sourcedid": teacher.sourcedid,
+            "EnabledUser": teacher.EnabledUser,
+            "DateLastModified": teacher.DateLastModified,
+            "school_code": teacher.school_code,
+            "bddemo": teacher.bddemo.json() if teacher.bddemo else None
+    
         })
         db_teacher = result.fetchone()
 

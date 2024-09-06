@@ -197,6 +197,12 @@ class TeacherInDBResponse(BaseModel):
     Subjects: Optional[List[str]] = None
     SiteDuties: Optional[List[str]] = None
     GradeLevels: Optional[List[str]] = None
+    EnabledUser: Optional[str] = None
+    school_code: Optional[str] = None
+    bddemo: Optional[BDDemoModel] = None
+    DateLastModified: Optional[str] = None
+    Sections: Optional[List[str]] = None
+
 
 
     class Config:
