@@ -5,7 +5,7 @@ export default function Layout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div>
-      <SiteNavigationBar></SiteNavigationBar>
+      <SiteNavigationBar siteSelector={true}></SiteNavigationBar>
       <div>{children}</div>
     </div>
   )

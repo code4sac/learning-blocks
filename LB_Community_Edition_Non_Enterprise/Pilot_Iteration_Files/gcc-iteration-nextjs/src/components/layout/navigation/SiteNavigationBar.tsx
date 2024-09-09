@@ -26,6 +26,7 @@ import {
   TagUser,
   Scale,
 } from './Icons'
+import NavigationSiteSelector from './NavigationSiteSelector'
 
 function onSiteSelect(site: string) {
   console.log(site)
@@ -71,89 +72,101 @@ export default function SiteNavigationBar({
             <p className="font-bold text-inherit">Learning Blocks</p>
           </Link>
           {/* <Image src="/logo.svg" alt="Learning Blocks" width={120} height={40} /> */}
-          {/* {siteSelector && (
+          {siteSelector && (
             <NavigationSiteSelector
               sites={['GCC Pilot Iteration']}
               onSiteSelect={onSiteSelect}
+              className="pl-4"
             ></NavigationSiteSelector>
-          )} */}
+          )}
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden lg:flex gap-4">
-        <Dropdown>
-          <NavbarItem>
-            <DropdownTrigger>
-              <Button
-                disableRipple
-                className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                endContent={icons.chevron}
-                radius="sm"
-                variant="light"
+      {!siteSelector && (
+        <NavbarContent className="hidden lg:flex gap-4">
+          <Dropdown>
+            <NavbarItem>
+              <DropdownTrigger>
+                <Button
+                  disableRipple
+                  className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+                  endContent={icons.chevron}
+                  radius="sm"
+                  variant="light"
+                >
+                  Components
+                </Button>
+              </DropdownTrigger>
+            </NavbarItem>
+            <DropdownMenu
+              aria-label="ACME features"
+              className="w-[340px]"
+              itemClasses={{
+                base: 'gap-4',
+              }}
+            >
+              <DropdownItem
+                key="autoscaling"
+                description="ACME scales apps to meet user demand, automagically, based on load."
+                startContent={icons.scale}
               >
-                Components
-              </Button>
-            </DropdownTrigger>
+                Autoscaling
+              </DropdownItem>
+              <DropdownItem
+                key="usage_metrics"
+                description="Real-time metrics to debug issues. Slow query added? We’ll show you exactly where."
+                startContent={icons.activity}
+              >
+                Usage Metrics
+              </DropdownItem>
+              <DropdownItem
+                key="production_ready"
+                description="ACME runs on ACME, join us and others serving requests at web scale."
+                startContent={icons.flash}
+              >
+                Production Ready
+              </DropdownItem>
+              <DropdownItem
+                key="99_uptime"
+                description="Applications stay on the grid with high availability and high uptime guarantees."
+                startContent={icons.server}
+              >
+                +99% Uptime
+              </DropdownItem>
+              <DropdownItem
+                key="supreme_support"
+                description="Overcome any challenge with a supporting team ready to respond."
+                startContent={icons.user}
+              >
+                +Supreme Support
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          <NavbarItem>
+            <Link color="foreground" href="/signin">
+              Demo
+            </Link>
           </NavbarItem>
-          <DropdownMenu
-            aria-label="ACME features"
-            className="w-[340px]"
-            itemClasses={{
-              base: 'gap-4',
-            }}
-          >
-            <DropdownItem
-              key="autoscaling"
-              description="ACME scales apps to meet user demand, automagically, based on load."
-              startContent={icons.scale}
-            >
-              Autoscaling
-            </DropdownItem>
-            <DropdownItem
-              key="usage_metrics"
-              description="Real-time metrics to debug issues. Slow query added? We’ll show you exactly where."
-              startContent={icons.activity}
-            >
-              Usage Metrics
-            </DropdownItem>
-            <DropdownItem
-              key="production_ready"
-              description="ACME runs on ACME, join us and others serving requests at web scale."
-              startContent={icons.flash}
-            >
-              Production Ready
-            </DropdownItem>
-            <DropdownItem
-              key="99_uptime"
-              description="Applications stay on the grid with high availability and high uptime guarantees."
-              startContent={icons.server}
-            >
-              +99% Uptime
-            </DropdownItem>
-            <DropdownItem
-              key="supreme_support"
-              description="Overcome any challenge with a supporting team ready to respond."
-              startContent={icons.user}
-            >
-              +Supreme Support
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-        <NavbarItem>
-          <Link color="foreground" href="/signin">
-            Demo
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
+        </NavbarContent>
+      )}
 
       <NavbarContent justify="end">
         <NavbarItem className="hidden sm:flex">
-          <Button
-            radius="full"
-            className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
-          >
-            Login
-          </Button>
+          {siteSelector ? (
+            <Button
+              radius="full"
+              className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              radius="full"
+              className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+            >
+              Login
+            </Button>
+          )}
         </NavbarItem>
       </NavbarContent>
 

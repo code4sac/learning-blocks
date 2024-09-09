@@ -1,9 +1,26 @@
 'use client'
 import { NextUIProvider } from '@nextui-org/react'
 import * as React from 'react'
+import { ThemeProviderProps } from 'next-themes/dist/types'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
+import { useRouter } from 'next/router'
 
-export function AppNextUIProvider({ children }: { children: React.ReactNode }) {
-  return <NextUIProvider>{children}</NextUIProvider>
+export interface AppNextUIProviderProps {
+  children: React.ReactNode
+  themeProps?: ThemeProviderProps
+}
+
+export function AppNextUIProvider({
+  children,
+  themeProps,
+}: AppNextUIProviderProps) {
+  let router = useRouter()
+
+  return (
+    <NextUIProvider navigate={router.push}>
+      <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+    </NextUIProvider>
+  )
 }
 
 export interface AuthenticatedState {
@@ -12,11 +29,11 @@ export interface AuthenticatedState {
   user: User | null
 }
 
-const AuthContext = React.createContext<AuthenticatedState | null>(null)
+let AuthContext = React.createContext<AuthenticatedState | null>(null)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = React.useState<User | null>(null)
-  const isAuthenticated = !!user
+  let [user, setUser] = React.useState<User | null>(null)
+  let isAuthenticated = !!user
   return (
     <AuthContext.Provider value={{ isAuthenticated, user, setUser }}>
       {children}
@@ -25,7 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function useAuth() {
-  const context = React.useContext(AuthContext)
+  let context = React.useContext(AuthContext)
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider')
   }
