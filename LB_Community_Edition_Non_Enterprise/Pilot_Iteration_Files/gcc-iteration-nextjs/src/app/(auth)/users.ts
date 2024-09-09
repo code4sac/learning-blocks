@@ -1,9 +1,9 @@
 import 'server-only'
-import { COOKIE_NAME } from '../../constants'
+import { COOKIE_NAME } from '../../utilities/constants'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { getUserFromToken } from '../documentation/old-utilities/authTools'
 import { cache } from 'react'
+import { getUserFromToken } from '@/services/drizzle/utilities/user'
 
 export const getCurrentUser = cache(async () => {
   const token = cookies().get(COOKIE_NAME)

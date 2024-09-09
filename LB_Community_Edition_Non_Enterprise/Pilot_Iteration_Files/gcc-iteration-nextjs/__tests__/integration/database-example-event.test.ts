@@ -1,4 +1,4 @@
-import { db } from '@/db'
+import { db } from '@/utilities/db'
 import { createEvent } from '@/services/drizzle/utilities/createEvent'
 import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 

@@ -3,7 +3,7 @@ import { NextUIProvider } from '@nextui-org/react'
 import * as React from 'react'
 import { ThemeProviderProps } from 'next-themes/dist/types'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 export interface AppNextUIProviderProps {
   children: React.ReactNode
@@ -50,6 +50,6 @@ export function useAuth() {
 }
 
 export class User {
-  id: string
-  name: string
+  id!: string
+  name!: string
 }

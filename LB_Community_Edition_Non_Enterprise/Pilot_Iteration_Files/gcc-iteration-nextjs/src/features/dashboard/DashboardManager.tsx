@@ -3,45 +3,31 @@ import { ReactElement } from 'react'
 import DashboardD81 from '@/features/dashboard/DashboardD81'
 import DashboardD0f from '@/features/dashboard/DashboardD0F'
 
-export interface DashboardProps {
+export interface DashboardManagerProps {
   data: [any]
   selectedSubMenu: SubMenu
   setPageQueryKey?: any
 }
 
 /**
- * Manage routing and data for the dashboard.
- * @param subMenu {string} The selected toolbar menu.
- * @returns App container child element.
+ * DashboardManager component to manage and render different dashboard views
+ * based on the selected submenu.
+ *
+ * @param {DashboardManagerProps} props - The props for the DashboardManager component.
+ * @returns {ReactElement} The rendered dashboard component.
  */
-function DashboardManager({
+export default function DashboardManager({
   data,
   selectedSubMenu,
   setPageQueryKey,
-}: DashboardProps) {
-  function renderInnerContent(): ReactElement {
-    switch (selectedSubMenu) {
-      case SubMenu.Example01:
-        return (
-          <DashboardD81
-            data={data}
-            setPageQueryKey={setPageQueryKey}
-          ></DashboardD81>
-        )
-      case SubMenu.Example02:
-        return <DashboardD0f demographics={data}></DashboardD0f>
-      default:
-        return (
-          <div>
-            <div>
-              <div>{selectedSubMenu}</div>
-            </div>
-          </div>
-        )
-    }
-  }
-
-  return <div>{renderInnerContent()}</div>
+}: DashboardManagerProps) {
+  return (
+    <div>
+      <DashboardD81
+        data={data}
+        setPageQueryKey={setPageQueryKey}
+      ></DashboardD81>
+      {/* <DashboardD0f demographics={data}></DashboardD0f> */}
+    </div>
+  )
 }
-
-export default DashboardManager

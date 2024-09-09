@@ -27,6 +27,7 @@ import {
   Scale,
 } from './Icons'
 import NavigationSiteSelector from './NavigationSiteSelector'
+import { signout } from '@/actions/signout'
 
 function onSiteSelect(site: string) {
   console.log(site)
@@ -76,7 +77,6 @@ export default function SiteNavigationBar({
             <NavigationSiteSelector
               sites={['GCC Pilot Iteration']}
               onSiteSelect={onSiteSelect}
-              className="pl-4"
             ></NavigationSiteSelector>
           )}
         </NavbarBrand>
@@ -156,15 +156,16 @@ export default function SiteNavigationBar({
             <Button
               radius="full"
               className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              onPress={() => signout()}
             >
-              Logout
+              Sign Out
             </Button>
           ) : (
             <Button
               radius="full"
               className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
             >
-              Login
+              Sign In
             </Button>
           )}
         </NavbarItem>

@@ -2,12 +2,10 @@
  * Support page.
  * @returns JSX element.
  */
-function SupportPage() {
-    let element = <div>
-        Support
-    </div>
+export default function SupportPage() {
+  let element = <div>Support</div>
 
-    return element
+  return element
 }
 
 export default SupportPage

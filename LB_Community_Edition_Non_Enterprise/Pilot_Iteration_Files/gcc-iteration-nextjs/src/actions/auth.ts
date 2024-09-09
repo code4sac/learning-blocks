@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { redirect } from 'next/navigation'
 import { signin, signup } from '@/services/drizzle/utilities/user'
-import { COOKIE_NAME } from '@/constants'
+import { COOKIE_NAME } from '@/utilities/constants'
 
 const authSchema = z.object({
   email: z.string().email(),

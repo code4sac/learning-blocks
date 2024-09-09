@@ -1,6 +1,6 @@
 'use server'
 
-import { COOKIE_NAME } from '@/constants'
+import { COOKIE_NAME } from '@/utilities/constants'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 

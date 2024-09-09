@@ -2,12 +2,10 @@
  * Settings page.
  * @returns JSX element.
  */
-function SettingsPage() {
-    let element = <div>
-        Settings.
-    </div>
+export default function SettingsPage() {
+  let element = <div>Settings.</div>
 
-    return element
+  return element
 }
 
 export default SettingsPage

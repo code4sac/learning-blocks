@@ -1,12 +1,10 @@
 /**
  * Disclaimer page.
  */
-function DisclaimerPage() {
-    let element = <div>
-        Disclaimer
-    </div>
+export default function DisclaimerPage() {
+  let element = <div>Disclaimer</div>
 
-    return element
+  return element
 }
 
 export default DisclaimerPage

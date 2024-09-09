@@ -1,8 +1,9 @@
 import AppNavigationBar from '@/components/layout/navigation/AppNavigationBar'
+import { SubMenu } from '@/utilities/models/page'
 
-interface NEAppContainerProps {
+interface AppContainerProps {
   selectedMenu: string
-  selectedSubMenu: string
+  selectedSubMenu: SubMenu
   setCurrentSubMenu: any
   children: any
 }
@@ -15,12 +16,12 @@ interface NEAppContainerProps {
  * @param setCurrentSubMenu {any} The .
  * @returns App container child element.
  */
-function AppContainer({
+export default function AppContainer({
   children,
   selectedMenu,
   selectedSubMenu,
   setCurrentSubMenu,
-}: NEAppContainerProps) {
+}: AppContainerProps) {
   return (
     <div>
       <AppNavigationBar
@@ -32,5 +33,3 @@ function AppContainer({
     </div>
   )
 }
-
-export default AppContainer

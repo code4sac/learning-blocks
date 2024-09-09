@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 interface NavigationSiteSelectorProps {
   sites: string[]
-  selectedSite: string
+  selectedSite?: string
   onSiteSelect: (site: string) => void
 }
 
@@ -26,7 +26,7 @@ const NavigationSiteSelector: React.FC<NavigationSiteSelectorProps> = ({
         <span>GCC Pilot Iteration</span>
       </div> */}
       <select
-        value={selectedSite}
+        value={selectedSite ? selectedSite : sites[0]}
         onChange={(e) => onSiteSelect(e.target.value)}
       >
         {sites.map((site) => (

@@ -1,4 +1,4 @@
-import { db } from '@/db'
+import { db } from '@/utilities/db'
 import { createTestUser } from '@/services/drizzle/utilities/user'
 import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 

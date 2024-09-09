@@ -1,4 +1,4 @@
-import { db } from '@/db'
+import { db } from '@/utilities/db'
 import bcrypt from 'bcrypt'
 import { eq } from 'drizzle-orm'
 import jwt from 'jsonwebtoken'
