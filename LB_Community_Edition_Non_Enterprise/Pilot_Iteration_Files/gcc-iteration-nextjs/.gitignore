@@ -1,20 +1,36 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
+node_modules
+.pnp
 .pnp.js
 .yarn/install-state.gz
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Ignore production .env files
+.env
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+.idea
+# VSCode is a supported editor for this project.
+# .vscode
 
 # testing
 /coverage
 
 # next.js
-/.next/
+.next
 /out/
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -28,18 +44,14 @@ yarn-error.log*
 # vercel
 .vercel
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-
-# local env files
-# .env*.local
-
-# Ignore all .env files
-.env
-.env.*
-
-.idea
-# VSCode is a supported editor for this project.
-# .vscode
+# Other
+.now/*
+.changeset
+esm/*
+.DS_Store
+!.commitlintrc.cjs
+!.lintstagedrc.cjs
+!jest.config.js
+!plopfile.js
+!react-shim.js
+!tsup.config.ts
