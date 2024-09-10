@@ -136,6 +136,7 @@ class SchoolsInDB(Base):
     city: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     state: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     zip_code: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+
     bddemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)  # Changed to lowercase
 
     # Relationship to PeopleInDB
