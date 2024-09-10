@@ -105,7 +105,7 @@ class BDDemoModel(BaseModel):
             "Total_At_Risk": 0,
         }
     )
-    BDcurrentAttendance: Dict[str, int] = Field(
+    BDAttendance: Dict[str, int] = Field(
         {
             "Total_Days_Absent": 0,
             "Total_Days_Present": 0,
@@ -120,6 +120,16 @@ class BDDemoModel(BaseModel):
             "Total_Students_Admin_Dropped": 0,
             "Total_Students": 0,
             "Total_Teachers": 0,
+            "Change_in_Enrollment": 0,
+            "perc_of_Students_Chronically_Absent": 0,
+            "zero_perc_absent_current_year": 0,
+            "zero_per_absent_prior_year": 0,
+            "zero_to_five_perc_absent_current_year": 0,
+            "zero_to_five_perc_absent_prior_year": 0,
+            "five_to_ten_perc_absent_current_year": 0,
+            "five_to_ten_perc_absent_prior_year": 0,
+            "above_ten_perc_absent_current_year": 0,
+            "above_ten_perc_absent_prior_year": 0,
         }
     )
     BDcurrentRetention: Dict[str, int] = Field(
@@ -290,14 +300,7 @@ class BDDemoModel(BaseModel):
 
     '''
     To be added to schema
-    zero_perc_absent_current_year: Mapped[Optional[dict[str,int]]] = mapped_column(dict, nullable=True)
-    zero_per_absent_prior_year: Mapped[Optional[dict[str,int]]] = mapped_column(dict, nullable=True)
-    zero_to_five_perc_absent_current_year: Mapped[Optional[dict[str,int]]] = mapped_column(dict, nullable=True)
-    zero_to_five_perc_absent_prior_year: Mapped[Optional[dict[str,int]]] = mapped_column(dict, nullable=True)
-    five_to_ten_perc_absent_current_year: Mapped[Optional[dict[str,int]]] = mapped_column(dict, nullable=True)
-    five_to_ten_perc_absent_prior_year: Mapped[Optional[dict[str,int]]] = mapped_column(dict, nullable=True)
-    above_ten_perc_absent_current_year: Mapped[Optional[dict[str,int]]] = mapped_column(dict, nullable=True)
-    above_ten_perc_absent_prior_year: Mapped[Optional[dict[str,int]]] = mapped_column(dict, nullable=True)
+    
 
     yearly_enrollment: Mapped[Optional[dict[str,int]]] = mapped_column(dict, nullable=True)
     
