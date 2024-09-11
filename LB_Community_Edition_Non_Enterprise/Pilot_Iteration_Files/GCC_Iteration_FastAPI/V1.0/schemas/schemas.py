@@ -141,6 +141,8 @@ class BDDemoModel(BaseModel):
     BDcurrentSuspensions: Dict[str, int] = Field(
         {
             "Total_Suspensions": 0,
+            "Total_InSchool_Suspensions": 0,
+            "Total_OutOfSchool_Suspensions": 0,
             "Total_Students": 0,
         }
     )
@@ -298,14 +300,6 @@ class BDDemoModel(BaseModel):
 
 
 
-    '''
-    To be added to schema
-    
-
-    yearly_enrollment: Mapped[Optional[dict[str,int]]] = mapped_column(dict, nullable=True)
-    
-    num_suspensions: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
-    '''
 class TeacherInDBCreate(BaseModel):
     AnonymizedTeacherID: str
     AnonymizedTeacherNumber: Optional[str] = None
