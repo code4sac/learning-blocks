@@ -1,5 +1,5 @@
 import SiteNavigationBar from '@/components/layout/navigation/SiteNavigationBar'
-import LandingPage02 from '@/features/landingPage/LandingPage02'
+import LandingPage02 from '@/feature/landingPage/LandingPage02'
 
 export default async function Page() {
   return (

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import LandingPage02 from '@/features/landingPage/LandingPage02'
+import LandingPage02 from '@/feature/landingPage/LandingPage02'
 
 /**
  * Currently not working. Landing page tests.

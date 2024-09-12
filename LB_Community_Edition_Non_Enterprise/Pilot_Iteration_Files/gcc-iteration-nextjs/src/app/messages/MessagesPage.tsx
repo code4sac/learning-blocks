@@ -32,5 +32,3 @@ export default function MessagesPage({ selectedSubMenu }: MessagesPageProps) {
     </div>
   )
 }
-
-export default MessagesPage

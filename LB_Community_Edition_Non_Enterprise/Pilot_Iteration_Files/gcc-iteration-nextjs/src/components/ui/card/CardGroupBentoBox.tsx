@@ -1,5 +1,5 @@
 import styles from './CardGroupBentoBox.module.css'
-import { DemographicCardGroupProps } from '@/utilities/models/card'
+import { DemographicCardGroupProps } from '@/utility/models/card'
 import CardC89 from '@/components/ui/card/CardC89'
 
 function CardGroupBentoBox({ data }: DemographicCardGroupProps) {

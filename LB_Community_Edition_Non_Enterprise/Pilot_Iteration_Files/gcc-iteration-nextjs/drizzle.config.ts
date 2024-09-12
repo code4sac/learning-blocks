@@ -2,8 +2,8 @@ import type { Config } from 'drizzle-kit'
 
 export default {
   dialect: 'sqlite',
-  schema: './src/services/drizzle/schema.ts',
-  out: './src/services/drizzle/migrations',
+  schema: './src/service/drizzle/schema.ts',
+  out: './src/service/drizzle/migrations',
   driver: 'turso',
   dbCredentials: {
     url: process.env.TURSO_CONNECTION_URL!,

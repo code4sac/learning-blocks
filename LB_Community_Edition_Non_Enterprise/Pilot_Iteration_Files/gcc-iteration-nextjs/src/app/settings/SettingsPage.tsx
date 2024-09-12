@@ -7,5 +7,3 @@ export default function SettingsPage() {
 
   return element
 }
-
-export default SettingsPage

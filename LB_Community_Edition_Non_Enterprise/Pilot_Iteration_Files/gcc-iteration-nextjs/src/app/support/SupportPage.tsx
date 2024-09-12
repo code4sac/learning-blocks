@@ -7,5 +7,3 @@ export default function SupportPage() {
 
   return element
 }
-
-export default SupportPage
