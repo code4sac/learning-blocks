@@ -5,14 +5,30 @@ from datetime import datetime
 
 # Base schema for PeopleInDB creation
 class PeopleInDBCreate(BaseModel):
-    firstname: str
-    Lastname: str
+    first_name: str
+    last_name: str
     role: str  # Assuming it's a string, but you might want to use an Enum
-    sourcedid: str
-    EnabledUser: bool
-    DateLastModified: Optional[str] = None
+    sourced_id: str
+    enabled_user: bool
+    date_last_modified: Optional[str] = None
     school_code: Optional[str] = None
-    AnonymizedStudentID: str 
+    anonymized_student_ID: str 
+    anonymized_student_number: str
+    sections: Optional[List[str]] = None
+    schl_associated: Optional[str] = None
+    stu_associated: Optional[List[str]] = None
+    credentials: Optional[List[str]] = None
+    subjects: Optional[List[str]] = None
+    site_duties: Optional[List[str]] = None
+    grade_levels: Optional[List[str]] = None
+    bd_demo: Optional[Dict[str, List[str]]] = None
+    birthdate: Optional[str] = None
+    sourced_ID: str
+    anonymized_teacher_ID: str
+    anonymized_teacher_number: str
+    site_duties: Optional[List[str]] = None
+    grade_levels: Optional[List[str]] = None
+
 
     class Config:
         from_attributes = True
@@ -382,6 +398,8 @@ class PeopleInDB(BaseModel):
     Lastname: str
     role: RoleEnum
     sourcedid: str
+    AnonymizedStudentID: Optional[str] = None
+    AnonymizedStudentNumber: Optional[str] = None
     EnabledUser: Optional[str] = None
     dateLastModified: Optional[str] = None
     school_code: Optional[str] = None

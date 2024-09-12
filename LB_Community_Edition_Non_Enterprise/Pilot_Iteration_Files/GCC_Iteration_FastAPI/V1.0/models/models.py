@@ -43,20 +43,25 @@ class PricePerStudent(int, enum.Enum):
 # Updated PeopleInDB model with polymorphism
 class PeopleInDB(Base):
     __tablename__ = "people"
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
-    firstname: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
-    lastname: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
-    role: Mapped[RoleEnum] = mapped_column(SQLAEnum(RoleEnum), nullable=False, index=True)
-    sourcedid: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)  # sourcedid as the unique identifier
+    ID: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    FirstName: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
+    LastName: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
+    Role: Mapped[RoleEnum] = mapped_column(SQLAEnum(RoleEnum), nullable=False, index=True)
+    SourcedId: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)  # sourcedid as the unique identifier
     EnabledUser: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
-    dateLastModified: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
-    school_code: Mapped[Optional[str]] = mapped_column(String, ForeignKey("schools.school_code"), nullable=True, index=True)
+    DateLastModified: Mapped[str] = mapped_column(String, index=True)  # Changed to lowercase
+    SchoolCode: Mapped[Optional[str]] = mapped_column(String, ForeignKey("schools.school_code"), nullable=True, index=True)
+    AnonymizedStudentID: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    AnonymizedStudentNumber: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    bddemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)  # Changed to lowercase
+    AnonymizedStudentID: Mapped[str] = mapped_column(String, unique=True, nullable=False)  # Changed to lowercase
+    AnonymizedStudentNumber: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
     
     # Relationships
     school: Mapped["SchoolsInDB"] = relationship("SchoolsInDB", back_populates="people")
 
     __mapper_args__ = {
-        'polymorphic_on': role,  # This is the polymorphic discriminator
+        'polymorphic_on': Role,  # This is the polymorphic discriminator
         'polymorphic_identity': 'people',  # Base identity
     }
 
@@ -65,13 +70,13 @@ class StudentInDB(PeopleInDB):
     __tablename__ = "students"
     __table_args__ = {'extend_existing': True}
     id: Mapped[int] = mapped_column(Integer, ForeignKey("people.id"), primary_key=True, index=True)
-    anonymizedstudentid: Mapped[str] = mapped_column(String, unique=True, nullable=False)  # Changed to lowercase
-    anonymizedstudentnumber: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    AnonymizedStudentID: Mapped[str] = mapped_column(String, unique=True, nullable=False)  # Changed to lowercase
+    AnonymizedStudentNumber: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
     bddemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)  # Changed to lowercase
-    role: Mapped[RoleEnum] = mapped_column(SQLAEnum(RoleEnum), nullable=False, index=True)
-    sourcedid: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)
+    Role: Mapped[RoleEnum] = mapped_column(SQLAEnum(RoleEnum), nullable=False, index=True)
+    SourcedID: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)
     sections: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
-    schlassociated: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    SchlAssociated: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
     birthdate: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
     school_code: Mapped[Optional[str]] = mapped_column(String, ForeignKey("schools.school_code"), nullable=True, index=True)
 
