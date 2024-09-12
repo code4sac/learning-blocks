@@ -1,7 +1,7 @@
 'use client'
 import { ReactElement, useState } from 'react'
 import { PageProps, SubMenu } from '@/utility/models/page'
-import DashboardManager from '@/features/dashboard/DashboardManager'
+import DashboardManager from '@/feature/dashboard/DashboardManager'
 import { fetchJson } from '@/service/fetch/fetchJson'
 import AppContainer from '@/components/layout/AppContainer'
 

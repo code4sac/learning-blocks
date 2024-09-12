@@ -103,8 +103,13 @@ class TeacherInDB(PeopleInDB):
     credentials: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
     subjects: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
     siteduties: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
-    gradelevels: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
+    GradeLevels: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
     bddemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)  # Changed to lowercase
+    role: Mapped[RoleEnum] = mapped_column(SQLAEnum(RoleEnum), nullable=False, index=True)
+    sourcedid: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)
+    school_code: Mapped[Optional[str]] = mapped_column(String, ForeignKey("schools.school_code"), nullable=True, index=True)
+    Enableduser: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
+
 
     def set_stu_associated(self, data: Optional[Dict[str, Dict[str, Optional[str]]]]):
         """Serialize dictionary to JSON string after validation."""
@@ -131,6 +136,7 @@ class SchoolsInDB(Base):
     city: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     state: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     zip_code: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+
     bddemo: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)  # Changed to lowercase
 
     # Relationship to PeopleInDB

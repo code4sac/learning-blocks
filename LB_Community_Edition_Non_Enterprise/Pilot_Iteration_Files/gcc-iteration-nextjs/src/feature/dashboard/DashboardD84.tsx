@@ -1,6 +1,6 @@
 'use client'
 import { Card } from 'react-bootstrap'
-import data from './data/ExampleDataAnalytics.json'
+import data from '../../../__tests__/mock/ExampleDataAnalytics.json'
 import styles from './DashboardD84.module.css'
 import { xor } from 'lodash'
 import { useState } from 'react'

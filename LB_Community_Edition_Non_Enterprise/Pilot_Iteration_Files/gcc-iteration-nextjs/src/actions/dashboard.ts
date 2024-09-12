@@ -1,7 +1,6 @@
 'use server'
-
 import { SubMenu } from '@/utility/models/page'
-import { fetchJson } from '@/utilities/api/fetchJson'
+import { fetchJson } from '@/service/fetch/fetchJson'
 
 /**
  * Fetch dashboard data.

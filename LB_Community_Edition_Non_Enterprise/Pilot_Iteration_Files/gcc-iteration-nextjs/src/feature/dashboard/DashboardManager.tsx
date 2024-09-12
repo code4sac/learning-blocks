@@ -1,7 +1,7 @@
 import { SubMenu } from '@/utility/models/page'
 import { ReactElement } from 'react'
-import DashboardD81 from '@/features/dashboard/DashboardD81'
-import DashboardD0f from '@/features/dashboard/DashboardD0F'
+import DashboardD81 from '@/feature/dashboard/DashboardD81'
+import DashboardD0f from '@/feature/dashboard/DashboardD0F'
 
 export interface DashboardManagerProps {
   data: [any]

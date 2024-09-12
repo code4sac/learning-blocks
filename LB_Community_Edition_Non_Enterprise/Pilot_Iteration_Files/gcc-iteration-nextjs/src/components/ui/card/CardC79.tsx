@@ -1,7 +1,7 @@
 import styles from './CardC79.module.css'
 import Image from 'next/image'
 import { AnalyticCardProps } from '@/utility/models/card'
-import { parseAnalyticArrowGraphImage } from '@/features/dashboard/graphUtils'
+import { parseAnalyticArrowGraphImage } from '@/feature/dashboard/graphUtils'
 
 /**
  * Dashboard arrow graph card. Categories (Red, Orange, Yellow, Green, Blue). Monotone color theme.

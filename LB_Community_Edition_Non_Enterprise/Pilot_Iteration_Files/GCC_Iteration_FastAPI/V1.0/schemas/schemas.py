@@ -105,18 +105,31 @@ class BDDemoModel(BaseModel):
             "Total_At_Risk": 0,
         }
     )
-    BDcurrentAttendance: Dict[str, int] = Field(
+    BDAttendance: Dict[str, int] = Field(
         {
             "Total_Days_Absent": 0,
             "Total_Days_Present": 0,
             "Total_Days_InSchl_Suspended": 0,
             "Total_Days_Home_Suspended": 0,
+            "Total_Students_Suspended": 0,
+            "Total_Students_Not_Suspended": 0,
             "Total_Students_Chronically_Absent": 0,
             "Total_Students_Not_Chronically_Absent": 0,
             "Total_Students_Mid_Year_Graduated": 0,
             "Total_Students_Mid_Year_Enrolled": 0,
             "Total_Students_Admin_Dropped": 0,
             "Total_Students": 0,
+            "Total_Teachers": 0,
+            "Change_in_Enrollment": 0,
+            "perc_of_Students_Chronically_Absent": 0,
+            "zero_perc_absent_current_year": 0,
+            "zero_per_absent_prior_year": 0,
+            "zero_to_five_perc_absent_current_year": 0,
+            "zero_to_five_perc_absent_prior_year": 0,
+            "five_to_ten_perc_absent_current_year": 0,
+            "five_to_ten_perc_absent_prior_year": 0,
+            "above_ten_perc_absent_current_year": 0,
+            "above_ten_perc_absent_prior_year": 0,
         }
     )
     BDcurrentRetention: Dict[str, int] = Field(
@@ -128,9 +141,163 @@ class BDDemoModel(BaseModel):
     BDcurrentSuspensions: Dict[str, int] = Field(
         {
             "Total_Suspensions": 0,
+            "Total_InSchool_Suspensions": 0,
+            "Total_OutOfSchool_Suspensions": 0,
             "Total_Students": 0,
         }
     )
+    BDCurrentweeklyEnrollmentCurrentYear: Dict[str,int] = Field(
+        {
+            "2024_2025_week_01": 0,
+            "2024_2025_week_02": 0,
+            "2024_2025_week_03": 0,
+            "2024_2025_week_04": 0,
+            "2024_2025_week_05": 0,
+            "2024_2025_week_06": 0,
+            "2024_2025_week_07": 0,
+            "2024_2025_week_08": 0,
+            "2024_2025_week_09": 0,
+            "2024_2025_week_10": 0,
+            "2024_2025_week_11": 0,
+            "2024_2025_week_12": 0,
+            "2024_2025_week_13": 0,
+            "2024_2025_week_14": 0,
+            "2024_2025_week_15": 0,
+            "2024_2025_week_16": 0,
+            "2024_2025_week_17": 0,
+            "2024_2025_week_18": 0,
+            "2024_2025_week_19": 0,
+            "2024_2025_week_20": 0,
+            "2024_2025_week_21": 0,
+            "2024_2025_week_22": 0,
+            "2024_2025_week_23": 0,
+            "2024_2025_week_24": 0,
+            "2024_2025_week_25": 0,
+            "2024_2025_week_26": 0,
+            "2024_2025_week_27": 0,
+            "2024_2025_week_28": 0,
+            "2024_2025_week_29": 0,
+            "2024_2025_week_30": 0,
+            "2024_2025_week_31": 0,
+            "2024_2025_week_32": 0,
+            "2024_2025_week_33": 0,
+            "2024_2025_week_34": 0,
+            "2024_2025_week_35": 0,
+            "2024_2025_week_36": 0,
+            "2024_2025_week_37": 0,
+            "2024_2025_week_38": 0,
+            "2024_2025_week_39": 0,
+            "2024_2025_week_40": 0,
+        }
+    )
+    BDPriorYearWeeklyEnrollment: Dict[str,int] = Field(
+        {
+            "2023_2024_week_01": 0,
+            "2023_2024_week_02": 0,
+            "2023_2024_week_03": 0,
+            "2023_2024_week_04": 0,
+            "2023_2024_week_05": 0,
+            "2023_2024_week_06": 0,
+            "2023_2024_week_07": 0,
+            "2023_2024_week_08": 0,
+            "2023_2024_week_09": 0,
+            "2023_2024_week_10": 0,
+            "2023_2024_week_11": 0,
+            "2023_2024_week_12": 0,
+            "2023_2024_week_13": 0,
+            "2023_2024_week_14": 0,
+            "2023_2024_week_15": 0,
+            "2023_2024_week_16": 0,
+            "2023_2024_week_17": 0,
+            "2023_2024_week_18": 0,
+            "2023_2024_week_19": 0,
+            "2023_2024_week_20": 0,
+            "2023_2024_week_21": 0,
+            "2023_2024_week_22": 0,
+            "2023_2024_week_23": 0,
+            "2023_2024_week_24": 0,
+            "2023_2024_week_25": 0,
+            "2023_2024_week_26": 0,
+            "2023_2024_week_27": 0,
+            "2023_2024_week_28": 0,
+            "2023_2024_week_29": 0,
+            "2023_2024_week_30": 0,
+            "2023_2024_week_31": 0,
+            "2023_2024_week_32": 0,
+            "2023_2024_week_33": 0,
+            "2023_2024_week_34": 0,
+            "2023_2024_week_35": 0,
+            "2023_2024_week_36": 0,
+            "2023_2024_week_37": 0,
+            "2023_2024_week_38": 0,
+            "2023_2024_week_39": 0,
+            "2023_2024_week_40": 0,
+        }
+    )
+    BDPriorPriorYearWeeklyEnrollment: Dict[str,int] = Field(
+        {
+            "2022_2023_week_01": 0,
+            "2022_2023_week_02": 0,
+            "2022_2023_week_03": 0,
+            "2022_2023_week_04": 0,
+            "2022_2023_week_05": 0,
+            "2022_2023_week_06": 0,
+            "2022_2023_week_07": 0,
+            "2022_2023_week_08": 0,
+            "2022_2023_week_09": 0,
+            "2022_2023_week_10": 0,
+            "2022_2023_week_11": 0,
+            "2022_2023_week_12": 0,
+            "2022_2023_week_13": 0,
+            "2022_2023_week_14": 0,
+            "2022_2023_week_15": 0,
+            "2022_2023_week_16": 0,
+            "2022_2023_week_17": 0,
+            "2022_2023_week_18": 0,
+            "2022_2023_week_19": 0,
+            "2022_2023_week_20": 0,
+            "2022_2023_week_21": 0,
+            "2022_2023_week_22": 0,
+            "2022_2023_week_23": 0,
+            "2022_2023_week_24": 0,
+            "2022_2023_week_25": 0,
+            "2022_2023_week_26": 0,
+            "2022_2023_week_27": 0,
+            "2022_2023_week_28": 0,
+            "2022_2023_week_29": 0,
+            "2022_2023_week_30": 0,
+            "2022_2023_week_31": 0,
+            "2022_2023_week_32": 0,
+            "2022_2023_week_33": 0,
+            "2022_2023_week_34": 0,
+            "2022_2023_week_35": 0,
+            "2022_2023_week_36": 0,
+            "2022_2023_week_37": 0,
+            "2022_2023_week_38": 0,
+            "2022_2023_week_39": 0,
+            "2022_2023_week_40": 0,
+        }
+    )     
+    BDweeklyEnrollmentByGrade: Dict[str,int] = Field(
+        {
+            "TK": 0,
+            "K": 0,
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+        }
+    )
+
+
 
 
 class TeacherInDBCreate(BaseModel):
@@ -197,6 +364,12 @@ class TeacherInDBResponse(BaseModel):
     Subjects: Optional[List[str]] = None
     SiteDuties: Optional[List[str]] = None
     GradeLevels: Optional[List[str]] = None
+    EnabledUser: Optional[str] = None
+    school_code: Optional[str] = None
+    bddemo: Optional[BDDemoModel] = None
+    DateLastModified: Optional[str] = None
+    Sections: Optional[List[str]] = None
+
 
 
     class Config:

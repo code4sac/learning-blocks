@@ -1,4 +1,4 @@
-import { parseAnalyticBarGraphImage } from '@/features/dashboard/graphUtils'
+import { parseAnalyticBarGraphImage } from '@/feature/dashboard/graphUtils'
 import styles from './CardC93.module.css'
 import { AnalyticCategory } from '@/utility/models/analytics'
 import { AnalyticCardProps } from '@/utility/models/card'

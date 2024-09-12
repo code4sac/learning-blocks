@@ -16,10 +16,14 @@ const exampleEvent = {
 /**
  * Create event, which requires a user to be associated with it.
  */
-test('Create Event', async () => {
-  const createdEvent = await createEvent(db, exampleEvent)
-  expect(createdEvent).toBeDefined()
-  expect(createdEvent.event.name).toBe(exampleEvent.name)
-  expect(createdEvent.event.startOn).toEqual(exampleEvent.startOn)
-  expect(createdEvent.event.createdById).toBe(exampleEvent.createdById)
+describe('Create Event', {}, () => {
+  beforeAll(async () => {})
+
+  test('Create Event', async () => {
+    const createdEvent = await createEvent(db, exampleEvent)
+    expect(createdEvent).toBeDefined()
+    expect(createdEvent.event.name).toBe(exampleEvent.name)
+    expect(createdEvent.event.startOn).toEqual(exampleEvent.startOn)
+    expect(createdEvent.event.createdById).toBe(exampleEvent.createdById)
+  })
 })

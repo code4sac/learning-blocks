@@ -1,7 +1,7 @@
 import styles from './CardC89.module.css'
 import { PieChart } from '@mui/x-charts/PieChart'
 import { Demographic } from '@/utility/models/demographic'
-import { parseDemographicPieChartData } from '@/features/dashboard/graphUtils'
+import { parseDemographicPieChartData } from '@/feature/dashboard/graphUtils'
 
 interface C89Props {
   data: Demographic[]
