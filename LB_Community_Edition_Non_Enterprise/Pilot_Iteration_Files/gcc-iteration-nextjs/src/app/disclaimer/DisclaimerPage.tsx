@@ -6,5 +6,3 @@ export default function DisclaimerPage() {
 
   return element
 }
-
-export default DisclaimerPage

@@ -28,5 +28,3 @@ export default function PathwayPage() {
     </div>
   )
 }
-
-export default PathwayPage

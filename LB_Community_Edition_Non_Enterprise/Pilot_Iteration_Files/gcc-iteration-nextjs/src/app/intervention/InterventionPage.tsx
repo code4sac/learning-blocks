@@ -28,5 +28,3 @@ export default function InterventionPage() {
     </div>
   )
 }
-
-export default InterventionPage

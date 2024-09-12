@@ -1,9 +1,9 @@
 'use server'
 
-import { db } from '@/database/db'
-import { events } from '@/services/drizzle/schema'
-import { delay } from '@/utilities/delay'
-import { getCurrentUser } from '@/utilities/users'
+import { getCurrentUser } from '@/app/(auth)/users'
+import { events } from '@/service/drizzle/schema'
+import { db } from '@/utility/db'
+import { delay } from '@/utility/delay'
 import randomName from '@scaleway/random-name'
 import { revalidateTag } from 'next/cache'
 

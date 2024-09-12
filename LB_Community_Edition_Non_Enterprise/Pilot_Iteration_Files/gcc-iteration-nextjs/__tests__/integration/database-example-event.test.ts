@@ -1,5 +1,5 @@
-import { db } from '@/utilities/db'
-import { createEvent } from '@/services/drizzle/utilities/createEvent'
+import { db } from '@/utility/db'
+import { createEvent } from '@/service/drizzle/utilities/createEvent'
 import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 
 const exampleUser = {
@@ -16,10 +16,14 @@ const exampleEvent = {
 /**
  * Create event, which requires a user to be associated with it.
  */
-test('Create Event', async () => {
-  const createdEvent = await createEvent(db, exampleEvent)
-  expect(createdEvent).toBeDefined()
-  expect(createdEvent.event.name).toBe(exampleEvent.name)
-  expect(createdEvent.event.startOn).toEqual(exampleEvent.startOn)
-  expect(createdEvent.event.createdById).toBe(exampleEvent.createdById)
+describe('Create Event', {}, () => {
+  beforeAll(async () => {})
+
+  test('Create Event', async () => {
+    const createdEvent = await createEvent(db, exampleEvent)
+    expect(createdEvent).toBeDefined()
+    expect(createdEvent.event.name).toBe(exampleEvent.name)
+    expect(createdEvent.event.startOn).toEqual(exampleEvent.startOn)
+    expect(createdEvent.event.createdById).toBe(exampleEvent.createdById)
+  })
 })
