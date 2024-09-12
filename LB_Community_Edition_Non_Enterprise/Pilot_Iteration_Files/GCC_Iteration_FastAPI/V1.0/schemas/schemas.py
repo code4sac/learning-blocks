@@ -2,12 +2,12 @@ from typing import Optional, List, Dict
 from models.models import RoleEnum
 from pydantic import BaseModel, Field
 from datetime import datetime
-
+from models.models import RoleEnum
 # Base schema for PeopleInDB creation
 class PeopleInDBCreate(BaseModel):
     first_name: str
     last_name: str
-    role: str  # Assuming it's a string, but you might want to use an Enum
+    role: RoleEnum
     sourced_id: str
     enabled_user: bool
     date_last_modified: Optional[str] = None
@@ -334,16 +334,17 @@ class TeacherInDBCreate(BaseModel):
 # Response schema for PeopleInDB
 
 class StudentInDBCreate(BaseModel):
-    AnonymizedStudentID: str
-    AnonymizedStudentNumber: str
-    Sections: Optional[List[str]] = None
-    SchlAssociated: Optional[str] = None
-    Birthdate: Optional[str] = None
+    anonymized_student_ID: str
+    anonymized_student_number: str
+    sections: Optional[List[str]] = None
+    schl_associated: Optional[str] = None
+    birthdate: Optional[str] = None
     role: RoleEnum = "student"
-    sourcedid: str
+    sourced_ID: str
     school_code: Optional[str] = None
     bddemo: Optional[BDDemoModel] = None
     school_name: Optional[str] = None
+    grade_levels: Optional[List[str]] = None
 
 
 
