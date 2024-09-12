@@ -1,6 +1,6 @@
 'use server'
 
-import { SubMenu } from '@/utilities/models/page'
+import { SubMenu } from '@/utility/models/page'
 import { fetchJson } from '@/utilities/api/fetchJson'
 
 /**

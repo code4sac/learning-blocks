@@ -36,5 +36,3 @@ export default function StudentPage() {
     </div>
   )
 }
-
-export default StudentPage

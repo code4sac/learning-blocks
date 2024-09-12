@@ -1,5 +1,5 @@
-import { db } from '@/utilities/db'
-import { createEvent } from '@/services/drizzle/utilities/createEvent'
+import { db } from '@/utility/db'
+import { createEvent } from '@/service/drizzle/utilities/createEvent'
 import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 
 const exampleUser = {

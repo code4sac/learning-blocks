@@ -1,7 +1,7 @@
 'use server'
 
 import { db } from '@/database/db'
-import { events } from '@/services/drizzle/schema'
+import { events } from '@/service/drizzle/schema'
 import { delay } from '@/utilities/delay'
 import { getCurrentUser } from '@/utilities/users'
 import randomName from '@scaleway/random-name'

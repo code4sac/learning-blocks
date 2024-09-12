@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from 'next'
-import { AppNextUIProvider } from '@/utilities/providers'
+import { AppNextUIProvider } from '@/utility/providers'
 import './globals.css'
 import React from 'react'
-import { siteConfig } from '@/utilities/constants'
-import { fontSans } from '@/utilities/fonts'
+import { siteConfig } from '@/utility/constants'
+import { fontSans } from '@/utility/fonts'
 import clsx from 'clsx'
 
 export const metadata: Metadata = {

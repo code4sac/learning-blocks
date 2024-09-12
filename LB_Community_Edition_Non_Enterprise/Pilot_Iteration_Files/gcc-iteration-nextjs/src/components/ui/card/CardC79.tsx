@@ -1,6 +1,6 @@
 import styles from './CardC79.module.css'
 import Image from 'next/image'
-import { AnalyticCardProps } from '@/utilities/models/card'
+import { AnalyticCardProps } from '@/utility/models/card'
 import { parseAnalyticArrowGraphImage } from '@/features/dashboard/graphUtils'
 
 /**

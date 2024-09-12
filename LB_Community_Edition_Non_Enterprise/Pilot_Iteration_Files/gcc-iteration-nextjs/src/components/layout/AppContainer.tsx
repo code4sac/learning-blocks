@@ -1,5 +1,5 @@
 import AppNavigationBar from '@/components/layout/navigation/AppNavigationBar'
-import { SubMenu } from '@/utilities/models/page'
+import { SubMenu } from '@/utility/models/page'
 
 interface AppContainerProps {
   selectedMenu: string

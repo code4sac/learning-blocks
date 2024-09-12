@@ -1,7 +1,7 @@
 import { parseAnalyticBarGraphImage } from '@/features/dashboard/graphUtils'
 import styles from './CardC93.module.css'
-import { AnalyticCategory } from '@/utilities/models/analytics'
-import { AnalyticCardProps } from '@/utilities/models/card'
+import { AnalyticCategory } from '@/utility/models/analytics'
+import { AnalyticCardProps } from '@/utility/models/card'
 import Image from 'next/image'
 
 /**

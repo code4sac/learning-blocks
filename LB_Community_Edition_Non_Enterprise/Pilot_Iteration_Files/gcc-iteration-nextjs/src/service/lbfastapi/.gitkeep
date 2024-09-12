@@ -1,0 +1,2 @@
+TODO: Connect to FastAPI server at http://127.0.0.1:8000
+Is it appropriate to functions from src/services/fetch inside of src/services/lbfastapi?

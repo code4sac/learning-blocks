@@ -5,7 +5,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { StudentTableProps } from '@/utilities/models/table'
+import { StudentTableProps } from '@/utility/models/table'
 import { getDefaultColumns } from '@/components/ui/table/tableUtils'
 import { Button } from '@nextui-org/button'
 
