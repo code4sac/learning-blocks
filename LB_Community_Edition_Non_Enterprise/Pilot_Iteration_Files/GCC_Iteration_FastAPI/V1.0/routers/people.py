@@ -1,117 +1,145 @@
-from fastapi import APIRouter, HTTPException, Depends
-from sqlalchemy.orm import Session
+from fastapi import Depends, HTTPException, APIRouter
 from sqlalchemy import text
-from models.models import PeopleInDB
-from schemas.schemas import PeopleInDBCreate, PeopleInDBResponse, TeacherInDBResponse, StudentInDBResponse
+from sqlalchemy.orm import Session
+from models import PeopleInDB
+from schemas.schemas import PeopleInDBCreate, PeopleInDBResponse, StudentInDBResponse, TeacherInDBResponse, StudentInDBCreate
 from databases.databases import get_db  # Ensure relative import is correct
 
 router = APIRouter()
 
+# Helper function to insert into `people` table
+def insert_person(db, person: PeopleInDBCreate):
+    insert_people_query = text("""
+        INSERT INTO people (first_name, last_name, role, sourced_id, enabled_user, date_last_modified, school_code)
+        VALUES (:FirstName, :LastName, :Role, :SourcedId, :EnabledUser, :DateLastModified, :SchoolCode)
+        RETURNING id, first_name, last_name, role, sourced_id, enabled_user, date_last_modified, school_code
+    """)
+    
+    result = db.execute(insert_people_query, {
+        "FirstName": person.first_name,
+        "LastName": person.last_name,
+        "Role": person.role,
+        "SourcedId": person.sourced_id,
+        "EnabledUser": person.enabled_user,
+        "DateLastModified": person.date_last_modified,
+        "SchoolCode": person.school_code
+    })
+    
+    return result.fetchone()
+
+# Helper function to insert into `students` table
+def insert_student(db, student: StudentInDBCreate, db_person):
+    insert_student_query = text("""
+        INSERT INTO students (id, anonymized_student_ID, anonymized_student_number, sections, schl_associated, birthdate, sourced_ID, grade_levels)
+        VALUES (:id, :AnonymizedStudentID, :AnonymizedStudentNumber, :sections, :SchlAssociated, :birthdate, :SourcedID, :GradeLevels)
+        RETURNING id, anonymized_student_ID, anonymized_student_number, sections, schl_associated, birthdate, sourced_ID, grade_levels, school_code
+    """)
+    
+    result = db.execute(insert_student_query, {
+        "id": db_person[0],  # Pass the ID from the people table
+        "AnonymizedStudentID": student.anonymized_student_ID,
+        "AnonymizedStudentNumber": student.anonymized_student_number,
+        "sections": student.sections,
+        "SchlAssociated": student.schl_associated,
+        "birthdate": student.birthdate,
+        "SourcedID": student.sourced_ID,
+        "GradeLevels": student.grade_levels
+    })
+    
+    return result.fetchone()
+
+# Helper function to insert into `teachers` table
+def insert_teacher(db, teacher: PeopleInDBCreate, db_person):
+    insert_teacher_query = text("""
+        INSERT INTO teachers (id, anonymized_teacher_ID, anonymized_teacher_number, sections, stu_associated, schl_associated, site_duties,
+                              credentials, subjects, siteduties, grade_levels, bd_demo)
+        VALUES (:id, :anonymized_teacher_ID, :anonymized_teacher_number, :sections, :stu_associated, :schl_associated, :site_duties,
+                :credentials, :subjects, :siteduties, :grade_levels, :bd_demo)
+        RETURNING id, anonymized_teacher_ID, anonymized_teacher_number, sections, stu_associated, schl_associated, site_duties,
+                  credentials, subjects, siteduties, grade_levels, bd_demo
+    """)
+    
+    result = db.execute(insert_teacher_query, {
+        "id": db_person[0],  # Use the id from the people table
+        "anonymized_teacher_ID": teacher.anonymized_teacher_ID,
+        "anonymized_teacher_number": teacher.anonymized_teacher_number,
+        "sections": teacher.sections,
+        "stu_associated": teacher.stu_associated,
+        "schlassociated": teacher.schl_associated,
+        "site_duties": teacher.site_duties,
+        "credentials": teacher.credentials,
+        "subjects": teacher.subjects,
+        "siteduties": teacher.site_duties,
+        "GradeLevels": teacher.grade_levels,
+        "bd_demo": teacher.bd_demo
+    })
+    
+    return result.fetchone()
+
+
 @router.post("/people/", response_model=PeopleInDBResponse)
 def create_person(person: PeopleInDBCreate, db: Session = Depends(get_db)):
     try:
-        db_person = PeopleInDB(
-            firstname=person.firstname,
-            lastname=person.Lastname,
-            role=person.role,
-            sourcedid=person.sourcedid,
-            EnabledUser=person.EnabledUser,
-            dateLastModified=person.DateLastModified,
-            school_code=person.school_code
-        )
-        db.add(db_person)
-        db.commit()
-        db.refresh(db_person)
-
-        # Insert the corresponding StudentInDB or TeacherInDB record based on the role
-        if person.role == "student":
-            query = text("""
-                INSERT INTO students (id, AnonymizedStudentID, AnonymizedStudentNumber, Sections, SchlAssociated, Birthdate)
-                VALUES (:id, :AnonymizedStudentID, :AnonymizedStudentNumber, :Sections, :SchlAssociated, :Birthdate)
-                RETURNING id, AnonymizedStudentID, AnonymizedStudentNumber, Sections, SchlAssociated, Birthdate
-            """)
-            result = db.execute(query, {
-                "id": db_person.id,
-                "AnonymizedStudentID": person.AnonymizedStudentID,
-                "AnonymizedStudentNumber": person.AnonymizedStudentNumber,
-                "Sections": person.Sections,
-                "SchlAssociated": person.SchlAssociated,
-                "Birthdate": person.Birthdate
-            })
-            new_student = result.fetchone()
-
-            if not new_student:
-                raise HTTPException(status_code=500, detail="Failed to create student.")
-
-            student_data = StudentInDBResponse(
-                id=new_student[0],
-                AnonymizedStudentID=new_student[1],
-                AnonymizedStudentNumber=new_student[2],
-                Sections=new_student[3],
-                SchlAssociated=new_student[4],
-                Birthdate=new_student[5]
+        with db.begin():  # Ensuring atomic transactions
+            # Insert into `people` table
+            db_person = insert_person(db, person)
+            
+            if not db_person:
+                raise HTTPException(status_code=500, detail="Failed to create person.")
+            
+            # Depending on role, insert into `students` or `teachers`
+            student_data = None
+            teacher_data = None
+            
+            if person.role == "student":
+                db_student = insert_student(db, person, db_person)
+                if not db_student:
+                    raise HTTPException(status_code=500, detail="Failed to create student.")
+                
+                student_data = StudentInDBResponse(
+                    id=db_student[0],
+                    anonymizedstudentid=db_student[1],
+                    anonymizedstudentnumber=db_student[2],
+                    sections=db_student[3],
+                    schlassociated=db_student[4],
+                    birthdate=db_student[5]
+                )
+            
+            elif person.role == "teacher":
+                db_teacher = insert_teacher(db, person, db_person)
+                if not db_teacher:
+                    raise HTTPException(status_code=500, detail="Failed to create teacher.")
+                
+                teacher_data = TeacherInDBResponse(
+                    id=db_teacher[0],
+                    anonymizedteacherid=db_teacher[1],
+                    anonymizedteachernumber=db_teacher[2],
+                    sections=db_teacher[3],
+                    stuassociated=db_teacher[4],
+                    schlassociated=db_teacher[5],
+                    credentials=db_teacher[6],
+                    subjects=db_teacher[7],
+                    siteduties=db_teacher[8],
+                    GradeLevels=db_teacher[9],
+                    bddemo=db_teacher[10]
+                )
+            
+            # Construct response object
+            response_person = PeopleInDBResponse(
+                id=db_person[0],
+                firstname=db_person[1],
+                lastname=db_person[2],
+                role=db_person[3],
+                sourcedid=db_person[4],
+                EnabledUser=db_person[5],
+                dateLastModified=db_person[6],
+                school_code=db_person[7],
+                student=student_data,
+                teacher=teacher_data
             )
-        elif person.role == "teacher":
-            query = text("""
-                INSERT INTO teachers (id, AnonymizedTeacherID, AnonymizedTeacherNumber, Sections, StuAssociated, SchlAssociated,
-                                      Credentials, Subjects, SiteDuties, GradeLevels, BDDemo)
-                VALUES (:id, :AnonymizedTeacherID, :AnonymizedTeacherNumber, :Sections, :StuAssociated, :SchlAssociated,
-                        :Credentials, :Subjects, :SiteDuties, :GradeLevels, :BDdemo)
-                RETURNING id, AnonymizedTeacherID, AnonymizedTeacherNumber, Sections, StuAssociated, SchlAssociated,
-                          Credentials, Subjects, SiteDuties, GradeLevels, BDDemo
-            """)
-            result = db.execute(query, {
-                "id": db_person.id,
-                "AnonymizedTeacherID": person.AnonymizedTeacherID,
-                "AnonymizedTeacherNumber": person.AnonymizedTeacherNumber,
-                "Sections": person.Sections,
-                "StuAssociated": person.StuAssociated,
-                "SchlAssociated": person.SchlAssociated,
-                "Credentials": person.Credentials,
-                "Subjects": person.Subjects,
-                "SiteDuties": person.SiteDuties,
-                "GradeLevels": person.GradeLevels,
-                "BDdemo": person.BDDemo if person.BDDemo else None
-            })
-            new_teacher = result.fetchone()
-
-            if not new_teacher:
-                raise HTTPException(status_code=500, detail="Failed to create teacher.")
-
-            teacher_data = TeacherInDBResponse(
-                id=new_teacher[0],
-                AnonymizedTeacherID=new_teacher[1],
-                AnonymizedTeacherNumber=new_teacher[2],
-                Sections=new_teacher[3],
-                StuAssociated=new_teacher[4],
-                SchlAssociated=new_teacher[5],
-                Credentials=new_teacher[6],
-                Subjects=new_teacher[7],
-                SiteDuties=new_teacher[8],
-                GradeLevels=new_teacher[9],
-                BDDemo=new_teacher[10]
-            )
-
-        # Commit the transaction
-        db.commit()
-
-        # Construct the response data
-        response_person = PeopleInDBResponse(
-            id=db_person.id,
-            firstname=db_person.firstname,
-            lastname=db_person.lastname,
-            role=db_person.role,
-            sourcedid=db_person.sourcedid,
-            EnabledUser=db_person.EnabledUser,
-            DateLastModified=db_person.dateLastModified,
-            school_code=db_person.school_code,
-            student=student_data if person.role == "student" else None,
-            teacher=teacher_data if person.role == "teacher" else None
-            #test
-
-        )
-
+        
         return response_person
+    
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")

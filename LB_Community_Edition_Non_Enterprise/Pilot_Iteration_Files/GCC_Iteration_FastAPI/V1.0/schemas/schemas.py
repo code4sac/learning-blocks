@@ -2,17 +2,33 @@ from typing import Optional, List, Dict
 from models.models import RoleEnum
 from pydantic import BaseModel, Field
 from datetime import datetime
-
+from models.models import RoleEnum
 # Base schema for PeopleInDB creation
 class PeopleInDBCreate(BaseModel):
-    firstname: str
-    Lastname: str
-    role: str  # Assuming it's a string, but you might want to use an Enum
-    sourcedid: str
-    EnabledUser: bool
-    DateLastModified: Optional[str] = None
+    first_name: str
+    last_name: str
+    role: RoleEnum
+    sourced_id: str
+    enabled_user: bool
+    date_last_modified: Optional[str] = None
     school_code: Optional[str] = None
-    AnonymizedStudentID: str 
+    anonymized_student_ID: str 
+    anonymized_student_number: str
+    sections: Optional[List[str]] = None
+    schl_associated: Optional[str] = None
+    stu_associated: Optional[List[str]] = None
+    credentials: Optional[List[str]] = None
+    subjects: Optional[List[str]] = None
+    site_duties: Optional[List[str]] = None
+    grade_levels: Optional[List[str]] = None
+    bd_demo: Optional[Dict[str, List[str]]] = None
+    birthdate: Optional[str] = None
+    sourced_ID: str
+    anonymized_teacher_ID: str
+    anonymized_teacher_number: str
+    site_duties: Optional[List[str]] = None
+    grade_levels: Optional[List[str]] = None
+
 
     class Config:
         from_attributes = True
@@ -318,16 +334,17 @@ class TeacherInDBCreate(BaseModel):
 # Response schema for PeopleInDB
 
 class StudentInDBCreate(BaseModel):
-    AnonymizedStudentID: str
-    AnonymizedStudentNumber: str
-    Sections: Optional[List[str]] = None
-    SchlAssociated: Optional[str] = None
-    Birthdate: Optional[str] = None
+    anonymized_student_ID: str
+    anonymized_student_number: str
+    sections: Optional[List[str]] = None
+    schl_associated: Optional[str] = None
+    birthdate: Optional[str] = None
     role: RoleEnum = "student"
-    sourcedid: str
+    sourced_ID: str
     school_code: Optional[str] = None
     bddemo: Optional[BDDemoModel] = None
     school_name: Optional[str] = None
+    grade_levels: Optional[List[str]] = None
 
 
 
@@ -382,6 +399,8 @@ class PeopleInDB(BaseModel):
     Lastname: str
     role: RoleEnum
     sourcedid: str
+    AnonymizedStudentID: Optional[str] = None
+    AnonymizedStudentNumber: Optional[str] = None
     EnabledUser: Optional[str] = None
     dateLastModified: Optional[str] = None
     school_code: Optional[str] = None
