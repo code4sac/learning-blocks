@@ -1,11 +1,15 @@
 'use client'
+
 import { Card } from 'react-bootstrap'
-import data from '../../../__tests__/mock/ExampleDataAnalytics.json'
-import styles from './DashboardD84.module.css'
 import { xor } from 'lodash'
 import { useState } from 'react'
-import { Demographic } from '@/utility/models/demographic'
 import Image from 'next/image'
+
+import { Demographic } from '@/utility/models/demographic'
+
+import data from '../../../__tests__/mock/ExampleDataAnalytics.json'
+
+import styles from './DashboardD84.module.css'
 
 export interface D84Props {
   demographics: [Demographic]
@@ -72,8 +76,8 @@ function DashboardD84() {
           <Card
             key={it.key}
             className={styles.card}
-            onClick={() => handleClick(index)}
             data-bs-theme={getCardTheme(index)}
+            onClick={() => handleClick(index)}
           >
             {/*<DropdownButton id="dropdown-basic-button" title={<Image src="/menu_dots.png" height="20" width="20" /> }*/}
             {/*  style={{ position: 'relative', float: 'right', margin: '4px 8px' }}*/}
@@ -94,12 +98,12 @@ function DashboardD84() {
               <div className={styles.cardBodyImageContainer}>
                 {it.analytics_title === 'College and Career' ? (
                   <Image
+                    alt={`Chart displaying ${it.analytics_level_text} level for ${it.analytics_title}.`}
                     src={`/${getAnalyticsChart(
                       'chart',
                       it.analytics_level_amount,
                     )}`}
                     width="120"
-                    alt={`Chart displaying ${it.analytics_level_text} level for ${it.analytics_title}.`}
                   />
                 ) : it.analytics_title === 'Unduplicated Count' ? (
                   <div style={{ fontSize: '64px' }}>
@@ -107,9 +111,9 @@ function DashboardD84() {
                   </div>
                 ) : (
                   <Image
+                    alt={`Chart displaying ${it.analytics_level_text} level for ${it.analytics_title}.`}
                     src={`/${getAnalyticsChart('', it.analytics_level_amount)}`}
                     width="100"
-                    alt={`Chart displaying ${it.analytics_level_text} level for ${it.analytics_title}.`}
                   />
                 )}
               </div>

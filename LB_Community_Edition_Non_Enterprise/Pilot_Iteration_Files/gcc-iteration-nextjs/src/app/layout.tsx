@@ -1,9 +1,13 @@
 import type { Metadata, Viewport } from 'next'
+
 import { AppNextUIProvider } from '@/utility/providers'
+
 import './globals.css'
 import React from 'react'
+
 import { siteConfig } from '@/utility/constants'
 import { fontSans } from '@/utility/fonts'
+
 import clsx from 'clsx'
 
 export const metadata: Metadata = {
@@ -39,10 +43,11 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
+        {/* BUG: Typescript warning the props are missing children. */}
         <AppNextUIProvider
-          themeProps={{ attribute: 'class', defaultTheme: 'light' }}
+          themeProps={{ attribute: 'class', children, defaultTheme: 'light' }}
         >
-          {children}
+          <div>{children}</div>
         </AppNextUIProvider>
       </body>
     </html>

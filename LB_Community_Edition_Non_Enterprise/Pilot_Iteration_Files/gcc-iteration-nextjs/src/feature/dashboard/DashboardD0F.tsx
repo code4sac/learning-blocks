@@ -1,8 +1,9 @@
 'use client'
-import styles from './DashboardD0f.module.css'
 import { Demographic } from '@/utility/models/demographic'
 import CardC44 from '@/components/ui/card/CardC44'
 import CardC89 from '@/components/ui/card/CardC89'
+
+import styles from './DashboardD0f.module.css'
 
 export interface D0fProps {
   demographics: [Demographic]
@@ -23,8 +24,8 @@ function DashboardD0f({ demographics }: D0fProps) {
             .map((it) => (
               <CardC44
                 key={it.key}
-                title={it.demographicTitle}
                 stat={it.demographicAggregate.toString()}
+                title={it.demographicTitle}
               />
             ))}
         </div>
@@ -34,8 +35,8 @@ function DashboardD0f({ demographics }: D0fProps) {
             .map((it) => (
               <CardC44
                 key={it.key}
-                title={it.demographicTitle}
                 stat={it.demographicAggregate.toString()}
+                title={it.demographicTitle}
               />
             ))}
         </div>
@@ -45,8 +46,8 @@ function DashboardD0f({ demographics }: D0fProps) {
             .map((it) => (
               <CardC44
                 key={it.key}
-                title={it.demographicTitle}
                 stat={it.demographicAggregate.toString()}
+                title={it.demographicTitle}
               />
             ))}
         </div>
@@ -56,29 +57,19 @@ function DashboardD0f({ demographics }: D0fProps) {
             .map((it) => (
               <CardC44
                 key={it.key}
-                title={it.demographicTitle}
                 stat={it.demographicAggregate.toString()}
+                title={it.demographicTitle}
               />
             ))}
         </div>
         <div className={`${styles.demographicCard} ${styles.demographic5}`}>
-          <CardC89 data={demographics}></CardC89>
+          <CardC89 data={demographics} />
         </div>
-        <div
-          className={`${styles.demographicCard} ${styles.demographic6}`}
-        ></div>
-        <div
-          className={`${styles.demographicCard} ${styles.demographic7}`}
-        ></div>
-        <div
-          className={`${styles.demographicCard} ${styles.demographic8}`}
-        ></div>
-        <div
-          className={`${styles.demographicCard} ${styles.demographic9}`}
-        ></div>
-        <div
-          className={`${styles.demographicCard} ${styles.demographic10}`}
-        ></div>
+        <div className={`${styles.demographicCard} ${styles.demographic6}`} />
+        <div className={`${styles.demographicCard} ${styles.demographic7}`} />
+        <div className={`${styles.demographicCard} ${styles.demographic8}`} />
+        <div className={`${styles.demographicCard} ${styles.demographic9}`} />
+        <div className={`${styles.demographicCard} ${styles.demographic10}`} />
       </div>
     </div>
   )

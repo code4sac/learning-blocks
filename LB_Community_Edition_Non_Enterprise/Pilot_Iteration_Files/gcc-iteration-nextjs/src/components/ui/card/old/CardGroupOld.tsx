@@ -1,6 +1,7 @@
-import styles from './Cards01.module.css'
 import { xor } from 'lodash'
 import Image from 'next/image'
+
+import styles from './Cards01.module.css'
 
 function CardGroupOld({ data, selectedCards, setSelectedCards, getCardTheme }) {
   return (
@@ -10,25 +11,25 @@ function CardGroupOld({ data, selectedCards, setSelectedCards, getCardTheme }) {
           <div key={card.key}>
             <Card
               className={styles.card}
-              onClick={() => setSelectedCards(xor(selectedCards, [index]))}
               data-bs-theme={getCardTheme(index)}
+              onClick={() => setSelectedCards(xor(selectedCards, [index]))}
             >
               <div onClick={(e) => e.stopPropagation()}>
                 <DropdownButton
                   id="dropdown-basic-button"
-                  title={
-                    <Image
-                      src="menu_dots.png"
-                      height="20"
-                      width="20"
-                      alt="Dropdown menu"
-                    />
-                  }
                   style={{
                     position: 'relative',
                     float: 'right',
                     margin: '4px 8px',
                   }}
+                  title={
+                    <Image
+                      alt="Dropdown menu"
+                      height="20"
+                      src="menu_dots.png"
+                      width="20"
+                    />
+                  }
                   variant="outline-light"
                 >
                   <Dropdown.Item href="#/action-1">
@@ -54,9 +55,9 @@ function CardGroupOld({ data, selectedCards, setSelectedCards, getCardTheme }) {
               <Card.Body>
                 <Card.Text className={`h6 text-center`}>{card.title}</Card.Text>
                 <Image
+                  alt={`Chart displaying ${card.levelAmount} level for ${card.title}.`}
                   src={`/${card.analyticsImage}`}
                   width="120"
-                  alt={`Chart displaying ${card.levelAmount} level for ${card.title}.`}
                 />
                 {/*<div className={styles.cardBodyImageContainer}>*/}
                 {/*    {it.analytics_title === "College and Career" ?*/}

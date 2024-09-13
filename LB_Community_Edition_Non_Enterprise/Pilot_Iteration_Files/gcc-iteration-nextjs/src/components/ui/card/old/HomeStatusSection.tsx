@@ -1,12 +1,12 @@
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from 'react-bootstrap'
 
 function HomeStatusSection() {
-  const a = () => {};
+  const a = () => {}
   return (
     <>
-      <Row className={"home_section_01_container"}>
-        <Col className={"home_section_01_col"}>
-          <div className={"home_section_01_api_status"}>
+      <Row className={'home_section_01_container'}>
+        <Col className={'home_section_01_col'}>
+          <div className={'home_section_01_api_status'}>
             <Row>
               <h3>System Monitor</h3>
             </Row>
@@ -19,8 +19,8 @@ function HomeStatusSection() {
             </Row>
           </div>
         </Col>
-        <Col className={"home_section_01_col"}>
-          <div className={"home_section_01_getting_started"}>
+        <Col className={'home_section_01_col'}>
+          <div className={'home_section_01_getting_started'}>
             <ul>
               <li>
                 <a href="https://github.com/code4sac/learning-blocks/Documentation%20Folder/getting-started.md">
@@ -38,7 +38,7 @@ function HomeStatusSection() {
                 </a>
               </li>
               <li>
-                To contact support, please visit the support page.{" "}
+                To contact support, please visit the support page.{' '}
                 <a href="/support">lb-sis.com/support</a>
               </li>
             </ul>
@@ -46,7 +46,7 @@ function HomeStatusSection() {
         </Col>
       </Row>
     </>
-  );
+  )
 }
 
-export default HomeStatusSection;
+export default HomeStatusSection

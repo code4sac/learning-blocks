@@ -1,11 +1,8 @@
-import { SubMenu } from '@/utility/models/page'
-import { ReactElement } from 'react'
 import DashboardD81 from '@/feature/dashboard/DashboardD81'
-import DashboardD0f from '@/feature/dashboard/DashboardD0F'
 
 export interface DashboardManagerProps {
   data: [any]
-  selectedSubMenu: SubMenu
+  selectedSubMenu: string
   setPageQueryKey?: any
 }
 
@@ -23,10 +20,7 @@ export default function DashboardManager({
 }: DashboardManagerProps) {
   return (
     <div>
-      <DashboardD81
-        data={data}
-        setPageQueryKey={setPageQueryKey}
-      ></DashboardD81>
+      <DashboardD81 data={data} setPageQueryKey={setPageQueryKey} />
       {/* <DashboardD0f demographics={data}></DashboardD0f> */}
     </div>
   )

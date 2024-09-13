@@ -26,69 +26,69 @@ export default function LandingPage02() {
                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                       <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
                         <Image
-                          height={64}
-                          width={44}
                           alt=""
-                          src="/a1.jpeg"
                           className="h-full w-full object-cover object-center"
+                          height={64}
+                          src="/a1.jpeg"
+                          width={44}
                         />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <Image
-                          height={64}
-                          width={44}
                           alt=""
+                          className="h-full w-full object-cover object-center"
+                          height={64}
                           src="/a2.jpeg"
-                          className="h-full w-full object-cover object-center"
+                          width={44}
                         />
                       </div>
                     </div>
                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <Image
-                          height={64}
-                          width={44}
                           alt=""
+                          className="h-full w-full object-cover object-center"
+                          height={64}
                           src="/a3.jpeg"
-                          className="h-full w-full object-cover object-center"
+                          width={44}
                         />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <Image
-                          height={64}
-                          width={44}
                           alt=""
+                          className="h-full w-full object-cover object-center"
+                          height={64}
                           src="/a4.jpeg"
-                          className="h-full w-full object-cover object-center"
+                          width={44}
                         />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <Image
-                          height={64}
-                          width={44}
                           alt=""
-                          src="/a1.jpeg"
                           className="h-full w-full object-cover object-center"
+                          height={64}
+                          src="/a1.jpeg"
+                          width={44}
                         />
                       </div>
                     </div>
                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <Image
-                          height={64}
-                          width={44}
                           alt=""
-                          src="/a1.jpeg"
                           className="h-full w-full object-cover object-center"
+                          height={64}
+                          src="/a1.jpeg"
+                          width={44}
                         />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <Image
-                          height={64}
-                          width={44}
                           alt=""
-                          src="/a1.jpeg"
                           className="h-full w-full object-cover object-center"
+                          height={64}
+                          src="/a1.jpeg"
+                          width={44}
                         />
                       </div>
                     </div>
@@ -97,8 +97,8 @@ export default function LandingPage02() {
               </div>
 
               <a
-                href="/dashboard"
                 className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
+                href="/dashboard"
               >
                 Live Demo
               </a>

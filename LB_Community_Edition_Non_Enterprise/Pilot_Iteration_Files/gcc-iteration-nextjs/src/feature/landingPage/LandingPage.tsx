@@ -1,4 +1,4 @@
-import { Link } from "@nextui-org/react";
+import { Link } from '@nextui-org/react'
 
 export default function LandingPage() {
   return (
@@ -12,5 +12,5 @@ export default function LandingPage() {
         </ul>
       </div>
     </div>
-  );
+  )
 }

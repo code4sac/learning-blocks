@@ -1,7 +1,9 @@
-import styles from './CardC89.module.css'
 import { PieChart } from '@mui/x-charts/PieChart'
+
 import { Demographic } from '@/utility/models/demographic'
 import { parseDemographicPieChartData } from '@/feature/dashboard/graphUtils'
+
+import styles from './CardC89.module.css'
 
 interface C89Props {
   data: Demographic[]
@@ -32,6 +34,7 @@ function CardC89({ data }: C89Props) {
       <div className={`${styles.dashboardContainer}`}>
         {data ? (
           <PieChart
+            height={300}
             series={[
               {
                 data: parseDemographicPieChartData(data),
@@ -46,8 +49,7 @@ function CardC89({ data }: C89Props) {
               },
             ]}
             width={820}
-            height={300}
-          ></PieChart>
+          />
         ) : null}
       </div>
     </div>

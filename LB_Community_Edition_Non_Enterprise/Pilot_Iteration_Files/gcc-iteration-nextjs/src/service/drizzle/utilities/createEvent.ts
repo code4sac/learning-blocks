@@ -1,5 +1,6 @@
-import { events } from '@/service/drizzle/schema'
 import { LibSQLDatabase } from 'drizzle-orm/libsql'
+
+import { events } from '@/service/drizzle/schema'
 
 export async function createEvent(
   db: LibSQLDatabase<typeof import('../schema')>,

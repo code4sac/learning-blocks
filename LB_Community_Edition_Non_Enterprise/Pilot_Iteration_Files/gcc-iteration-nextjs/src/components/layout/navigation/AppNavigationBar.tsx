@@ -1,39 +1,34 @@
-﻿import links from '../../../../__tests__/mock/links01.json'
-import styles from './AppNavigationBar.module.css'
-import { SubMenu } from '@/utility/models/page'
+﻿'use-client'
+
 import Image from 'next/image'
-import { useState } from 'react'
-import {
-  Button,
-  Input,
-  Navbar,
-  NavbarContent,
-  NavbarItem,
-} from '@nextui-org/react'
+import { Input, Navbar, NavbarContent, NavbarItem } from '@nextui-org/react'
+import Link from 'next/link'
+
+import { SubMenu } from '@/utility/models/page'
+
+import links from '../../../../__tests__/mock/links01.json'
+
+import styles from './AppNavigationBar.module.css'
 import { SearchIcon } from './SearchIcon'
 
-interface NEAppNavigationBarProps {
+interface AppNavigationBarProps {
   selectedMenu: string
   selectedSubMenu: SubMenu
   onClickSubMenuLink: any
 }
 
+function capitalizeFirstLetter(text: string) {
+  return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
 /**
- * Non-enterprise app navigation bar.
- * @param subMenu {string} The selected toolbar menu.
- * @returns App container child element.
+ * App navigation bar.
  */
 function AppNavigationBar({
   onClickSubMenuLink,
   selectedMenu,
   selectedSubMenu,
-}: NEAppNavigationBarProps) {
-  const [querySaveDisabled, setQuerySaveDisabled] = useState(false)
-
-  function capitalizeFirstLetter(text: string) {
-    return text.charAt(0).toUpperCase() + text.slice(1)
-  }
-
+}: AppNavigationBarProps) {
   return (
     <div className={`${styles.mainToolbarContainer}`}>
       <Navbar className={`justify-content-between border-bottom`}>
@@ -42,35 +37,33 @@ function AppNavigationBar({
             {links.map((link) => {
               return (
                 <div key={link.key}>
-                  <a
-                    href={link.key}
+                  <Link
                     className={`${styles.menuLink} ${
                       link.key === selectedMenu ? styles.menuLinkSelected : ''
                     }`}
+                    href={link.key}
                   >
                     <Image
+                      alt="Expand navbar"
+                      height="24"
                       src={
                         link.key === selectedMenu
                           ? `${link.menuIcon}_light.svg`
                           : `${link.menuIcon}.svg`
                       }
                       width="24"
-                      height="24"
-                      alt="Expand navbar"
                     />
                     <span style={{ paddingLeft: '4px', fontWeight: '600' }}>
                       {capitalizeFirstLetter(link.key)}
                     </span>
-                  </a>
+                  </Link>
                 </div>
               )
             })}
-            <NavbarItem className="hidden lg:flex"></NavbarItem>
+            <NavbarItem className="hidden lg:flex" />
             <NavbarItem>
               <Input
-                label="Search"
                 isClearable
-                radius="lg"
                 classNames={{
                   label: 'text-black/50 dark:text-white/90',
                   input: [
@@ -92,7 +85,9 @@ function AppNavigationBar({
                     '!cursor-text',
                   ],
                 }}
+                label="Search"
                 placeholder="Type to search..."
+                radius="lg"
                 startContent={
                   <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
                 }

@@ -1,5 +1,5 @@
 export interface Demographic {
-  demographicTitle: string;
-  key: string;
-  demographicAggregate: number;
+  demographicTitle: string
+  key: string
+  demographicAggregate: number
 }

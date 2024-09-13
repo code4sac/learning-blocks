@@ -1,7 +1,9 @@
-import { db } from '@/utility/db'
 import bcrypt from 'bcrypt'
 import { eq } from 'drizzle-orm'
 import jwt from 'jsonwebtoken'
+
+import { db } from '@/utility/db'
+
 import { users } from '../schema'
 
 const SECRET = 'use_an_ENV_variable'

@@ -17,6 +17,9 @@ import {
   NavbarMenuToggle,
 } from '@nextui-org/react'
 import React from 'react'
+
+import { signout } from '@/actions/signout'
+
 import {
   ChevronDown,
   Lock,
@@ -27,7 +30,6 @@ import {
   Scale,
 } from './Icons'
 import NavigationSiteSelector from './NavigationSiteSelector'
-import { signout } from '@/actions/signout'
 
 function onSiteSelect(site: string) {
   console.log(site)
@@ -77,7 +79,7 @@ export default function SiteNavigationBar({
             <NavigationSiteSelector
               sites={['GCC Pilot Iteration']}
               onSiteSelect={onSiteSelect}
-            ></NavigationSiteSelector>
+            />
           )}
         </NavbarBrand>
       </NavbarContent>
@@ -154,16 +156,16 @@ export default function SiteNavigationBar({
         <NavbarItem className="hidden sm:flex">
           {siteSelector ? (
             <Button
-              radius="full"
               className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              radius="full"
               onPress={() => signout()}
             >
               Sign Out
             </Button>
           ) : (
             <Button
-              radius="full"
               className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              radius="full"
             >
               Sign In
             </Button>
@@ -175,6 +177,7 @@ export default function SiteNavigationBar({
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
+              className="w-full"
               color={
                 index === 2
                   ? 'primary'
@@ -182,7 +185,6 @@ export default function SiteNavigationBar({
                     ? 'danger'
                     : 'foreground'
               }
-              className="w-full"
               href="#"
               size="lg"
             >

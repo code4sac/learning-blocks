@@ -1,35 +1,21 @@
 'use client'
-import { ReactElement, useState } from 'react'
-import { PageProps, SubMenu } from '@/utility/models/page'
+
+import { useSearchParams } from 'next/navigation'
+
 import DashboardManager from '@/feature/dashboard/DashboardManager'
-import { fetchJson } from '@/service/fetch/fetchJson'
 import AppContainer from '@/components/layout/AppContainer'
 
-let data = {}
+export default function Page() {
+  let searchParams = useSearchParams()
+  let currentSubMenu = searchParams.get('navigationKey') || ''
+  let data = undefined
 
-let context = {
-  auth: undefined!,
-  navigationKey: 'example 01',
-  queryKey: '1efa02',
-}
-
-/**
- * Dashboard page.
- * @returns App page.
- */
-export default function Page({ navigationKey, queryKey }: PageProps) {
-  const [currentSubMenu, setCurrentSubMenu] = useState(SubMenu.Example01)
-  const [pageQueryKey, setPageQueryKey] = useState(queryKey ? queryKey : '')
   return (
-    <AppContainer
-      selectedMenu="dashboard"
-      selectedSubMenu={currentSubMenu}
-      setCurrentSubMenu={setCurrentSubMenu}
-    >
+    <AppContainer selectedMenu="dashboard" selectedSubMenu={currentSubMenu}>
       <DashboardManager
         data={data ? data : [{}]}
         selectedSubMenu={currentSubMenu}
-      ></DashboardManager>
+      />
     </AppContainer>
   )
 }

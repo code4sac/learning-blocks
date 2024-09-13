@@ -6,7 +6,7 @@ function Card03() {
   return (
     <Card style={{ width: '18rem' }}>
       <Link to="/dashboard03">
-        <Card.Img variant="top" src="/demo_03.png" />
+        <Card.Img src="/demo_03.png" variant="top" />
       </Link>
       <Card.Body>
         <Link to="/dashboard03">

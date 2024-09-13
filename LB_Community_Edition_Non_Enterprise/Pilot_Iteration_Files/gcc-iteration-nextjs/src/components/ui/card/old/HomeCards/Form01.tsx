@@ -1,6 +1,7 @@
-import type { FieldApi } from "@tanstack/react-form";
-import { useForm } from "@tanstack/react-form";
-import { Button } from "react-bootstrap";
+import type { FieldApi } from '@tanstack/react-form'
+
+import { useForm } from '@tanstack/react-form'
+import { Button } from 'react-bootstrap'
 
 function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
   return (
@@ -8,22 +9,22 @@ function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
       {field.state.meta.touchedErrors ? (
         <em>{field.state.meta.touchedErrors} </em>
       ) : null}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? 'Validating...' : null}
     </>
-  );
+  )
 }
 
 function Form01() {
   const form = useForm({
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      firstName: '',
+      lastName: '',
     },
     onSubmit: async ({ value }) => {
       // Do something with form data
-      console.log(value);
+      console.log(value)
     },
-  });
+  })
 
   return (
     <div>
@@ -31,31 +32,14 @@ function Form01() {
       <form.Provider>
         <form
           onSubmit={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            void form.handleSubmit();
+            e.preventDefault()
+            e.stopPropagation()
+            void form.handleSubmit()
           }}
         >
           <div>
             {/* A type-safe field component*/}
             <form.Field
-              name="firstName"
-              validators={{
-                onChange: ({ value }) =>
-                  !value
-                    ? "A first name is required"
-                    : value.length < 3
-                    ? "First name must be at least 3 characters"
-                    : undefined,
-                onChangeAsyncDebounceMs: 500,
-                onChangeAsync: async ({ value }) => {
-                  await new Promise((resolve) => setTimeout(resolve, 1000));
-                  return (
-                    value.includes("error") &&
-                    'No "error" allowed in first name'
-                  );
-                },
-              }}
               children={(field) => {
                 // Avoid hasty abstractions. Render props are great!
                 return (
@@ -69,13 +53,29 @@ function Form01() {
                     />
                     <FieldInfo field={field} />
                   </>
-                );
+                )
+              }}
+              name="firstName"
+              validators={{
+                onChange: ({ value }) =>
+                  !value
+                    ? 'A first name is required'
+                    : value.length < 3
+                      ? 'First name must be at least 3 characters'
+                      : undefined,
+                onChangeAsyncDebounceMs: 500,
+                onChangeAsync: async ({ value }) => {
+                  await new Promise((resolve) => setTimeout(resolve, 1000))
+                  return (
+                    value.includes('error') &&
+                    'No "error" allowed in first name'
+                  )
+                },
               }}
             />
           </div>
           <div>
             <form.Field
-              name="lastName"
               children={(field) => (
                 <>
                   <label htmlFor={field.name}> Last Name: </label>
@@ -88,20 +88,21 @@ function Form01() {
                   <FieldInfo field={field} />
                 </>
               )}
+              name="lastName"
             />
           </div>
           <form.Subscribe
-            selector={(state) => [state.canSubmit, state.isSubmitting]}
             children={([canSubmit, isSubmitting]) => (
-              <Button type="submit" disabled={!canSubmit}>
-                {isSubmitting ? "..." : "Submit"}
+              <Button disabled={!canSubmit} type="submit">
+                {isSubmitting ? '...' : 'Submit'}
               </Button>
             )}
+            selector={(state) => [state.canSubmit, state.isSubmitting]}
           />
         </form>
       </form.Provider>
     </div>
-  );
+  )
 }
 
-export default Form01;
+export default Form01

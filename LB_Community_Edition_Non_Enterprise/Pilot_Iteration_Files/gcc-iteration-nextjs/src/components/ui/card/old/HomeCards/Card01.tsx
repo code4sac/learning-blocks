@@ -4,8 +4,8 @@ function Card01() {
   return (
     <Card
       isFooterBlurred
-      radius="lg"
       className="border-none"
+      radius="lg"
       style={{ width: '18rem' }}
     >
       <Image
@@ -26,10 +26,10 @@ function Card01() {
         <p className="text-tiny text-white/80">Available soon.</p>
         <Button
           className="text-tiny text-white bg-black/20"
-          variant="flat"
           color="default"
           radius="lg"
           size="sm"
+          variant="flat"
         >
           Notify me
         </Button>

@@ -1,10 +1,10 @@
-import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
+import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 function Card04() {
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="/demo_07.png" />
+    <Card style={{ width: '18rem' }}>
+      <Card.Img src="/demo_07.png" variant="top" />
       <Card.Body>
         <Card.Title>
           List of students from API request and their data
@@ -24,7 +24,7 @@ function Card04() {
         <Card.Link href="#">Another Link</Card.Link>
       </Card.Body>
     </Card>
-  );
+  )
 }
 
-export default Card04;
+export default Card04

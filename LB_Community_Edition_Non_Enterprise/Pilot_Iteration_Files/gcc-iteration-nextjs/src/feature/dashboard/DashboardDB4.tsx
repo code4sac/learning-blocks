@@ -1,10 +1,12 @@
 'use client'
 import { Container } from 'react-bootstrap'
-import styles from './DashboardDb4.module.css'
 import { reject, xor } from 'lodash'
 import { useState } from 'react'
+
 import CardC44 from '@/components/ui/card/CardC44'
 import CardC89 from '@/components/ui/card/CardC89'
+
+import styles from './DashboardDb4.module.css'
 
 export interface DashboardAggregatorProps {
   languageStudents: [LanguageStudent]
@@ -56,8 +58,8 @@ function DashboardDb4({ languageStudents }: DashboardAggregatorProps) {
             .map((it) => (
               <CardC44
                 key={it.key}
-                title={it.languageStudentTitle}
                 stat={it.languageStudentAggregate.toString()}
+                title={it.languageStudentTitle}
               />
             ))}
         </div>
@@ -69,8 +71,8 @@ function DashboardDb4({ languageStudents }: DashboardAggregatorProps) {
             .map((it) => (
               <CardC44
                 key={it.key}
-                title={it.languageStudentTitle}
                 stat={it.languageStudentAggregate.toString()}
+                title={it.languageStudentTitle}
               />
             ))}
         </div>
@@ -82,8 +84,8 @@ function DashboardDb4({ languageStudents }: DashboardAggregatorProps) {
             .map((it) => (
               <CardC44
                 key={it.key}
-                title={it.languageStudentTitle}
                 stat={it.languageStudentAggregate.toString()}
+                title={it.languageStudentTitle}
               />
             ))}
         </div>
@@ -95,31 +97,31 @@ function DashboardDb4({ languageStudents }: DashboardAggregatorProps) {
             .map((it) => (
               <CardC44
                 key={it.key}
-                title={it.languageStudentTitle}
                 stat={it.languageStudentAggregate.toString()}
+                title={it.languageStudentTitle}
               />
             ))}
         </div>
         <div
           className={`${styles.languageStudentCard} ${styles.languageStudent5}`}
         >
-          <CardC89 data={languageStudents}></CardC89>
+          <CardC89 data={languageStudents} />
         </div>
         <div
           className={`${styles.languageStudentCard} ${styles.languageStudent6}`}
-        ></div>
+        />
         <div
           className={`${styles.languageStudentCard} ${styles.languageStudent7}`}
-        ></div>
+        />
         <div
           className={`${styles.languageStudentCard} ${styles.languageStudent8}`}
-        ></div>
+        />
         <div
           className={`${styles.languageStudentCard} ${styles.languageStudent9}`}
-        ></div>
+        />
         <div
           className={`${styles.languageStudentCard} ${styles.languageStudent10}`}
-        ></div>
+        />
         {/*{data.map((it, index) => {*/}
         {/*  return <>*/}
         {/*    <Card className={styles.card} onClick={() => handleClick(index)} data-bs-theme={getCardTheme(index)} >*/}

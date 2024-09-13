@@ -1,10 +1,10 @@
-import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
+import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 function Card02() {
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="/demo_04.png" />
+    <Card style={{ width: '18rem' }}>
+      <Card.Img src="/demo_04.png" variant="top" />
       <Card.Body>
         <Card.Title>Bar Graphs from data</Card.Title>
         <Card.Text>
@@ -22,7 +22,7 @@ function Card02() {
         <Card.Link href="#">Another Link</Card.Link>
       </Card.Body>
     </Card>
-  );
+  )
 }
 
-export default Card02;
+export default Card02

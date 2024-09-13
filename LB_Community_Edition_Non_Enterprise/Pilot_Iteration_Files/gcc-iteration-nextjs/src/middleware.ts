@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+
 import { COOKIE_NAME } from '@/utility/constants'
+
+import { defaultDashboard } from './utility/urlHelpers'
 
 export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/dashboard')) {
@@ -9,7 +12,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname === '/') {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
+    return defaultDashboard(request)
   }
 }
 

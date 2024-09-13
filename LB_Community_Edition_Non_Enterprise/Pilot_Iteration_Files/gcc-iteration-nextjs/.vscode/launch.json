@@ -4,9 +4,14 @@
     {
       "name": "Launch via NPM",
       "request": "launch",
-      "runtimeArgs": ["run", "test"],
+      "runtimeArgs": [
+        "run",
+        "test"
+      ],
       "runtimeExecutable": "npm",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "type": "node"
     },
     {
