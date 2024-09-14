@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { COOKIE_NAME } from '@/utility/constants'
 
-import { defaultDashboard } from './utility/urlHelpers'
+import { defaultDashboard } from '../src/utility/urlHelpers'
 
 export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/dashboard')) {

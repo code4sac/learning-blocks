@@ -5,11 +5,10 @@ function buildUrl() {
     navigationKey: 'example 01',
     queryKey: '1efa02',
   }
-  let path = 'dashboard'
   let query = `q=${context.queryKey}&n=${context.navigationKey}`
-  return new URL(`/${path}?${query}`)
+  return query
 }
 
 export function defaultDashboard(request: NextRequest) {
-  return NextResponse.redirect(buildUrl())
+  return NextResponse.redirect(new URL(`dashboard?${buildUrl()}`, request.url))
 }

@@ -25,7 +25,7 @@ export const registerUser = async (prevState: any, formData: FormData) => {
     console.error(e)
     return { message: 'Failed to sign you up' }
   }
-  redirect('/dashboard')
+  redirect('/app/dashboard')
 }
 
 export const signinUser = async (prevState: any, formData: FormData) => {
@@ -42,5 +42,5 @@ export const signinUser = async (prevState: any, formData: FormData) => {
     console.error(e)
     return { message: 'Failed to sign you in' }
   }
-  redirect('/dashboard')
+  redirect('/app/dashboard')
 }

@@ -6,7 +6,7 @@ import { useState } from 'react'
 import CardC44 from '@/components/ui/card/CardC44'
 import CardC89 from '@/components/ui/card/CardC89'
 
-import styles from './DashboardDb4.module.css'
+import styles from './DashboardDB4.module.css'
 
 export interface DashboardAggregatorProps {
   languageStudents: [LanguageStudent]

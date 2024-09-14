@@ -3,7 +3,7 @@ import { Demographic } from '@/utility/models/demographic'
 import CardC44 from '@/components/ui/card/CardC44'
 import CardC89 from '@/components/ui/card/CardC89'
 
-import styles from './DashboardD0f.module.css'
+import styles from './DashboardD0F.module.css'
 
 export interface D0fProps {
   demographics: [Demographic]

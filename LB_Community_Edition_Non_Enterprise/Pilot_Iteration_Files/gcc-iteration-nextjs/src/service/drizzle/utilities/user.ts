@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import { eq } from 'drizzle-orm'
 import jwt from 'jsonwebtoken'
 
-import { db } from '@/utility/db'
+import { db } from '../db'
 
 import { users } from '../schema'
 
@@ -51,7 +51,7 @@ export const signin = async ({
   }
 
   const token = createTokenForUser(match.id)
-  const { password: pw, ...user } = match
+  const { ...user } = match
 
   return { user, token }
 }

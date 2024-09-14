@@ -1,4 +1,5 @@
 'use client'
+
 import { NextUIProvider } from '@nextui-org/system'
 import * as React from 'react'
 import { ThemeProviderProps } from 'next-themes/dist/types'

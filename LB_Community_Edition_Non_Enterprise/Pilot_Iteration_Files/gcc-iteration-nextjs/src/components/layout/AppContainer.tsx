@@ -1,4 +1,4 @@
-import AppNavigationBar from '@/components/layout/navigation/AppNavigationBar'
+import AppNavigationBar from '@/components/layout/AppNavigationBar'
 
 interface AppContainerProps {
   selectedMenu: string

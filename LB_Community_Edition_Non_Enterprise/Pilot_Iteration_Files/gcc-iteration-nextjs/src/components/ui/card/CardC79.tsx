@@ -7,15 +7,9 @@ import styles from './CardC79.module.css'
 
 /**
  * Dashboard arrow graph card. Categories (Red, Orange, Yellow, Green, Blue). Monotone color theme.
- * @param props Card component properties.
- * @returns Single arrow graph data.
+ * Old props: selectedCategories,
  */
-function CardC79({
-  data,
-  selectedCategories,
-  getCardTheme,
-  selectCategory,
-}: AnalyticCardProps) {
+function CardC79({ data, getCardTheme, selectCategory }: AnalyticCardProps) {
   function getColorIndicator(index: number) {
     switch (index) {
       case 0:
