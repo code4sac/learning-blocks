@@ -438,6 +438,7 @@ class SchoolsInDBBase(BaseModel):
     State: Optional[str] = None
     ZipCode: Optional[str] = None
 
+
     class Config:
         orm_mode = True
 

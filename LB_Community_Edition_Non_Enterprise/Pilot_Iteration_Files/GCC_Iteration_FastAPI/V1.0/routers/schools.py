@@ -65,23 +65,46 @@ def read_school(school_id: int, db: Session = Depends(get_db)):
     school = db.query(SchoolsInDB).filter(SchoolsInDB.ID == school_id).first()
     if not school:
         raise HTTPException(status_code=404, detail="School not found")
-    return school
+    
+    # Deserialize MetaData from JSON string
+    response_meta_data = None
+    if school.MetaData:
+        try:
+            response_meta_data = json.loads(school.MetaData)
+        except json.JSONDecodeError as e:
+            print(f"Error decoding MetaData: {e}")
+            raise HTTPException(status_code=500, detail="Failed to decode MetaData.")
+    
+    # Construct the response data
+    response_school = SchoolsInDBResponse(
+        ID=school.ID,
+        SchoolCode=school.SchoolCode,
+        SchoolName=school.SchoolName,
+        Address=school.Address,
+        City=school.City,
+        State=school.State,
+        ZipCode=school.ZipCode,
+        MetaData=response_meta_data
+    )
+
+    return response_school
 
 
 # Update a school
 @router.put("/schools/{school_id}", response_model=SchoolsInDBResponse)
 def update_school(school_id: int, school: SchoolsInDBCreate, db: Session = Depends(get_db)):
-    existing_school = db.query(SchoolsInDB).filter(SchoolsInDB.id == school_id).first()
+    existing_school = db.query(SchoolsInDB).filter(SchoolsInDB.ID == school_id).first()
     if not existing_school:
         raise HTTPException(status_code=404, detail="School not found")
     
     try:
-        existing_school.school_code = school.school_code
-        existing_school.school_name = school.school_name
-        existing_school.address = school.address
-        existing_school.city = school.city
-        existing_school.state = school.state
-        existing_school.zip_code = school.zip_code
+        existing_school.SchoolCode = school.SchoolCode
+        existing_school.SchoolName = school.SchoolName
+        existing_school.Address = school.Address
+        existing_school.City = school.City
+        existing_school.State = school.State
+        existing_school.ZipCode = school.ZipCode
+        existing_school.MetaData = school.MetaData.model_dump() if school.MetaData else None
 
         db.commit()
         db.refresh(existing_school)
