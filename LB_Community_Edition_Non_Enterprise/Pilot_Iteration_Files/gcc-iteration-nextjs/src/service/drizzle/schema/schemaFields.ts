@@ -1,6 +1,7 @@
+import { randomUUID } from 'node:crypto'
+
 import { sql } from 'drizzle-orm'
 import { integer, text } from 'drizzle-orm/sqlite-core'
-import { randomUUID } from 'node:crypto'
 
 export const id = () =>
   text('id')

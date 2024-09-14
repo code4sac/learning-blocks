@@ -1,34 +1,26 @@
-import AppNavigationBar from '@/components/layout/navigation/AppNavigationBar'
-import { SubMenu } from '@/utility/models/page'
+import AppNavigationBar from '@/components/layout/AppNavigationBar'
 
 interface AppContainerProps {
   selectedMenu: string
-  selectedSubMenu: SubMenu
+  selectedSubMenu: string
   setCurrentSubMenu: any
   children: any
 }
 
 /**
- * Enterprise app container.
- * @param children {ReactElement} Content for the inner application.
- * @param selectedMenu {string} The .
- * @param selectedSubMenu {string} The .
- * @param setCurrentSubMenu {any} The .
- * @returns App container child element.
+ * This container is the content between the navigation bar and the footer. It contains it's own sub navigation bar.
  */
 export default function AppContainer({
   children,
   selectedMenu,
   selectedSubMenu,
-  setCurrentSubMenu,
 }: AppContainerProps) {
   return (
     <div>
       <AppNavigationBar
         selectedMenu={selectedMenu}
         selectedSubMenu={selectedSubMenu}
-        onClickSubMenuLink={setCurrentSubMenu}
-      ></AppNavigationBar>
+      />
       <div>{children}</div>
     </div>
   )

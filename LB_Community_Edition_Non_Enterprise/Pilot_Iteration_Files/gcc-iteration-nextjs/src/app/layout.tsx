@@ -1,10 +1,12 @@
-import type { Metadata, Viewport } from 'next'
-import { AppNextUIProvider } from '@/utility/providers'
 import './globals.css'
+import type { Metadata, Viewport } from 'next'
+
 import React from 'react'
+import clsx from 'clsx'
+
+import { AppNextUIProvider } from '@/utility/providers'
 import { siteConfig } from '@/utility/constants'
 import { fontSans } from '@/utility/fonts'
-import clsx from 'clsx'
 
 export const metadata: Metadata = {
   title: {
@@ -21,17 +23,12 @@ export const viewport: Viewport = {
   ],
 }
 
-/**
- * Root layout component.
- *
- * @param children - The children components to be rendered.
- * @returns The rendered RootLayout component.
- */
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html suppressHydrationWarning lang="en">
+      {/* Suppress hyrdration warning was taken from nextui new project template. */}
       <head />
       <body
         className={clsx(
@@ -39,8 +36,9 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
+        {/* BUG: Typescript warning the props are missing children. */}
         <AppNextUIProvider
-          themeProps={{ attribute: 'class', defaultTheme: 'light' }}
+          themeProps={{ attribute: 'class', children, defaultTheme: 'light' }}
         >
           {children}
         </AppNextUIProvider>

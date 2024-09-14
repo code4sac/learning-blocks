@@ -1,13 +1,15 @@
 import { useReducer } from 'react'
-import styles from './Table01.module.css'
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { Button } from '@nextui-org/button'
+
 import { StudentTableProps } from '@/utility/models/table'
 import { getDefaultColumns } from '@/components/ui/table/tableUtils'
-import { Button } from '@nextui-org/button'
+
+import styles from './Table01.module.css'
 
 function Table01({ data }: StudentTableProps) {
   const rerender = useReducer(() => ({}), {})[1]
@@ -67,7 +69,7 @@ function Table01({ data }: StudentTableProps) {
           </tfoot>
         </table>
         <div className="h-4" />
-        <Button onClick={() => rerender()} className="border p-2">
+        <Button className="border p-2" onClick={() => rerender()}>
           Rerender
         </Button>
       </div>

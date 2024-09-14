@@ -7,7 +7,7 @@ const Submit = ({ label, ...btnProps }) => {
   const { pending } = useFormStatus()
 
   return (
-    <Button {...btnProps} type="submit" isLoading={pending}>
+    <Button {...btnProps} isLoading={pending} type="submit">
       {label}
     </Button>
   )

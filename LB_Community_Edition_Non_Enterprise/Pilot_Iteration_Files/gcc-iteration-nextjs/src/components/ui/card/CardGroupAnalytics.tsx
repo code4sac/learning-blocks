@@ -1,7 +1,8 @@
+import { AnalyticCardGroupProps } from '@/utility/models/card'
+
 import styles from './CardGroupAnalytics.module.css'
 import CardC79 from './CardC79'
 import CardC93 from './CardC93'
-import { AnalyticCardGroupProps } from '@/utility/models/card'
 
 function CardGroupAnalytics({
   data,
@@ -18,20 +19,20 @@ function CardGroupAnalytics({
               <CardC93
                 key={analytic.key}
                 data={analytic}
-                selectedCategories={selectedCategories}
                 getCardTheme={getCardTheme}
                 selectCategory={selectCategory}
-              ></CardC93>
+                selectedCategories={selectedCategories}
+              />
             )
           default:
             return (
               <CardC79
                 key={analytic.key}
                 data={analytic}
-                selectedCategories={selectedCategories}
                 getCardTheme={getCardTheme}
                 selectCategory={selectCategory}
-              ></CardC79>
+                selectedCategories={selectedCategories}
+              />
             )
         }
       })}

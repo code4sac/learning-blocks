@@ -20,6 +20,7 @@ export const siteConfig = {
       href: '/profile',
     },
   ],
+  subNavMenuItems: [],
   links: {
     github: 'https://github.com/nextui-org/nextui',
     twitter: 'https://twitter.com/getnextui',

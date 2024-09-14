@@ -1,11 +1,12 @@
 'use server'
 
+import randomName from '@scaleway/random-name'
+import { revalidateTag } from 'next/cache'
+
 import { getCurrentUser } from '@/app/(auth)/users'
 import { events } from '@/service/drizzle/schema'
 import { db } from '@/utility/db'
 import { delay } from '@/utility/delay'
-import randomName from '@scaleway/random-name'
-import { revalidateTag } from 'next/cache'
 
 export const createNewEvent = async () => {
   await delay(1000)
