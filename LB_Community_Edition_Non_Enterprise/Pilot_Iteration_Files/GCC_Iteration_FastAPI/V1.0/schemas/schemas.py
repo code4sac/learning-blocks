@@ -15,7 +15,6 @@ class PeopleInDBCreate(BaseModel):
     SchoolCode: Optional[str] = None
     AnonymizedStudentID: str 
     AnonymizedStudentNumber: str
-    sections: Optional[List[str]] = None
     SchlAssociated: Optional[str] = None
     stu_associated: Optional[List[str]] = None
     Credentials: Optional[List[str]] = None
