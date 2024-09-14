@@ -65,9 +65,13 @@ class PeopleInDB(Base):
 class StudentInDB(PeopleInDB):
     __tablename__ = "students"
     __table_args__ = {'extend_existing': True}
-    id: Mapped[int] = mapped_column(Integer, ForeignKey("people.id"), primary_key=True, index=True)
-    AnonymizedStudentID: Mapped[str] = mapped_column(String, ForeignKey("people.AnonymizedStudentID"), nullable=False) 
-    AnonymizedStudentNumber: Mapped[Optional[str]] = mapped_column(String, ForeignKey("people.AnonymizedStudentNumber"), nullable=True)
+    __mapper_args__ = {
+        'polymorphic_identity': 'student',  # Identity for Teacher
+        'inherit_condition': PeopleInDB.ID == id,  # Specify the inherit condition
+    }
+    id: Mapped[int] = mapped_column(Integer, ForeignKey("people.ID"), primary_key=True, index=True)
+    AnonymizedStudentID: Mapped[str] = mapped_column(String, nullable=False) 
+    AnonymizedStudentNumber: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     MetaData: Mapped[Optional[Dict[str, List[str]]]] = mapped_column(JSON, nullable=True)
     Sections: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  
     SchlAssociated: Mapped[Optional[str]] = mapped_column(String,  nullable=True) 
@@ -93,8 +97,12 @@ def validate_stu_associated(data: Dict[str, Dict[str, Optional[str]]]) -> bool:
 class TeacherInDB(PeopleInDB):
     __tablename__ = "teachers"
     __table_args__ = {'extend_existing': True}
-    id: Mapped[int] = mapped_column(Integer, ForeignKey("people.id"), primary_key=True, index=True)
-    AnonymizedTeacherID: Mapped[str] = mapped_column(String, ForeignKey("people.AnonymizedTeacherID"), unique=True,  nullable=False)  # Changed to lowercase
+    __mapper_args__ = {
+        'polymorphic_identity': 'teacher',  # Identity for Teacher
+        'inherit_condition': PeopleInDB.ID == id,  # Specify the inherit condition
+    }
+    id: Mapped[int] = mapped_column(Integer, ForeignKey("people.ID"), primary_key=True, index=True)
+    AnonymizedTeacherID: Mapped[str] = mapped_column(String, unique=True,  nullable=False)  # Changed to lowercase
     Sections: Mapped[Optional[List[str]]] = mapped_column(String, nullable=True)  # Changed to lowercase
     StuAssociated: Mapped[Optional[Dict[str, Dict[str, Optional[str]]]]] = mapped_column(JSON, nullable=True)  # Changed to lowercase
     SchlAssociated: Mapped[Optional[str]] = mapped_column(String, nullable=True)  # Changed to lowercase
@@ -127,7 +135,7 @@ class TeacherInDB(PeopleInDB):
 # Add the SchoolsInDB model
 class SchoolsInDB(Base):
     __tablename__ = "schools"
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    ID: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     SchoolCode: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     SchoolName: Mapped[str] = mapped_column(String, nullable=False)
     Address: Mapped[Optional[str]] = mapped_column(String, nullable=True)

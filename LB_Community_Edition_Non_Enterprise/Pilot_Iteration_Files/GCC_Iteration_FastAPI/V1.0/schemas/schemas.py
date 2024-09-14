@@ -5,29 +5,29 @@ from datetime import datetime
 from models.models import RoleEnum
 # Base schema for PeopleInDB creation
 class PeopleInDBCreate(BaseModel):
-    first_name: str
-    last_name: str
-    role: RoleEnum
-    sourced_id: str
-    enabled_user: bool
-    date_last_modified: Optional[str] = None
-    school_code: Optional[str] = None
-    anonymized_student_ID: str 
-    anonymized_student_number: str
+    ID: int
+    FirstName: str
+    LastName: str
+    Role: RoleEnum
+    SourcedID: str
+    EnabledUser: bool
+    DateLastModified: Optional[str] = None
+    SchoolCode: Optional[str] = None
+    AnonymizedStudentID: str 
+    AnonymizedStudentNumber: str
     sections: Optional[List[str]] = None
-    schl_associated: Optional[str] = None
+    SchlAssociated: Optional[str] = None
     stu_associated: Optional[List[str]] = None
-    credentials: Optional[List[str]] = None
-    subjects: Optional[List[str]] = None
-    site_duties: Optional[List[str]] = None
-    grade_levels: Optional[List[str]] = None
-    bd_demo: Optional[Dict[str, List[str]]] = None
-    birthdate: Optional[str] = None
-    sourced_ID: str
-    anonymized_teacher_ID: str
-    anonymized_teacher_number: str
-    site_duties: Optional[List[str]] = None
-    grade_levels: Optional[List[str]] = None
+    Credentials: Optional[List[str]] = None
+    Subjects: Optional[List[str]] = None
+    SiteDuties: Optional[List[str]] = None
+    GradeLevels: Optional[List[str]] = None
+    MetaData: Optional[Dict[str, List[str]]] = None
+    Birthdate: Optional[str] = None
+    SourcedID: str
+    AnonymizedTeacherID: str
+    SiteDuties: Optional[List[str]] = None
+    GradeLevels: Optional[List[str]] = None
 
 
     class Config:
@@ -317,6 +317,7 @@ class BDDemoModel(BaseModel):
 
 
 class TeacherInDBCreate(BaseModel):
+    ID: int
     AnonymizedTeacherID: str
     AnonymizedTeacherNumber: Optional[str] = None
     Sections: Optional[List[str]] = None
@@ -326,7 +327,7 @@ class TeacherInDBCreate(BaseModel):
     Subjects: Optional[List[str]] = None
     SiteDuties: Optional[List[str]] = None
     GradeLevels: Optional[List[str]] = None
-    bddemo: Optional[BDDemoModel] = None
+    MetaData: Optional[BDDemoModel] = None
 
     class Config:
         from_attributes = True
@@ -334,32 +335,33 @@ class TeacherInDBCreate(BaseModel):
 # Response schema for PeopleInDB
 
 class StudentInDBCreate(BaseModel):
-    anonymized_student_ID: str
-    anonymized_student_number: str
-    sections: Optional[List[str]] = None
-    schl_associated: Optional[str] = None
-    birthdate: Optional[str] = None
-    role: RoleEnum = "student"
-    sourced_ID: str
-    school_code: Optional[str] = None
-    bddemo: Optional[BDDemoModel] = None
-    school_name: Optional[str] = None
-    grade_levels: Optional[List[str]] = None
+    ID: int
+    AnonymizedStudentID: str
+    AnonymizedStudentNumber: str
+    Sections: Optional[List[str]] = None
+    SchlAssociated: Optional[str] = None
+    Birthdate: Optional[str] = None
+    Role: RoleEnum = "student"
+    SourcedID: str
+    SchoolCode: Optional[str] = None
+    MetaData: Optional[BDDemoModel] = None
+    SchoolName: Optional[str] = None
+    GradeLevels: Optional[List[str]] = None
 
 
 
  #Response schema for StudentInDB
 class StudentInDBResponse(BaseModel):
+    ID: int
     AnonymizedStudentID: str
     AnonymizedStudentNumber: Optional[str] = None
-    role: RoleEnum = "student"
-    sourcedid: str
-    id: int
-    birthdate: Optional[str] = None
+    Role: RoleEnum = "student"
+    SourcedID: str
+    Birthdate: Optional[str] = None
     Sections: Optional[List[str]] = None
     SchlAssociated: Optional[str] = None
-    school_code: Optional[str] = None
-    bddemo: Optional[BDDemoModel] = None
+    SchoolCode: Optional[str] = None
+    MetaData: Optional[BDDemoModel] = None
     
 
     class Config:
@@ -371,6 +373,7 @@ class StudentInDBResponse(BaseModel):
 
 # Response schema for TeacherInDB
 class TeacherInDBResponse(BaseModel):
+    ID:int
     AnonymizedTeacherID: str
     AnonymizedTeacherNumber: Optional[str] = None
     role: RoleEnum = "teacher"
@@ -382,8 +385,8 @@ class TeacherInDBResponse(BaseModel):
     SiteDuties: Optional[List[str]] = None
     GradeLevels: Optional[List[str]] = None
     EnabledUser: Optional[str] = None
-    school_code: Optional[str] = None
-    bddemo: Optional[BDDemoModel] = None
+    SchoolCode: Optional[str] = None
+    MetaData: Optional[BDDemoModel] = None
     DateLastModified: Optional[str] = None
     Sections: Optional[List[str]] = None
 
@@ -394,30 +397,30 @@ class TeacherInDBResponse(BaseModel):
 
 
 class PeopleInDB(BaseModel):
-    id: int
-    firstname: str
-    Lastname: str
-    role: RoleEnum
-    sourcedid: str
+    ID: int
+    FirstName: str
+    LastName: str
+    Role: RoleEnum
+    SourcedId: str
     AnonymizedStudentID: Optional[str] = None
     AnonymizedStudentNumber: Optional[str] = None
     EnabledUser: Optional[str] = None
-    dateLastModified: Optional[str] = None
-    school_code: Optional[str] = None
+    DateLastModified: Optional[str] = None
+    SchoolCode: Optional[str] = None
     student: Optional[StudentInDBResponse] = None
     teacher: Optional[TeacherInDBResponse] = None
     class Config:
         orm_mode = True
 
 class PeopleInDBResponse(BaseModel):
-    id: int
-    firstname: str
-    lastname: str
-    role: str
-    sourcedid: str
+    ID: int
+    FirstName: str
+    LastName: str
+    Role: str
+    SourcedId: str
     EnabledUser: bool
-    dateLastModified: Optional[str] = None
-    school_code: Optional[str]
+    DateLastModified: Optional[str] = None
+    SchoolCode: Optional[str]
     student: Optional[StudentInDBResponse] = None
     teacher: Optional[TeacherInDBResponse] = None
 
@@ -426,54 +429,54 @@ class PeopleInDBResponse(BaseModel):
 # Base schema for SchoolsInDB
 
 class SchoolsInDBBase(BaseModel):
-    school_code: str
-    school_name: str
-    address: Optional[str] = None
-    city: Optional[str] = None
-    state: Optional[str] = None
-    zip_code: Optional[str] = None
+    SchoolCode: str
+    SchoolName: str
+    Address: Optional[str] = None
+    City: Optional[str] = None
+    State: Optional[str] = None
+    ZipCode: Optional[str] = None
 
     class Config:
         orm_mode = True
 
 # Schema for SchoolsInDB creation
 class SchoolsInDBCreate(SchoolsInDBBase):
-    bddemo : Optional[BDDemoModel] = None
+    MetaData : Optional[BDDemoModel] = None
     pass
 
 # Response schema for SchoolsInDB with list of associated people
 class SchoolsInDBResponse(SchoolsInDBBase):
-    id: int
+    ID: int
     people: List[PeopleInDBResponse] = []  # List of people associated with the school
-    school_code: str
-    school_name: str
+    SchoolCode: str
+    SchoolName: str
 
-    bddemo: Optional[BDDemoModel] = None
+    MetaData: Optional[BDDemoModel] = None
 
     class Config:
         orm_mode = True
 
 # Schema for updating PeopleInDB records
 class PeopleInDBUpdate(BaseModel):
-    firstname: Optional[str] = None
-    Lastname: Optional[str] = None
-    role: RoleEnum = "RoleEnum"
-    sourcedid: Optional[str] = None
+    FirstName: Optional[str] = None
+    LastName: Optional[str] = None
+    Role: RoleEnum = "RoleEnum"
+    SourcedId: Optional[str] = None
     EnabledUser: Optional[str] = None
-    dateLastModified: Optional[str] = None
-    school_code: Optional[str] = None
+    DateLastModified: Optional[str] = None
+    SchoolCode: Optional[str] = None
 
     class Config:
         from_attributes = True
 
 class StudentInDB(BaseModel):
-    id: int
+    ID: int
     AnonymizedStudentID: str
     AnonymizedStudentNumber: str
     Sections: Optional[List[str]] = None
     SchlAssociated: Optional[str] = None
     Birthdate: Optional[str] = None
-    school_code: Optional[str] = None
+    SchoolCode: Optional[str] = None
 
     class Config:
         orm_mode = True

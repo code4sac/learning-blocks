@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException, APIRouter
 from sqlalchemy import text
 from sqlalchemy.orm import Session
-from models import PeopleInDB
+from models.models import PeopleInDB
 from schemas.schemas import PeopleInDBCreate, PeopleInDBResponse, StudentInDBResponse, TeacherInDBResponse, StudentInDBCreate
 from databases.databases import get_db  # Ensure relative import is correct
 
