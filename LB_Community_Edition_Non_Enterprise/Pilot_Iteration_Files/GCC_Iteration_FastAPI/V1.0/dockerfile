@@ -13,8 +13,6 @@ RUN pip install --upgrade pip \
     && poetry install --no-root --no-dev \
     && pip install -r requirements.txt
 
-# Run Alembic migrations
-RUN alembic upgrade head
 
 # Optionally, you might want to set a default command or override it
 CMD ["uvicorn", "app:main", "--host", "0.0.0.0", "--port", "8000"]

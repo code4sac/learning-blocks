@@ -5,56 +5,61 @@ from sqlalchemy.sql import text  # Add this import
 from models.models import SchoolsInDB
 from schemas.schemas import SchoolsInDBCreate, SchoolsInDBResponse
 from databases.databases import get_db
+import json  
 
 router = APIRouter()
 
 @router.post("/schools/", response_model=SchoolsInDBResponse)
 def create_school(school: SchoolsInDBCreate, db: Session = Depends(get_db)):
     try:
-        # Convert BDDemoModel to JSON string if it exists
-        MetaData_json = json.dumps(school.MetaData.model_dump()) if school.MetaData else None  # Replace dict() with model_dump()
-
-        # Insert the school record using raw SQL with quoted identifiers
-        query = text("""
-        INSERT INTO "schools" ("SchoolCode", "SchoolName", "Address", "City", "State", "ZipCode", "MetaData")
-        VALUES (:SchoolCode, :SchoolName, :Address, :City, :State, :ZipCode, :MetaData)
-        RETURNING "ID", "SchoolCode", "SchoolName", "Address", "City", "State", "ZipCode", "MetaData"
-        """)
-        result = db.execute(query, {
-            "SchoolCode": school.SchoolCode,
-            "SchoolName": school.SchoolName,
-            "Address": school.Address,
-            "City": school.City,
-            "State": school.State,
-            "ZipCode": school.ZipCode,
-            "MetaData": MetaData_json
-        })
-        db_school = result.fetchone()
+        # Create a new School instance
+        new_school = SchoolsInDB(
+            SchoolCode=school.SchoolCode,
+            SchoolName=school.SchoolName,
+            Address=school.Address,
+            City=school.City,
+            State=school.State,
+            ZipCode=school.ZipCode,
+            MetaData=json.dumps(school.MetaData.dict()) if school.MetaData else None
+        )
         
-        if not db_school:
-            raise HTTPException(status_code=500, detail="Failed to create school.")
+        # Add the new School instance to the session
+        db.add(new_school)
         
         # Commit the transaction
         db.commit()
         
+        # Refresh to get the new ID
+        db.refresh(new_school)
+        
+        # Deserialize MetaData from JSON string
+        response_meta_data = None
+        if new_school.MetaData:
+            try:
+                response_meta_data = json.loads(new_school.MetaData)
+            except json.JSONDecodeError as e:
+                print(f"Error decoding MetaData: {e}")
+                raise HTTPException(status_code=500, detail="Failed to decode MetaData.")
+        
         # Construct the response data
         response_school = SchoolsInDBResponse(
-            ID=db_school[0],
-            SchoolCode=db_school[1],
-            SchoolName=db_school[2],
-            Address=db_school[3],
-            City=db_school[4],
-            State=db_school[5],
-            ZipCode=db_school[6],
-            MetaData=json.loads(db_school[7]) if db_school[7] else None
+            ID=new_school.ID,
+            SchoolCode=new_school.SchoolCode,
+            SchoolName=new_school.SchoolName,
+            Address=new_school.Address,
+            City=new_school.City,
+            State=new_school.State,
+            ZipCode=new_school.ZipCode,
+            MetaData=response_meta_data
         )
 
         return response_school
     except Exception as e:
         db.rollback()
+        print(f"An error occurred: {e}")
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
-    
 
+        
 @router.get("/schools/{school_id}", response_model=SchoolsInDBResponse)
 def read_school(school_id: int, db: Session = Depends(get_db)):
     school = db.query(SchoolsInDB).filter(SchoolsInDB.ID == school_id).first()
@@ -71,13 +76,12 @@ def update_school(school_id: int, school: SchoolsInDBCreate, db: Session = Depen
         raise HTTPException(status_code=404, detail="School not found")
     
     try:
-        existing_school.SchoolCode = school.SchoolCode
-        existing_school.SchoolName = school.SchoolName
-        existing_school.Address = school.Address
-        existing_school.City = school.City
-        existing_school.State = school.State
-        existing_school.ZipCode = school.ZipCode
-        existing_school.MetaData = json.dumps(school.MetaData.model_dump()) if school.MetaData else None  # Replace dict() with model_dump()
+        existing_school.school_code = school.school_code
+        existing_school.school_name = school.school_name
+        existing_school.address = school.address
+        existing_school.city = school.city
+        existing_school.state = school.state
+        existing_school.zip_code = school.zip_code
 
         db.commit()
         db.refresh(existing_school)

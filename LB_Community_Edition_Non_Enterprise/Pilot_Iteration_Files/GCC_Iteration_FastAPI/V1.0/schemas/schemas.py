@@ -34,6 +34,7 @@ class PeopleInDBCreate(BaseModel):
         from_attributes = True
 
 class BDDemoModel(BaseModel):
+    
     BDcurrentAcademicIndicator: Dict[str, int] = Field(
         {
             "Suspensions_Indicator": 0,
@@ -429,6 +430,7 @@ class PeopleInDBResponse(BaseModel):
 # Base schema for SchoolsInDB
 
 class SchoolsInDBBase(BaseModel):
+    ID: int
     SchoolCode: str
     SchoolName: str
     Address: Optional[str] = None
@@ -446,7 +448,7 @@ class SchoolsInDBCreate(SchoolsInDBBase):
 
 # Response schema for SchoolsInDB with list of associated people
 class SchoolsInDBResponse(SchoolsInDBBase):
-    ID: int
+    
     people: List[PeopleInDBResponse] = []  # List of people associated with the school
     SchoolCode: str
     SchoolName: str
