@@ -1,8 +1,9 @@
 'use client'
 import { useFormState } from 'react-dom'
-import { Input, Button } from '@nextui-org/react'
-import { signinUser } from '@/actions/auth'
+import { Input } from '@nextui-org/react'
 import Link from 'next/link'
+
+import { signinUser } from '@/actions/auth'
 import SubmitButton from '@/components/ui/button/SubmitButton'
 
 const initState = { message: null }
@@ -22,18 +23,18 @@ const SigninPage = () => {
       <Input
         fullWidth
         required
-        size="lg"
-        placeholder="Email"
         name="email"
+        placeholder="Email"
+        size="lg"
         type="email"
       />
       <Input
-        name="password"
         fullWidth
         required
+        name="password"
+        placeholder="Password"
         size="lg"
         type="password"
-        placeholder="Password"
       />
       <SubmitButton label={'signin'} />
       <div>

@@ -1,4 +1,5 @@
 import { createColumnHelper } from '@tanstack/react-table'
+
 import { TableStudent } from '@/utility/models/table'
 
 export function getDefaultColumns() {
@@ -6,7 +7,7 @@ export function getDefaultColumns() {
 
   return [
     columnHelper.accessor('photo', {
-      header: () => <span>Photo </span>,
+      header: () => <span>Photo</span>,
       cell: (info) => <i>{info.getValue()} </i>,
     }),
     columnHelper.accessor((row) => row.studentId, {
@@ -28,39 +29,3 @@ export function getDefaultColumns() {
     }),
   ]
 }
-
-type Person = {
-  firstName: string
-  lastName: string
-  age: number
-  visits: number
-  status: string
-  progress: number
-}
-
-const defaultData: Person[] = [
-  {
-    firstName: 'tanner',
-    lastName: 'linsley',
-    age: 24,
-    visits: 100,
-    status: 'In Relationship',
-    progress: 50,
-  },
-  {
-    firstName: 'tandy',
-    lastName: 'miller',
-    age: 40,
-    visits: 40,
-    status: 'Single',
-    progress: 80,
-  },
-  {
-    firstName: 'joe',
-    lastName: 'dirte',
-    age: 45,
-    visits: 20,
-    status: 'Complicated',
-    progress: 10,
-  },
-]

@@ -1,6 +1,7 @@
 import { loadEnvConfig } from '@next/env'
 import { drizzle } from 'drizzle-orm/libsql'
 import { createClient } from '@libsql/client'
+
 import * as schema from '@/service/drizzle/schema'
 
 // Set the environment variables that are used by the Drizzle client.

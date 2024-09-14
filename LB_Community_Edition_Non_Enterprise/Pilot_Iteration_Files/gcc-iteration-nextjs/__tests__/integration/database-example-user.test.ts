@@ -1,9 +1,8 @@
-import { db } from '@/utility/db'
 import { createTestUser } from '@/service/drizzle/utilities/user'
 import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 
 const exampleUser = {
-  email: 'user7@example.com',
+  email: 'user532@example.com',
   password: 'vNPFeBSQ+2rKtuZtTw==',
 }
 

@@ -1,7 +1,9 @@
-import { db } from '@/utility/db'
 import bcrypt from 'bcrypt'
 import { eq } from 'drizzle-orm'
 import jwt from 'jsonwebtoken'
+
+import { db } from '../db'
+
 import { users } from '../schema'
 
 const SECRET = 'use_an_ENV_variable'
@@ -49,7 +51,7 @@ export const signin = async ({
   }
 
   const token = createTokenForUser(match.id)
-  const { password: pw, ...user } = match
+  const { ...user } = match
 
   return { user, token }
 }

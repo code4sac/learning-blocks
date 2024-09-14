@@ -1,19 +1,19 @@
 'use client'
-import { NextUIProvider } from '@nextui-org/react'
+
+import { NextUIProvider } from '@nextui-org/system'
 import * as React from 'react'
 import { ThemeProviderProps } from 'next-themes/dist/types'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { useRouter } from 'next/navigation'
 
 export interface AppNextUIProviderProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   themeProps?: ThemeProviderProps
 }
-
-export function AppNextUIProvider({
+export const AppNextUIProvider: React.FC<AppNextUIProviderProps> = ({
   children,
   themeProps,
-}: AppNextUIProviderProps) {
+}) => {
   let router = useRouter()
 
   return (

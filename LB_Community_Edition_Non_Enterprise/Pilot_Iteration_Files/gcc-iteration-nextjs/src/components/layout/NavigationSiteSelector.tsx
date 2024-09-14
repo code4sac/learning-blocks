@@ -1,7 +1,5 @@
 'use client'
 
-import Image from 'next/image'
-
 interface NavigationSiteSelectorProps {
   sites: string[]
   selectedSite?: string

@@ -1,6 +1,7 @@
-"use client";
+'use client'
 
-import { useEffect } from "react";
+import { Button } from '@nextui-org/react'
+import { useEffect } from 'react'
 
 /**
  * Error component. Error boundaries must be Client Components
@@ -15,25 +16,26 @@ export default function Error({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
-  reset: () => void;
+  error: Error & { digest?: string }
+  reset: () => void
 }): JSX.Element {
   useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+    // TODO: Log the error to an error reporting service
+    // eslint-disable-next-line no-console
+    console.error(error)
+  }, [error])
 
   return (
     <div>
       <h2>Something went wrong!</h2>
-      <button
+      <Button
         onClick={
           // Attempt to recover by trying to re-render the segment
           () => reset()
         }
       >
         Try again
-      </button>
+      </Button>
     </div>
-  );
+  )
 }

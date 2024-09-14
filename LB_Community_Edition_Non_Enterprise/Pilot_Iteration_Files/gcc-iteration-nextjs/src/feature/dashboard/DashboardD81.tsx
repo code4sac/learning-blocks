@@ -1,12 +1,14 @@
 'use client'
-import styles from './DashboardD81.module.css'
 import { useState } from 'react'
+
 import { Analytic } from '@/utility/models/analytics'
 import { Demographic } from '@/utility/models/demographic'
 import { TableStudent } from '@/utility/models/table'
 import CardGroupBentoBox from '@/components/ui/card/CardGroupBentoBox'
 import CardGroupAnalytics from '@/components/ui/card/CardGroupAnalytics'
 import Table01 from '@/components/ui/table/Table01'
+
+import styles from './DashboardD81.module.css'
 
 interface PageData {
   analytics?: Analytic[]
@@ -60,14 +62,14 @@ function DashboardD81({ data, setPageQueryKey }: D81Props) {
 
   return (
     <div className={styles.container}>
-      <CardGroupBentoBox data={data?.demographics}></CardGroupBentoBox>
+      <CardGroupBentoBox data={data?.demographics} />
       <CardGroupAnalytics
         data={data?.analytics!}
-        selectedCategories={selectedCategories}
-        selectCategory={selectCategory}
         getCardTheme={getCardTheme}
-      ></CardGroupAnalytics>
-      <Table01 data={defaultData}></Table01>
+        selectCategory={selectCategory}
+        selectedCategories={selectedCategories}
+      />
+      <Table01 data={defaultData} />
     </div>
   )
 }
