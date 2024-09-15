@@ -1,11 +1,45 @@
 from fastapi import Depends, HTTPException, APIRouter
-from sqlalchemy import text
-from sqlalchemy.orm import Session
-from models.models import PeopleInDB
-from schemas.schemas import PeopleInDBCreate, PeopleInDBResponse, StudentInDBResponse, TeacherInDBResponse, StudentInDBCreate, TeacherInDBCreate
+
+from sqlalchemy.orm import Session, joinedload
+from models.models import PeopleInDB, StudentInDB, TeacherInDB, RoleEnum
+from schemas.schemas import PeopleInDBCreate, PeopleInDBResponse, StudentInDBResponse, TeacherInDBResponse, StudentInDBCreate, TeacherInDBCreate, PeopleCreateRequest
 from databases.databases import get_db  # Ensure relative import is correct
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 
 router = APIRouter()
+@router.get("/people/{person_id}", response_model=PeopleInDBResponse)
+def read_person(person_id: int, db: Session = Depends(get_db)):
+    # Get the person from the database
+    person = db.query(PeopleInDB).filter(PeopleInDB.ID == person_id).first()
+    
+    # Check if the person exists
+    if person is None:
+        raise HTTPException(status_code=404, detail="Person not found")
+    
+    # Construct the response data
+    response_person = PeopleInDBResponse(
+        ID=person.ID,
+        FirstName=person.FirstName,
+        LastName=person.LastName,
+        Role=person.Role,
+        SourcedID=person.SourcedID,
+        EnabledUser=person.EnabledUser,
+        DateLastModified=person.DateLastModified,
+        SchoolCode=person.SchoolCode,
+        AnonymizedStudentID=person.AnonymizedStudentID,
+        AnonymizedStudentNumber=person.AnonymizedStudentNumber,
+        AnonymizedTeacherID=person.AnonymizedTeacherID
+    )
+    
+    return response_person
+
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from fastapi import HTTPException, Depends
+
+
+
+
+
 
 @router.post("/people/", response_model=PeopleInDBResponse)
 def create_person(person: PeopleInDBCreate, db: Session = Depends(get_db)):
@@ -53,3 +87,5 @@ def create_person(person: PeopleInDBCreate, db: Session = Depends(get_db)):
         db.rollback()
         print(f"An error occurred: {e}")
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
+    
+

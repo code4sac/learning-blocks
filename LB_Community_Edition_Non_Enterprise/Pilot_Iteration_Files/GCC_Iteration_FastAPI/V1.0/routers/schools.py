@@ -84,6 +84,7 @@ def read_school(school_id: int, db: Session = Depends(get_db)):
         City=school.City,
         State=school.State,
         ZipCode=school.ZipCode,
+        GradeLevels=school.GradeLevels,
         MetaData=response_meta_data
     )
 
@@ -104,6 +105,7 @@ def update_school(school_id: int, school: SchoolsInDBCreate, db: Session = Depen
         existing_school.City = school.City
         existing_school.State = school.State
         existing_school.ZipCode = school.ZipCode
+        existing_school.GradeLevels = school.GradeLevels
         existing_school.MetaData = school.MetaData.model_dump() if school.MetaData else None
 
         db.commit()
@@ -115,18 +117,5 @@ def update_school(school_id: int, school: SchoolsInDBCreate, db: Session = Depen
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
 
-# Delete a school
-@router.delete("/schools/{school_id}", response_model=SchoolsInDBResponse)
-def delete_school(school_id: int, db: Session = Depends(get_db)):
-    school = db.query(SchoolsInDB).filter(SchoolsInDB.id == school_id).first()
-    if not school:
-        raise HTTPException(status_code=404, detail="School not found")
-    
-    try:
-        db.delete(school)
-        db.commit()
-        return school
-    except Exception as e:
-        db.rollback()
-        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
+
 

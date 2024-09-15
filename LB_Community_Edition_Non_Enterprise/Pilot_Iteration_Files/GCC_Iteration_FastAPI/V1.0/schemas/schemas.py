@@ -23,7 +23,6 @@ class PeopleInDBCreate(BaseModel):
     GradeLevels: Optional[List[str]] = None
     MetaData: Optional[Dict[str, List[str]]] = None
     Birthdate: Optional[str] = None
-    SourcedID: str
     AnonymizedTeacherID: str
     SiteDuties: Optional[List[str]] = None
     GradeLevels: Optional[List[str]] = None
@@ -36,6 +35,7 @@ class BDDemoModel(BaseModel):
     
     BDcurrentAcademicIndicator: Dict[str, int] = Field(
         {
+           
             "Suspensions_Indicator": 0,
             "EL_Prgrs_Indicator": 0,
             "Grad_Rate_Indicator": 0,
@@ -362,7 +362,9 @@ class StudentInDBResponse(BaseModel):
     SchlAssociated: Optional[str] = None
     SchoolCode: Optional[str] = None
     MetaData: Optional[BDDemoModel] = None
-    
+    StuAssociated: Optional[List[str]] = None  # Add this
+    GradeLevels: Optional[List[str]] = None  # Add this
+
 
     class Config:
       from_attributes = True
@@ -376,8 +378,8 @@ class TeacherInDBResponse(BaseModel):
     ID:int
     AnonymizedTeacherID: str
     AnonymizedTeacherNumber: Optional[str] = None
-    role: RoleEnum = "teacher"
-    sourcedid: str
+    Role: RoleEnum = "teacher"
+    SourcedID: str
     StuAssociated: List[StudentInDBResponse] = []
     SchlAssociated: Optional[str] = None
     Credentials: Optional[List[str]] = None
@@ -401,7 +403,7 @@ class PeopleInDB(BaseModel):
     FirstName: str
     LastName: str
     Role: RoleEnum
-    SourcedId: str
+    SourcedID: str
     AnonymizedStudentID: Optional[str] = None
     AnonymizedStudentNumber: Optional[str] = None
     EnabledUser: Optional[str] = None
@@ -412,12 +414,28 @@ class PeopleInDB(BaseModel):
     class Config:
         orm_mode = True
 
+class PeopleCreateRequest(BaseModel):
+    ID: int
+    FirstName: str
+    LastName: str
+    Role: str
+    SourcedID: str
+    EnabledUser: bool
+    DateLastModified: Optional[str] = None
+    SchoolCode: Optional[str]
+    student: Optional[StudentInDBResponse] = None
+    teacher: Optional[TeacherInDBResponse] = None
+
+    class Config:
+        orm_mode = True
+
+
 class PeopleInDBResponse(BaseModel):
     ID: int
     FirstName: str
     LastName: str
     Role: str
-    SourcedId: str
+    SourcedID: str
     EnabledUser: bool
     DateLastModified: Optional[str] = None
     SchoolCode: Optional[str]
@@ -436,6 +454,7 @@ class SchoolsInDBBase(BaseModel):
     City: Optional[str] = None
     State: Optional[str] = None
     ZipCode: Optional[str] = None
+    GradeLevels: Optional[List[str]]
 
 
     class Config:
@@ -452,6 +471,11 @@ class SchoolsInDBResponse(SchoolsInDBBase):
     people: List[PeopleInDBResponse] = []  # List of people associated with the school
     SchoolCode: str
     SchoolName: str
+    Address: Optional[str] = None
+    City: Optional[str] = None
+    State: Optional[str] = None
+    ZipCode: Optional[str] = None
+    GradeLevels: Optional[List[str]] = None
 
     MetaData: Optional[BDDemoModel] = None
 
@@ -463,7 +487,7 @@ class PeopleInDBUpdate(BaseModel):
     FirstName: Optional[str] = None
     LastName: Optional[str] = None
     Role: RoleEnum = "RoleEnum"
-    SourcedId: Optional[str] = None
+    SourcedID: Optional[str] = None
     EnabledUser: Optional[str] = None
     DateLastModified: Optional[str] = None
     SchoolCode: Optional[str] = None
