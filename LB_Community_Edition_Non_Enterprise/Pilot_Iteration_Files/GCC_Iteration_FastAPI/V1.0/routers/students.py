@@ -41,20 +41,38 @@ def create_school(student: StudentInDBCreate, db: Session = Depends(get_db)):
 @router.get("/students/{student_id}", response_model=StudentInDBResponse)
 def read_student(student_id: int, db: Session = Depends(get_db)):
     try:
-        db_student = db.query(StudentInDB).filter(StudentInDB.id == student_id).first()
+        db_student = db.query(StudentInDB).filter(StudentInDB.ID == student_id).first()
         if db_student is None:
             raise HTTPException(status_code=404, detail="Student not found")
+        
+        # Ensure MetaData is a valid JSON string or None
+        try:
+            meta_data = json.loads(db_student.MetaData) if db_student.MetaData else None
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=500, detail="MetaData is not a valid JSON string")
+        
+        # Create the response object with the appropriate fields
         response_student = StudentInDBResponse(
-            id=db_student.id,
+            ID=db_student.ID,
+            FirstName=db_student.FirstName,
+            LastName=db_student.LastName,
+            SchoolCode=db_student.SchoolCode,
             AnonymizedStudentID=db_student.AnonymizedStudentID,
             AnonymizedStudentNumber=db_student.AnonymizedStudentNumber,
-            role=db_student.Role,
-            sourcedid=db_student.SourcedID,
-            SchoolCode=db_student.SchoolCode,
-            MetaData=db_student.MetaData
+            Role=db_student.Role,
+            SourcedID=db_student.SourcedID,
+            Sections=db_student.Sections,
+            SchlAssociated=db_student.SchlAssociated,
+            Birthdate=db_student.Birthdate,
+            GradeLevels=db_student.GradeLevels,
+            MetaData=meta_data,  # Ensure MetaData is a valid dictionary
+            EnabledUser=db_student.EnabledUser,
+            DateLastModified=db_student.DateLastModified,
+            StuAssociated=db_student.StuAssociated
         )
         
         return response_student
+    except HTTPException as e:
+        raise e  # Forward the HTTP exception as is
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
-
