@@ -11,18 +11,11 @@ router = APIRouter()
 @router.post("/student", response_model=StudentInDBResponse)
 def create_school(student: StudentInDBCreate, db: Session = Depends(get_db)):
         # Deserialize MetaData from JSON string
-    response_meta_data = None
-    if student.MetaData:
-        try:
-            response_meta_data = json.loads(student.MetaData)
-        except json.JSONDecodeError as e:
-            print(f"Error decoding MetaData: {e}")
-            raise HTTPException(status_code=500, detail="Failed to decode MetaData.")
-    
+
     try:
         
         db_student = StudentInDB(
-            school_code=student.SchoolCode,
+            SchoolCode=student.SchoolCode,
             AnonymizedStudentID=student.AnonymizedStudentID,
             AnonymizedStudentNumber=student.AnonymizedStudentNumber,
             role=student.Role,
@@ -31,7 +24,7 @@ def create_school(student: StudentInDBCreate, db: Session = Depends(get_db)):
             schlassociated=student.SchlAssociated,
             birthdate=student.Birthdate,
             gradelevels=student.GradeLevels,
-            MetaData=response_meta_data
+            MetaData=json.dumps(student.MetaData.dict()) if student.MetaData else None
             
         )
         db.add(db_student)
@@ -54,10 +47,10 @@ def read_student(student_id: int, db: Session = Depends(get_db)):
             id=db_student.id,
             AnonymizedStudentID=db_student.AnonymizedStudentID,
             AnonymizedStudentNumber=db_student.AnonymizedStudentNumber,
-            role=db_student.role,
-            sourcedid=db_student.sourcedid,
-            school_code=db_student.school_code,
-            BDDemoModel=db_student.BDDemo
+            role=db_student.Role,
+            sourcedid=db_student.SourcedID,
+            SchoolCode=db_student.SchoolCode,
+            MetaData=db_student.MetaData
         )
         
         return response_student

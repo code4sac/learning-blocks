@@ -33,9 +33,6 @@ def read_person(person_id: int, db: Session = Depends(get_db)):
     
     return response_person
 
-from sqlalchemy.exc import IntegrityError, SQLAlchemyError
-from fastapi import HTTPException, Depends
-
 
 
 
