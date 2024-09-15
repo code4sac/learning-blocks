@@ -38,6 +38,8 @@ def create_school(student: StudentInDBCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
     
+import json
+
 @router.get("/students/{student_id}", response_model=StudentInDBResponse)
 def read_student(student_id: int, db: Session = Depends(get_db)):
     try:
@@ -51,6 +53,11 @@ def read_student(student_id: int, db: Session = Depends(get_db)):
         except json.JSONDecodeError:
             raise HTTPException(status_code=500, detail="MetaData is not a valid JSON string")
         
+        # Convert stringified lists to actual lists
+        sections = json.loads(db_student.Sections) if isinstance(db_student.Sections, str) else db_student.Sections
+        stu_associated = json.loads(db_student.StuAssociated) if isinstance(db_student.StuAssociated, str) else db_student.StuAssociated
+        grade_levels = json.loads(db_student.GradeLevels) if isinstance(db_student.GradeLevels, str) else db_student.GradeLevels
+        
         # Create the response object with the appropriate fields
         response_student = StudentInDBResponse(
             ID=db_student.ID,
@@ -61,14 +68,14 @@ def read_student(student_id: int, db: Session = Depends(get_db)):
             AnonymizedStudentNumber=db_student.AnonymizedStudentNumber,
             Role=db_student.Role,
             SourcedID=db_student.SourcedID,
-            Sections=db_student.Sections,
+            Sections=sections,  # Ensure it's a valid list
             SchlAssociated=db_student.SchlAssociated,
             Birthdate=db_student.Birthdate,
-            GradeLevels=db_student.GradeLevels,
+            GradeLevels=grade_levels,  # Ensure it's a valid list
             MetaData=meta_data,  # Ensure MetaData is a valid dictionary
             EnabledUser=db_student.EnabledUser,
             DateLastModified=db_student.DateLastModified,
-            StuAssociated=db_student.StuAssociated
+            StuAssociated=stu_associated  # Ensure it's a valid list
         )
         
         return response_student
