@@ -336,6 +336,8 @@ class TeacherInDBCreate(BaseModel):
 
 class StudentInDBCreate(BaseModel):
     ID: int
+    FirstName: str
+    LastName: str
     AnonymizedStudentID: str
     AnonymizedStudentNumber: str
     Sections: Optional[List[str]] = None
@@ -353,6 +355,8 @@ class StudentInDBCreate(BaseModel):
  #Response schema for StudentInDB
 class StudentInDBResponse(BaseModel):
     ID: int
+    FirstName: str
+    LastName: str
     AnonymizedStudentID: str
     AnonymizedStudentNumber: Optional[str] = None
     Role: RoleEnum = "student"
