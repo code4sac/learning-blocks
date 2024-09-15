@@ -497,6 +497,12 @@ class PeopleInDBUpdate(BaseModel):
 
 class StudentInDB(BaseModel):
     ID: int
+    FirstName: str
+    LastName: str
+    Role: RoleEnum
+    SourcedID: str
+    GradeLevels: Optional[List[str]] = None
+    MetaData: Optional[Dict[str, List[str]]] = None
     AnonymizedStudentID: str
     AnonymizedStudentNumber: str
     Sections: Optional[List[str]] = None
