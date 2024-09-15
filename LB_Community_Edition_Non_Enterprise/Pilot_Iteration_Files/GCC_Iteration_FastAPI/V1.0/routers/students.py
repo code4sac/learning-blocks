@@ -10,10 +10,7 @@ router = APIRouter()
 
 @router.post("/student", response_model=StudentInDBResponse)
 def create_school(student: StudentInDBCreate, db: Session = Depends(get_db)):
-        # Deserialize MetaData from JSON string
-
     try:
-        
         db_student = StudentInDB(
             FirstName=student.FirstName,
             LastName=student.LastName,
@@ -26,8 +23,10 @@ def create_school(student: StudentInDBCreate, db: Session = Depends(get_db)):
             SchlAssociated=student.SchlAssociated,
             Birthdate=student.Birthdate,
             GradeLevels=student.GradeLevels,
-            MetaData=json.dumps(student.MetaData.dict()) if student.MetaData else None
-            
+            MetaData=json.dumps(student.MetaData.dict()) if student.MetaData else None,
+            EnabledUser=student.EnabledUser,
+            DateLastModified=student.DateLastModified,
+            StuAssociated=student.StuAssociated
         )
         db.add(db_student)
         db.commit()

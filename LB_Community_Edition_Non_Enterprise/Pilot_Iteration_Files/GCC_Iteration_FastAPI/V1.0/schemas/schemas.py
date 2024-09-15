@@ -349,6 +349,10 @@ class StudentInDBCreate(BaseModel):
     MetaData: Optional[BDDemoModel] = None
     SchoolName: Optional[str] = None
     GradeLevels: Optional[List[str]] = None
+    EnabledUser: Optional[str] = None
+    DateLastModified: Optional[str] = None
+    StuAssociated: Optional[List[str]] = None  # Add this
+
 
 
 
@@ -368,6 +372,7 @@ class StudentInDBResponse(BaseModel):
     MetaData: Optional[BDDemoModel] = None
     StuAssociated: Optional[List[str]] = None  # Add this
     GradeLevels: Optional[List[str]] = None  # Add this
+    
 
 
     class Config:
