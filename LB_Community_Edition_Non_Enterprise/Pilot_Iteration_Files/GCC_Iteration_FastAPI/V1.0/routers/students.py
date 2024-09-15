@@ -15,15 +15,17 @@ def create_school(student: StudentInDBCreate, db: Session = Depends(get_db)):
     try:
         
         db_student = StudentInDB(
+            FirstName=student.FirstName,
+            LastName=student.LastName,
             SchoolCode=student.SchoolCode,
             AnonymizedStudentID=student.AnonymizedStudentID,
             AnonymizedStudentNumber=student.AnonymizedStudentNumber,
-            role=student.Role,
-            sourcedid=student.SourcedID,
+            Role=student.Role,
+            SourcedID=student.SourcedID,
             Sections=student.Sections,
-            schlassociated=student.SchlAssociated,
-            birthdate=student.Birthdate,
-            gradelevels=student.GradeLevels,
+            SchlAssociated=student.SchlAssociated,
+            Birthdate=student.Birthdate,
+            GradeLevels=student.GradeLevels,
             MetaData=json.dumps(student.MetaData.dict()) if student.MetaData else None
             
         )
