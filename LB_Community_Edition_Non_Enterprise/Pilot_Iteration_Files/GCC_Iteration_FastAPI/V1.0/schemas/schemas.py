@@ -372,7 +372,7 @@ class StudentInDBResponse(BaseModel):
     MetaData: Optional[BDDemoModel] = None
     StuAssociated: Optional[List[str]] = None  # Add this
     GradeLevels: Optional[List[str]] = None  # Add this
-    
+    DateLastModified: Optional[str] = None  # Add this
 
 
     class Config:

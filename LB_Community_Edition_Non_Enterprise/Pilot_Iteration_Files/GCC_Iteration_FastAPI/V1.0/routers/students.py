@@ -25,7 +25,7 @@ def create_school(student: StudentInDBCreate, db: Session = Depends(get_db)):
             GradeLevels=student.GradeLevels,
             MetaData=json.dumps(student.MetaData.dict()) if student.MetaData else None,
             EnabledUser=student.EnabledUser,
-            DateLastModified=student.DateLastModified,
+            DateLastModified=student.DateLastModified ,
             StuAssociated=student.StuAssociated
         )
         db.add(db_student)
