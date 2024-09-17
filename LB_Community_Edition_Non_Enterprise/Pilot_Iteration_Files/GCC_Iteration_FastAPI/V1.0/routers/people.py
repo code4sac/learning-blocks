@@ -5,6 +5,8 @@ from models.models import PeopleInDB, StudentInDB, TeacherInDB, RoleEnum
 from schemas.schemas import PeopleInDBCreate, PeopleInDBResponse, StudentInDBResponse, TeacherInDBResponse, StudentInDBCreate, TeacherInDBCreate, PeopleCreateRequest
 from databases.databases import get_db  # Ensure relative import is correct
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from typing import Optional
+from pydantic import BaseModel
 
 router = APIRouter()
 @router.get("/people/{person_id}", response_model=PeopleInDBResponse)
@@ -50,9 +52,9 @@ def create_person(person: PeopleInDBCreate, db: Session = Depends(get_db)):
             EnabledUser=person.EnabledUser,
             DateLastModified=person.DateLastModified,
             SchoolCode=person.SchoolCode,
-            AnonymizedStudentID=person.AnonymizedStudentID,
-            AnonymizedStudentNumber=person.AnonymizedStudentNumber,
-            AnonymizedTeacherID=person.AnonymizedTeacherID
+            AnonymizedStudentID=person.AnonymizedStudentID if person.AnonymizedStudentID is not None else None,
+            AnonymizedStudentNumber=person.AnonymizedStudentNumber if person.AnonymizedStudentNumber is not None else None,
+            AnonymizedTeacherID=person.AnonymizedTeacherID if person.AnonymizedTeacherID is not None else None
         )
         
         # Add the new PeopleInDB instance to the session
@@ -80,9 +82,13 @@ def create_person(person: PeopleInDBCreate, db: Session = Depends(get_db)):
         )
 
         return response_person
+    except IntegrityError as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail="Integrity error: possibly a duplicate entry.")
+    except SQLAlchemyError as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail="Database error occurred.")
     except Exception as e:
         db.rollback()
-        print(f"An error occurred: {e}")
-        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
-    
+        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
 

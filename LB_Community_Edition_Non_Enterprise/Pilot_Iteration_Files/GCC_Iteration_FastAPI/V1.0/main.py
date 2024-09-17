@@ -9,7 +9,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 # Include routers
-app.include_router(people.router)
-app.include_router(students.router)
-app.include_router(teachers.router)
-app.include_router(schools.router, prefix="/api")
+app.include_router(people.router, prefix="/api_V1")
+app.include_router(students.router, prefix="/api_V1")
+#app.include_router(teachers.router)
+app.include_router(schools.router, prefix="/api_V1")

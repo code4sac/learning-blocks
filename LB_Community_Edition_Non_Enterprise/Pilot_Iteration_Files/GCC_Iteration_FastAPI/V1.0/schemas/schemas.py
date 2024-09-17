@@ -13,8 +13,8 @@ class PeopleInDBCreate(BaseModel):
     EnabledUser: bool
     DateLastModified: Optional[str] = None
     SchoolCode: Optional[str] = None
-    AnonymizedStudentID: str 
-    AnonymizedStudentNumber: str
+    AnonymizedStudentID: Optional[str] = None 
+    AnonymizedStudentNumber: Optional[str] = None
     SchlAssociated: Optional[str] = None
     stu_associated: Optional[List[str]] = None
     Credentials: Optional[List[str]] = None
@@ -22,7 +22,7 @@ class PeopleInDBCreate(BaseModel):
     SiteDuties: Optional[List[str]] = None
     MetaData: Optional[Dict[str, List[str]]] = None
     Birthdate: Optional[str] = None
-    AnonymizedTeacherID: str
+    AnonymizedTeacherID: Optional[str] = None
     SiteDuties: Optional[List[str]] = None
     GradeLevels: Optional[str] = None
 
@@ -355,12 +355,12 @@ class StudentInDBCreate(BaseModel):
 
 
 
- #Response schema for StudentInDB
+# Response schema for StudentInDB
 class StudentInDBResponse(BaseModel):
-    ID: int
-    FirstName: str
-    LastName: str
-    AnonymizedStudentID: str
+    ID: Optional[int] = None
+    FirstName: Optional[str] = None
+    LastName: Optional[str] = None
+    AnonymizedStudentID: Optional[str] = None
     AnonymizedStudentNumber: Optional[str] = None
     Role: RoleEnum = "student"
     SourcedID: str
@@ -372,11 +372,10 @@ class StudentInDBResponse(BaseModel):
     StuAssociated: Optional[List[str]] = None  # Add this
     GradeLevels: Optional[str] = None  # Add this
     DateLastModified: Optional[str] = None  # Add this
-
+    EnabledUser: Optional[str] = None  # Add this
 
     class Config:
-      from_attributes = True
-      
+        from_attributes = True
 
 
 
