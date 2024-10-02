@@ -30,22 +30,39 @@ class PeopleInDBCreate(BaseModel):
     class Config:
         from_attributes = True
 
-class BDDemoModel(BaseModel):
-    
-    BDcurrentAcademicIndicator: Dict[str, int] = Field(
+class MetaData(BaseModel):
+
+    CADashboardCollegeandCareerData: Dict[str, int] = Field(
         {
-           
-            "Suspensions_Indicator": 0,
-            "EL_Prgrs_Indicator": 0,
-            "Grad_Rate_Indicator": 0,
-            "College_Career_Indicator": 0,
-            "ELA_Indicator": 0,
-            "Math_Indicator": 0,
-            "Total_Students_Grad_OnTrack": 0,
-            "Total_Students_Grad_OffTrack": 0,
-            "Total_At_Risk_Students": 0,
+            "24_25_State_College_Career_Readiness_Performance_Color": 0,
+            "24_25_School_College_Career_Readiness_Performance_Color": 0,
+            "24_25_State_College_Career_Readiness_Status": 0,
+            "24_25_School_College_Career_Readiness_Status": 0,
+            "24_25_State_College_Career_Readiness_Rate": 0,
+            "24_25_School_College_Career_Readiness_Rate": 0,
+            "24_25_State_College_Career_Readiness_Change": 0,
+            "24_25_School_College_Career_Readiness_Change": 0,
+            "24_25_State_College_Career_Readiness_Total": 0,
+            "24_25_School_College_Readiness_Total": 0,
+            "24_25_State_Career_Readiness_Total": 0,
         },
-        description="Breakdown of students by academic indicators."
+        description="Breakdown of college and career readiness data."
+    )
+    
+    CADashboardSuspensionData: Dict[str, int] = Field(
+        {
+            "24_25_State_Suspensions_Performance_Color": 0,
+            "24_25_School_Suspensions_Performance_Color": 0,
+            "24_25_State_Suspensions_Rate": 0,
+            "24_25_School_Suspensions_Rate": 0,
+            "24_25_State_Suspensions_Change": 0,
+            "24_25_School_Suspensions_Change": 0,
+            "24_25_State_Enrollment_Total_Census_Day": 0,
+            "24_25_School_Enrollment_Total_Census_Day": 0,
+            "24_25_State_Suspensions_Total": 0,
+            "24_25_School_Suspensions_Total": 0,
+        },
+        description="Breakdown of suspension data."
     )
     BDcurrentethnicity: Dict[str, int] = Field(
         {
