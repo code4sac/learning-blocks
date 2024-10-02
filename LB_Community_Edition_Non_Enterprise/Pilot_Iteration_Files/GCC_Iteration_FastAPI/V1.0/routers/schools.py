@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import text  # Add this import
 from models.models import SchoolsInDB
-from schemas.schemas import SchoolsInDBCreate, SchoolsInDBResponse
+from schemas.schemas import SchoolsInDBCreate, SchoolsInDBResponse, MetaData
 from databases.databases import get_db
 import json  
 

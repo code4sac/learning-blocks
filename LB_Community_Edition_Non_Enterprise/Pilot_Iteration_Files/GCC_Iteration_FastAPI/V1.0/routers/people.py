@@ -2,7 +2,7 @@ from fastapi import Depends, HTTPException, APIRouter
 
 from sqlalchemy.orm import Session, joinedload
 from models.models import PeopleInDB, StudentInDB, TeacherInDB, RoleEnum
-from schemas.schemas import PeopleInDBCreate, PeopleInDBResponse, StudentInDBResponse, TeacherInDBResponse, StudentInDBCreate, TeacherInDBCreate, PeopleCreateRequest
+from schemas.schemas import PeopleInDBCreate, PeopleInDBResponse, StudentInDBResponse, TeacherInDBResponse, StudentInDBCreate, TeacherInDBCreate, PeopleCreateRequest, MetaData
 from databases.databases import get_db  # Ensure relative import is correct
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from typing import Optional

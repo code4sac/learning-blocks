@@ -343,7 +343,7 @@ class TeacherInDBCreate(BaseModel):
     Subjects: Optional[List[str]] = None
     SiteDuties: Optional[List[str]] = None
     GradeLevels: Optional[str] = None
-    MetaData: Optional[BDDemoModel] = None
+    MetaData: Optional["MetaData"] = None
 
     class Config:
         from_attributes = True
@@ -362,7 +362,7 @@ class StudentInDBCreate(BaseModel):
     Role: RoleEnum = "student"
     SourcedID: str
     SchoolCode: Optional[str] = None
-    MetaData: Optional[BDDemoModel] = None
+    MetaData: Optional["MetaData"] = None
     SchoolName: Optional[str] = None
     GradeLevels: Optional[str] = None
     EnabledUser: Optional[str] = None
@@ -385,7 +385,7 @@ class StudentInDBResponse(BaseModel):
     Sections: Optional[List[str]] = None
     SchlAssociated: Optional[str] = None
     SchoolCode: Optional[str] = None
-    MetaData: Optional[BDDemoModel] = None
+    MetaData: Optional["MetaData"] = None
     StuAssociated: Optional[List[str]] = None  # Add this
     GradeLevels: Optional[str] = None  # Add this
     DateLastModified: Optional[str] = None  # Add this
@@ -412,7 +412,7 @@ class TeacherInDBResponse(BaseModel):
     GradeLevels: Optional[str] = None
     EnabledUser: Optional[str] = None
     SchoolCode: Optional[str] = None
-    MetaData: Optional[BDDemoModel] = None
+    MetaData: Optional["MetaData"] = None
     DateLastModified: Optional[str] = None
     Sections: Optional[List[str]] = None
 
@@ -485,13 +485,13 @@ class SchoolsInDBBase(BaseModel):
 
 # Schema for SchoolsInDB creation
 class SchoolsInDBCreate(SchoolsInDBBase):
-    MetaData: Optional[BDDemoModel] = None
+    MetaData: Optional["MetaData"] = None
     pass
 
 # Response schema for SchoolsInDB with list of associated people
 class SchoolsInDBResponse(SchoolsInDBBase):
     people: List[PeopleInDBResponse] = Field(default_factory=list)  # List of associated people
-    MetaData: Optional[BDDemoModel] = None
+    MetaData: Optional["MetaData"] = None
 
     class Config:
         orm_mode = True

@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from models.models import StudentInDB
-from schemas.schemas import StudentInDBCreate, StudentInDBResponse, BDDemoModel
+from schemas.schemas import StudentInDBCreate, StudentInDBResponse, MetaData
 from databases.databases import get_db  # Ensure relative import is correct
 
 router = APIRouter()

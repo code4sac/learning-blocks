@@ -4,7 +4,7 @@ from sqlalchemy import text
 from models.models import PeopleInDB, RoleEnum, TeacherInDB
 from schemas.schemas import (
     PeopleInDBCreate, PeopleInDBResponse, 
-    TeacherInDBResponse, BDDemoModel
+    TeacherInDBResponse, MetaData
 )
 from databases.databases import get_db  # Use relative import
 
@@ -123,7 +123,7 @@ def read_teacher(teacher_id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/teachers/{teacher_id}/update_teacher_bddemo", response_model=TeacherInDBResponse, summary="Update Teacher BDDemo")
-def update_bddemo(teacher_id: int, bddemo: BDDemoModel, db: Session = Depends(get_db)):
+def update_bddemo(teacher_id: int, bddemo: MetaData, db: Session = Depends(get_db)):
     try:
         # Find the teacher by ID
         db_teacher = db.query(TeacherInDB).filter(TeacherInDB.id == teacher_id).first()
