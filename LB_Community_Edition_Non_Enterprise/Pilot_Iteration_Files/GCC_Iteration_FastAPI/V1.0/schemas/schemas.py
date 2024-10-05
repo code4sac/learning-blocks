@@ -31,8 +31,8 @@ class PeopleInDBCreate(BaseModel):
         from_attributes = True
 
 class MetaData(BaseModel):
-
-    CADashboardCollegeandCareerData: Dict[str, int] = Field(
+    class CADashboardCollegeandCareerData(BaseModel):
+        data: Dict[str, int] = Field(
         {
             "24_25_State_College_Career_Readiness_Performance_Color": 0,
             "24_25_School_College_Career_Readiness_Performance_Color": 0,
@@ -42,8 +42,8 @@ class MetaData(BaseModel):
             "24_25_State_College_Career_Readiness_Numerator": 0,
             "24_25_State_College_Career_Readiness_Denominator": 0,
             "24_25_School_College_Career_Readiness_Rate": 0,
-            "24_25_School_College_Career_Readiness_Numerator": 0
-            "24_25_School_College_Career_Readiness_Denominator": 0
+            "24_25_School_College_Career_Readiness_Numerator": 0,
+            "24_25_School_College_Career_Readiness_Denominator": 0,
             "24_25_State_College_Career_Readiness_Change": 0,
             "24_25_School_College_Career_Readiness_Change": 0,
             "24_25_State_College_Career_Readiness_Total": 0,
@@ -82,7 +82,6 @@ class MetaData(BaseModel):
             "21_22_State_College_Career_Readiness_Total": 0,
             "21_22_School_College_Readiness_Total": 0,
             "21_22_State_Career_Readiness_Total": 0,
-
         },
         description="Breakdown of college and career readiness data."
     )
