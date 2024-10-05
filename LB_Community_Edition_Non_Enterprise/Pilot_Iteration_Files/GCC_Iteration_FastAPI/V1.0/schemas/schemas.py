@@ -39,7 +39,11 @@ class MetaData(BaseModel):
             "24_25_State_College_Career_Readiness_Status": 0,
             "24_25_School_College_Career_Readiness_Status": 0,
             "24_25_State_College_Career_Readiness_Rate": 0,
+            "24_25_State_College_Career_Readiness_Numerator": 0,
+            "24_25_State_College_Career_Readiness_Denominator": 0,
             "24_25_School_College_Career_Readiness_Rate": 0,
+            "24_25_School_College_Career_Readiness_Numerator": 0
+            "24_25_School_College_Career_Readiness_Denominator": 0
             "24_25_State_College_Career_Readiness_Change": 0,
             "24_25_School_College_Career_Readiness_Change": 0,
             "24_25_State_College_Career_Readiness_Total": 0,
