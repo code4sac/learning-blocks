@@ -1,0 +1,51 @@
+title: Learning Blocks
+project_type: website
+project_status: active
+description: This open-source project dedicated to helping developers make API tools for student support service providers. The goal is for student support service providers to gain access to student informational systems.
+comments: This is a great project for members who want to learn Python(Sqlalchemy/FastAPI) and Javascript (React/NextJS.).
+communications: Slack
+channels: \#proj-learning-blocks
+image_url:
+project_partner: Mary C. Norris
+project_lead: Shawn Dean
+technical_lead: Nate Bass
+lead_designer: Help Needed
+tags: Python,FastAPI,SQLAlchemy,Javascript,React,Next.js,github,figma
+contributing:
+  designer:
+    difficulty: medium
+    technologies: Python,Javascript, Figma
+    ways_to_contribute: improve existing designs, design new pages
+  developer:
+    difficulty: medium
+    frontend: Javascript
+    backend: Python
+    technologies: Figma, VSCode
+    version_control: Github
+    repo: /learning-blocks
+    ways_to_contribute: Bug fixing, testing, maintenance; see issues on github
+  project_manager:
+    difficulty: easy
+    technologies: github, slack
+    ways_to_contribute: organize and create issues & milestones, work with team members to stay and track and remove roadblocks
+roadmap:
+  research:
+    time_range: July 1, 2022 - February 31, 2025
+  design:
+    time_range: March 1, 2025 - October 5, 2025
+  development:
+    time_range: October 6, 2025 - April 1, 2025
+  deployment:
+    time_range: April 2, 2026 - April 9, 2026
+  launch:
+    time_range: April 10, 2024 - June 26, 2026
+  objective: 
+  comments: 
+  outcome: 
+resources:
+  documentation: /Readme.md
+  tutorials: If you want a refresher of python -  https://www.youtube.com/playlist?list=PLKm_OLZcymWhidOEKl48_EeMh78PZdQiV, How the backend works - https://www.youtube.com/playlist?list=PLKm_OLZcymWhtiM-0oQE2ABrrbgsndsn0, How to make Get, Post, Update, Delete endpoints with FastAPI - https://www.youtube.com/playlist?list=PLKm_OLZcymWjyF_oG_uUkZUm0y5d9ztvl
+  meeting_times: Scheduled for Wednesdays at 6:30 PM and listed on Meetup.
+  office_hours: Saturdays at 3:00 PM (Posted on Slack)
+screenshots:
+  - opensac.jpg
