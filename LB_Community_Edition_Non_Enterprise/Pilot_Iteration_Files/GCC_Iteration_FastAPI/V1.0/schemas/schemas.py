@@ -34,59 +34,114 @@ class MetaData(BaseModel):
     class CADashboardCollegeandCareerData(BaseModel):
         data: Dict[str, int] = Field(
         {
-            "24_25_State_College_Career_Readiness_Performance_Color": 0,
-            "24_25_School_College_Career_Readiness_Performance_Color": 0,
+        "24_25_State_College_Career_Readiness_Performance_Color": 0,
+        "24_25_School_College_Career_Readiness_Performance_Color": 0,
+		"24_25_School_College_Career_Readiness_Performance_Color_SED": 0,
+        "24_25_School_College_Career_Readiness_Performance_Color_EL": 0,
+        "24_25_School_College_Career_Readiness_Performance_Color_White": 0,
+        "24_25_School_College_Career_Readiness_Performance_Color_Hispanic": 0,
+        "24_25_School_College_Career_Readiness_Performance_Color_NA": 0,
+        "24_25_School_College_Career_Readiness_Performance_Color_Asi": 0,
+        "24_25_School_College_Career_Readiness_Performance_Color_AA": 0,
+        "24_25_School_College_Career_Readiness_Performance_Color_PAC": 0,
+        "24_25_School_College_Career_Readiness_Performance_Color_Fil": 0,
+        "24_25_School_College_Career_Readiness_Performance_Color_Two": 0,
+        "24_25_School_College_Career_Readiness_Performance_Color_McVento": 0,
 
-            "24_25_State_College_Career_Readiness_Status": 0,
-            "24_25_School_College_Career_Readiness_Status": 0,
 
-            "24_25_State_College_Career_Readiness_Rate": 0,
-            "24_25_School_College_Career_Readiness_Rate": 0,
-          
-            "24_25_State_College_Career_Readiness_Numerator": 0,
-            "24_25_School_College_Career_Readiness_Numerator": 0,
 
-            "24_25_State_College_Career_Readiness_Denominator": 0,
-            "24_25_School_College_Career_Readiness_Denominator": 0,
 
-            "24_25_State_College_Career_Readiness_Change": 0,
-            "24_25_School_College_Career_Readiness_Change": 0,
-            "24_25_State_College_Career_Readiness_Total": 0,
-            "24_25_School_College_Readiness_Total": 0,
-            "24_25_State_Career_Readiness_Total": 0,
-            "23_24_State_College_Career_Readiness_Performance_Color": 0,
-            "23_24_School_College_Career_Readiness_Performance_Color": 0,
-            "23_24_State_College_Career_Readiness_Status": 0,
-            "23_24_School_College_Career_Readiness_Status": 0,
-            "23_24_State_College_Career_Readiness_Rate": 0,
-            "23_24_School_College_Career_Readiness_Rate": 0,
-            "23_24_State_College_Career_Readiness_Change": 0,
-            "23_24_School_College_Career_Readiness_Change": 0,
-            "23_24_State_College_Career_Readiness_Total": 0,
-            "23_24_School_College_Readiness_Total": 0,
-            "23_24_State_Career_Readiness_Total": 0,
-            "22_23_State_College_Career_Readiness_Performance_Color": 0,
-            "22_23_School_College_Career_Readiness_Performance_Color": 0,
-            "22_23_State_College_Career_Readiness_Status": 0,
-            "22_23_School_College_Career_Readiness_Status": 0,
-            "22_23_State_College_Career_Readiness_Rate": 0,
-            "22_23_School_College_Career_Readiness_Rate": 0,
-            "22_23_State_College_Career_Readiness_Change": 0,
-            "22_23_School_College_Career_Readiness_Change": 0,
-            "22_23_State_College_Career_Readiness_Total": 0,
-            "22_23_School_College_Readiness_Total": 0,
-            "22_23_State_Career_Readiness_Total": 0,
-            "21_22_State_College_Career_Readiness_Performance_Color": 0,
-            "21_22_School_College_Career_Readiness_Performance_Color": 0,
-            "21_22_State_College_Career_Readiness_Status": 0,
-            "21_22_School_College_Career_Readiness_Status": 0,
-            "21_22_State_College_Career_Readiness_Rate": 0,
-            "21_22_School_College_Career_Readiness_Rate": 0,
-            "21_22_State_College_Career_Readiness_Change": 0,
-            "21_22_School_College_Career_Readiness_Change": 0,
-            "21_22_State_College_Career_Readiness_Total": 0,
-            "21_22_School_College_Readiness_Total": 0,
-            "21_22_State_Career_Readiness_Total": 0,
+		
+        "24_25_State_College_Career_Readiness_Status": 0,
+        "24_25_School_College_Career_Readiness_Status": 0,
+        "24_25_State_College_Career_Readiness_Rate": 0,
+        "24_25_School_College_Career_Readiness_Rate": 0,
+		"24_25_School_College_Career_Readiness_Rate_SED": 0,
+		"24_25_School_College_Career_Readiness_Rate_EL": 0,
+		"24_25_School_College_Career_Readiness_Rate_White": 0,
+		"24_25_School_College_Career_Readiness_Rate_White": 0,
+        "24_25_School_College_Career_Readiness_Rate_Hispanic": 0,
+        "24_25_School_College_Career_Readiness_Rate_AA": 0,
+        "24_25_School_College_Career_Readiness_Rate_Asi": 0,
+        "24_25_School_College_Career_Readiness_Rate_PAC": 0,
+        "24_25_School_College_Career_Readiness_Rate_Fil": 0,
+        "24_25_School_College_Career_Readiness_Rate_Two": 0,
+        "24_25_School_College_Career_Readiness_Rate_McVento": 0,
+       
+
+
+
+
+        "24_25_State_College_Career_Readiness_Numerator": 0,
+        "24_25_School_College_Career_Readiness_Numerator": 0,
+        "24_25_School_College_Career_Readiness_Numerator_SED": 0,
+		"24_25_School_College_Career_Readiness_Numerator_EL": 0,
+		"24_25_School_College_Career_Readiness_Numerator_White": 0,
+		"24_25_School_College_Career_Readiness_Numerator_Hispanic": 0,
+        "24_25_School_College_Career_Readiness_Numerator_AA": 0,
+        "24_25_School_College_Career_Readiness_Numerator_Asi": 0,
+        "24_25_School_College_Career_Readiness_Numerator_PAC": 0,
+        "24_25_School_College_Career_Readiness_Numerator_Fil": 0,
+        "24_25_School_College_Career_Readiness_Numerator_Two": 0,
+        "24_25_School_College_Career_Readiness_Numerator_McVento": 0,
+        "24_25_School_College_Career_Readiness_Numerator_At_Risk": 0,        
+
+
+		
+        "24_25_State_College_Career_Readiness_Denominator": 0,
+        "24_25_School_College_Career_Readiness_Denominator": 0,
+        "24_25_School_College_Career_Readiness_Denominator_SED": 0,
+        "24_25_School_College_Career_Readiness_Denominator_EL": 0,
+	    "24_25_School_College_Career_Readiness_Denominator_White": 0,	
+	    "24_25_School_College_Career_Readiness_Denominator_Hispanic": 0,	
+        "24_25_School_College_Career_Readiness_Denominator_AA": 0,
+        "24_25_School_College_Career_Readiness_Denominator_Asi": 0,
+        "24_25_School_College_Career_Readiness_Denominator_PAC": 0,
+        "24_25_School_College_Career_Readiness_Denominator_Fil": 0,
+        "24_25_School_College_Career_Readiness_Denominator_Two": 0,
+        "24_25_School_College_Career_Readiness_Denominator_McVento": 0,
+        "24_25_School_College_Career_Readiness_Denominator_At_Risk": 0,
+
+
+		
+        "24_25_State_College_Career_Readiness_Change": 0,
+        "24_25_School_College_Career_Readiness_Change": 0,
+        "24_25_School_College_Career_Readiness_Change_SED": 0,
+        "24_25_School_College_Career_Readiness_Change_EL": 0,
+        "24_25_School_College_Career_Readiness_Change_White": 0,
+        "24_25_School_College_Career_Readiness_Change_Hispanic": 0,
+        "24_25_School_College_Readiness_Change_AA": 0,
+        "24_25_School_College_Readiness_Change_Asi": 0,
+        "24_25_School_College_Readiness_Change_PAC": 0,
+        "24_25_School_College_Readiness_Change_Fil": 0,
+        "24_25_School_College_Readiness_Change_Two": 0,
+        "24_25_School_College_Readiness_Change_McVento": 0,
+        "24_25_School_College_Readiness_Change_At_Risk": 0,
+
+
+		
+        "24_25_State_College_Career_Readiness_Total": 0,
+        "24_25_School_College_Readiness_Total": 0,
+        "24_25_School_Career_Readiness_Total": 0,
+		"24_25_School_College_Career_Readiness_Total_AA": 0,
+		"24_25_School_College_Career_Readiness_Total_Asi": 0,
+		"24_25_School_College_Career_Readiness_Total_HIS": 0,
+		"24_25_School_College_Career_Readiness_Total_PAC": 0,
+		"24_25_School_College_Career_Readiness_Total_White": 0,
+        "24_25_School_College_Career_Readiness_Total_Two": 0,
+        "24_25_School_College_Career_Readiness_Total_McVento": 0,
+        "24_25_School_College_Career_Readiness_Total_SED": 0,
+        "24_25_School_College_Career_Readiness_Total_EL": 0,
+
+    
+       
+		
+        "24_25_School_Career_Readiness_At_Risk_Total": 17,
+        "24_25_School_College_Readiness_At_Risk_Total": 4,
+
+
+		
+
         },
         description="Breakdown of college and career readiness data."
     )
