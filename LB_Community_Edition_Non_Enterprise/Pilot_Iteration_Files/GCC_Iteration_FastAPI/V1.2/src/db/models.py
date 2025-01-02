@@ -157,5 +157,7 @@ class TeacherInDB(BaseWithPolymorphism, table=True):
         """Returns the StuAssociated field as a dictionary."""
         return self.StuAssociated
 
-    
+
+
+
 
