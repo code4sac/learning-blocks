@@ -15,5 +15,5 @@ async_engine = create_async_engine(
 # Function to initialize the database connection
 async def init_db():
     async with async_engine.begin() as conn:
-        from .models import SchoolsInDB, PeopleInDB, StudentInDB, SectionsInDB, TeacherInDB
+        from .models import SchoolsInDB, PeopleInDB, StudentInDB, SectionsInDB, TeacherInDB, RoleEnum
         await conn.run_sync(SQLModel.metadata.create_all)
