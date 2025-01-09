@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field, Column, Relationship
-from sqlalchemy import Table, String, ForeignKey, Enum as SQLMEnum
-from sqlalchemy.dialects.postgresql import JSON, ARRAY
+from sqlalchemy import String, Enum as SQLMEnum
+from sqlalchemy.dialects.postgresql import JSON
 from typing import List, Optional, Dict
 from enum import Enum
 import sqlalchemy.dialects.postgresql as pg
@@ -18,7 +18,7 @@ from sqlmodel import SQLModel, Field, Relationship
 # Polymorphic model for teachers
 def validate_stu_associated(data: Dict[str, Dict[str, Optional[str]]]) -> bool:
     """Validate the structure of StuAssociated data."""
-    for key, value in data.items():
+    for _, value in data.items():
         if not isinstance(value, dict):
             return False
         if "Start_Date" not in value or "End_Date" not in value:
@@ -36,11 +36,24 @@ class RoleEnum(str, Enum):
     relative = "relative"
     student = "student"
     teacher = "teacher"
+    vendor = "vendor"
 
 class TimestampMixin:
     created_at: Optional[datetime] = Field(default_factory=lambda: datetime.now(datetime.timezone.utc))
     updated_at: Optional[datetime] = Field(default_factory=lambda: datetime.now(datetime.timezone.utc), sa_column_kwargs={"onupdate": lambda: datetime.now(datetime.timezone.utc)})
 
+class BaseWithPolymorphism(SQLModel):
+    """
+    Base class that handles the polymorphic setup.
+    This abstracts the common setup for polymorphic behavior.
+    """
+    
+    @declared_attr
+    def __mapper_args__(cls):
+        return {
+            "polymorphic_on": cls.__table__.c.role,
+            "polymorphic_identity": cls.__name__.lower(),
+        }
 # Define a model for the 'PerformanceColor' metadata
 class CCPerformanceColorData(TimestampMixin, SQLModel, table=True):
     __tablename__ = "CC_performance_color_data"
@@ -295,12 +308,12 @@ class SchoolsInDB(TimestampMixin, SQLModel, table=True):
     Sections: Optional[List[str]] = Field(default=None, sa_column=Column(pg.ARRAY(String)))
  
     # Define the relationships with ReadinessStatusData and PerformanceColorData
-    readiness_status_data: List["ReadinessStatusData"] = Relationship(back_populates="school")
-    performance_color_data: List["PerformanceColorData"] = Relationship(back_populates="school")
-    readiness_change_data: List["ReadinessChangeData"] = Relationship(back_populates="school")
-    readiness_total_data: List["ReadinessTotalData"] = Relationship(back_populates="school")
-    readiness_numerator: List["ReadinessNumerator"] = Relationship(back_populates="school")
-    readiness_denominator_data: List["ReadinessDenominatorData"] = Relationship(back_populates="school")
+    school_readiness_status_data: List["ReadinessStatusData"] = Relationship(back_populates="school")
+    school_performance_color_data: List["CCPerformanceColorData"] = Relationship(back_populates="school")
+    school_readiness_change_data: List["ReadinessChangeData"] = Relationship(back_populates="school")
+    school_readiness_total_data: List["ReadinessTotalData"] = Relationship(back_populates="school")
+    school_readiness_numerator: List["ReadinessNumerator"] = Relationship(back_populates="school")
+    school_readiness_denominator_data: List["ReadinessDenominatorData"] = Relationship(back_populates="school")
     
 
     # Add relationship to SectionsInDB
@@ -315,18 +328,7 @@ class SectionsInDB(TimestampMixin,SQLModel, table=True):
     SchoolCode: str = Field(nullable=False, foreign_key="schools.SchoolCode", index=True)
     MetaData: Optional[Dict[str, BaseModel]] = Field(default=None, sa_column=Column(JSON))
     students: List["StudentInDB"] = Relationship(back_populates="sections")
-class BaseWithPolymorphism(SQLModel):
-    """
-    Base class that handles the polymorphic setup.
-    This abstracts the common setup for polymorphic behavior.
-    """
-    
-    @declared_attr
-    def __mapper_args__(cls):
-        return {
-            "polymorphic_on": cls.__table__.c.role,
-            "polymorphic_identity": cls.__name__.lower(),
-        }
+
 
 
 class PeopleInDB(TimestampMixin, BaseWithPolymorphism, table=True):
@@ -366,9 +368,18 @@ class StudentInDB(TimestampMixin, BaseWithPolymorphism, table=True):
     AnonymizedStudentNumber: Optional[str] = Field(default=None)
     MetaData: Optional[Dict[str, BaseModel]] = Field(default=None, sa_column=Column(JSON))
     Sections: Optional[List[str]] = Field(default=None, sa_column=Column(pg.ARRAY(String)))
+    sections: List["SectionsInDB"] = Relationship(back_populates="students")   
+    Interventions: Optional[List[str]] = Field(default=None, sa_column=Column(pg.ARRAY(String)))    
 
-    sections: List["SectionsInDB"] = Relationship(back_populates="students")
-
+    
+    # Define the relationships with ReadinessStatusData and PerformanceColorData
+    student_readiness_status_data: List["ReadinessStatusData"] = Relationship(back_populates="school")
+    student_performance_color_data: List["CCPerformanceColorData"] = Relationship(back_populates="school")
+    student_readiness_change_data: List["ReadinessChangeData"] = Relationship(back_populates="school")
+    student_readiness_total_data: List["ReadinessTotalData"] = Relationship(back_populates="school")
+    student_readiness_numerator: List["ReadinessNumerator"] = Relationship(back_populates="school")
+    student_readiness_denominator_data: List["ReadinessDenominatorData"] = Relationship(back_populates="school")
+    
     __mapper_args__ = {
         "polymorphic_identity": "student",
     }
@@ -396,7 +407,6 @@ class TeacherInDB(TimestampMixin, BaseWithPolymorphism, table=True):
     __mapper_args__ = {
         "polymorphic_identity": "teacher",
     }
-
     def set_stu_associated(self, data: Optional[Dict[str, Dict[str, Optional[str]]]]):
         """Sets the StuAssociated field after validation."""
         if data and validate_stu_associated(data):
@@ -407,3 +417,70 @@ class TeacherInDB(TimestampMixin, BaseWithPolymorphism, table=True):
     def get_stu_associated(self) -> Optional[Dict[str, Dict[str, Optional[str]]]]:
         """Returns the StuAssociated field as a dictionary."""
         return self.StuAssociated
+    
+class class_section(TimestampMixin, BaseWithPolymorphism, table=True):
+    __tablename__ = "class_section"
+
+    # Regular fields
+    ID: int = Field(default=None, primary_key=True, index=True)
+    SectionName: str = Field(nullable=False)
+    MetaData: Optional[Dict[str, BaseModel]] = Field(default=None, sa_column=Column(JSON))
+    school: Optional["SchoolsInDB"] = Relationship(back_populates="people")
+
+    __mapper_args__ = {
+        "polymorphic_identity": "class_section",
+    }
+
+class Vendor(TimestampMixin, BaseWithPolymorphism, table=True):
+    __tablename__ = "vendors"
+
+    # Regular fields
+    ID: int = Field(default=None, primary_key=True, foreign_key="people.ID", index=True)
+    VendorName: str = Field(nullable=False)
+    VendorURL: str = Field(nullable=False)
+    MetaData: Optional[Dict[str, BaseModel]] = Field(default=None, sa_column=Column(JSON))
+
+    # Relationships
+    school: Optional["SchoolsInDB"] = Relationship(back_populates="people")
+
+    __mapper_args__ = {
+        "polymorphic_identity": "vendor",
+    }
+
+class Config:
+            arbitrary_types_allowed = True
+
+class InterventionCategories(TimestampMixin, BaseWithPolymorphism, table=True):
+        __tablename__ = "intervention_categories"
+
+        # Regular fields
+        ID: int = Field(default=None, primary_key=True, index=True)
+        CategoryName: str = Field(nullable=False)
+        MetaData: Optional[Dict[str, BaseModel]] = Field(default=None, sa_column=Column(JSON))
+
+        # Relationships
+        school: Optional["SchoolsInDB"] = Relationship(back_populates="people")
+
+        __mapper_args__ = {
+            "polymorphic_identity": "intervention_categories",
+        }
+
+class InterventionSession(TimestampMixin, BaseWithPolymorphism, table=True):
+        __tablename__ = "interventions"
+
+        # Regular fields
+        ID: int = Field(default=None, primary_key=True, index=True)
+        Intervention_Category: Optional[int] = Field(default=None, foreign_key="intervention_categories.id", primary_key=True)
+        InterventionSessionName: str = Field(nullable=False)
+        MetaData: Optional[Dict[str, BaseModel]] = Field(default=None, sa_column=Column(JSON))
+        Vendor: Optional[int] = Field(nullable=False, foreign_key="vendors.ID", index=True)
+        Teacher: Optional[int] = Field(nullable=False, foreign_key="teachers.ID", index=True)   
+        student_id: Optional[int] = Field(default=None, foreign_key="student.id", primary_key=True)
+        school: Optional["SchoolsInDB"] = Relationship(back_populates="people")
+
+        __mapper_args__ = {
+            "polymorphic_identity": "interventions",
+        }
+
+class Config:
+    arbitrary_types_allowed = True
