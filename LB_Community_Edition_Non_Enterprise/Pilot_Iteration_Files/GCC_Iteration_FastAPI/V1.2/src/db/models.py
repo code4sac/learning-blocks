@@ -14,6 +14,7 @@ from sqlalchemy import select
 from typing import List, Optional
 from sqlmodel import SQLModel, Field, Relationship
 from sqlalchemy import Integer, String, Enum as SQLAlchemyEnum, DateTime
+from uuid import uuid4
 
 
 
@@ -92,51 +93,48 @@ class BaseWithPolymorphism(SQLModel):
             "polymorphic_on": cls.__table__.c.role,
             "polymorphic_identity": cls.__name__.lower(),
         }
-class BaseReadinessData(SQLModel):
-    most_recent: Optional[bool] = Field(default=False)
-    created_at: Optional[datetime] = Field(default_factory=lambda: datetime.now(datetime.timezone.utc))
+# ✅ Abstract Base Class (No Table)
+class ReadinessData:
+  
 
-    updated_at: Optional[datetime] = Field(default_factory=lambda: datetime.now(datetime.timezone.utc), sa_column_kwargs={"onupdate": lambda: datetime.now(datetime.timezone.utc)})
+    ReadinessLocation: LocationEnum = Field(nullable=False, index=True) 
+    ReadinessCCI: CCIEnum = Field(  nullable=False, index=True)
+    ReadinessIndicatorCategory: IndicatorCategoryEnum = Field( nullable=False, index=True)
 
 
-class ReadinessData(SQLModel, table=True):
-    __tablename__ = "readiness_data"
-    __abstract__ = True  # This class won't be directly instantiated
 
-    ReadinessLocation: str = Field(sa_column=Column(SQLAlchemyEnum(LocationEnum), nullable=False, index=True))
-    ReadinessCCI: str = Field(sa_column=Column(SQLAlchemyEnum(CCIEnum), nullable=False, index=True))
-    ReadinessIndicatorCategory: str = Field(sa_column=Column(SQLAlchemyEnum(IndicatorCategoryEnum), nullable=False, index=True))
-    ReadinessRate: str = Field(sa_column=Column(SQLAlchemyEnum(ColorEnum), nullable=False, index=True))
-
-# Specialized models using ReadinessData
+# ✅ Subclasses with Unique Tables
 class ReadinessTotalData(ReadinessData, SQLModel, table=True):
     __tablename__ = "readiness_total_data"
-    TotalRate: str = Field(sa_column=Column(SQLAlchemyEnum(ColorEnum), nullable=False, index=True))
+    TotalID: int = Field(default=None, primary_key=True, index=True)
+    TotalRate: str = Field(unique=True, nullable=False)
 
-class ReadinessNumerator(ReadinessData,  SQLModel, table=True):
+
+class ReadinessNumerator(ReadinessData, SQLModel, table=True):
     __tablename__ = "readiness_numerator"
-    NumeratorRate: str = Field(sa_column=Column(SQLAlchemyEnum(ColorEnum), nullable=False, index=True))
+    NumeratorID: int = Field(default=None, primary_key=True, index=True)
+    NumeratorRate: str = Field(unique=True, nullable=False)
+
 class CCPerformanceColorData(ReadinessData, SQLModel, table=True):
-    __tablename__ = "CC_performance_color_data"
-    PerformColor: str = Field(sa_column=Column(SQLAlchemyEnum(ColorEnum), nullable=False, index=True))
+    __tablename__ = "cc_performance_color_data"
+    PerformanceID: int = Field(default=None, primary_key=True, index=True)
+    PerformColor: str = Field( nullable=False)
 
-class ReadinessStatusData(ReadinessData,  SQLModel, table=True):
+class ReadinessStatusData(ReadinessData, SQLModel, table=True):
     __tablename__ = "readiness_status_data"
-    StatusRate: str = Field(sa_column=Column(SQLAlchemyEnum(ColorEnum), nullable=False, index=True))
+    StatusID: int = Field(default=None, primary_key=True, index=True)
+    StatusRate: str = Field( nullable=False)
 
-class ReadinessNumeratorData(ReadinessData, SQLModel, table=True):
-    __tablename__ = "readiness_numerator_data"
-    NumeratorRate: str = Field(sa_column=Column(SQLAlchemyEnum(ColorEnum), nullable=False, index=True))
-
-class ReadinessDenominatorData(ReadinessData, SQLModel,  table=True):
+class ReadinessDenominatorData(ReadinessData, SQLModel, table=True):
     __tablename__ = "readiness_denominator_data"
-    DenominatorRate: str = Field(sa_column=Column(SQLAlchemyEnum(ColorEnum), nullable=False, index=True))
+    DenominatorID: int = Field(default=None, primary_key=True, index=True)
+    DenominatorRate: str = Field( nullable=False)
 
-class ReadinessChangeData(ReadinessData, SQLModel,  table=True):
+class ReadinessChangeData(ReadinessData, SQLModel, table=True):
     __tablename__ = "readiness_change_data"
-    ChangeRate: str = Field(sa_column=Column(SQLAlchemyEnum(ColorEnum), nullable=False, index=True))
+    ChangeID: int = Field(default=None, primary_key=True, index=True)
+    ChangeRate: str = Field( nullable=False)
 
-# You could similarly define other readiness-related classes.
 
 class StudentSectionAssociation(TimestampMixin, SQLModel, table=True):
     __tablename__ = "student_section_association"
