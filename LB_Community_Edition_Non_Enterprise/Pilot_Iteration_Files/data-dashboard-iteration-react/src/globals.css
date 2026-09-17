@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import "tailwindcss";
+
+body {
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family:
+		source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+@theme {
+		--color-primary-50: #ebf5fe;
+		--color-primary-100: #e1effd;
+		--color-primary-200: #c3defb;
+		--color-primary-300: #a4cbfc;
+		--color-primary-400: #76abf7;
+		--color-primary-500: #3e87f4;
+		--color-primary-600: #196aed;
+		--color-primary-700: #175bd7;
+		--color-primary-800: #1d469c;
+		--color-primary-900: #233a74;
+
+
+	--color-cool1-500: #013148;
+	--color-cool2-500: #1923E0;
+	--color-cool3-500: #1962E0;
+	--color-cool4-500: #19E0E0;
+	--color-cool5-500: #4F19E0;
+}
